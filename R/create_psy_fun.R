@@ -1,3 +1,4 @@
+#' @export
 create_psy_fun <- function(psy_fun, guess, lapses) {
   if (psy_fun == 'cum_normal_fun') shape <- function(x,p) cum_normal_fun(x, p)
   if (psy_fun == 'logistic_fun') shape <- function(x,p) logistic_fun(x, p)

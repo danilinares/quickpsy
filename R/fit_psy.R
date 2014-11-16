@@ -1,3 +1,4 @@
+#' @export
 fit_psy <- function(d, x, k, n, psy_fun, pini, guess, lapses) {
   x <- deparse(substitute(x))
   k <- deparse(substitute(k))

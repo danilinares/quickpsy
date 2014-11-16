@@ -60,5 +60,20 @@ p <- ggplot(data=av,aes(x=phase,y=y))+
 p
 
 
+av2 <- av
+av2$phase <- -.5*av2$phase+3
+avt<- rbind(av,av2)
+twocum<- function(x,p) cum_normal_fun(x,c(p[1],p[2]))-cum_normal_fun(x,c(p[3],p[4]))
+
+fit<-fit_psy(avt, phase, nyes, ntrials, twocum, c(0,1,3,1))
+xseq <- seq(-1, 4, len = 100)
+yseq <- fit$psy_fun(xseq, fit$para)
+curve <- data.frame(x=xseq,y=yseq)
+p <- ggplot(data=avt,aes(x=phase,y=y))+
+  geom_point()+
+  geom_line(data=curve,aes(x=x,y=y))
+p
+
+
 
 
