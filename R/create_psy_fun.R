@@ -1,3 +1,5 @@
+#' create_psy_fun
+#'
 #' @export
 create_psy_fun <- function(psy_fun, guess, lapses) {
   if (psy_fun == 'cum_normal_fun') shape <- function(x,p) cum_normal_fun(x, p)
@@ -14,6 +16,13 @@ create_psy_fun <- function(psy_fun, guess, lapses) {
         guess <- tail(p,2)[1]
         lapses <- tail(p,2)[2]
         pshape <- head(p,-2)
+        print('estimating guess and lapses')
+      }
+      if (!guess && !lapses) {
+        guess <- 0
+        lapses <- 0
+        pshape <- p
+
       }
     }
     if (is.numeric(guess) && is.logical(lapses)){

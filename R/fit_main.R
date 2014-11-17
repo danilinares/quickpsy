@@ -1,4 +1,5 @@
 #' fit_main
+#'
 #' @inheritParams create_nll
 #' @param pini Initial parameters.
 #' @export
