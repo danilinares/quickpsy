@@ -15,7 +15,7 @@ fit_psy <- function(d, x, k, n, psy_fun_name, pini = NULL, guess, lapses) {
   }
   cat('Initial parameters:',pini)
   para <- fit_main(d, x, k, n, psy_fun, pini)
-  manage_exceptions(psy_fun_name, para, guess, lapses)
+  handle_exceptions(psy_fun_name, para, guess, lapses)
   list(para = para,
        psy_fun = psy_fun)
 }
