@@ -16,13 +16,11 @@ create_psy_fun <- function(psy_fun, guess, lapses) {
         guess <- tail(p,2)[1]
         lapses <- tail(p,2)[2]
         pshape <- head(p,-2)
-        print('estimating guess and lapses')
       }
       if (!guess && !lapses) {
         guess <- 0
         lapses <- 0
         pshape <- p
-
       }
     }
     if (is.numeric(guess) && is.logical(lapses)){
@@ -31,12 +29,22 @@ create_psy_fun <- function(psy_fun, guess, lapses) {
         lapses <- tail(p,1)
         pshape <- head(p,-1)
       }
+      if (!lapses) {
+        guess <- guess
+        lapses <- lapses
+        pshape <- p
+      }
     }
     if (is.logical(guess) && is.numeric(lapses)){
-      if (lapses) {
+      if (guess) {
         guess <- tail(p,1)
         lapses <- lapses
         pshape <- head(p,-1)
+      }
+      if (!guess) {
+        guess <- guess
+        lapses <- lapses
+        pshape <- p
       }
     }
     return(guess + (1 - guess- lapses) * shape(x, pshape))
