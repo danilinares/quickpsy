@@ -34,9 +34,9 @@ calculate_pini <- function(d, x, k, n, psy_fun, guess, lapses) {
 
   y01 <- (y - gue) / (1 - gue - lap)
   datp <- data.frame(x = d[[x]], y01)
-  dat <- datp[datp$y01> 0 & datp$y01 < 1,] # Eliminating probabilities outside (0,1)
+  dat <- filter(datp, y01 > 0, y01 <1) # Eliminating probabilities outside (0,1)
   if (nrow(dat) < 2) {
-    dat <- datp[datp$y01>= 0 & datp$y01 <= 1,] # Eliminating probabilities outside [0,1]
+    dat <- filter(datp, y01 >= 0, y01 <= 1) # Eliminating probabilities outside [0,1]
     if (nrow(dat) < 2) stop('Initial values for the parameters cannot be calculated. Try to assign initial values manually', call. = F)
     else {
       warning('To calculate the initial values of the parameters 0s and/or 1s are replaced by 1 / (2 * n) and 1 - 1 / (2 * n) where n is the number of trials', call. = F)
