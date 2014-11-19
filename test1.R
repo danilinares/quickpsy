@@ -7,19 +7,41 @@ av <- dat %>%
   group_by(phase, speed) %>%
   summarise(ntrials = n(), nyes = sum(response), y = nyes / ntrials)
 
-quickpsy <- function(d, x, k, n, cond1, psy_fun_name, pini = NULL, guess, lapses) {
-  x <- deparse(substitute(x))
-  k <- deparse(substitute(k))
-  n <- deparse(substitute(n))
-  cond1 <- deparse(substitute(cond1))
+av %>% group_by(speed) %>% mutate( hh = nyes)
 
+fit_psy <- function(d, x, k, n, psy_fun_name, pini = NULL, guess, lapses) {
+  #   x <- deparse(substitute(x))
+  #   k <- deparse(substitute(k))
+  #   n <- deparse(substitute(n))
+  if (is.character(psy_fun_name)) {
+    pini <- calculate_pini(d, x, k, n, psy_fun_name, guess, lapses)
 
-   curves <- d %>% group_by(speed) %>%
-    do(mean(.$nyes))
-   curves
+    psy_fun <- create_psy_fun(psy_fun_name, guess, lapses)
+  }
+  else if (is.function(psy_fun_name)){
+    psy_fun <- psy_fun_name
+  }
+  cat('Initial parameters:',pini)
+  para <- fit_main(d, x, k, n, psy_fun, pini)
+  handle_exceptions(psy_fun_name, para, guess, lapses)
+  list(para = para,
+       psy_fun = psy_fun)
 }
-fit<-quickpsy(av, phase, nyes, ntrials, speed, 'cum_normal_fun',guess=T,lapses=T)
+#fit_psy(av, 'phase', 'nyes', 'ntrials', 'cum_normal_fun',guess=T,lapses=T)
 
+quickpsy <- function(d, x, k, n, psy_fun_name, pini = NULL, guess, lapses) {
+#   x <- lazy(x)
+#   k <- lazy(k)
+#   n <- lazy(n)
+#   x <- deparse(substitute(x))
+#   k <- deparse(substitute(k))
+#   n <- deparse(substitute(n))
+  d %>% do(mod=fit_psy(., x = x, k = k, n =n , psy_fun_name, pini = NULL, guess, lapses))
+}
+fit<-quickpsy(av, phase, nyes, ntrials, 'cum_normal_fun',guess=T,lapses=T)
+
+
+fit
 
 
 

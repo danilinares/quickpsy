@@ -1,7 +1,7 @@
 #' fit_main
 #'
 #' @export
-fit_psy <- function(d, x, k, n, psy_fun_name, pini = NULL, guess, lapses) {
+fit_psy <- function(d, x, k, n, psy_fun_name, pini = NULL, guess = 0, lapses = 0) {
   x <- deparse(substitute(x))
   k <- deparse(substitute(k))
   n <- deparse(substitute(n))
@@ -16,6 +16,9 @@ fit_psy <- function(d, x, k, n, psy_fun_name, pini = NULL, guess, lapses) {
   cat('Initial parameters:',pini)
   para <- fit_main(d, x, k, n, psy_fun, pini)
   handle_exceptions(psy_fun_name, para, guess, lapses)
-  list(para = para,
+
+  list(d = d, x = x, k = k, n = n,
+       psy_fun_name =psy_fun_name , pini = pini, guess = guess, lapses = lapses,
+       para = para,
        psy_fun = psy_fun)
 }
