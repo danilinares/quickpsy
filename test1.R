@@ -53,6 +53,11 @@ fit
 # cambios de DL
 
 
+#change by joan
+
+#Second change by me!!
+
+
 ### providing the label function with  guesses and lapses as parameters
 fit<-fit_psy(av, phase, nyes, ntrials, 'cum_normal_fun',guess=T,lapses=T)
 xseq <- seq(-1, 2, len = 100)
