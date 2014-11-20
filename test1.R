@@ -44,7 +44,7 @@ fit<-quickpsy(av, phase, nyes, ntrials, 'cum_normal_fun',guess=T,lapses=T)
 fit
 
 
-
+#change by joan
 
 
 ### providing the label function with  guesses and lapses as parameters
