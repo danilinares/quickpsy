@@ -10,17 +10,15 @@ m = example01$m
 
 example01 <- example01 %>% mutate(y = r / m)
 
-fit<-fit_psy(example01, x, y, m, 'cum_normal_fun')
 
+val <- binomfit_lims( r, m, x, link = "probit" )
+numxfit <- 999
+xseq <- seq(0, 1.5, 0.01)
+yseq <- predict( val$fit, data.frame( x = xseq ), type = "response" )
+curve <- data.frame(xfit, pfit)
 
-
-xseq <- seq(-1, 2, len = 100)
-yseq <- fit$psy_fun(xseq, fit$para)
-curve <- data.frame(x=xseq,y=yseq)
-p <- ggplot(data=av,aes(x=phase,y=y))+
+p <- ggplot(data = example01, aes(x = x, y = y))+
   geom_point()+
-  geom_line(data=curve,aes(x=x,y=y))
+  geom_line(data = curve, aes(x = xfit, y = pfit))
 p
 
-ggplot(example01, aes(x = x, y = y))+
-  geom_point()
