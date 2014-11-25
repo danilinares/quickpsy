@@ -2,7 +2,6 @@
 #'
 #' @export
 calculate_pini <- function(d, x, k, n, psy_fun, guess, lapses) {
-
   ntrials <- unique(d[[n]])
   y <- d[[k]] / d[[n]]
 
@@ -45,7 +44,7 @@ calculate_pini <- function(d, x, k, n, psy_fun, guess, lapses) {
     }
   }
 
-      dat$z <- qnorm(dat$y01)
+  dat$z <- qnorm(dat$y01)
   coef <- lm(z~x, data = dat)$coefficients
   p1 <- -coef[[1]] / coef[[2]]
   p2 <- 1 / coef[[2]]
