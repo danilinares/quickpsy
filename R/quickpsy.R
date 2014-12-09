@@ -1,7 +1,7 @@
 #' quickpsy
 #' @export
 quickpsy <- function(d, x, k, n, random, within, between, psy_fun_name,
-                     pini = NULL ,guess = 0, lapses = 0) {
+                     pini = NULL, guess = 0, lapses = 0) {
   x <- deparse(substitute(x))
   k <- deparse(substitute(k))
   n <- deparse(substitute(n))
@@ -19,8 +19,9 @@ quickpsy <- function(d, x, k, n, random, within, between, psy_fun_name,
     between <- deparse(substitute(between))
     grouping_var <- c(grouping_var, between)
   }
-  if (!(missing(random) && missing(random) && missing(random)) )
-      d <- d %>% group_by_(.dots=grouping_var)
+  if (!(missing(random) && missing(random) && missing(random)) ) {
+    d <- d %>% group_by_(.dots=grouping_var)
+  }
 
   fits <- d %>%
     do(fit=fit_psy(., x, k, n, psy_fun_name, pini, guess=guess, lapses=lapses))

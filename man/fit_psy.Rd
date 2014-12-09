@@ -3,7 +3,7 @@
 \alias{fit_psy}
 \title{fit_main}
 \usage{
-fit_psy(d, x, k, n, psy_fun_name, pini = NULL, guess = 0, lapses = 0)
+fit_psy(d, x, k, n, psy_fun_name, pini, guess, lapses)
 }
 \description{
 fit_main
