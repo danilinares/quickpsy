@@ -1,10 +1,11 @@
 #' quickpsy
 #' @export
-quickpsy <- function(d, x, k, n, random, within, between, psy_fun_name,
+quickpsy <- function(d, x, k, n, random, within, between, psy_fun,
                      pini = NULL, guess = 0, lapses = 0) {
   x <- deparse(substitute(x))
   k <- deparse(substitute(k))
   n <- deparse(substitute(n))
+  psy_fun_name <- deparse(substitute(psy_fun))
   grouping_var <- c()
 
   if (!missing(random)) {
@@ -24,10 +25,13 @@ quickpsy <- function(d, x, k, n, random, within, between, psy_fun_name,
   }
 
   fits <- d %>%
-    do(fit=fit_psy(., x, k, n, psy_fun_name, pini, guess=guess, lapses=lapses))
+    do(fit=fit_psy(., x, k, n, psy_fun, psy_fun_name,
+                   pini, guess=guess, lapses=lapses))
 
   curve <-  plyr::ddply(fits,grouping_var, curve_psy)
   para <-  plyr::ddply(fits,grouping_var, para_psy)
 
   list(curve = curve , para = para)
 }
+
+

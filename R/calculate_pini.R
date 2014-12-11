@@ -63,3 +63,4 @@ calculate_pini <- function(d, x, k, n, psy_fun, guess, lapses) {
     if (!lapses) return(c(p1, p2))
   }
 }
+

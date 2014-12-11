@@ -1,14 +1,21 @@
 #' fit_main
 #'
 #' @export
-fit_psy <- function(d, x, k, n, psy_fun_name, pini, guess, lapses) {
-  if (is.character(psy_fun_name)) {
-    pini <- calculate_pini(d, x, k, n, psy_fun_name, guess, lapses)
-    psy_fun <- create_psy_fun(psy_fun_name, guess, lapses)
+
+fit_psy <- function(d, x, k, n, psy_fun, psy_fun_name, pini, guess, lapses) {
+  #subd <- d %>% select_(paste0('-', x), paste0('-', k), paste0('-', n))
+  print(head(d,1))
+  def_funs <- list(cum_normal_fun = cum_normal_fun,
+                   logistic_fun = logistic_fun)
+
+  if (psy_fun_name %in%  names(def_funs)) {
+    if (is.null(pini)) {
+      pini <- calculate_pini(d, x, k, n, psy_fun, guess, lapses)
+    }
+
+    psy_fun <- create_psy_fun(psy_fun, guess, lapses)
   }
-  else if (is.function(psy_fun_name)){
-    psy_fun <- psy_fun_name
-  }
+
   cat('Initial parameters:', pini, '\n')
   para <- fit_main(d, x, k, n, psy_fun, pini)
   cat('Parameters:', para, '\n')

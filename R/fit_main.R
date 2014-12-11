@@ -8,3 +8,4 @@ fit_main <- function(d, x, k, n, psy_fun, pini) {
   para <- optim(pini, nll)$p
   #para <- nlm(nll, pini)$estimate
 }
+

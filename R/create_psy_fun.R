@@ -2,9 +2,7 @@
 #'
 #' @export
 create_psy_fun <- function(psy_fun, guess, lapses) {
-  if (psy_fun == 'cum_normal_fun') shape <- function(x,p) cum_normal_fun(x, p)
-  if (psy_fun == 'logistic_fun') shape <- function(x,p) logistic_fun(x, p)
-
+  psy_fun <- psy_fun
   function (x,p) {
     if (is.numeric(guess) && is.numeric(lapses)) {
       guess <- guess
@@ -47,6 +45,6 @@ create_psy_fun <- function(psy_fun, guess, lapses) {
         pshape <- p
       }
     }
-    return(guess + (1 - guess- lapses) * shape(x, pshape))
+    return(guess + (1 - guess- lapses) * psy_fun(x, pshape))
   }
 }
