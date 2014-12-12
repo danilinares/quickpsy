@@ -5,7 +5,6 @@ calculate_pini <- function(d, x, k, n, psy_fun, guess, lapses) {
   ntrials <- unique(d[[n]])
   y <- d[[k]] / d[[n]]
 
-
   if (is.numeric(guess) && is.numeric(lapses)) {
     gue <- guess
     lap  <- lapses
@@ -31,24 +30,31 @@ calculate_pini <- function(d, x, k, n, psy_fun, guess, lapses) {
     if (!lapses) lap <- 0
   }
 
+  ### Transforming y values to be closer to the range (0,1)
   y01 <- (y - gue) / (1 - gue - lap)
   datp <- data.frame(x = d[[x]], y01)
-  dat <- filter(datp, y01 > 0, y01 <1) # Eliminating probabilities outside (0,1)
-  if (nrow(dat) < 2) {
-    dat <- filter(datp, y01 >= 0, y01 <= 1) # Eliminating probabilities outside [0,1]
-    if (nrow(dat) < 2) stop('Initial values for the parameters cannot be calculated. Try to assign initial values manually', call. = F)
-    else {
-      warning('To calculate the initial values of the parameters 0s and/or 1s are replaced by 1 / (2 * n) and 1 - 1 / (2 * n) where n is the number of trials', call. = F)
-      dat$y01[dat$y01 == 0] <- 1 / (2 * ntrials)
-      dat$y01[dat$y01 == 1] <- 1 - 1 / (2 * ntrials)
-    }
-  }
 
+  ### Replacing 0s and/or 1s by 1 / (2 * n) and 1 - 1 / (2 * n) where n is the number of trials
+  datp$y01[datp$y01 == 0] <- 1 / (2 * ntrials)
+  datp$y01[datp$y01 == 1] <- 1 - 1 / (2 * ntrials)
+
+  ### Eliminating probabilities outside (0,1)
+  dat <- filter(datp, y01 > 0, y01 <1)
+
+  ### Linear fit
   dat$z <- qnorm(dat$y01)
   coef <- lm(z~x, data = dat)$coefficients
-  p1 <- -coef[[1]] / coef[[2]]
-  p2 <- 1 / coef[[2]]
 
+  if (coef[[2]] == 0) { # checking that the slope is not zero
+    p1 <- median(dat$x)
+    p2 <- (1 - gue - lap) / (max(dat$x)-min(dat$x))
+  }
+  else {
+    p1 <- -coef[[1]] / coef[[2]]
+    p2 <- 1 / coef[[2]]
+  }
+
+  print(coef[[2]])
   if (is.numeric(guess) && is.numeric(lapses)) return(c(p1, p2))
   if (is.logical(guess) && is.logical(lapses)) {
     if (guess && lapses) return(c(p1, p2, gue, lap))

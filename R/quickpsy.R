@@ -2,6 +2,7 @@
 #' @export
 quickpsy <- function(d, x, k, n, random, within, between, psy_fun,
                      pini = NULL, guess = 0, lapses = 0) {
+  d <- ungroup(d)
   x <- deparse(substitute(x))
   k <- deparse(substitute(k))
   n <- deparse(substitute(n))

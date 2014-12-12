@@ -47,19 +47,20 @@ fit <- quickpsy(av, phase, nyes, ntrials, random = subject, within = cond,
                 between = speed,
                 psy_fun = cum_normal_fun)
 
-p <- ggplot(data=av,aes(x=phase,y=y, color=cond))+
-  facet_grid(speed~subject) +
+p <- ggplot(data=av,aes(x=phase,y=y, color=subject))+
+  facet_grid(speed~cond) +
   geom_point()+
   geom_line(data=fit$curve)
 p
 
 
-av1 <- filter(av, subject == 'dl', cond == 'self', speed == 3)
+av1 <- filter(av, subject == 'jlm', cond == 'self', speed == 3)
 fit <- quickpsy(av1, phase, nyes, ntrials, psy_fun = cum_normal_fun)
 
 p <- ggplot(data=av1,aes(x=phase,y=y))+
   geom_point()+
-  geom_line(data=fit$curve)
+  geom_line(data=fit$curve) +
+  theme()
 p
 
 
