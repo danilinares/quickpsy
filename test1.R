@@ -8,7 +8,7 @@ av <- dat %>% group_by(phase) %>%
   summarise(ntrials = n(), nyes = sum(response), y = nyes / ntrials)
 
 fit <- quickpsy(av, phase, nyes, ntrials,
-                psy_fun_name = cum_normal_fun, pini=c(.5,.3))
+                psy_fun = cum_normal_fun, pini=c(.5,.3))
 
 p <- ggplot(data=av,aes(x=phase,y=y))+
   geom_point()+
@@ -19,7 +19,7 @@ av <- dat %>% group_by(phase, subject) %>%
   summarise(ntrials = n(), nyes = sum(response), y = nyes / ntrials)
 
 fit <- quickpsy(av, phase, nyes, ntrials, random = subject,
-                psy_fun_name = cum_normal_fun, pini=c(.5,.3))
+                psy_fun = cum_normal_fun, pini=c(.5,.3))
 
 p <- ggplot(data=av,aes(x=phase,y=y))+
   facet_wrap(~subject) +
@@ -31,7 +31,7 @@ av <- dat %>% group_by(phase, subject, cond) %>%
   summarise(ntrials = n(), nyes = sum(response), y = nyes / ntrials)
 
 fit <- quickpsy(av, phase, nyes, ntrials, random = subject, within = cond,
-                psy_fun_name = cum_normal_fun, pini=c(.5,.3))
+                psy_fun = cum_normal_fun, pini=c(.5,.3))
 
 p <- ggplot(data=av,aes(x=phase,y=y, color=cond))+
   facet_wrap(~subject) +
@@ -44,7 +44,7 @@ av <- dat %>% group_by(phase, subject, cond, speed) %>%
 
 fit <- quickpsy(av, phase, nyes, ntrials, random = subject, within = cond,
                 between = speed,
-                psy_fun_name = cum_normal_fun, pini=c(.5,.3))
+                psy_fun = cum_normal_fun, pini=c(.5,.3))
 
 p <- ggplot(data=av,aes(x=phase,y=y, color=cond))+
   facet_grid(speed~subject) +

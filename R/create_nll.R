@@ -11,8 +11,6 @@ create_nll <- function(d, x, k, n, psy_fun){
     phi <- psy_fun(d[[x]], p)
     phi[phi < .Machine$double.eps] <- .Machine$double.eps
     phi[phi > (1 - .Machine$double.eps)] <- 1 - .Machine$double.eps
-  #  if (any(phi <= 0) || any(phi >=1) || any(is.na(phi))) return(Inf)
-  #   else
        return(-sum(d[[k]] * log(phi) + (d[[n]] - d[[k]]) * log(1 - phi)))
   }
 }
