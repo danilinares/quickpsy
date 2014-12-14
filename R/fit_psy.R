@@ -1,10 +1,11 @@
-#' fit_main
+#' fit_psy
 #'
 #' @export
 
-fit_psy <- function(d, x, k, n, psy_fun, psy_fun_name, pini, guess, lapses) {
+fit_psy <- function(d, x, k, n, psy_fun, psy_fun_name,
+                    pini, guess, lapses, DE, pini2) {
   #subd <- d %>% select_(paste0('-', x), paste0('-', k), paste0('-', n))
-  print(head(d,1))
+  #print(head(d,1))
 
   def_funs <- list(cum_normal_fun = cum_normal_fun,
                    logistic_fun = logistic_fun)
@@ -16,10 +17,9 @@ fit_psy <- function(d, x, k, n, psy_fun, psy_fun_name, pini, guess, lapses) {
   }
 
   cat('Initial parameters:', pini, '\n')
-  cat('Guess:', guess,'\n Lapses:',lapses, '\n')
-
+  cat('Guess:', guess,'\nLapses:',lapses, '\n')
   psy_fun <- create_psy_fun(psy_fun, guess, lapses)
-  para <- fit_main(d, x, k, n, psy_fun, psy_fun_name, pini)
+  para <- fit_main(d, x, k, n, psy_fun, psy_fun_name, pini, DE, pini2)
   cat('Parameters:', para, '\n')
 
   handle_exceptions(psy_fun_name, para, guess, lapses)
