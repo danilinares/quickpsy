@@ -14,15 +14,15 @@ quickpsy <- function(d, x, k, n, random, within, between,
   grouping_var <- c()
 
   if (!missing(random)) {
-    random <- deparse(substitute(random))
+    random <- as.character(substitute(random))[-1]
     grouping_var <- c(grouping_var, random)
   }
   if (!missing(within)) {
-    within <- deparse(substitute(within))
+    within <- as.character(substitute(within))[-1]
     grouping_var <- c(grouping_var, within)
   }
   if (!missing(between)) {
-    between <- deparse(substitute(between))
+    between <- as.character(substitute(between))[-1]
     grouping_var <- c(grouping_var, between)
   }
   if (!(missing(random) && missing(within) && missing(between)) ) {
@@ -36,7 +36,7 @@ quickpsy <- function(d, x, k, n, random, within, between,
                    pini, guess = guess, lapses = lapses, DE, pini2))
 
   curve <-  plyr::ddply(fits,grouping_var, function(d) curve_psy(d, xmin, xmax, log))
-  para <-  plyr::ddply(fits,grouping_var, para_psy)
+  para <-  plyr::ddply(fits,grouping_var, function(d) para_psy(d))
 
   list(curve = curve , para = para)
 }

@@ -24,3 +24,20 @@ ggplot(SHR1, aes(x = Quanta, y = PerCent / 100)) +
   geom_line(data = curve.glm, aes(x = xseq, y = yseq))+
   geom_line(data = fit$curve, aes(x = Quanta, y = y), color = 'red', lty = 2)
 
+
+
+fit <- quickpsy(HSP, Quanta, NumYes, N, within=Obs,log = T, xmin = 20, xmax = 450)
+
+ggplot(HSP, aes(x = Quanta, y = PerCent / 100)) +
+  facet_grid(.~Obs) +
+  geom_point()+
+  geom_line(data = fit$curve, aes(x = Quanta, y = y), color = 'red', lty = 2)
+
+
+fit <- quickpsy(HSP, Quanta, NumYes, N, random = Obs, log = T, xmin = 20, xmax = 450)
+
+ggplot(HSP, aes(x = Quanta, y = PerCent / 100)) +
+  facet_grid(.~Obs) +
+  geom_point()+
+  geom_line(data = fit$curve, aes(x = Quanta, y = y), color = 'red', lty = 2)
+
