@@ -6,7 +6,6 @@ fit_psy <- function(d, x, k, n, psy_fun, psy_fun_name,
                     pini, guess, lapses, DE, pini2) {
   #subd <- d %>% select_(paste0('-', x), paste0('-', k), paste0('-', n))
   #print(head(d,1))
-
   def_funs <- list(cum_normal_fun = cum_normal_fun,
                    logistic_fun = logistic_fun)
 

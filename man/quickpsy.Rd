@@ -3,8 +3,8 @@
 \alias{quickpsy}
 \title{quickpsy}
 \usage{
-quickpsy(d, x, k, n, random, within, between, psy_fun_name, pini = NULL,
-  guess = 0, lapses = 0)
+quickpsy(d, x, k, n, random, within, between, psy_fun, pini = NULL,
+  guess = 0, lapses = 0, DE = F, pini2 = NULL)
 }
 \description{
 quickpsy

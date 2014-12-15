@@ -2,10 +2,12 @@
 
 export(calculate_pini)
 export(create_nll)
+export(create_nll_cum_norm)
 export(create_psy_fun)
 export(cum_normal_fun)
 export(curve_psy)
 export(fit_main)
+export(fit_main_glm)
 export(fit_psy)
 export(handle_exceptions)
 export(logistic_fun)
