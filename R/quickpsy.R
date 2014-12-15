@@ -1,7 +1,9 @@
 #' quickpsy
 #' @export
-quickpsy <- function(d, x, k, n, random, within, between, psy_fun,
-                     pini = NULL, guess = 0, lapses = 0, DE = F, pini2 = NULL) {
+quickpsy <- function(d, x, k, n, random, within, between,
+                     xmin = NULL, xmax = NULL, log = F,
+                     psy_fun = cum_normal_fun, pini = NULL,
+                     guess = 0, lapses = 0, DE = F, pini2 = NULL) {
 
   if (DE && (is.null(pini) || is.null(pini2))) stop('DEoptim requires pini (vector with the lower bounds of the initial values of the parameters) and pini2 (vector with the upper bounds of the initial values of the parameters) ')
   d <- ungroup(d)
@@ -27,11 +29,13 @@ quickpsy <- function(d, x, k, n, random, within, between, psy_fun,
     d <- d %>% group_by_(.dots=grouping_var)
   }
 
+  if (log) d[[x]] <- log(d[[x]])
+
   fits <- d %>%
     do(fit=fit_psy(., x, k, n, psy_fun, psy_fun_name,
                    pini, guess = guess, lapses = lapses, DE, pini2))
 
-  curve <-  plyr::ddply(fits,grouping_var, curve_psy)
+  curve <-  plyr::ddply(fits,grouping_var, function(d) curve_psy(d, xmin, xmax, log))
   para <-  plyr::ddply(fits,grouping_var, para_psy)
 
   list(curve = curve , para = para)
