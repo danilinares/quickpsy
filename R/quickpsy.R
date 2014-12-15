@@ -2,15 +2,16 @@
 #' @export
 quickpsy <- function(d, x, k, n, random, within, between,
                      xmin = NULL, xmax = NULL, log = F,
-                     psy_fun = cum_normal_fun, pini = NULL,
-                     guess = 0, lapses = 0, DE = F, pini2 = NULL) {
+                     psyfun = cum_normal_fun, pini = NULL,
+                     guess = 0, lapses = 0, DE = F, pini2 = NULL,
+                     threprob = .5 * (1 - guess)) {
 
   if (DE && (is.null(pini) || is.null(pini2))) stop('DEoptim requires pini (vector with the lower bounds of the initial values of the parameters) and pini2 (vector with the upper bounds of the initial values of the parameters) ')
   d <- ungroup(d)
   x <- deparse(substitute(x))
   k <- deparse(substitute(k))
   n <- deparse(substitute(n))
-  psy_fun_name <- deparse(substitute(psy_fun))
+  psyfunname <- deparse(substitute(psyfun))
   grouping_var <- c()
 
   if (!missing(random)) {
@@ -19,6 +20,7 @@ quickpsy <- function(d, x, k, n, random, within, between,
   }
   if (!missing(within)) {
     within <- as.character(substitute(within))[-1]
+    #within <- deparse(substitute(within))
     grouping_var <- c(grouping_var, within)
   }
   if (!missing(between)) {
@@ -30,15 +32,18 @@ quickpsy <- function(d, x, k, n, random, within, between,
   }
 
   if (log) d[[x]] <- log(d[[x]])
-
+print(grouping_var)
   fits <- d %>%
-    do(fit=fit_psy(., x, k, n, psy_fun, psy_fun_name,
+    do(fit=fit_psy(., x, k, n, psyfun, psyfunname,
                    pini, guess = guess, lapses = lapses, DE, pini2))
 
   curve <-  plyr::ddply(fits,grouping_var, function(d) curve_psy(d, xmin, xmax, log))
   para <-  plyr::ddply(fits,grouping_var, function(d) para_psy(d))
+  thre <-  plyr::ddply(fits,grouping_var, function(d)
+    thre_psy(d, threprob, psyfunname, guess, lapses, log))
 
-  list(curve = curve , para = para)
+
+  list(curve = curve , para = para, thre = thre)
 }
 
 

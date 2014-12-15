@@ -1,3 +1,5 @@
+library(quickpsy)
+
 x<-c(1,2)
 dd<-data.frame(x,k=c(40,70),r=c(60,30), n=c(100,100))
 dd$y <- dd$k/dd$n
@@ -21,6 +23,8 @@ yseq2<-pnorm(xseq, para[1],para[2])
 
 curve<-data.frame(x=xseq,y=yseq, y2=yseq2)
 
+fit <- quickpsy(dd, x, k, n, xmin = 0, xmax = 3)
+
 ggplot(data=dd,aes(x=x,y=k/n))+geom_point()+
   geom_line(data=curve,aes(x=x,y=y))+
-  geom_line(data=curve,aes(x=x,y=y2),color='red')
+  geom_line(data=fit$curve,aes(x=x,y=y),color='red', lty=2)

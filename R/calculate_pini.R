@@ -1,10 +1,9 @@
 #' calculate_pini
 #'
 #' @export
-calculate_pini <- function(d, x, k, n, psy_fun, guess, lapses) {
+calculate_pini <- function(d, x, k, n, guess, lapses) {
   ntrials <- unique(d[[n]])
   y <- d[[k]] / d[[n]]
-
   if (is.numeric(guess) && is.numeric(lapses)) {
     gue <- guess
     lap  <- lapses
@@ -13,10 +12,6 @@ calculate_pini <- function(d, x, k, n, psy_fun, guess, lapses) {
     if (guess && lapses) {
       gue <- min(y)
       lap  <- 1 - max(y)
-    }
-    if (!guess && !lapses) {
-      gue <- 0
-      lap  <- 0
     }
   }
   if (is.logical(guess) && is.numeric(lapses)) {
@@ -54,19 +49,19 @@ calculate_pini <- function(d, x, k, n, psy_fun, guess, lapses) {
     p2 <- 1 / coef[[2]]
   }
 
-  print(coef[[2]])
   if (is.numeric(guess) && is.numeric(lapses)) return(c(p1, p2))
   if (is.logical(guess) && is.logical(lapses)) {
-    if (guess && lapses) return(c(p1, p2, gue, lap))
-    if (!guess && !lapses) return(c(p1, p2))
+    if (guess && lapses) pini <- c(p1, p2, gue, lap)
+    if (!guess && !lapses) pini <- c(p1, p2)
   }
   if (is.logical(guess) && is.numeric(lapses)) {
-    if (guess) return(c(p1, p2, gue))
-    if (!guess) return(c(p1, p2))
+    if (guess) pini <- c(p1, p2, gue)
+    if (!guess) pini <- c(p1, p2)
   }
   if (is.numeric(guess) && is.logical(lapses)) {
-    if (lapses) return(c(p1, p2, lap))
-    if (!lapses) return(c(p1, p2))
+    if (lapses) pini <- c(p1, p2, lap)
+    if (!lapses) pini <- c(p1, p2)
   }
+  pini
 }
 
