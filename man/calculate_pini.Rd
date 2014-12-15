@@ -4,7 +4,7 @@
 \alias{calculate_pini}
 \title{calculate_pini}
 \usage{
-calculate_pini(d, x, k, n, psy_fun, guess, lapses)
+calculate_pini(d, x, k, n, guess, lapses)
 }
 \description{
 calculate_pini

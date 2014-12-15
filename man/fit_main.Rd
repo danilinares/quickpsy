@@ -4,7 +4,7 @@
 \alias{fit_main}
 \title{fit_main}
 \usage{
-fit_main(d, x, k, n, psy_fun, psy_fun_name, pini, DE, pini2)
+fit_main(d, x, k, n, psyfun, pini, DE, pini2)
 }
 \arguments{
 \item{d}{The data frame containing the data.}
@@ -14,8 +14,6 @@ fit_main(d, x, k, n, psy_fun, psy_fun_name, pini, DE, pini2)
 \item{k}{Number of 'yes' or correct responses.}
 
 \item{n}{Number of trials.}
-
-\item{psy_fun}{Function to create the negative log-likelihood.}
 
 \item{pini}{Initial parameters.}
 }

@@ -4,8 +4,9 @@
 \alias{quickpsy}
 \title{quickpsy}
 \usage{
-quickpsy(d, x, k, n, random, within, between, psy_fun, pini = NULL,
-  guess = 0, lapses = 0, DE = F, pini2 = NULL)
+quickpsy(d, x, k, n, random, within, between, xmin = NULL, xmax = NULL,
+  log = F, psyfun = cum_normal_fun, pini = NULL, guess = 0,
+  lapses = 0, DE = F, pini2 = NULL, threprob = 0.5 * (1 - guess))
 }
 \description{
 quickpsy

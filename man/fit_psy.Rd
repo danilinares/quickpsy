@@ -4,7 +4,7 @@
 \alias{fit_psy}
 \title{fit_psy}
 \usage{
-fit_psy(d, x, k, n, psy_fun, psy_fun_name, pini, guess, lapses, DE, pini2)
+fit_psy(d, x, k, n, psyfun, psyfunname, pini, guess, lapses, DE, pini2)
 }
 \description{
 fit_psy

@@ -4,7 +4,7 @@
 \alias{curve_psy}
 \title{curve_psy}
 \usage{
-curve_psy(l, xmin, xmax)
+curve_psy(l, xmin, xmax, log)
 }
 \description{
 curve_psy
