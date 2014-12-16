@@ -7,6 +7,14 @@ plotcurves.quickpsy <- function(l, xpanel, ypanel, color) {
   p <- ggplot()
 
   ngroup <- length(l$grouping_var)
+  if (ngroup == 0) {
+    p <- p +
+      geom_point(data = l$d, aes_string(x = l$x, y = 'y')) +
+      geom_line(data = l$curves, aes_string(x = l$x, y = 'y')) +
+      geom_linerange(data = l$thresholds,
+                     aes_string(x = 'thre', ymin = l$guess,
+                                ymax = l$threprob))
+  }
   if (ngroup == 1) {
     color <- l$grouping_var[1]
   }

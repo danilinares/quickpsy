@@ -1,6 +1,6 @@
 #' quickpsy
 #' @export
-quickpsy <- function(d, x, k, n, random, within, between,
+quickpsy <- function(d, x, k, n = NULL, random, within, between,
                      xmin = NULL, xmax = NULL, log = F,
                      psyfun = cum_normal_fun, pini = NULL,
                      guess = 0, lapses = 0, DE = F, pini2 = NULL,
@@ -12,11 +12,9 @@ quickpsy <- function(d, x, k, n, random, within, between,
   d <- d  %>% ungroup()
   x <- deparse(substitute(x))
   k <- deparse(substitute(k))
-  n <- deparse(substitute(n))
+  if (!is.null(n)) n <- deparse(substitute(n))
+
   psyfunname <- deparse(substitute(psyfun))
-
-  d$y <- d[[k]] / d[[n]]
-
 
   grouping_var <- c()
   if (!missing(random)) {
@@ -31,9 +29,23 @@ quickpsy <- function(d, x, k, n, random, within, between,
     between <- as.character(substitute(between))[-1]
     grouping_var <- c(grouping_var, between)
   }
-  if (!(missing(random) && missing(within) && missing(between)) ) {
-    d <- d %>% group_by_(.dots=grouping_var)
+
+  if (is.null(n)) {
+    d[[k]][d[[k]] == -1] <- 0
+    d <- d %>% group_by_(.dots=c(grouping_var, x)) %>%
+      summarise_(n = 'n()', k = paste0('sum(',k,')'))
+    names(d)[names(d) == 'k'] <- k
+    n <- 'n'
+    if (!(missing(random) && missing(within) && missing(between)) ) {
+      d <- d %>% group_by_(.dots=grouping_var)
+    }
   }
+  else {
+    if (!(missing(random) && missing(within) && missing(between)) )
+      d <- d %>% group_by_(.dots=grouping_var)
+  }
+
+  d$y <- d[[k]] / d[[n]]
 
   fits <- par_psy(d, x, k, n, xmin , xmax, log, psyfun, psyfunname, pini,
           guess, lapses, DE, pini2)
