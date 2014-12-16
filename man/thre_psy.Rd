@@ -4,7 +4,7 @@
 \alias{thre_psy}
 \title{thre_psy}
 \usage{
-thre_psy(l, threprob, psyfunname, guess, lapses, log)
+thre_psy(d, threprob)
 }
 \description{
 thre_psy
