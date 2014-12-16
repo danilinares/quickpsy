@@ -4,23 +4,27 @@ quickpsy <- function(d, x, k, n, random, within, between,
                      xmin = NULL, xmax = NULL, log = F,
                      psyfun = cum_normal_fun, pini = NULL,
                      guess = 0, lapses = 0, DE = F, pini2 = NULL,
-                     threprob = .5 * (1 - guess)) {
+                     threprob = .5 * (1 - guess),
+                     curv = T, thre = T) {
 
-  if (DE && (is.null(pini) || is.null(pini2))) stop('DEoptim requires pini (vector with the lower bounds of the initial values of the parameters) and pini2 (vector with the upper bounds of the initial values of the parameters) ')
-  d <- ungroup(d)
+  handle_excep_quickpsy(DE, pini, pini2)
+
+  d <- d  %>% ungroup()
   x <- deparse(substitute(x))
   k <- deparse(substitute(k))
   n <- deparse(substitute(n))
   psyfunname <- deparse(substitute(psyfun))
-  grouping_var <- c()
 
+  d$y <- d[[k]] / d[[n]]
+
+
+  grouping_var <- c()
   if (!missing(random)) {
     random <- as.character(substitute(random))[-1]
     grouping_var <- c(grouping_var, random)
   }
   if (!missing(within)) {
     within <- as.character(substitute(within))[-1]
-    #within <- deparse(substitute(within))
     grouping_var <- c(grouping_var, within)
   }
   if (!missing(between)) {
@@ -31,19 +35,19 @@ quickpsy <- function(d, x, k, n, random, within, between,
     d <- d %>% group_by_(.dots=grouping_var)
   }
 
-  if (log) d[[x]] <- log(d[[x]])
-print(grouping_var)
-  fits <- d %>%
-    do(fit=fit_psy(., x, k, n, psyfun, psyfunname,
-                   pini, guess = guess, lapses = lapses, DE, pini2))
+  fits <- par_psy(d, x, k, n, xmin , xmax, log, psyfun, psyfunname, pini,
+          guess, lapses, DE, pini2)
 
-  curve <-  plyr::ddply(fits,grouping_var, function(d) curve_psy(d, xmin, xmax, log))
-  para <-  plyr::ddply(fits,grouping_var, function(d) para_psy(d))
-  thre <-  plyr::ddply(fits,grouping_var, function(d)
-    thre_psy(d, threprob, psyfunname, guess, lapses, log))
+  fitsGroups <- list(d = d, x = x, threprob = threprob, guess = guess,
+                     fits = fits, grouping_var = grouping_var, threprob = threprob)
+  out <- fitsGroups
 
+  if (curv) out <- c(out, list(curves = curves(fitsGroups)))
+  if (thre) out <- c(out, list(thresholds = thresholds(fitsGroups, threprob)))
 
-  list(curve = curve , para = para, thre = thre)
+  class(out) <- 'quickpsy'
+  out
+
 }
 
 

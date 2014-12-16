@@ -2,7 +2,6 @@
 #'
 #' @export
 curve_psy <- function(l, xmin, xmax, log) {
-
   f <- l$fit[[1]]
   if (is.null(xmin)) xmin <- min(f$d[[f$x]])
   else if (log) xmin <- log(xmin)

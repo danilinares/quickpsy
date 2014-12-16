@@ -29,7 +29,7 @@ fit_psy <- function(d, x, k, n, psyfun, psyfunname,
   handle_exceptions(psyfunname, para, guess, lapses)
 
   list(d = d, x = x, k = k, n = n,
-       psyfunname =psyfunname , pini = pini, guess = guess, lapses = lapses,
+       psyfunname = psyfunname , pini = pini, guess = guess, lapses = lapses,
        para = para,
        psyfun = psyfun)
 }
