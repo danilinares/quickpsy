@@ -5,7 +5,7 @@ quickpsy <- function(d, x, k, n, random, within, between,
                      psyfun = cum_normal_fun, pini = NULL,
                      guess = 0, lapses = 0, DE = F, pini2 = NULL,
                      threprob = .5 * (1 - guess),
-                     curv = T, thre = T) {
+                     curv = T, thre = T, plotcurves = T) {
 
   handle_excep_quickpsy(DE, pini, pini2)
 
@@ -42,10 +42,12 @@ quickpsy <- function(d, x, k, n, random, within, between,
                      fits = fits, grouping_var = grouping_var, threprob = threprob)
   out <- fitsGroups
 
+
   if (curv) out <- c(out, list(curves = curves(fitsGroups)))
   if (thre) out <- c(out, list(thresholds = thresholds(fitsGroups, threprob)))
 
   class(out) <- 'quickpsy'
+  if (plotcurves) print(plotcurves(out))
   out
 
 }
