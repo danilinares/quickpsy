@@ -24,6 +24,7 @@ plotthre.quickpsy <- function(l, xpanel, ypanel, color) {
   if (ngroup == 2) {
     fill <- l$grouping_var[1]
     x <- l$grouping_var[2]
+    l$thresholds[[fill]] <- factor(l$thresholds[[fill]])
     p <- p +
       geom_bar(data = l$thresholds,
                aes_string(x =x, fill = fill, y = 'thre'),
@@ -33,6 +34,7 @@ plotthre.quickpsy <- function(l, xpanel, ypanel, color) {
     fill <- l$grouping_var[1]
     x <- l$grouping_var[2]
     xpanel <- l$grouping_var[3]
+    l$thresholds[[fill]] <- factor(l$thresholds[[fill]])
     p <- p +
       facet_wrap(as.formula(paste0('~',xpanel))) +
       geom_bar(data = l$thresholds,
