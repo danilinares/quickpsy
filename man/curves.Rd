@@ -4,7 +4,7 @@
 \alias{curves}
 \title{curves}
 \usage{
-curves(fitsGroups, xmin = NULL, xmax = NULL, log = F)
+curves(fitsGroups, xmin, xmax, log)
 }
 \description{
 curves
