@@ -4,10 +4,22 @@ quickpsy <- function(d, x, k, n = NULL, random, within, between,
                      xmin = NULL, xmax = NULL, log = F,
                      psyfun = cum_normal_fun, pini = NULL,
                      guess = 0, lapses = 0, DE = F, pini2 = NULL,
-                     threprob = .5 * (1 - guess),
+                     threprob = NULL,
                      curv = T, thre = T, plotcurves = T) {
 
   handle_excep_quickpsy(DE, pini, pini2)
+
+  if (plotcurves) {
+    curv <- T
+    thre <- T
+  }
+
+  if (is.logical(guess) && !guess) guess <- 0
+  if (is.logical(lapses) && !lapses) lapses <- 0
+
+  if (is.null(threprob))
+    if (is.logical(guess) && guess) threprob <- .5
+    else  threprob <- guess + .5 * (1 - guess)
 
   d <- d  %>% ungroup()
   x <- deparse(substitute(x))
@@ -51,15 +63,17 @@ quickpsy <- function(d, x, k, n = NULL, random, within, between,
           guess, lapses, DE, pini2)
 
   fitsGroups <- list(d = d, x = x, threprob = threprob, guess = guess,
-                     fits = fits, grouping_var = grouping_var, threprob = threprob)
+                     fits = fits, grouping_var = grouping_var)
   out <- fitsGroups
 
 
-  if (curv) out <- c(out, list(curves = curves(fitsGroups)))
+  if (curv) out <- c(out, list(curves = curves(fitsGroups, xmin, xmax, log)))
   if (thre) out <- c(out, list(thresholds = thresholds(fitsGroups, threprob)))
 
   class(out) <- 'quickpsy'
-  if (plotcurves) print(plotcurves(out))
+  if (plotcurves) {
+    grid.arrange(plotcurves(out),plotthre(out))
+  }
   out
 
 }

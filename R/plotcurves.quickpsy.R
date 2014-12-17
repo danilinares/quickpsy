@@ -12,11 +12,12 @@ plotcurves.quickpsy <- function(l, xpanel, ypanel, color) {
       geom_point(data = l$d, aes_string(x = l$x, y = 'y')) +
       geom_line(data = l$curves, aes_string(x = l$x, y = 'y')) +
       geom_linerange(data = l$thresholds,
-                     aes_string(x = 'thre', ymin = l$guess,
+                     aes_string(x = 'thre', ymin = 0,
                                 ymax = l$threprob))
   }
   if (ngroup == 1) {
     color <- l$grouping_var[1]
+
   }
   if (ngroup == 2) {
     xpanel <- l$grouping_var[1]
@@ -30,11 +31,15 @@ plotcurves.quickpsy <- function(l, xpanel, ypanel, color) {
     p <- p + facet_grid(as.formula(paste0(xpanel,'~',ypanel)))
   }
   if (ngroup == 1 || ngroup ==2 || ngroup == 3) {
+    l$d[[color]] <- factor(l$d[[color]])
+    l$curves[[color]] <- factor(l$curves[[color]])
+    l$thresholds[[color]] <- factor(l$thresholds[[color]])
+
     p <- p +
       geom_point(data = l$d, aes_string(x = l$x, y = 'y', color = color)) +
       geom_line(data = l$curves, aes_string(x = l$x, y = 'y', color = color)) +
       geom_linerange(data = l$thresholds,
-                     aes_string(x = 'thre', ymin = l$guess,
+                     aes_string(x = 'thre', ymin = 0,
                                 ymax = l$threprob, color = color))
   }
   p

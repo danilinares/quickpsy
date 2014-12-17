@@ -7,8 +7,7 @@ fit_psy <- function(d, x, k, n, psyfun, psyfunname,
   #subd <- d %>% select_(paste0('-', x), paste0('-', k), paste0('-', n))
   #print(head(d,1))
 
-  if (is.logical(guess) && !guess) guess <- 0
-  if (is.logical(lapses) && !lapses) lapses <- 0
+
 
   def_funs <- list(cum_normal_fun = cum_normal_fun,
                    logistic_fun = logistic_fun,

@@ -30,8 +30,9 @@ calculate_pini <- function(d, x, k, n, guess, lapses) {
   datp <- data.frame(x = d[[x]], y01)
 
   ### Replacing 0s and/or 1s by 1 / (2 * n) and 1 - 1 / (2 * n) where n is the number of trials
-  datp$y01[datp$y01 == 0] <- 1 / (2 * ntrials)
-  datp$y01[datp$y01 == 1] <- 1 - 1 / (2 * ntrials)
+  datp <- datp %>%
+    mutate(y01 = ifelse(y01 == 1, 1 - 1 / (2 * ntrials), y01)) %>%
+    mutate(y01 = ifelse(y01 == 0, 1 / (2 * ntrials), y01))
 
   ### Eliminating probabilities outside (0,1)
   dat <- filter(datp, y01 > 0, y01 <1)
