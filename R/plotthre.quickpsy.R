@@ -2,7 +2,7 @@
 #'
 #' @export
 plotthre.quickpsy <- function(l, xpanel, ypanel, color) {
-  if (!('thresholds' %in% names(fit))) stop('quickpsy should be called with thre = TRUE')
+  if (!('thresholds' %in% names(l))) stop('quickpsy should be called with thre = TRUE')
 
   p <- ggplot()
 
