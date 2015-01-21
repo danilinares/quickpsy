@@ -31,7 +31,6 @@ thre_psy <- function(d, threprob) {
       if (psyfunname == 'weibull_fun')
         thre <- inv_weibull_fun(q, c(para[1], para[2]))
 
-
   }
 
   if (log) thre <- exp(thre)

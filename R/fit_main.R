@@ -9,8 +9,6 @@ fit_main <- function(d, x, k, n, psyfun, pini, DE, pini2) {
     mod <- DEoptim(nll,lower=pini,upper=pini2)$optim
     para <- mod$bestmem
   }
-  else {
-    para <- optim(pini, nll)$p
-  }
+  else para <- optim(pini, nll)$p
 }
 
