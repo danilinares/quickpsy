@@ -4,9 +4,8 @@
 \alias{fitpsy}
 \title{fitpsy}
 \usage{
-fitpsy(d = data, x = x, k = response, n = NULL, random, within, between,
-  xmin = NULL, xmax = NULL, log = F, psyfun = cum_normal_fun,
-  pini = NULL, guess = 0, lapses = 0, DE = F, pini2 = NULL)
+fitpsy(d, x, k, n, random, within, between, xmin, xmax, log, funname, pini,
+  guess, lapses, pini2)
 }
 \description{
 fitpsy

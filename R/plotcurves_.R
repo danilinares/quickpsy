@@ -18,8 +18,8 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
     }
     if (thresholds) {
       p <- p +
-        geom_linerange(data = qp$thresholds, aes_string(x = 'thre', ymin = 0,
-                                  ymax = qp$thresholds$prob))
+        geom_linerange(data = qp$thresholds, aes_string(x = 'thre',
+                       ymin = qp$guess, ymax = qp$thresholds$prob))
     }
   }
 
@@ -81,7 +81,7 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
     qp$averages[[color]] <- factor(qp$averages[[color]])
     qp$curves[[color]] <- factor(qp$curves[[color]])
     qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
-  }
+
 
   if (averages) {
     p <- p + geom_point(data = qp$averages,
@@ -93,8 +93,9 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
   }
   if (thresholds) {
     p <- p +
-      geom_linerange(data = qp$thresholds, aes_string(x = 'thre', ymin = 0,
-                     ymax = qp$thresholds$prob, color = color))
+      geom_linerange(data = qp$thresholds, aes_string(x = 'thre',
+                     ymin = qp$guess, ymax = qp$thresholds$prob, color = color))
     }
+  }
   p
 }

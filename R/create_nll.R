@@ -6,9 +6,9 @@
 #' @param psy_fun Function to create the negative log-likelihood.
 #' @return It returns a function. The negative log-likelihood as a function of the parameters (p).
 #' @export
-create_nll <- function(d, x, k, n, psy_fun){
+create_nll <- function(d, x, k, n, psyfunguesslapses){
   function(p) {
-    phi <- psy_fun(d[[x]], p)
+    phi <- psyfunguesslapses(d[[x]], p)
     phi[phi < .Machine$double.eps] <- .Machine$double.eps
      phi[phi > (1 - .Machine$double.eps)] <- 1 - .Machine$double.eps
        return(-sum(d[[k]] * log(phi) + (d[[n]] - d[[k]]) * log(1 - phi)))

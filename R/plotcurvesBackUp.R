@@ -1,5 +1,5 @@
 #' plotcurves
 #'
 #' @export
-plotcurves <- function(x,...) UseMethod('plotcurves')
+plotcurvesbackup <- function(x,...) UseMethod('plotcurves')
 

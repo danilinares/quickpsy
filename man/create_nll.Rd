@@ -4,7 +4,7 @@
 \alias{create_nll}
 \title{It creates from the data the negative log-likelihood as a function of the parameters.}
 \usage{
-create_nll(d, x, k, n, psy_fun)
+create_nll(d, x, k, n, psyfunguesslapses)
 }
 \arguments{
 \item{d}{The data frame containing the data.}

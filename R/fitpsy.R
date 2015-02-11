@@ -1,20 +1,52 @@
 #' fitpsy
 #' @export
-fitpsy <- function(d = data, x = x, k = response, n = NULL, random, within, between,
-                     xmin = NULL, xmax = NULL, log = F,
-                     psyfun = cum_normal_fun, pini = NULL,
-                     guess = 0, lapses = 0, DE = F, pini2 = NULL) {
-  ### deparsing
-  x <- deparse(substitute(x))
-  k <- deparse(substitute(k))
-  if (!is.null(n)) n <- deparse(substitute(n))
+fitpsy <- function(d, x, k, n, random, within, between, xmin, xmax, log,
+                    funname, pini, guess, lapses, pini2) {
 
-  if (!missing(random)) random <- as.character(substitute(random))[-1]
-  if (!missing(within)) within <- as.character(substitute(within))[-1]
-  if (!missing(between)) between <- as.character(substitute(between))[-1]
+  fun <- get(funname)
 
-  fitpsy_(d, x, k, n, random, within, between, xmin, xmax, log,
-          psyfun, pini, guess, lapses, DE, pini2)
+  if (!is.null(pini2) && is.null(pini)) stop('pini2 corresponds to the upper bound of the range for minimization; pini2 (the lower bound) is then required.', call. = F)
+
+  if (is.logical(guess) && !guess) guess <- 0
+  if (is.logical(lapses) && !lapses) lapses <- 0
+
+  d <- d  %>% ungroup()
+  groups <- c()
+  if (!missing(random)) groups <- c(groups, random)
+  if (!missing(within)) groups <- c(groups, within)
+  if (!missing(between)) groups <- c(groups, between)
+  if (is.null(n)) {
+    d[[k]][d[[k]] == -1] <- 0
+    d <- d %>% group_by_(.dots=c(groups, x)) %>%
+      summarise_(n = 'n()', k = paste0('sum(',k,')'))
+    names(d)[names(d) == 'k'] <- k
+    n <- 'n'
+  }
+
+  if (!(missing(random) && missing(within) && missing(between)))
+    d <- d %>% group_by_(.dots=groups)
+
+  d$y <- d[[k]] / d[[n]]
+
+  if (log) d[[x]] <- log(d[[x]])
+
+  psyfunguesslapses <- create_psy_fun(fun, guess, lapses)
+
+  limits <- limits(d, x, xmin, xmax, log)
+
+  groups <- as.character(groups(d))
+
+  if (funname %in% names(get_functions()))
+    if (is.null(pini)) pini <- pini(d, x, k, n, guess, lapses, funname)
+
+
+  para <- parameters(d, x, k, n, psyfunguesslapses, funname,
+                     pini, guess, lapses, pini2, groups)
+
+  list(x = x, k = k , n = n, guess = guess, lapses = lapses, averages = d,
+       groups = groups, funname = funname,
+       psyfunguesslapses = psyfunguesslapses, limits = limits, pini = pini,
+       pini2 = pini2, para = para)
 }
 
 

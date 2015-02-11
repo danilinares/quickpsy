@@ -1,6 +1,6 @@
 #' fitpsy_
 #' @export
-fitpsy_ <- function(d = data, x = x, k = response, n = NULL, random, within, between,
+fitpsy_backup <- function(d = data, x = x, k = response, n = NULL, random, within, between,
                      xmin = NULL, xmax = NULL, log = F,
                      psyfun = cum_normal_fun, pini = NULL,
                      guess = 0, lapses = 0, DE = F, pini2 = NULL) {

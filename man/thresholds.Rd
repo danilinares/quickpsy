@@ -4,7 +4,7 @@
 \alias{thresholds}
 \title{thresholds}
 \usage{
-thresholds(fitsGroups, threprob)
+thresholds(qp, prob = NULL, log = F)
 }
 \description{
 thresholds

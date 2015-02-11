@@ -4,7 +4,8 @@
 \alias{plotcurves}
 \title{plotcurves}
 \usage{
-plotcurves(x)
+plotcurves(qp, panel = NULL, xpanel = NULL, ypanel = NULL, color = NULL,
+  averages = T, curves = T, thresholds = T)
 }
 \description{
 plotcurves

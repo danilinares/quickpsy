@@ -8,9 +8,9 @@ qreadfiles <- function(path, ...) {
     namefile <- paste0(path, paste(unlist(d), collapse = ''), '.txt')
     data.frame(namefile, exist = file.exists(namefile))
   }
+
   namefiles <- expand.grid(arguments) %>%
     group_by_(.dots = names(arguments)) %>% do(namesfun(.))
-
   namefiles %>% filter(exist) %>%
     group_by_(.dots = names(arguments)) %>%
     do(read.table(.$namefile, header = T))
