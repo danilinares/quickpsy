@@ -13,17 +13,32 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
   if (ngroup == 0) {
 
-    p <- p + geom_bar(data = qp$para,
-                      aes_string(x = 0, y = 'para'),
-                      stat = 'identity', position = 'dodge') +
-      theme(axis.title.x = element_blank(),
-            axis.text.x = element_blank())
-    if ('bootstrap' %in% names(qp)) {
-      p <- p + geom_errorbar(data = qp$paraci,
-                             aes_string(x = 0,
-                                        ymin = 'parainf', ymax = 'parasup'),
-                             stat = 'identity', position = 'dodge', width = .5)
+    if (geom == 'bar') {
+      p <- p + geom_bar(data = qp$para,
+                        aes_string(x = 0, y = 'para'), fill = 'grey',
+                        stat = 'identity', position = 'dodge') +
+        theme(axis.title.x = element_blank(),
+              axis.text.x = element_blank())
+      if ('parabootstrap' %in% names(qp)) {
+        p <- p + geom_errorbar(data = qp$paraci, width = .5,
+                                aes_string(x = 0,
+                                           ymin = 'parainf', ymax = 'parasup'),
+                                stat = 'identity', position = 'dodge')
+      }
     }
+    if (geom == 'point') {
+      p <- p + geom_point(data = qp$para,
+                        aes_string(x = 0, y = 'para')) +
+        theme(axis.title.x = element_blank(),
+              axis.text.x = element_blank())
+      if ('parabootstrap' %in% names(qp)) {
+        p <- p + geom_linerange(data = qp$paraci,
+                                aes_string(x = 0,
+                                           ymin = 'parainf', ymax = 'parasup'),
+                                stat = 'identity', position = 'dodge')
+      }
+    }
+
   }
 
   if (ngroup == 1) {
@@ -31,14 +46,55 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
     if (!is.null(color)) {
       qp$para[[color]] <- factor(qp$para[[color]])
-      p <- p + geom_bar(data = qp$para,
-                 aes_string(x = color,fill = color, y = 'para'),
-                 stat = 'identity', position = 'dodge')
+      if (geom == 'bar') {
+        p <- p + geom_bar(data = qp$para,
+                   aes_string(x = color,fill = color, y = 'para'),
+                   stat = 'identity', position = 'dodge')
+        if ('parabootstrap' %in% names(qp)) {
+          p <- p + geom_errorbar(data = qp$paraci,
+                                 aes_string(x = color,
+                                            ymin = 'parainf', ymax = 'parasup'),
+                                 stat = 'identity', position = 'dodge', width = .5)
+        }
       }
+      if (geom == 'point') {
+        p <- p + geom_point(data = qp$para,
+                          aes_string(x = color, color = color, y = 'para'))
+        if ('parabootstrap' %in% names(qp)) {
+          qp$paraci[[color]] <- factor(qp$paraci[[color]])
+          p <- p + geom_linerange(data = qp$paraci,
+                                 aes_string(x = color, color = color,
+                                            ymin = 'parainf', ymax = 'parasup'),
+                                 stat = 'identity', position = 'dodge')
+        }
+      }
+
+    }
     if (is.null(color) && !is.null(x)) {
-      p <- p + geom_bar(data = qp$para,
-                        aes_string(x = x, y = 'para'),
-                        stat = 'identity', position = 'dodge')
+      if (geom == 'bar') {
+        p <- p + geom_bar(data = qp$para,
+                          aes_string(x = x, y = 'para'), fill = 'grey',
+                          stat = 'identity', position = 'dodge')
+        if ('parabootstrap' %in% names(qp)) {
+          p <- p + geom_errorbar(data = qp$paraci,
+                                  aes_string(x = x, width = .5,
+                                             ymin = 'parainf', ymax = 'parasup'),
+                                  stat = 'identity', position = 'dodge')
+        }
+      }
+      if (geom == 'point') {
+        p <- p + geom_point(data = qp$para,
+                          aes_string(x = x, y = 'para')) +
+          geom_line(data = qp$para,
+                     aes_string(x = x, y = 'para'))
+        if ('parabootstrap' %in% names(qp)) {
+          p <- p + geom_linerange(data = qp$paraci,
+                                  aes_string(x = x,
+                                             ymin = 'parainf', ymax = 'parasup'),
+                                  stat = 'identity', position = 'dodge')
+        }
+      }
+
     }
   }
 
@@ -87,24 +143,30 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
   if (ngroup == 2 || ngroup == 3) {
     qp$para[[color]] <- factor(qp$para[[color]])
-    if ('bootstrap' %in% names(qp)) qp$ci[[color]] <- factor(qp$ci[[color]])
+
     if (geom == 'bar') {
-    p <- p + geom_bar(data = qp$para,
+      qp$para[[x]] <- factor(qp$para[[x]])
+      p <- p + geom_bar(data = qp$para,
                aes_string(x = x, fill = color, y = 'para'),
                stat = 'identity', position = 'dodge')
-      if ('bootstrap' %in% names(qp)) {
-        p <- p + geom_errorbar(data = qppara$ci,
+      if ('parabootstrap' %in% names(qp)) {
+        qp$paraci[[color]] <- factor(qp$paraci[[color]])
+        #qp$paraci[[x]] <- factor(qp$paraci[[x]])
+        p <- p + geom_errorbar(data = qp$paraci, width = .5,
                       aes_string(x = x, fill = color,
                                  ymin = 'parainf', ymax = 'parasup'),
-                                 stat = 'identity', position = 'dodge')
+                                 stat = 'identity',
+                      position = position_dodge(width=0.9))
       }
     }
     if (geom == 'point') {
       p <- p + geom_point(data = qp$para,
                         aes_string(x = x, color = color, y = 'para')) +
                geom_line(data = qp$para,
-                     aes_string(x = x, color = color, y = 'para'))
-      if ('bootstrap' %in% names(qp)) {
+                     aes_string(x = x, color = color, y = 'para', group =color))
+      if ('parabootstrap' %in% names(qp)) {
+        qp$paraci[[color]] <- factor(qp$paraci[[color]])
+        #qp$paraci[[x]] <- factor(qp$paraci[[x]])
         p <- p + geom_linerange(data = qp$paraci,
                                aes_string(x = x, color = color,
                                           ymin = 'parainf', ymax = 'parasup'))

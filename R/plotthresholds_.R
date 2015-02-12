@@ -13,27 +13,86 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
   if (ngroup == 0) {
 
-    p <- p + geom_bar(data = qp$thresholds,
-                      aes_string(x = 0, y = 'thre'),
-                      stat = 'identity', position = 'dodge') +
-      theme(axis.title.x = element_blank(),
-            axis.text.x = element_blank())
+    if (geom == 'bar') {
+      p <- p + geom_bar(data = qp$thresholds,
+                        aes_string(x = 0, y = 'thre'), fill = 'grey',
+                        stat = 'identity', position = 'dodge') +
+        theme(axis.title.x = element_blank(),
+              axis.text.x = element_blank())
+    }
+    if (geom == 'point') {
+      p <- p + geom_point(data = qp$thresholds,
+                        aes_string(x = 0, y = 'thre')) +
+        theme(axis.title.x = element_blank(),
+              axis.text.x = element_blank())
+    }
+
+    if ('parabootstrap' %in% names(qp)) {
+      p <- p + geom_errorbar(data = qp$thresholdsci,
+                             aes_string(x = 0,
+                                        ymin = 'threinf', ymax = 'thresup'),
+                             stat = 'identity', position = 'dodge', width = .5)
+    }
   }
 
   if (ngroup == 1) {
     if (is.null(color) && is.null(x)) color <- groups[[1]]
 
     if (!is.null(color)) {
-      qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
-      p <- p + geom_bar(data = qp$thresholds,
-                 aes_string(x = color,fill = color, y = 'thre'),
-                 stat = 'identity', position = 'dodge')
+      if (geom == 'bar') {
+        qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
+        p <- p + geom_bar(data = qp$thresholds,
+                   aes_string(x = color,fill = color, y = 'thre'),
+                   stat = 'identity', position = 'dodge')
+        if ('parabootstrap' %in% names(qp)) {
+          p <- p + geom_errorbar(data = qp$thresholdsci,
+                                 aes_string(x = color,
+                                            ymin = 'threinf', ymax = 'thresup'),
+                             stat = 'identity', position = 'dodge', width = .5)
+        }
       }
-    if (is.null(color) && !is.null(x)) {
-      p <- p + geom_bar(data = qp$thresholds,
-                        aes_string(x = x, y = 'thre'),
-                        stat = 'identity', position = 'dodge')
+      if (geom == 'point') {
+        qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
+        p <- p + geom_point(data = qp$thresholds,
+                          aes_string(x = color,color = color, y = 'thre'))
+        if ('parabootstrap' %in% names(qp)) {
+          qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
+          p <- p + geom_linerange(data = qp$thresholdsci,
+                                 aes_string(x = color, color = color,
+                                            ymin = 'threinf', ymax = 'thresup'),
+                              stat = 'identity', position = 'dodge')
+        }
+      }
     }
+
+    if (is.null(color) && !is.null(x)) {
+      if (geom == 'bar') {
+        p <- p + geom_bar(data = qp$thresholds, fill ='grey',
+                          aes_string(x = x, y = 'thre'),
+                          stat = 'identity', position = 'dodge')
+        if ('parabootstrap' %in% names(qp)) {
+          p <- p + geom_errorbar(data = qp$thresholdsci,
+                                 aes_string(x = x,
+                                            ymin = 'threinf', ymax = 'thresup'),
+                                 stat = 'identity', position = 'dodge', width = .5)
+        }
+      }
+      if (geom == 'point') {
+        p <- p + geom_point(data = qp$thresholds, fill ='grey',
+                          aes_string(x = x, y = 'thre')) +
+          geom_line(data = qp$thresholds, fill ='grey',
+                     aes_string(x = x, y = 'thre'))
+        if ('parabootstrap' %in% names(qp)) {
+          p <- p + geom_linerange(data = qp$thresholdsci,
+                                 aes_string(x = x,
+                                            ymin = 'threinf', ymax = 'thresup'),
+                                 stat = 'identity', position = 'dodge')
+        }
+      }
+
+    }
+
+
   }
 
   if (ngroup == 2) {
@@ -86,15 +145,30 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
   if (ngroup == 2 || ngroup == 3) {
     if (geom == 'bar') {
+      qp$thresholds[[x]] <- factor(qp$thresholds[[x]])
     p <- p + geom_bar(data = qp$thresholds,
                aes_string(x = x, fill = color, y = 'thre'),
                stat = 'identity', position = 'dodge')
+    if ('parabootstrap' %in% names(qp)) {
+      qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
+      qp$thresholdsci[[x]] <- factor(qp$thresholdsci[[x]])
+      p <- p + geom_errorbar(data = qp$thresholdsci, width =.5,
+                              aes_string(x = x, fill = color,
+                                         ymin = 'threinf', ymax = 'thresup'),
+                              stat = 'identity', position = position_dodge(.9))
+    }
     }
     if (geom == 'point') {
       p <- p + geom_point(data = qp$thresholds,
                         aes_string(x = x, color = color, y = 'thre')) +
                geom_line(data = qp$thresholds,
-                     aes_string(x = x, color = color, y = 'thre'))
+                     aes_string(x = x, color = color, group = color, y = 'thre'))
+      if ('parabootstrap' %in% names(qp)) {
+        qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
+        p <- p + geom_linerange(data = qp$thresholdsci,
+                               aes_string(x = x, color = color, group = color,
+                                          ymin = 'threinf', ymax = 'thresup'))
+      }
     }
   }
 

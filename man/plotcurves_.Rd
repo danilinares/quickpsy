@@ -5,7 +5,7 @@
 \title{plotcurves_}
 \usage{
 plotcurves_(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
-  color = NULL, averages = T, curves = T, thresholds = T)
+  color = NULL, averages = T, curves = T, thresholds = T, ci = T)
 }
 \description{
 plotcurves_

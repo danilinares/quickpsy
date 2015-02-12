@@ -2,8 +2,12 @@
 #'
 #' @export
 plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
-                       color = NULL, averages = T, curves = T, thresholds = T) {
+                       color = NULL, averages = T, curves = T, thresholds = T,
+                       ci = T) {
   if (!('curves' %in% names(qp))) stop('To plot the curves, quickpsy should be called with curves = TRUE')
+
+  if (is.logical(qp$guess)) qp$guess <- 0
+  if (is.logical(qp$lapses)) qp$lapses <- 0
 
   p <- ggplot()
   groups <- qp$groups
@@ -20,6 +24,12 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
       p <- p +
         geom_linerange(data = qp$thresholds, aes_string(x = 'thre',
                        ymin = qp$guess, ymax = qp$thresholds$prob))
+    }
+    if (ci) {
+      p <- p +
+        geom_errorbarh(data = qp$thresholdsci, height = .03,
+                       aes_string(x = 'threinf', xmin = 'threinf',
+                                  xmax = 'thresup', y = qp$thresholds$prob))
     }
   }
 
@@ -81,20 +91,27 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
     qp$averages[[color]] <- factor(qp$averages[[color]])
     qp$curves[[color]] <- factor(qp$curves[[color]])
     qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
+    qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
 
 
-  if (averages) {
-    p <- p + geom_point(data = qp$averages,
-                        aes_string(x = qp$x, y = 'y', color = color))
-  }
-  if (curves) {
-    p <- p + geom_line(data = qp$curves,
-                       aes_string(x = 'x', y = 'y', color = color))
-  }
-  if (thresholds) {
-    p <- p +
-      geom_linerange(data = qp$thresholds, aes_string(x = 'thre',
-                     ymin = qp$guess, ymax = qp$thresholds$prob, color = color))
+    if (averages) {
+      p <- p + geom_point(data = qp$averages,
+                          aes_string(x = qp$x, y = 'y', color = color))
+    }
+    if (curves) {
+      p <- p + geom_line(data = qp$curves,
+                         aes_string(x = 'x', y = 'y', color = color))
+    }
+    if (thresholds) {
+      p <- p +
+        geom_linerange(data = qp$thresholds, aes_string(x = 'thre',
+                       ymin = qp$guess, ymax = qp$thresholds$prob, color = color))
+    }
+    if (ci) {
+      p <- p +
+        geom_errorbarh(data = qp$thresholdsci, height = .03,
+                       aes_string(x = 'threinf', xmin = 'threinf', color = color,
+                                  xmax = 'thresup', y = qp$thresholds$prob))
     }
   }
   p

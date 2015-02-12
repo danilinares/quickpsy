@@ -1,6 +1,6 @@
-#' qreadfiles
+#' quickreadfiles
 #' @export
-qreadfiles <- function(path, ...) {
+quickreadfiles <- function(path, ...) {
   arguments <- c(as.list(environment()), list(...))
   arguments[1] <- NULL
 

@@ -15,16 +15,16 @@ one_parameters <- function(d, x, k, n, psyfunguesslapses, funname,
   }
   else para <- optim(pini, nllfun)$par
 
-  if (funname %in% names(get_functions())) {
-    if (is.logical(guess) && !is.logical(lapses))
-      if (para[3]<0) message('Warning: negative guess rate')
-    if (!is.logical(guess) && is.logical(lapses))
-    if (para[3]<0) message('Warning: negative guess rate')
-    if (is.logical(guess) && is.logical(lapses)) {
-        if (para[3]<0) message('Warning: negative guess rate')
-        if (para[4]<0) message('Warning: negative lapses rate')
-    }
-  }
+#   if (funname %in% names(get_functions())) {
+#     if (is.logical(guess) && !is.logical(lapses))
+#       if (para[3]<0) message('Warning: negative guess rate')
+#     if (!is.logical(guess) && is.logical(lapses))
+#     if (para[3]<0) message('Warning: negative guess rate')
+#     if (is.logical(guess) && is.logical(lapses)) {
+#         if (para[3]<0) message('Warning: negative guess rate')
+#         if (para[4]<0) message('Warning: negative lapses rate')
+#     }
+#   }
 
   data.frame(paran = paste0('p', seq(1, length(para))), para)
 }

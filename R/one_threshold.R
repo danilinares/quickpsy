@@ -3,6 +3,7 @@
 #' @export
 one_threshold <- function(d, prob, log, funname, guess, lapses) {
   para <- d$para
+
   if (funname %in%  names(get_functions())) {
     if (is.numeric(guess) && is.numeric(lapses))
       q <- (prob - guess) / (1 - guess - lapses)
@@ -12,7 +13,7 @@ one_threshold <- function(d, prob, log, funname, guess, lapses) {
       q <- (prob - para[3]) / (1 - para[3] - lapses)
     if (is.numeric(guess) && is.logical(lapses))
       q <- (prob - guess) / (1 - guess - para[3])
-print(q)
+
     if (funname == 'cum_normal_fun')
       thre <- inv_cum_normal_fun(q, c(para[1], para[2]))
     if (funname == 'logistic_fun')
