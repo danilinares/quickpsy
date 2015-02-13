@@ -8,7 +8,7 @@ data <- quickreadfiles('inst/extdata/linareslopezmolinerjohnston2007/',
                    obs = c('dl','ss','at'), exp = c('exp1'))
 
 ### no groups
-fit <- quickpsy(data, FASE, RESP, B = 10)
+fit <- quickpsy(data, FASE, RESP, B = 3, bootstrap='parametric')
 plotcurves(fit)
 plotcurves(fit, averages = T, curves = F, thresholds = F, ci = F)
 plotpara(fit)
@@ -242,10 +242,14 @@ fit <- quickpsy(data, FASE, RESP, guess = T)
 plotcurves(fit)
 fit <- quickpsy(data, FASE, RESP, lapses = T)
 plotcurves(fit)
-fit <- quickpsy(data, FASE, RESP, guess = T, lapses = T, B = 100)
+fit <- quickpsy(data, FASE, RESP, guess = T, lapses = T, B = 10)
 plotcurves(fit)
 
-### it doesn't work
-fit <- quickpsy(data, FASE, RESP, random = .(EXC_F, obs, INTERVAL), guess = T)
+fit <- quickpsy(data, FASE, RESP,
+                random = .(EXC_F, obs, INTERVAL),
+                bootstrap = 'nonparametric',guess = T, B = 2)
 plotcurves(fit)
+
+
+
 

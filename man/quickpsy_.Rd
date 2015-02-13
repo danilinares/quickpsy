@@ -7,8 +7,8 @@
 quickpsy_(d, x = "x", k = "response", n, random, within, between,
   xmin = NULL, xmax = NULL, log = F, fun = "cum_normal_fun",
   pini = NULL, guess = 0, lapses = 0, prob = NULL, ypred = T,
-  curves = T, thresholds = T, loglik = T, bootstrap = "par", B = 1000,
-  ci = 0.95, pini2 = NULL)
+  curves = T, thresholds = T, loglik = T, bootstrap = "parametric",
+  B = 1000, ci = 0.95, pini2 = NULL)
 }
 \description{
 quickpsy_

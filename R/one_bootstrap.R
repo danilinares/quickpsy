@@ -2,9 +2,14 @@
 #'
 #' @export
 one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
-                           guess, lapses, pini, pini2, B, groups, ypred) {
+                           guess, lapses, pini, pini2, bootstrap, B,
+                          groups, ypred) {
+
 
   if (length(groups) != 0) ypred <- semi_join(ypred, d, by = groups)
+
+  if (bootstrap == 'parametric') ypred <- ypred$ypred
+  if (bootstrap == 'nonparametric') ypred <- d[[k]] / d[[n]]
 
   calculate_para <- function(f)
     parameters(f, x, k, n, psyfunguesslapses, funname,
@@ -18,10 +23,11 @@ one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
   }
 
   b <- boot(d, calculate_para, R = B, sim='parametric',
-            ran.gen = create_fake_data, mle = ypred$ypred)
+            ran.gen = create_fake_data, mle = ypred)
   fake_par <- b$t
   colnames(fake_par) <- paste0('p',1:length(fake_par[1,]))
   long <- data.frame(fake_par, sample = 1:length(fake_par[,1]))
   long %>% gather(paran, para, -sample) %>% arrange(sample)
+
 }
 

@@ -5,7 +5,7 @@
 \title{one_bootstrap}
 \usage{
 one_bootstrap(d, x, k, n, psyfunguesslapses, funname, guess, lapses, pini,
-  pini2, B, groups, ypred)
+  pini2, bootstrap, B, groups, ypred)
 }
 \description{
 one_bootstrap
