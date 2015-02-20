@@ -4,8 +4,8 @@
 \alias{one_parameters}
 \title{one_parameters}
 \usage{
-one_parameters(d, x, k, n, psyfunguesslapses, funname, pini, guess, lapses,
-  pini2, groups)
+one_parameters(d, x, k, n, psyfunguesslapses, funname, pini, piniset, guess,
+  lapses, pini2, groups)
 }
 \description{
 one_parameters

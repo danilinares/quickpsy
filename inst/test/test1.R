@@ -10,6 +10,8 @@ data <- quickreadfiles('inst/extdata/linareslopezmolinerjohnston2007/',
 ### no groups
 fit <- quickpsy(data, FASE, RESP, B = 3, bootstrap='parametric')
 plotcurves(fit)
+
+
 plotcurves(fit, averages = T, curves = F, thresholds = F, ci = F)
 plotpara(fit)
 plotpara(fit, geom = 'point')
@@ -17,8 +19,10 @@ plotthresholds(fit)
 plotthresholds(fit, geom = 'point')
 
 ### 1 group
-fit <- quickpsy(data, FASE, RESP, random = .(EXC_F), B = 10)
+fit <- quickpsy(data, FASE, RESP, random = .(EXC_F), B = 100,
+                pini=list(c(0,200),c(0,100)))
 plotcurves(fit)
+
 plotpara(fit)
 plotpara(fit, x = EXC_F)
 plotpara(fit, color = EXC_F)
@@ -238,7 +242,7 @@ fit <- quickpsy(data, FASE, RESP, lapses = .25)
 plotcurves(fit)
 fit <- quickpsy(data, FASE, RESP, guess = .25, lapses = .25)
 plotcurves(fit)
-fit <- quickpsy(data, FASE, RESP, guess = T)
+fit <- quickpsy(data, FASE, RESP, guess = T,B=1)
 plotcurves(fit)
 fit <- quickpsy(data, FASE, RESP, lapses = T)
 plotcurves(fit)

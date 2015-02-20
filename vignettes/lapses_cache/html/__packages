@@ -1,0 +1,9 @@
+base
+dplyr
+ggplot2
+quickpsy
+devtools
+gridExtra
+robustbase
+boot
+tidyr

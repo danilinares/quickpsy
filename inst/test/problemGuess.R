@@ -3,7 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(robustbase)
 
-data <- qreadfiles('inst/extdata/linareslopezmolinerjohnston2007/',
+data <- quickreadfiles('inst/extdata/linareslopezmolinerjohnston2007/',
                    obs = c('dl','ss','at'), exp = c('exp1'))
 
 dat_dl_800_2 <- filter(data, obs == 'dl', INTERVAL == 800, EXC_F == 2)
@@ -14,6 +14,11 @@ curvesquickpsy <- fitquickpsy$curves %>% mutate(fit = 'quickpsy')
 
 fitquickpsylapses <- quickpsy(dat_dl_800_2, FASE, RESP, lapses = T)
 curvesquickpsylapses <- fitquickpsylapses$curves %>% mutate(fit = 'quickpsy\nwith lapses')
+
+fitquickpsylapses05 <- quickpsy(dat_dl_800_2, FASE, RESP, lapses = T,
+                              pini = list(c(10,400),c(10,200),c(0,.05)))
+curvesquickpsylapses05 <- fitquickpsylapses05$curves %>%
+  mutate(fit = 'quickpsy with lapses\n between 0 and 0.05')
 
 fitglm <- glm(cbind(RESP, n - RESP) ~ FASE, data = fitquickpsy$averages,  family = binomial(probit))
 xseq <- seq(0,500, length = 300)
@@ -39,35 +44,8 @@ ggplot()+
   geom_line(data = curvesLeastSq, aes(x = x, y = y, color = fit)) +
   geom_line(data = curvesquickpsy, aes(x = x, y = y, color = fit)) +
   geom_line(data = curvesquickpsylapses, aes(x = x, y = y, color = fit)) +
+  geom_line(data = curvesquickpsylapses05, aes(x = x, y = y, color = fit)) +
   geom_line(data = curvesglm, aes(x = x, y = y, color = fit)) +
   geom_line(data = curvesglmrob, aes(x = x, y = y, color = fit)) +
   geom_point(data = fitquickpsy$averages, aes(x = FASE, y = y ))
-
-
-
-fitquickpsywithlapsepar <- fitquickpsy
-fitquickpsywithlapsepar$para <- head(fitquickpsylapses$para,2)
-
-loglik(fitquickpsy)$loglik > loglik(fitquickpsywithlapsepar)$loglik
-
-
-
-
-fit <- quickpsy(dat_dl_800_2, FASE, RESP, guess = F, pini=c(0,0),pini2=c(1000,1000))
-plotcurves(fit)
-fit <- quickpsy(dat_dl_800_2, FASE, RESP, guess = T, lapses = T, pini =c(50,50,0,0))
-plotcurves(fit)
-fit <- quickpsy(dat_dl_800_2, FASE, RESP, guess = T, lapses = T,
-                pini =c(0,0,-1,-1), pini2 = c(1000, 1000, 1, 1))
-plotcurves(fit)
-fit <- quickpsy(dat_dl_800_2, FASE, RESP, guess = T, pini =c(50,50,0))
-plotcurves(fit)
-fit <- quickpsy(dat_dl_800_2, FASE, RESP, guess = T, pini =c(0,0,-1),
-                pini2 =c(1000,1000,1))
-plotcurves(fit)
-
-
-
-plotcurves(fit_cum_normal_fun)
-plotthresholds(fit)
 

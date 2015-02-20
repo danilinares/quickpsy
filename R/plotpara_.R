@@ -145,11 +145,13 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
     qp$para[[color]] <- factor(qp$para[[color]])
 
     if (geom == 'bar') {
+
       qp$para[[x]] <- factor(qp$para[[x]])
       p <- p + geom_bar(data = qp$para,
                aes_string(x = x, fill = color, y = 'para'),
                stat = 'identity', position = 'dodge')
       if ('parabootstrap' %in% names(qp)) {
+        qp$paraci[[x]] <- factor(qp$paraci[[x]])
         qp$paraci[[color]] <- factor(qp$paraci[[color]])
         #qp$paraci[[x]] <- factor(qp$paraci[[x]])
         p <- p + geom_errorbar(data = qp$paraci, width = .5,
@@ -166,7 +168,6 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                      aes_string(x = x, color = color, y = 'para', group =color))
       if ('parabootstrap' %in% names(qp)) {
         qp$paraci[[color]] <- factor(qp$paraci[[color]])
-        #qp$paraci[[x]] <- factor(qp$paraci[[x]])
         p <- p + geom_linerange(data = qp$paraci,
                                aes_string(x = x, color = color,
                                           ymin = 'parainf', ymax = 'parasup'))

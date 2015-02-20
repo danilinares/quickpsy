@@ -2,7 +2,7 @@
 #'
 #' @export
 one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
-                           guess, lapses, pini, pini2, bootstrap, B,
+                           guess, lapses, pini, piniset, pini2, bootstrap, B,
                           groups, ypred) {
 
 
@@ -13,7 +13,7 @@ one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
 
   calculate_para <- function(f)
     parameters(f, x, k, n, psyfunguesslapses, funname,
-               pini, guess, lapses, pini2, groups)$para
+               pini, piniset, guess, lapses, pini2, groups)$para
 
   create_fake_data <- function(f, mle){
     kfake <- rbinom(length(f[[x]]), f[[n]], mle)

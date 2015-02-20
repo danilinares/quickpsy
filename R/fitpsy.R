@@ -1,7 +1,7 @@
 #' fitpsy
 #' @export
 fitpsy <- function(d, x, k, n, random, within, between, xmin, xmax, log,
-                    funname, pini, guess, lapses, pini2) {
+                    funname, pini, piniset, guess, lapses, pini2) {
 
   fun <- get(funname)
 
@@ -36,12 +36,13 @@ fitpsy <- function(d, x, k, n, random, within, between, xmin, xmax, log,
 
   groups <- as.character(groups(d))
 
-  if (funname %in% names(get_functions()))
-    if (is.null(pini)) pini <- pini(d, x, k, n, guess, lapses, funname)
-
+  if (!piniset)
+    if (funname %in% names(get_functions()))
+      pini <- pini(d, x, k, n, guess, lapses, funname)
+    else stop('Initial parameters should be set.')
 
   para <- parameters(d, x, k, n, psyfunguesslapses, funname,
-                     pini, guess, lapses, pini2, groups)
+                     pini, piniset, guess, lapses, pini2, groups)
 
   list(x = x, k = k , n = n, guess = guess, lapses = lapses, averages = d,
        groups = groups, funname = funname,

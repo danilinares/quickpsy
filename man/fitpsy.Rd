@@ -5,7 +5,7 @@
 \title{fitpsy}
 \usage{
 fitpsy(d, x, k, n, random, within, between, xmin, xmax, log, funname, pini,
-  guess, lapses, pini2)
+  piniset, guess, lapses, pini2)
 }
 \description{
 fitpsy

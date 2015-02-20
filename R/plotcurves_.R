@@ -4,7 +4,7 @@
 plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
                        color = NULL, averages = T, curves = T, thresholds = T,
                        ci = T) {
-  if (!('curves' %in% names(qp))) stop('To plot the curves, quickpsy should be called with curves = TRUE')
+  if (!('parabootstrap' %in% names(qp))) ci <- F
 
   if (is.logical(qp$guess)) qp$guess <- 0
   if (is.logical(qp$lapses)) qp$lapses <- 0

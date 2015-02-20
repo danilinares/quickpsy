@@ -54,20 +54,20 @@ pini <- function(d, x, k, n, guess, lapses, psyfun) {
     if (psyfun == 'logistic_fun') p2 <- 1 / p2
     if (psyfun == 'weibull_fun') p2 <- 1 / p2
 
-    if (is.numeric(guess) && is.numeric(lapses)) pini <- c(p1, p2)
+    if (is.numeric(guess) && is.numeric(lapses)) para <- c(p1, p2)
     if (is.logical(guess) && is.logical(lapses)) {
-      if (guess && lapses) pini <- c(p1, p2, gue, lap)
-      if (!guess && !lapses) pini <- c(p1, p2)
+      if (guess && lapses) para <- c(p1, p2, gue, lap)
+      if (!guess && !lapses) para <- c(p1, p2)
     }
     if (is.logical(guess) && is.numeric(lapses)) {
-      if (guess) pini <- c(p1, p2, gue)
-      if (!guess) pini <- c(p1, p2)
+      if (guess) para <- c(p1, p2, gue)
+      if (!guess) para <- c(p1, p2)
     }
     if (is.numeric(guess) && is.logical(lapses)) {
-      if (lapses) pini <- c(p1, p2, lap)
-      if (!lapses) pini <- c(p1, p2)
+      if (lapses) para <- c(p1, p2, lap)
+      if (!lapses) para <- c(p1, p2)
     }
-    data.frame(pini)
+    data.frame(paran = paste0('p', seq(1, length(para))), para)
   }
   d %>% do(calculate_pini(., x, k, n, guess, lapses, psyfun))
 }

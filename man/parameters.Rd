@@ -4,8 +4,8 @@
 \alias{parameters}
 \title{parameters}
 \usage{
-parameters(d, x, k, n, psyfunguesslapses, funname, pini, guess, lapses, pini2,
-  groups)
+parameters(d, x, k, n, psyfunguesslapses, funname, pini, piniset, guess, lapses,
+  pini2, groups)
 }
 \description{
 parameters

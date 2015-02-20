@@ -1,0 +1,140 @@
+---
+title: "Psychometric functions and lapses"
+author: "Daniel Linares and Joan López-Moliner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Psychometric functions and lapses}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+Here we use *quickpsy* to illustrate the problem of fitting psychometric functions when observers make lapses.
+
+## Lapses bias threshold estimation
+
+Wichmann and Hill (2001) showed that when lapses occur, the estimated threshold is biased. Using simulations like theirs (see the original paper for details), here we replicate this result.
+
+Wichmann and Hill used 7 sampling squemes defined as follow
+```{r, message=FALSE, fig.align='center', fig.width=5}
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(quickpsy)
+
+paraweibull <- c(10, 3)
+create_xs <- function(i, f) data.frame(squeme = i,  y = f, x = inv_weibull_fun(f, paraweibull))
+s <- list()
+s[[1]] <- create_xs(1, c(.3, .4, .48, .52, .6, .7))
+s[[2]] <- create_xs(2, c(.1, .3, .4, .6, .7, .9))
+s[[3]] <- create_xs(3, c(.3, .44, .7, .8, .9, .98))
+s[[4]] <- create_xs(4, c(.1, .2, .3, .4, .5, .6))
+s[[5]] <- create_xs(5, c(.08, .18, .28, .7, .85, .99))
+s[[6]] <- create_xs(6, c(.3, .4, .5, .6, .7, .99))
+s[[7]] <- create_xs(7, c(.34, .44, .54, .8, .9, .98))
+s <- do.call('rbind', s) 
+
+ggplot(s, aes(x = x, y = squeme, color = factor(squeme))) + 
+  geom_point() + geom_line() + 
+  labs(color = 'Sampling scheme') + theme(legend.position = 'top')
+```
+
+They generated parametric bootstrap samples of data coming from a psychometric function with the shape of a weibull function with parameters $10$ and $3$, $guess=0.5$ and variable $\lambda$ (directly related to the lapses). 
+
+For each value of the independent variable $x$, we simulated 160 trials (in the original paper 20, 40 and 80 trials were also used). 
+
+```{r}
+create_sim_dat <- function(d) {
+  psychometric_fun <- create_psy_fun(weibull_fun, .5, d$lambda)
+  ypred <- psychometric_fun(d$x, paraweibull)
+  k <- rbinom(length(d$x), d$n, ypred)
+  data.frame(x = d$x, k = k, n = d$n , y = k/d$n)
+}
+
+simdat <- merge(s, expand.grid(n = 160, sample = 1:100, lambda = seq(0,.05, .01))) %>%
+  group_by(squeme, n, sample, lambda) %>% do(create_sim_dat(.))
+
+```
+
+To illustrate the simulated data, we plot the first sample for each sampling scheme (columns) and each value of $\lambda$ (rows)
+
+```{r, fig.align='center',fig.width=7,fig.height=7}
+p <- ggplot(simdat %>% filter(sample == 1)) + facet_grid(lambda ~ squeme) + geom_point(aes(x = x, y = y))
+p
+```
+
+We use quickpsy to fit a weibull function to each condition using $\lambda = 0$
+
+```{r, warning=FALSE, cache=TRUE}
+fit <- quickpsy(simdat, x, k, n, within = .(squeme, lambda, sample), 
+                fun = weibull_fun, bootstrap = 'none', guess =.5, lapses = 0) 
+# we use 'none' for the bootstap because we are doing an explicit bootstrap  (we are fitting by sample)
+# that is, we don't need to bootstrap each of our samples
+```
+
+and for illustration purposes show the fitted psychometric function for the first sample 
+
+```{r,fig.align='center',fig.width=7,fig.height=7}
+p + geom_line(data = curves(fit, xmin = 0, xmax = 18) %>% filter(sample == 1),
+              aes(x = x, y =y)) 
+# we use the function curves instead of fit$curves because we want to define the range of the curves manually
+```
+
+Replicating Wichmann and Hill, we show that the thresholds are overstimated as $\lambda$ increases (they showed that the slope is also biased)
+```{r,fig.align='center',fig.width=4}
+thre <- fit$thresholds %>% group_by(squeme, lambda) %>%
+  summarise (threshold = mean(thre))
+
+real_threshold <- inv_weibull_fun((.75 - .5) / (1 - .5 - 0), paraweibull)
+
+ggplot(thre) + 
+  geom_point(aes(x = lambda, y = threshold, color = factor(squeme)), size = 4) +
+  geom_hline(yintercept = real_threshold, lty = 2) 
+```
+
+## Fitting lapses does not eliminate the bias in general
+
+Wichmann and Hill (2001) reported that allowing $\lambda$ to vary within a given small window eliminates the bias for the threshold, but consistent with Prins (2012) we were not able to replicate this finding 
+```{r,fig.align='center',fig.width=4}
+fit_lapses <- quickpsy(simdat, x, k, n, within = .(squeme, lambda, sample), 
+                fun = weibull_fun, bootstrap = 'none', guess =.5, lapses = T,
+                pini = list(c(1,30), c(1,10), c(0,.05))) # we introduce the min and max value for each parameter
+
+thre_lapses <- fit_lapses$thresholds %>% group_by(squeme, lambda) %>%
+  summarise (threshold = mean(thre))
+
+ggplot(thre_lapses) + 
+  geom_point(aes(x = lambda, y = threshold, color = factor(squeme)), size = 4) +
+  geom_hline(yintercept = real_threshold, lty = 2) 
+
+```
+
+## But for some data, fitting lapses does eliminate the bias 
+
+```{r, warning=FALSE, fig.align='center', fig.width=5}
+x <- seq(0,420,60)
+k <- c(0, 0, 4, 18, 20, 20, 19, 20)
+dat <- data.frame(x, k, n = 20)
+
+fitWithoutLapses <- quickpsy(dat, x, k, n) 
+fitWithLapses <- quickpsy(dat, x, k, n, lapses = T) 
+
+curvesWithoutLapses <- fitWithoutLapses$curves %>% mutate(cond = 'Without Lapses')
+curvesWithLapses <- fitWithLapses$curves %>% mutate(cond = 'With Lapses')
+
+ggplot()+
+  geom_point(data = fitWithoutLapses$averages, aes(x = x, y = y)) +
+  geom_line(data = curvesWithoutLapses,
+            aes(x = x, y = y, color = cond)) +
+  geom_line(data = curvesWithLapses,
+            aes(x = x, y = y, color = cond)) 
+```
+
+
+## References
+
+Prins, N. (2012). The psychometric function: The lapse rate revisited. Journal of Vision, 12(6), 25–25. 
+
+Wichmann, F. A., & Hill, N. J. (2001). The psychometric function: I. Fitting, sampling, and goodness of fit. Perception and Psychophysics, 63(8), 1293–1313.
+
+
