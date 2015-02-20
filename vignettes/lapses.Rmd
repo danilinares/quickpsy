@@ -19,7 +19,6 @@ Wichmann and Hill used 7 sampling squemes defined as follow
 ```{r, message=FALSE, fig.align='center', fig.width=5}
 library(dplyr)
 library(ggplot2)
-library(gridExtra)
 library(quickpsy)
 
 paraweibull <- c(10, 3)
@@ -111,6 +110,8 @@ ggplot(thre_lapses) +
 
 ## But for some data, fitting lapses does eliminate the bias 
 
+We illustrate this, with an extreme example
+
 ```{r, warning=FALSE, fig.align='center', fig.width=5}
 x <- seq(0,420,60)
 k <- c(0, 0, 4, 18, 20, 20, 19, 20)
@@ -130,6 +131,23 @@ ggplot()+
             aes(x = x, y = y, color = cond)) 
 ```
 
+When the number of parameters to be fitted is 3 or more the minization sometimes reaches local minima. To try to avoid that, differential evolution algorithms could be used (DEoptim)
+
+```{r, results='hide', fig.align='center', fig.width=5}
+
+fitWithLapses <- quickpsy(dat, x, k, n, lapses = T, DE = T, bootstrap = 'none',
+                          pini = list(c(10, 1000), c(1,100), c(0, .1))) 
+
+curvesWithLapses <- fitWithLapses$curves %>% mutate(cond = 'With Lapses')
+
+ggplot()+
+  geom_point(data = fitWithoutLapses$averages, aes(x = x, y = y)) +
+  geom_line(data = curvesWithoutLapses,
+            aes(x = x, y = y, color = cond)) +
+  geom_line(data = curvesWithLapses,
+            aes(x = x, y = y, color = cond)) 
+
+```
 
 ## References
 

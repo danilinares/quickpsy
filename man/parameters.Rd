@@ -5,7 +5,7 @@
 \title{parameters}
 \usage{
 parameters(d, x, k, n, psyfunguesslapses, funname, pini, piniset, guess, lapses,
-  pini2, groups)
+  DE, groups)
 }
 \description{
 parameters

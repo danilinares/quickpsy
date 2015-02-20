@@ -4,7 +4,7 @@
 
 one_curve <- function(d, xmin, xmax, log, groups, limits, psyfunguesslapses) {
 
-  if (length(groups) != 0) limits <- semi_join(limits, d, by = groups)
+  if (length(groups) != 0) limits <- dplyr::semi_join(limits, d, by = groups)
 
   if (!is.null(xmin)) limits$xmin <- xmin
   if (!is.null(xmax)) limits$xmax <- xmax

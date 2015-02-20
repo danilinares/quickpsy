@@ -5,14 +5,14 @@ quickpsy_ <- function(d, x = 'x', k = 'response', n, random, within, between,
                       pini = NULL, guess = 0, lapses = 0, prob = NULL,
                       ypred = T, thresholds = T,  loglik = F,
                       bootstrap = 'parametric', B = 30, ci = .95,
-                      pini2 = NULL) {
+                      DE = F) {
 
   if (missing(n)) n <- NULL
   if (is.null(pini)) piniset <- F
   else piniset <- T
 
   qp <- fitpsy(d, x, k, n, random, within, between, xmin, xmax, log,
-               fun, pini, piniset, guess, lapses, pini2)
+               fun, pini, piniset, guess, lapses, DE)
 
   qp <- c(qp, list(piniset=piniset))
 
@@ -32,7 +32,7 @@ quickpsy_ <- function(d, x = 'x', k = 'response', n, random, within, between,
     qp <- c(qp, list(thresholds = thresholds(qp, prob)))
   }
 
-  qp <- c(qp, list(loglik = loglik(qp)))
+  if (loglik) qp <- c(qp, list(loglik = loglik(qp)))
 
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
     qp <- c(qp, list(parabootstrap = parabootstrap(qp, bootstrap, B)))

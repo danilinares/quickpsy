@@ -5,7 +5,7 @@
 \title{one_parameters}
 \usage{
 one_parameters(d, x, k, n, psyfunguesslapses, funname, pini, piniset, guess,
-  lapses, pini2, groups)
+  lapses, DE, groups)
 }
 \description{
 one_parameters

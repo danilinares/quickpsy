@@ -69,6 +69,6 @@ pini <- function(d, x, k, n, guess, lapses, psyfun) {
     }
     data.frame(paran = paste0('p', seq(1, length(para))), para)
   }
-  d %>% do(calculate_pini(., x, k, n, guess, lapses, psyfun))
+  d %>% dplyr::do(calculate_pini(., x, k, n, guess, lapses, psyfun))
 }
 
