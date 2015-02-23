@@ -2,7 +2,9 @@
 #'
 #' @export
 plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
-                           ypanel = NULL, color = NULL, geom = 'bar') {
+                           ypanel = NULL, color = NULL, geom = 'bar', ci  = T) {
+
+  if ('paraci' %in% names(qp)) ci <- T
 
   p <- ggplot2::ggplot() + ylab(qp$x)
 
@@ -19,7 +21,7 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                         stat = 'identity', position = 'dodge') +
         ggplot2::theme(axis.title.x = element_blank(),
               axis.text.x = element_blank())
-      if ('parabootstrap' %in% names(qp)) {
+      if (ci) {
         p <- p + ggplot2::geom_errorbar(data = qp$paraci, width = .5,
                                 aes_string(x = 0,
                                            ymin = 'parainf', ymax = 'parasup'),
@@ -31,7 +33,7 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                         aes_string(x = 0, y = 'para')) +
         ggplot2::theme(axis.title.x = element_blank(),
               axis.text.x = element_blank())
-      if ('parabootstrap' %in% names(qp)) {
+      if (ci) {
         p <- p + ggplot2::geom_linerange(data = qp$paraci,
                                 aes_string(x = 0,
                                            ymin = 'parainf', ymax = 'parasup'),
@@ -50,7 +52,7 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
         p <- p + ggplot2::geom_bar(data = qp$para,
                    aes_string(x = color,fill = color, y = 'para'),
                    stat = 'identity', position = 'dodge')
-        if ('parabootstrap' %in% names(qp)) {
+        if (ci) {
           p <- p + ggplot2::geom_errorbar(data = qp$paraci,
                                  aes_string(x = color,
                                             ymin = 'parainf', ymax = 'parasup'),
@@ -60,7 +62,7 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
       if (geom == 'point') {
         p <- p + ggplot2::geom_point(data = qp$para,
                           aes_string(x = color, color = color, y = 'para'))
-        if ('parabootstrap' %in% names(qp)) {
+        if (ci) {
           qp$paraci[[color]] <- factor(qp$paraci[[color]])
           p <- p + ggplot2::geom_linerange(data = qp$paraci,
                                  aes_string(x = color, color = color,
@@ -75,7 +77,7 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
         p <- p + ggplot2::geom_bar(data = qp$para,
                           aes_string(x = x, y = 'para'), fill = 'grey',
                           stat = 'identity', position = 'dodge')
-        if ('parabootstrap' %in% names(qp)) {
+        if (ci) {
           p <- p + ggplot2::geom_errorbar(data = qp$paraci,
                                   aes_string(x = x, width = .5,
                                              ymin = 'parainf', ymax = 'parasup'),
@@ -87,7 +89,7 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                           aes_string(x = x, y = 'para')) +
           ggplot2::geom_line(data = qp$para,
                      aes_string(x = x, y = 'para'))
-        if ('parabootstrap' %in% names(qp)) {
+        if (ci) {
           p <- p + ggplot2::geom_linerange(data = qp$paraci,
                                   aes_string(x = x,
                                              ymin = 'parainf', ymax = 'parasup'),
@@ -150,7 +152,7 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
       p <- p + ggplot2::geom_bar(data = qp$para,
                aes_string(x = x, fill = color, y = 'para'),
                stat = 'identity', position = 'dodge')
-      if ('parabootstrap' %in% names(qp)) {
+      if (ci) {
         qp$paraci[[x]] <- factor(qp$paraci[[x]])
         qp$paraci[[color]] <- factor(qp$paraci[[color]])
         #qp$paraci[[x]] <- factor(qp$paraci[[x]])
@@ -166,7 +168,7 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                         aes_string(x = x, color = color, y = 'para')) +
         ggplot2::geom_line(data = qp$para,
                      aes_string(x = x, color = color, y = 'para', group =color))
-      if ('parabootstrap' %in% names(qp)) {
+      if (ci) {
         qp$paraci[[color]] <- factor(qp$paraci[[color]])
         p <- p + ggplot2::geom_linerange(data = qp$paraci,
                                aes_string(x = x, color = color,

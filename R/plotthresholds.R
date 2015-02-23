@@ -2,7 +2,7 @@
 #'
 #' @export
 plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
-                           ypanel = NULL, color = NULL, geom = 'bar') {
+                           ypanel = NULL, color = NULL, geom = 'bar', ci = T) {
 
   if (!missing(x)) x <- deparse(substitute(x))
   if (!missing(panel)) panel <- deparse(substitute(panel))

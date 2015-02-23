@@ -2,9 +2,12 @@
 #'
 #' @export
 plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
-                           ypanel = NULL, color = NULL, geom = 'bar') {
+                           ypanel = NULL, color = NULL, geom = 'bar', ci = T) {
 
-  if (!('thresholds' %in% names(qp))) stop('To plot the thresholds, quickpsy should be called with thresholds = TRUE')
+  if (!('thresholds' %in% names(qp)))
+    stop('To plot the thresholds, quickpsy should be called with thresholds = TRUE', call. = F)
+
+  if ('thresholdsci' %in% names(qp)) ci <- T
 
   p <- ggplot2::ggplot() + ggplot2::ylab(qp$x)
 
@@ -27,7 +30,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
               axis.text.x = element_blank())
     }
 
-    if ('parabootstrap' %in% names(qp)) {
+    if (ci) {
       p <- p + ggplot2::geom_errorbar(data = qp$thresholdsci,
                              aes_string(x = 0,
                                         ymin = 'threinf', ymax = 'thresup'),
@@ -44,7 +47,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
         p <- p + ggplot2::geom_bar(data = qp$thresholds,
                    aes_string(x = color,fill = color, y = 'thre'),
                    stat = 'identity', position = 'dodge')
-        if ('parabootstrap' %in% names(qp)) {
+        if (ci) {
           p <- p + ggplot2::geom_errorbar(data = qp$thresholdsci,
                                  aes_string(x = color,
                                             ymin = 'threinf', ymax = 'thresup'),
@@ -55,7 +58,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
         qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
         p <- p + ggplot2::geom_point(data = qp$thresholds,
                           aes_string(x = color,color = color, y = 'thre'))
-        if ('parabootstrap' %in% names(qp)) {
+        if (ci) {
           qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
           p <- p + ggplot2::geom_linerange(data = qp$thresholdsci,
                                  aes_string(x = color, color = color,
@@ -70,7 +73,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
         p <- p + ggplot2::geom_bar(data = qp$thresholds, fill ='grey',
                           aes_string(x = x, y = 'thre'),
                           stat = 'identity', position = 'dodge')
-        if ('parabootstrap' %in% names(qp)) {
+        if (ci) {
           p <- p + ggplot2::geom_errorbar(data = qp$thresholdsci,
                                  aes_string(x = x,
                                             ymin = 'threinf', ymax = 'thresup'),
@@ -82,7 +85,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                           aes_string(x = x, y = 'thre')) +
           geom_line(data = qp$thresholds, fill ='grey',
                      aes_string(x = x, y = 'thre'))
-        if ('parabootstrap' %in% names(qp)) {
+        if (ci) {
           p <- p + ggplot2::geom_linerange(data = qp$thresholdsci,
                                  aes_string(x = x,
                                             ymin = 'threinf', ymax = 'thresup'),
@@ -149,7 +152,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
     p <- p + ggplot2::geom_bar(data = qp$thresholds,
                aes_string(x = x, fill = color, y = 'thre'),
                stat = 'identity', position = 'dodge')
-    if ('parabootstrap' %in% names(qp)) {
+    if (ci) {
       qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
       qp$thresholdsci[[x]] <- factor(qp$thresholdsci[[x]])
       p <- p + ggplot2::geom_errorbar(data = qp$thresholdsci, width =.5,
@@ -163,7 +166,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                         aes_string(x = x, color = color, y = 'thre')) +
         ggplot2::geom_line(data = qp$thresholds,
                      aes_string(x = x, color = color, group = color, y = 'thre'))
-      if ('parabootstrap' %in% names(qp)) {
+      if (ci) {
         qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
         p <- p + ggplot2::geom_linerange(data = qp$thresholdsci,
                                aes_string(x = x, color = color, group = color,

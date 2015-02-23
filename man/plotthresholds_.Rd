@@ -5,7 +5,7 @@
 \title{plotthresholds_}
 \usage{
 plotthresholds_(qp, x = NULL, panel = NULL, xpanel = NULL,
-  ypanel = NULL, color = NULL, geom = "bar")
+  ypanel = NULL, color = NULL, geom = "bar", ci = T)
 }
 \description{
 plotthresholds_

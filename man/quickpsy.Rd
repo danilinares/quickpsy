@@ -2,14 +2,90 @@
 % Please edit documentation in R/quickpsy.R
 \name{quickpsy}
 \alias{quickpsy}
-\title{quickpsy}
+\title{Fits psychometric functions.}
 \usage{
-quickpsy(d, x = x, k = response, n, random, within, between, xmin = NULL,
-  xmax = NULL, log = F, fun = cum_normal_fun, pini = NULL, guess = 0,
-  lapses = 0, prob = NULL, ypred = T, thresholds = T, loglik = F,
-  bootstrap = "parametric", B = 30, ci = 0.95, DE = F)
+quickpsy(d = d, x = x, k = k, n = n, random, within, between,
+  xmin = NULL, xmax = NULL, log = F, fun = cum_normal_fun,
+  pini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
+  logliks = F, bootstrap = "parametric", B = 1000, ci = 0.95, DE = F)
+}
+\arguments{
+\item{d}{Data frame with the data to fit.}
+
+\item{x}{Name of the independent variable.}
+
+\item{k}{Name of the response variable. The response variable could be the
+number of trials of a given response or a vector of 0s and 1s indicating
+the response on each trial.}
+
+\item{n}{Only necessary if k refers to the number of trials of a given
+response. It corresponds to the name of the variable indicatingthe total
+number of trials.}
+
+\item{random}{Name of the random variable. It should be introduced as
+.(variable_name).}
+
+\item{within}{Name of the within variable. It should be introduced as
+.(variable_name).}
+
+\item{between}{Name of the between variable. It should be introduced as
+.(variable_name).}
+
+\item{xmin}{Minimum value of the independent variable for which the curve
+should be calculated (default is minimum value of the independent variable).}
+
+\item{xmax}{Maximum value of the independent variable for which the curve
+should be calculated (default is maximum value of the independent variable).}
+
+\item{fun}{Name of the shape of the curve to fit. It could be a predefined
+shape (cum_normal_fun, logistic_fun, weibull_fun) or a function introduced
+by the user.}
+
+\item{pini}{Initial values of the parameters.}
+
+\item{guess}{Guess rate (default is 0).}
+
+\item{lapses}{Lapse rate (default is 0).}
+
+\item{prob}{Probability to calculate the threshold (default is
+\code{guess + .5 * (1 - guess)}).}
+
+\item{thresholds}{If \code{FALSE}, thresholds are not calculated.}
+
+\item{logliks}{If \code{FALSE}, logliks are not calculated.}
+
+\item{bootstrap}{\code{'parametric'} parametric bootsrap;
+\code{'nonparametric'} non-parametric bootstrap; \code{'none'} No bootstrap.}
+}
+\value{
+A list containing the following components:
+\itemize{
+  \item \code{x, k, n}
+  \item \code{groups} The grouping variables.
+  \item \code{funname} String with the name of the shape of the curve
+  \item \code{psyfunguesslapses} Psychometric function
+  \item \code{limits} Limits of the curves.
+  \item \code{pini} Initial parameters.
+  \item \code{DE} Use of Differential Evolution algorithm (DEoptim).
+  \item \code{piniset} \code{FALSE} if initial parameters are not given.
+  \item \code{ypred} Predicted probabilities at the \code{x} values.
+  \item \code{curves} Psychometric curves.
+  \item \code{para} Fitted parameters
+  \item \code{paraci} Confidence intervals for the parameters
+  \item \code{thresholds} Thresholds.
+  \item \code{thresholdsci} Confidence intervals for the thresholds.
+}
 }
 \description{
-quickpsy
+\code{quickpsy} fits psychometric functions.
+}
+\examples{
+data(quickpsydat)
+fit <- quickpsy(quickpsydat, FASE, RESP,
+                between = .(ECC, INTERVAL, obs), B = 100)
+plotcurves(fit)
+}
+\seealso{
+\code{\link{quickpsy_}}
 }
 

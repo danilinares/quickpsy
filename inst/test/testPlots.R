@@ -4,15 +4,43 @@ library(ggplot2)
 library(boot)
 library(tidyr)
 
-data <- quickreadfiles('inst/extdata/linareslopezmolinerjohnston2007/',
+dat <- quickreadfiles('inst/extdata/linareslopezmolinerjohnston2007/',
                    obs = c('dl','ss','at'), exp = c('exp1'))
 
-### no groups
-fit <- quickpsy(data, FASE, RESP, B = 3, bootstrap='parametric')
+### curves
+fit <- quickpsy(dat, FASE, RESP, B = 30)
+plotcurves(fit)
+plotcurves(fit, averages = T, curves = F, thresholds = F, ci = F)
+
+
+fit <- quickpsy(data, FASE, RESP, bootstrap = 'none')
+plotcurves(fit)
+
+fit <- quickpsy(data, FASE, RESP, thresholds = F)
 plotcurves(fit)
 
 
+plotpara(fit)
+plotpara(fit, geom = 'point')
+plotthresholds(fit)
+plotthresholds(fit, geom = 'point')
+
+
+plotpara(fit)
+plotpara(fit, geom = 'point')
+plotthresholds(fit)
+plotthresholds(fit, geom = 'point')
+
+fit <- quickpsy(data, FASE, RESP, B = 30, thresholds = F)
+plotcurves(fit)
 plotcurves(fit, averages = T, curves = F, thresholds = F, ci = F)
+plotpara(fit)
+plotpara(fit, geom = 'point')
+plotthresholds(fit) # exception
+
+
+fit$thresholds <- thresholds(fit) # exception
+fit$thresholds <- thresholds(fit, prob = .5)
 plotpara(fit)
 plotpara(fit, geom = 'point')
 plotthresholds(fit)

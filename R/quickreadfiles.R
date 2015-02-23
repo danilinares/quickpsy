@@ -10,9 +10,11 @@ quickreadfiles <- function(path, ...) {
   }
 
   namefiles <- expand.grid(arguments) %>%
-    ggplot2::group_by_(.dots = names(arguments)) %>% do(namesfun(.))
-  namefiles %>% filter(exist) %>%
-    ggplot2::group_by_(.dots = names(arguments)) %>%
-    ggplot2::do(read.table(.$namefile, header = T))
+    dplyr::group_by_(.dots = names(arguments)) %>%
+    dplyr::do(namesfun(.))
+
+  namefiles %>% dplyr::filter(exist) %>%
+    dplyr::group_by_(.dots = names(arguments)) %>%
+    dplyr::do(read.table(.$namefile, header = T))
 
 }

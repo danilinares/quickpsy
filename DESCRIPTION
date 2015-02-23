@@ -1,17 +1,20 @@
 Package: quickpsy
-Title: What the package does (one line)
+Title: Fit psychometric functions for several conditions.
 Version: 0.1
-Author: x
+Author: as.person(c(
+    "Daniel Linares <danilinares@gmail.com> [aut, cre]",
+    "Joan López-Moliner <j.lopezmoliner@gmail.com> [aut, cre]"
+  ))
 Description: What the package does (one paragraph)
-Depends: 
+Depends:
     R (>= 3.1.1)
 License: What license is it under?
 LazyData: true
-Imports: 
+Imports:
     DEoptim,
     dplyr,
     ggplot2,
     tidyr
-Suggests: 
+Suggests:
     knitr
 VignetteBuilder: knitr

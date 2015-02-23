@@ -5,7 +5,7 @@
 \title{plotpara_}
 \usage{
 plotpara_(qp, x = NULL, panel = NULL, xpanel = NULL, ypanel = NULL,
-  color = NULL, geom = "bar")
+  color = NULL, geom = "bar", ci = T)
 }
 \description{
 plotpara_
