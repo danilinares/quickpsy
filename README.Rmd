@@ -30,3 +30,12 @@ and then
 devtools::install_github("danilinares/quickpsy")
 ```
 
+## Example
+```R
+data(quickpsydat)
+fit <- quickpsy(quickpsydat, FASE, RESP,
+                between = .(ECC, INTERVAL, obs), B = 100)
+plotcurves(fit)
+```
+
+

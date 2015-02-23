@@ -18,3 +18,13 @@ and then
 ``` {.r}
 devtools::install_github("danilinares/quickpsy")
 ```
+
+Example
+-------
+
+``` {.r}
+data(quickpsydat)
+fit <- quickpsy(quickpsydat, FASE, RESP,
+                between = .(ECC, INTERVAL, obs), B = 100)
+plotcurves(fit)
+```
