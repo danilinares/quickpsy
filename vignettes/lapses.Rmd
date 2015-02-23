@@ -50,8 +50,9 @@ create_sim_dat <- function(d) {
   data.frame(x = d$x, k = k, n = d$n , y = k/d$n)
 }
 
-simdat <- merge(s, expand.grid(n = 160, sample = 1:100, lambda = seq(0,.05, .01))) %>%
-  group_by(squeme, n, sample, lambda) %>% do(create_sim_dat(.))
+simdat <- merge(s, expand.grid(n = 160, sample = 1:50, lambda = seq(0,.05, .01))) %>%
+  group_by(squeme, n, sample, lambda) %>% do(create_sim_dat(.)) 
+# we use only 30 samples to increase speed
 
 ```
 
@@ -91,7 +92,7 @@ ggplot(thre) +
   geom_hline(yintercept = real_threshold, lty = 2) 
 ```
 
-## Fitting lapses does not eliminate the bias in general
+## Fitting lapses does not reduce the bias in general
 
 Wichmann and Hill (2001) reported that allowing $\lambda$ to vary within a given small window eliminates the bias for the threshold, but consistent with Prins (2012) we were not able to replicate this finding 
 ```{r,fig.align='center',fig.width=4}

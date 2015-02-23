@@ -7,16 +7,16 @@ quickpsy fits psychometric functions for several conditions. The package is stil
 Install
 -------
 
-Install the package devtools
+You need to install the package devtools, DEoptim, dplyr, ggplot2 and tidyr. For example, to install devtools
 
 ``` {.r}
-install.packages("devtools")
+install.packages('devtools')
 ```
 
 and then
 
 ``` {.r}
-devtools::install_github("danilinares/quickpsy")
+devtools::install_github('danilinares/quickpsy', build_vignettes = T)
 ```
 
 Example

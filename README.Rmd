@@ -19,16 +19,17 @@ still under construction.
 
 ## Install
 
-Install the package devtools
+You need to install the package devtools, DEoptim, dplyr, ggplot2 and tidyr. 
+For example, to install devtools
 
 ```R
-install.packages("devtools")
+install.packages('devtools')
 ```
 
 and then 
 
 ```R
-devtools::install_github("danilinares/quickpsy")
+devtools::install_github('danilinares/quickpsy', build_vignettes = T)
 ```
 
 ## Example
