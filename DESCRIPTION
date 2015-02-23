@@ -18,3 +18,4 @@ Imports:
 Suggests:
     knitr
 VignetteBuilder: knitr
+License: GPL-2
