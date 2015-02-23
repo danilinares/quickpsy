@@ -31,6 +31,7 @@ devtools::install_github("danilinares/quickpsy")
 ```
 
 ## Example
+
 ```R
 data(quickpsydat)
 fit <- quickpsy(quickpsydat, FASE, RESP,
@@ -38,4 +39,9 @@ fit <- quickpsy(quickpsydat, FASE, RESP,
 plotcurves(fit)
 ```
 
+## Tutorials
+
+```R
+browseVignettes('quickpsy')
+```
 

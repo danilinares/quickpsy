@@ -28,3 +28,10 @@ fit <- quickpsy(quickpsydat, FASE, RESP,
                 between = .(ECC, INTERVAL, obs), B = 100)
 plotcurves(fit)
 ```
+
+Tutorials
+---------
+
+``` {.r}
+browseVignettes('quickpsy')
+```
