@@ -7,9 +7,13 @@ quickpsy fits psychometric functions for several conditions.
 Installation
 ------------
 
-You need to install the package devtools
+Install the package devtools
 
-\`\`\`R install.packages("devtools") \`\`\`\` and then
+``` {.r}
+install.packages("devtools")
+```
+
+and then
 
 ``` {.r}
 devtools::install_github("danilinares/quickpsy")
