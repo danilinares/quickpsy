@@ -22,7 +22,8 @@ Install the package devtools
 
 ```R
 install.packages("devtools")
-````
+```
+
 and then 
 
 ```R
