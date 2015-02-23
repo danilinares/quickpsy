@@ -2,10 +2,10 @@
 
 
 
-quickpsy fits psychometric functions for several conditions.
+quickpsy fits psychometric functions for several conditions. The package is still under construction.
 
-Installation
-------------
+Install
+-------
 
 Install the package devtools
 
@@ -27,6 +27,8 @@ data(quickpsydat)
 fit <- quickpsy(quickpsydat, FASE, RESP,
                 between = .(ECC, INTERVAL, obs), B = 100)
 plotcurves(fit)
+plotpara(fit)
+plotthresholds(fit)
 ```
 
 Tutorials
