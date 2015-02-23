@@ -13,3 +13,7 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
+
+quickpsy fits psychometric functions for several conditions. 
+
+## Installation
