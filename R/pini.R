@@ -1,5 +1,4 @@
-#' pini
-#'
+#' @keywords internal
 #' @export
 pini <- function(d, x, k, n, guess, lapses, psyfun) {
   calculate_pini <- function(d, x, k, n, guess, lapses, psyfun) {

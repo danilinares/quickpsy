@@ -9,4 +9,5 @@ one_loglik(d, x, k, n, psyfunguesslapses, groups, para)
 \description{
 one_loglik
 }
+\keyword{internal}
 

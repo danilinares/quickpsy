@@ -9,4 +9,5 @@ one_ypred(d, log, groups, averages, x, psyfunguesslapses)
 \description{
 one_ypred
 }
+\keyword{internal}
 

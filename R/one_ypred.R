@@ -1,5 +1,5 @@
 #' one_ypred
-#'
+#' @keywords internal
 #' @export
 one_ypred <- function(d,log, groups, averages, x, psyfunguesslapses) {
   if (length(groups) != 0) averages <- dplyr::semi_join(averages, d, by = groups)

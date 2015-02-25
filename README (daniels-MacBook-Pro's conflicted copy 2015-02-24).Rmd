@@ -14,20 +14,20 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 quickpsy fits psychometric functions for several conditions. The package is 
 still under construction. 
 
 ## Install
 
-You need to install the package boot, DEoptim, devtools, dplyr, ggplot2 and 
-tidyr.
+You need to install the package devtools, dplyr, ggplot2, tidyr and DEoptim. 
 For example, to install devtools
 
 ```R
 install.packages('devtools')
 ```
 
-and then to install quickpsy
+and then 
 
 ```R
 devtools::install_github('danilinares/quickpsy', build_vignettes = T)
@@ -40,8 +40,6 @@ data(quickpsydat)
 fit <- quickpsy(quickpsydat, FASE, RESP,
                 between = .(ECC, INTERVAL, obs), B = 100)
 plotcurves(fit)
-plotpara(fit)
-plotthresholds(fit)
 ```
 
 ## Tutorials
@@ -50,3 +48,5 @@ plotthresholds(fit)
 browseVignettes('quickpsy')
 ```
 
+## Created by 
+Daniel Linares and Joan López-Moliner

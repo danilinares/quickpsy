@@ -1,5 +1,5 @@
 #' one_paraci
-#'
+#' @keywords internal
 #' @export
 one_paraci <- function(d, ci, method) {
   if (method == 'percent') {

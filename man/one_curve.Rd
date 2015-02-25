@@ -9,4 +9,5 @@ one_curve(d, xmin, xmax, log, groups, limits, psyfunguesslapses)
 \description{
 one_curve
 }
+\keyword{internal}
 

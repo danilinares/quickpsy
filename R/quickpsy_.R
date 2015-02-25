@@ -5,7 +5,7 @@ quickpsy_ <- function(d = d, x = 'x', k = 'k', n = 'n', random, within, between,
                       pini = NULL, guess = 0, lapses = 0, prob = NULL,
                       thresholds = T,  logliks = F,
                       bootstrap = 'parametric', B = 1000, ci = .95,
-                      DE = F) {
+                      optimization = 'optim') {
 
   if (!is.null(prob)) thresholds <- T
 
@@ -14,15 +14,15 @@ quickpsy_ <- function(d = d, x = 'x', k = 'k', n = 'n', random, within, between,
   else piniset <- T
 
   qp <- fitpsy(d, x, k, n, random, within, between, xmin, xmax, log,
-               fun, pini, piniset, guess, lapses, DE)
+               fun, pini, piniset, guess, lapses, optimization)
 
   qp <- c(qp, list(piniset=piniset))
 
   qp <- c(qp, list(ypred = ypred(qp)))
 
-#   if (sum(qp$ypred$ypred < 0) + sum(qp$ypred$ypred > 1) > 0)
-#     if (bootstrap == 'parametric')
-#       stop ('y-predictions not within (0,1) , bootstrap should be nonparametric')
+  if (sum(qp$ypred$ypred < 0) + sum(qp$ypred$ypred > 1) > 0)
+    if (bootstrap == 'parametric')
+      stop ('As y-predictions are not within (0,1), bootstrap should be \'nonparametric\'', call.=F)
 
   qp <- c(qp, list(curves = curves(qp)))
 
@@ -34,7 +34,6 @@ quickpsy_ <- function(d = d, x = 'x', k = 'k', n = 'n', random, within, between,
   }
 
   if (logliks) qp <- c(qp, list(logliks = logliks(qp)))
-
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
     qp <- c(qp, list(parabootstrap = parabootstrap(qp, bootstrap, B)))
     qp <- c(qp, list(paraci = paraci(qp, ci)))
@@ -43,6 +42,8 @@ quickpsy_ <- function(d = d, x = 'x', k = 'k', n = 'n', random, within, between,
       qp <- c(qp, list(thresholdsci = thresholdsci(qp, ci)))
     }
   }
+  else if (bootstrap != 'none')
+    stop('Bootstrap should be \'parametric\', \'nonparametric\' or \'none\'.', call. = F)
   class(qp) <- 'quickpsy'
   qp
 }

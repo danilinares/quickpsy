@@ -7,7 +7,8 @@
 quickpsy_(d = d, x = "x", k = "k", n = "n", random, within, between,
   xmin = NULL, xmax = NULL, log = F, fun = "cum_normal_fun",
   pini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
-  logliks = F, bootstrap = "parametric", B = 1000, ci = 0.95, DE = F)
+  logliks = F, bootstrap = "parametric", B = 1000, ci = 0.95,
+  optimization = "optim")
 }
 \description{
 quickpsy_

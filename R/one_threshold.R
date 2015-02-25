@@ -1,5 +1,5 @@
 #' one_threshold
-#'
+#' @keywords internal
 #' @export
 one_threshold <- function(d, prob, log, funname, guess, lapses, curves) {
   para <- d$para

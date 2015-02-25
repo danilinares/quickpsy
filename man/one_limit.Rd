@@ -9,4 +9,5 @@ one_limit(d, x, xmin, xmax, log)
 \description{
 one_limit
 }
+\keyword{internal}
 

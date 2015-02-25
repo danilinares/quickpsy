@@ -9,4 +9,5 @@ one_thresholdsci(d, ci, method)
 \description{
 one_thresholdsci
 }
+\keyword{internal}
 

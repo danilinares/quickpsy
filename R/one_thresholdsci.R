@@ -1,5 +1,5 @@
 #' one_thresholdsci
-#'
+#' @keywords internal
 #' @export
 one_thresholdsci <- function(d, ci, method) {
   if (method == 'percent') {

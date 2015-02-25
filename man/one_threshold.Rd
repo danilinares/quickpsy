@@ -9,4 +9,5 @@ one_threshold(d, prob, log, funname, guess, lapses, curves)
 \description{
 one_threshold
 }
+\keyword{internal}
 

@@ -5,9 +5,10 @@
 \title{one_bootstrap}
 \usage{
 one_bootstrap(d, x, k, n, psyfunguesslapses, funname, guess, lapses, pini,
-  piniset, DE, bootstrap, B, groups, ypred)
+  piniset, optimization, bootstrap, B, groups, ypred)
 }
 \description{
 one_bootstrap
 }
+\keyword{internal}
 

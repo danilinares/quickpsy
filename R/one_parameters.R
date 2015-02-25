@@ -1,20 +1,22 @@
-#' one_parameters
-#'
+#' @keywords internal
 #' @export
-one_parameters <- function(d, x, k, n, psyfunguesslapses, funname,
-                              pini, piniset, guess, lapses, DE, groups) {
-
+one_parameters <- function(d, x, k, n, psyfunguesslapses, funname, pini,
+                           piniset, guess, lapses, optimization, groups) {
   nllfun <- create_nll(d, x, k, n, psyfunguesslapses)
 
-  if (DE) {
-    if (is.list(pini)) {
+  if (optimization == 'DE') {
+    if (is.data.frame(pini) || is.atomic(pini))
+      stop('pini should be specified as a list of the type list(c(para1min, para1max), c(para2min, para2max),...', call. = F)
+    else if (is.list(pini)) {
       pini <- matrix(unlist(pini), ncol = 2, byrow = T)
       mod <- DEoptim::DEoptim(nllfun, lower = pini[,1], upper = pini[,2])$optim
       para <- mod$bestmem
     }
-    else stop('pini should be a list of the type list(c(p1min, p1max), c(p2min, p2max),...')
+    else
+      stop('pini should be specified as a list of the type list(c(para1min, para1max), c(para2min, para2max),...', call. = F)
+
   }
-  else {
+  if (optimization== 'optim') {
 
     if (piniset) {
       if (is.atomic(pini))
@@ -42,6 +44,8 @@ one_parameters <- function(d, x, k, n, psyfunguesslapses, funname,
       para <- optim(pini, nllfun)$par
     }
   }
+  if (optimization != 'DE' && optimization != 'optim')
+    stop('optimization should be \'optim \' or \'DE\'.', call. = F)
   data.frame(paran = paste0('p', seq(1, length(para))), para)
 }
 

@@ -9,4 +9,5 @@ one_paraci(d, ci, method)
 \description{
 one_paraci
 }
+\keyword{internal}
 

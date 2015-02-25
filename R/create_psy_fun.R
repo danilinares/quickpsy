@@ -1,5 +1,4 @@
-#' create_psy_fun
-#'
+#' @keywords internal
 #' @export
 create_psy_fun <- function(psy_fun, guess, lapses) {
   psy_fun <- psy_fun

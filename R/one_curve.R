@@ -1,5 +1,5 @@
 #' one_curve
-#'
+#' @keywords internal
 #' @export
 
 one_curve <- function(d, xmin, xmax, log, groups, limits, psyfunguesslapses) {

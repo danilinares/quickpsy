@@ -62,7 +62,8 @@ quickpsy <- function(d = d, x = x, k = k, n = n, random, within, between,
                      xmin = NULL, xmax = NULL, log = F, fun = cum_normal_fun,
                      pini = NULL, guess = 0, lapses = 0, prob = NULL,
                      thresholds = T, logliks = F,
-                     bootstrap = 'parametric', B = 1000, ci = .95, DE = F) {
+                     bootstrap = 'parametric', B = 1000, ci = .95,
+                     optimization = 'optim') {
 
   x <- deparse(substitute(x))
   k <- deparse(substitute(k))
@@ -76,7 +77,7 @@ quickpsy <- function(d = d, x = x, k = k, n = n, random, within, between,
   ### calling the standard evaluation of quickpsy
   quickpsy_(d, x, k, n, random, within, between, xmin, xmax, log, fun, pini,
             guess, lapses, prob, thresholds, logliks, bootstrap,
-            B, ci, DE)
+            B, ci, optimization)
 }
 
 

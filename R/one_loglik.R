@@ -1,5 +1,5 @@
 #' one_loglik
-#'
+#' @keywords internal
 #' @export
 one_loglik <- function(d, x, k, n, psyfunguesslapses, groups, para) {
   nllfun <- create_nll(d, x, k, n, psyfunguesslapses)

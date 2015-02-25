@@ -1,5 +1,5 @@
 #' one_limit
-#'
+#' @keywords internal
 #' @export
 one_limit <- function(d, x, xmin, xmax, log) {
   if (is.null(xmin)) xmin <- min(d[[x]])
