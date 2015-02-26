@@ -2,11 +2,25 @@
 % Please edit documentation in R/inv_weibull_fun.R
 \name{inv_weibull_fun}
 \alias{inv_weibull_fun}
-\title{inv_weibull_fun}
+\title{Inverse weibull  function}
 \usage{
 inv_weibull_fun(x, p)
 }
+\arguments{
+\item{p}{Vector of parameters \code{p = c(\alpha, \beta)}.}
+
+\item{prob}{Vector of probabilities.}
+}
+\value{
+\code{x} at each probability.
+}
 \description{
-inv_weibull_fun
+Inverse weibull function
+}
+\examples{
+yseq <- seq(0, 1, .01)
+xseq <- inv_weibull_fun(yseq, c(2, 4))
+curve <- data.frame(x = xseq, y = yseq)
+ggplot(curve, aes(x = x, y = y)) + geom_line()
 }
 

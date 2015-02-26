@@ -11,6 +11,7 @@ one_curve <- function(d, xmin, xmax, log, groups, limits, psyfunguesslapses) {
 
   xseq <- seq(limits$xmin, limits$xmax, length = 300)
   yseq <- psyfunguesslapses(xseq, d$para)
+
   if (log) xseq <- exp(xseq)
   data.frame(x = xseq, y = yseq)
 }

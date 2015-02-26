@@ -23,9 +23,10 @@ Example
 -------
 
 ``` {.r}
-data(quickpsydat)
-fit <- quickpsy(quickpsydat, FASE, RESP,
-                between = .(ECC, INTERVAL, obs), B = 100)
+library(MPDiR) # contains the Vernier data
+data(Vernier) # ?Venier for the reference
+fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+                grouping = .(Direction, WaveForm, TempFreq))
 plotcurves(fit)
 plotpara(fit)
 plotthresholds(fit)

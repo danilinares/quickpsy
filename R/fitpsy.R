@@ -1,7 +1,7 @@
 #' @keywords internal
 #' @export
-fitpsy <- function(d, x, k, n, random, within, between, xmin, xmax, log,
-                    funname, pini, piniset, guess, lapses, optimization) {
+fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
+                   log, funname, pini, piniset, guess, lapses, optimization) {
 
   fun <- get(funname)
 
@@ -13,6 +13,7 @@ fitpsy <- function(d, x, k, n, random, within, between, xmin, xmax, log,
   if (!missing(random)) groups <- c(groups, random)
   if (!missing(within)) groups <- c(groups, within)
   if (!missing(between)) groups <- c(groups, between)
+  if (!missing(grouping)) groups <- c(groups, grouping)
   if (is.null(n)) {
     d[[k]][d[[k]] == -1] <- 0
     d <- d %>% dplyr::group_by_(.dots=c(groups, x)) %>%
@@ -21,7 +22,7 @@ fitpsy <- function(d, x, k, n, random, within, between, xmin, xmax, log,
     n <- 'n'
   }
 
-  if (!(missing(random) && missing(within) && missing(between)))
+  if (!(missing(random) && missing(within) && missing(between) && missing(grouping)))
     d <- d %>% dplyr::group_by_(.dots=groups)
 
   d$y <- d[[k]] / d[[n]]
@@ -43,9 +44,9 @@ fitpsy <- function(d, x, k, n, random, within, between, xmin, xmax, log,
                      pini, piniset, guess, lapses, optimization, groups)
 
   list(x = x, k = k , n = n, guess = guess, lapses = lapses, averages = d,
-       groups = groups, funname = funname,
+       groups = groups, funname = funname, log = log,
        psyfunguesslapses = psyfunguesslapses, limits = limits, pini = pini,
-       optimization = optimization, para = para)
+       optimization = optimization, para = as.data.frame(para))
 }
 
 

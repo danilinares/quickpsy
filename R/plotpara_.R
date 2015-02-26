@@ -6,7 +6,9 @@ plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
   if (!('paraci' %in% names(qp))) ci <- F
 
-  p <- ggplot2::ggplot() + ylab(qp$x)
+  p <- ggplot2::ggplot()
+  if (qp$log) p <- p + ggplot2::ylab(paste0('log(', qp$x, ')'))
+  else p <- p + ggplot2::ylab(qp$x)
 
   groups <- qp$groups
   ngroup <- length(groups)

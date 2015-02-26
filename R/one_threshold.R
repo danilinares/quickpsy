@@ -27,8 +27,7 @@ one_threshold <- function(d, prob, log, funname, guess, lapses, curves) {
         thre <- inv_weibull_fun(q, c(para[1], para[2]))
     }
   }
-  #if (log) thre <- exp(thre)
-
+  if (log) thre <- exp(thre)
 
   data.frame(thre, prob)
 }

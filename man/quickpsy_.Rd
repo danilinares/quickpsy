@@ -2,15 +2,28 @@
 % Please edit documentation in R/quickpsy_.R
 \name{quickpsy_}
 \alias{quickpsy_}
-\title{quickpsy_}
+\title{Fits psychometric functions.}
 \usage{
-quickpsy_(d = d, x = "x", k = "k", n = "n", random, within, between,
+quickpsy_(d, x = "x", k = "k", n = "n", grouping, random, within, between,
   xmin = NULL, xmax = NULL, log = F, fun = "cum_normal_fun",
   pini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
-  logliks = F, bootstrap = "parametric", B = 1000, ci = 0.95,
+  logliks = F, bootstrap = "parametric", B = 100, ci = 0.95,
   optimization = "optim")
 }
 \description{
-quickpsy_
+\code{quickpsy_} is the standard evaluation SE function associated
+to the non-standard evaluation NSE function \code{quickpsy}.
+\href{http://adv-r.had.co.nz/Computing-on-the-language.html}{SE functions can be more easily called from other functions.}
+In SE functions, you need to quote the names of the variables.
+}
+\examples{
+library(MPDiR) # contains the Vernier data
+data(Vernier) # ?Venier for the reference
+fit <- quickpsy_(Vernier, 'Phaseshift', 'NumUpward', 'N',
+                grouping = c('Direction', 'WaveForm', 'TempFreq'))
+plotcurves(fit)
+}
+\seealso{
+\code{\link{quickpsy}}
 }
 

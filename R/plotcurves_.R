@@ -11,6 +11,14 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
   if (is.logical(qp$lapses)) qp$lapses <- 0
 
   p <- ggplot2::ggplot()
+
+  if (qp$log) {
+    xmin <- min(qp$averages[[qp$x]])
+    xmax <- max(qp$averages[[qp$x]])
+    breaks <- signif(exp( seq(log(xmin), log(xmax), length.out=4) ), digits = 2)
+    p <- p + ggplot2::scale_x_log10(breaks = breaks)
+  }
+
   groups <- qp$groups
   ngroup <- length(groups)
 

@@ -39,8 +39,31 @@ plotcurves(fit) + layer_curve + layer_thre
 
 
 ## several fits quickpsy
-fit <- quickpsy(HSP, logQ, NumYes, N, prob = prob, within = .(Run), random = .(Obs), B = 10)
+fit <- quickpsy(HSP, logQ, NumYes, N, prob = prob, within = .(Run),
+                random = .(Obs), B = 10)
 plotcurves(fit, xpanel = Obs, ypanel = Run)
+
+
+### log
+fit <- quickpsy(HSP, Quanta, NumYes, N, prob = prob, within = .(Run),
+                random = .(Obs), B = 100, log = T)
+plotcurves(fit, xpanel = Obs, ypanel = Run)
+plotpara(fit)
+plotthresholds(fit)
+
+library(MPDiR)
+library(gridExtra)
+
+data(HSP)
+HSP <- HSP %>% mutate(k = round(N * p / 100))
+fit <- quickpsy(HSP, Q, k, N, prob = .6, grouping = .(Run, Obs), log = T)
+
+grid.arrange(
+  plotcurves(fit, xpanel = Run, ypanel = Obs),
+  arrangeGrob(plotpara(fit), plotthresholds(fit)),
+  ncol = 2)
+
+
 
 
 

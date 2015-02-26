@@ -106,7 +106,6 @@ thre_lapses <- fit_lapses$thresholds %>% group_by(squeme, lambda) %>%
 ggplot(thre_lapses) + 
   geom_point(aes(x = lambda, y = threshold, color = factor(squeme)), size = 4) +
   geom_hline(yintercept = real_threshold, lty = 2) 
-
 ```
 
 ## But for some data, fitting lapses does eliminate the bias 
@@ -135,8 +134,7 @@ ggplot()+
 When the number of parameters to be fitted is 3 or more the minization sometimes reaches local minima. To try to avoid that, differential evolution algorithms could be used (DEoptim)
 
 ```{r, results='hide', fig.align='center', fig.width=5}
-
-fitWithLapses <- quickpsy(dat, x, k, n, lapses = T, DE = T, bootstrap = 'none',
+fitWithLapses <- quickpsy(dat, x, k, n, lapses = T, optimize = 'DE', bootstrap = 'none',
                           pini = list(c(10, 1000), c(1,100), c(0, .1))) 
 
 curvesWithLapses <- fitWithLapses$curves %>% mutate(cond = 'With Lapses')

@@ -4,45 +4,67 @@
 \alias{quickpsy}
 \title{Fits psychometric functions.}
 \usage{
-quickpsy(d = d, x = x, k = k, n = n, random, within, between,
+quickpsy(d, x = x, k = k, n = n, grouping, random, within, between,
   xmin = NULL, xmax = NULL, log = F, fun = cum_normal_fun,
   pini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
-  logliks = F, bootstrap = "parametric", B = 1000, ci = 0.95,
+  logliks = F, bootstrap = "parametric", B = 100, ci = 0.95,
   optimization = "optim")
 }
 \arguments{
-\item{d}{Data frame with the data to fit.}
+\item{d}{Data frame with the data to fit. It should have a
+\href{http://vita.had.co.nz/papers/tidy-data.html}{tidy} form in which
+each column corresponds to a variable and each row is an observation.}
 
-\item{x}{Name of the independent variable.}
+\item{x}{Name of the explanatory variable.}
 
 \item{k}{Name of the response variable. The response variable could be the
-number of trials of a given response or a vector of 0s and 1s indicating
-the response on each trial.}
+number of trials in which a response was given or a vector of 0s (or -1s) and
+1s indicating the response on each trial.}
 
-\item{n}{Only necessary if k refers to the number of trials of a given
-response. It corresponds to the name of the variable indicatingthe total
+\item{n}{Only necessary if \code{k} refers to the number of trials of a given
+response. It corresponds to the name of the variable indicating the total
 number of trials.}
 
-\item{random}{Name of the random variable. It should be introduced as
-.(variable_name).}
+\item{grouping}{Name of the grouping variables. It should be specified as
+\code{grouping = .(variable_name1, variable_name2)}.}
 
-\item{within}{Name of the within variable. It should be introduced as
-.(variable_name).}
+\item{random}{Name of the random variable. It should be specified as
+\code{random = .(variable_name1, variable_name2)}. In the current version
+of quickpsy, the random variable has not special treatment. It does the
+same as \code{grouping}.}
 
-\item{between}{Name of the between variable. It should be introduced as
-.(variable_name).}
+\item{within}{Name of the within variable. It should be specified as
+\code{within = .(variable_name1, variable_name2)}. In the current version
+of quickpsy, the within variable has not special treatment. It does the
+same as \code{grouping}.}
 
-\item{xmin}{Minimum value of the independent variable for which the curve
-should be calculated (default is minimum value of the independent variable).}
+\item{between}{Name of the between variable.  It should be specified as
+\code{between = .(variable_name1, variable_name2)}. In the current version
+of quickpsy, the between variable has not special treatment. It does the
+same as \code{grouping}.}
 
-\item{xmax}{Maximum value of the independent variable for which the curve
-should be calculated (default is maximum value of the independent variable).}
+\item{xmin}{Minimum value of the explanatory variable for which the curves
+should be calculated (the default is the minimum value of the explanatory
+variable).}
+
+\item{xmax}{Maximum value of the explanatory variable for which the curves
+should be calculated (the default is the maximum value of the explanatory
+variable).}
+
+\item{log}{If \code{TRUE}, the logarithm of the independent variable is used
+to fit the curves (default is \code{FALSE}).}
 
 \item{fun}{Name of the shape of the curve to fit. It could be a predefined
-shape (cum_normal_fun, logistic_fun, weibull_fun) or a function introduced
-by the user.}
+shape (\code{cum_normal_fun}, \code{logistic_fun}, \code{weibull_fun})
+or the name of a function introduced by the user
+(default is \code{cum_normal_fun}).}
 
-\item{pini}{Initial values of the parameters.}
+\item{pini}{Initial parameters. quickpsy calculates default
+initial parameters using probit analysis, but it is also possible to
+specify a vector of initial parameters or a list of the form
+\code{list(c(para1min, para2max), c(para2min, para2max))} to
+constraint the lower and upper bounds of the parameters (when
+\code{optimization = 'DE'}, pini should be also a list).}
 
 \item{guess}{Guess rate (default is 0).}
 
@@ -51,26 +73,42 @@ by the user.}
 \item{prob}{Probability to calculate the threshold (default is
 \code{guess + .5 * (1 - guess)}).}
 
-\item{thresholds}{If \code{FALSE}, thresholds are not calculated.}
+\item{thresholds}{If \code{FALSE}, thresholds are not calculated
+(default is \code{TRUE}).}
 
-\item{logliks}{If \code{FALSE}, logliks are not calculated.}
+\item{logliks}{If \code{TRUE}, the loglikelihoods are calculated
+(default is \code{FALSE}).}
 
-\item{bootstrap}{\code{'parametric'} parametric bootsrap;
-\code{'nonparametric'} non-parametric bootstrap; \code{'none'} No bootstrap.}
+\item{bootstrap}{\code{'parametric'} performs parametric bootsrap;
+\code{'nonparametric'} performs non-parametric bootstrap;
+\code{'none'} does not perform bootstrap (default is \code{'parametric'}).}
+
+\item{B}{number of bootstrap samples (default is ONLY a 100).}
+
+\item{ci}{Confidence intervals level (default is .95).}
+
+\item{optimization}{Method to optimize. The default is 'optim' which uses
+the \code{optim} function. It can also be \code{'DE'} which uses de function
+\code{DEoptim} from the package DEoptim, which performs differential
+evolution optimization. Using \code{DEoptim}, it is less likely that the
+optimization finishes in a local minimum, but the optimization is slow.
+When \code{'DE'} is used, \code{pini} should be specified as a list with
+lower and upper bounds.}
 }
 \value{
 A list containing the following components:
 \itemize{
   \item \code{x, k, n}
   \item \code{groups} The grouping variables.
-  \item \code{funname} String with the name of the shape of the curve
-  \item \code{psyfunguesslapses} Psychometric function
+  \item \code{funname} String with the name of the shape of the curve.
+  \item \code{psyfunguesslapses} Curve including guess and lapses.
   \item \code{limits} Limits of the curves.
   \item \code{pini} Initial parameters.
-  \item \code{DE} Use of Differential Evolution algorithm (DEoptim).
+  \item \code{optimization} Method to optimize.
   \item \code{piniset} \code{FALSE} if initial parameters are not given.
-  \item \code{ypred} Predicted probabilities at the \code{x} values.
-  \item \code{curves} Psychometric curves.
+  \item \code{ypred} Predicted probabilities at the values of the explanatory
+  variable.
+  \item \code{curves} Curves.
   \item \code{para} Fitted parameters
   \item \code{paraci} Confidence intervals for the parameters
   \item \code{thresholds} Thresholds.
@@ -78,13 +116,16 @@ A list containing the following components:
 }
 }
 \description{
-\code{quickpsy} fits psychometric functions.
+\code{quickpsy} fits psychometric functions using maximum likelihood.
 }
 \examples{
-data(quickpsydat)
-fit <- quickpsy(quickpsydat, FASE, RESP,
-                between = .(ECC, INTERVAL, obs), B = 100)
+library(MPDiR) # contains the Vernier data
+data(Vernier) # ?Venier for the reference
+fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+                grouping = .(Direction, WaveForm, TempFreq))
 plotcurves(fit)
+plotpara(fit)
+plotthresholds(fit)
 }
 \seealso{
 \code{\link{quickpsy_}}

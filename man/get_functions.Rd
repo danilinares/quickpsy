@@ -2,11 +2,11 @@
 % Please edit documentation in R/get_functions.R
 \name{get_functions}
 \alias{get_functions}
-\title{get_functions}
+\title{Predefined functions}
 \usage{
 get_functions()
 }
 \description{
-get_functions
+\code{getfunctions} lists the predefined functions in \code{quickpsy}.
 }
 

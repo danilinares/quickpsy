@@ -10,6 +10,6 @@ plotcurves <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
   if (!missing(ypanel)) ypanel <- deparse(substitute(ypanel))
   if (!missing(color)) color <- deparse(substitute(color))
 
-  plotcurves_(qp, panel, xpanel, ypanel, color, averages, curves, thresholds,
-              ci)
+  plotcurves_(qp, panel, xpanel, ypanel, color, averages, curves,
+              thresholds, ci)
 }
