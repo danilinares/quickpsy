@@ -46,7 +46,7 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
   list(x = x, k = k , n = n, guess = guess, lapses = lapses, averages = d,
        groups = groups, funname = funname, log = log,
        psyfunguesslapses = psyfunguesslapses, limits = limits, pini = pini,
-       optimization = optimization, para = as.data.frame(para))
+       optimization = optimization, para = para)
 }
 
 
