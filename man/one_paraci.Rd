@@ -4,7 +4,7 @@
 \alias{one_paraci}
 \title{one_paraci}
 \usage{
-one_paraci(d, ci, method)
+one_paraci(d, ci)
 }
 \description{
 one_paraci

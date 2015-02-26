@@ -2,11 +2,28 @@
 % Please edit documentation in R/thresholdsbootstrap.R
 \name{thresholdsbootstrap}
 \alias{thresholdsbootstrap}
-\title{thresholdsbootstrap}
+\title{Creates bootstrap samples of the thresholds.}
 \usage{
 thresholdsbootstrap(qp, prob = NULL, log = F)
 }
+\arguments{
+\item{qp}{output from quickpsy}
+
+\item{prob}{Probability to calculate the threshold.}
+
+\item{log}{Use \code{TRUE}, if the logarithm of the independent variable
+has been used to fit the curves (default is \code{FALSE}).}
+}
 \description{
-thresholdsbootstrap
+\code{thresholdsbootstrap} creates bootstrap samples of the thresholds.
+}
+\examples{
+library(MPDiR) # contains the Vernier data
+data(Vernier) # ?Venier for the reference
+fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+                grouping = .(Direction, WaveForm, TempFreq),
+                thresholds = F)
+boot_samples_thre <- thresholdsbootstrap(fit, prob = .5)
+head(boot_samples_thre)
 }
 

@@ -19,6 +19,8 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
                       bootstrap = 'parametric', B = 100, ci = .95,
                       optimization = 'optim') {
 
+  options(dplyr.print_max = 1e9)
+
   if (!is.null(prob)) thresholds <- T
 
   if (missing(n)) n <- NULL
@@ -42,16 +44,16 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
     if (is.null(prob))
       if (is.logical(guess) && guess) prob <- .5
       else  prob <- guess + .5 * (1 - guess)
-    qp <- c(qp, list(thresholds = as.data.frame(thresholds(qp, prob, log))))
+    qp <- c(qp, list(thresholds = thresholds(qp, prob, log)))
   }
 
   if (logliks) qp <- c(qp, list(logliks = logliks(qp)))
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
     qp <- c(qp, list(parabootstrap = parabootstrap(qp, bootstrap, B)))
-    qp <- c(qp, list(paraci = as.data.frame(paraci(qp, ci))))
+    qp <- c(qp, list(paraci = paraci(qp, ci)))
     if (thresholds) {
       qp <- c(qp, list(thresholdsbootstrap = thresholdsbootstrap(qp, prob, log)))
-      qp <- c(qp, list(thresholdsci = as.data.frame(thresholdsci(qp, ci))))
+      qp <- c(qp, list(thresholdsci = thresholdsci(qp, ci)))
     }
   }
   else if (bootstrap != 'none')

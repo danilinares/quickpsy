@@ -2,11 +2,27 @@
 % Please edit documentation in R/thresholds.R
 \name{thresholds}
 \alias{thresholds}
-\title{thresholds}
+\title{Calculates the thresholds}
 \usage{
 thresholds(qp, prob = NULL, log = F)
 }
+\arguments{
+\item{qp}{output from quickpsy}
+
+\item{prob}{Probability to calculate the threshold.}
+
+\item{log}{Use \code{TRUE}, if the logarithm of the independent variable
+has been used to fit the curves (default is \code{FALSE}).}
+}
 \description{
-thresholds
+\code{thresholds} alculates the thresholds
+}
+\examples{
+library(MPDiR) # contains the Vernier data
+data(Vernier) # ?Venier for the reference
+fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+                grouping = .(Direction, WaveForm, TempFreq),
+                thresholds = F)
+thresholds(fit, prob = .5)
 }
 

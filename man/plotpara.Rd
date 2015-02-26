@@ -2,12 +2,45 @@
 % Please edit documentation in R/plotpara.R
 \name{plotpara}
 \alias{plotpara}
-\title{plotpara}
+\title{Plot the values of the parameters}
 \usage{
 plotpara(qp, x = NULL, panel = NULL, xpanel = NULL, ypanel = NULL,
   color = NULL, geom = "bar", ci = T)
 }
+\arguments{
+\item{qp}{output from quickpsy.}
+
+\item{x}{Name of the variable to displayed in the x-axis.}
+
+\item{panel}{Name of the variable to be split in panels.}
+
+\item{xpanel}{Name of the variable to be split in horizontal panels.}
+
+\item{ypanel}{Name of the variable to be split in vertical panels.}
+
+\item{color}{Name of the variable codded by color.}
+
+\item{geom}{If \code{'bar'} displays bars.
+If \code{'point'} displays points (default is 'bar').}
+
+\item{ci}{If \code{FALSE} confidence intervals are not plotted
+(default is \code{TRUE}).}
+}
 \description{
-plotpara
+\code{plotcurves} plot the values of the parameters.
+}
+\examples{
+library(MPDiR) # contains the Vernier data
+data(Vernier) # ?Venier for the reference
+fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+                grouping = .(Direction, WaveForm, TempFreq))
+plotpara(fit)
+plotpara(fit, x = WaveForm)
+plotpara(fit, xpanel = Direction)
+plotpara(fit, color = Direction)
+plotpara(fit, color = Direction, ypanel = WaveForm, geom = 'point')
+}
+\seealso{
+\code{\link{plotpara_}}
 }
 

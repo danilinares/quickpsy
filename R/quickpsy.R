@@ -55,7 +55,7 @@
 #' \code{'nonparametric'} performs non-parametric bootstrap;
 #' \code{'none'} does not perform bootstrap (default is \code{'parametric'}).
 #' @param B number of bootstrap samples (default is ONLY a 100).
-#' @param ci Confidence intervals level (default is .95).
+#' @param ci Confidence intervals level based on percentiles (default is .95).
 #' @param optimization Method to optimize. The default is 'optim' which uses
 #' the \code{optim} function. It can also be \code{'DE'} which uses de function
 #' \code{DEoptim} from the package DEoptim, which performs differential

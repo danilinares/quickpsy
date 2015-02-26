@@ -2,11 +2,22 @@
 % Please edit documentation in R/ypred.R
 \name{ypred}
 \alias{ypred}
-\title{ypred}
+\title{Predicted probabilities}
 \usage{
 ypred(qp)
 }
+\arguments{
+\item{qp}{output from quickpsy}
+}
 \description{
-ypred
+\code{ypred} calculates the predicted probabilities at the values of the
+explanatory variable.
+}
+\examples{
+library(MPDiR) # contains the Vernier data
+data(Vernier) # ?Venier for the reference
+fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+                grouping = .(Direction, WaveForm, TempFreq))
+ypred(fit)
 }
 

@@ -85,7 +85,7 @@ constraint the lower and upper bounds of the parameters (when
 
 \item{B}{number of bootstrap samples (default is ONLY a 100).}
 
-\item{ci}{Confidence intervals level (default is .95).}
+\item{ci}{Confidence intervals level based on percentiles (default is .95).}
 
 \item{optimization}{Method to optimize. The default is 'optim' which uses
 the \code{optim} function. It can also be \code{'DE'} which uses de function

@@ -1,5 +1,20 @@
-#' plotpara_
+#' Plot the values of the parameters
 #'
+#' \code{plotpara_} is the standard evaluation SE function associated
+#' to the non-standard evaluation NSE function \code{plotpara}.
+#' \href{http://adv-r.had.co.nz/Computing-on-the-language.html}{SE functions can be more easily called from other functions.}
+#' In SE functions, you need to quote the names of the variables.
+#' @seealso \code{\link{plotpara}}
+#' @examples
+#' #' library(MPDiR) # contains the Vernier data
+#' data(Vernier) # ?Venier for the reference
+#' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+#'                 grouping = .(Direction, WaveForm, TempFreq))
+#'
+#' plotpara_(fit, x = 'WaveForm')
+#' plotpara_(fit, xpanel = 'Direction')
+#' plotpara_(fit, color = 'Direction')
+#' plotpara_(fit, color = 'Direction', ypanel = 'WaveForm', geom = 'point')
 #' @export
 plotpara_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                            ypanel = NULL, color = NULL, geom = 'bar', ci  = T) {

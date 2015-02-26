@@ -1,5 +1,27 @@
-#' plotthresholds
+#' Plot the thresholds
 #'
+#' \code{plotthresholds} plot the thresholds.
+#' @param qp output from quickpsy.
+#' @param x Name of the variable to displayed in the x-axis.
+#' @param panel Name of the variable to be split in panels.
+#' @param xpanel Name of the variable to be split in horizontal panels.
+#' @param ypanel Name of the variable to be split in vertical panels.
+#' @param color Name of the variable codded by color.
+#' @param geom If \code{'bar'} displays bars.
+#' If \code{'point'} displays points (default is 'bar').
+#' @param ci If \code{FALSE} confidence intervals are not plotted
+#' (default is \code{TRUE}).
+#' @seealso  \code{\link{plotthresholds_}}
+#' @examples
+#' library(MPDiR) # contains the Vernier data
+#' data(Vernier) # ?Venier for the reference
+#' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+#'                 grouping = .(Direction, WaveForm, TempFreq))
+#' plotthresholds(fit)
+#' plotthresholds(fit, x = WaveForm)
+#' plotthresholds(fit, xpanel = Direction)
+#' plotthresholds(fit, color = Direction)
+#' plotthresholds(fit, color = Direction, ypanel = WaveForm, geom = 'point')
 #' @export
 plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                            ypanel = NULL, color = NULL, geom = 'bar', ci = T) {

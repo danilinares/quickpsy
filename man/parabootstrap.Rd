@@ -2,11 +2,29 @@
 % Please edit documentation in R/parabootstrap.R
 \name{parabootstrap}
 \alias{parabootstrap}
-\title{parabootstrap}
+\title{Creates bootstrap samples of the parameters}
 \usage{
-parabootstrap(qp, bootstrap = "parametric", B = 1000)
+parabootstrap(qp, bootstrap = "parametric", B = 100)
+}
+\arguments{
+\item{qp}{output from quickpsy}
+
+\item{bootstrap}{\code{'parametric'} performs parametric bootsrap;
+\code{'nonparametric'} performs non-parametric bootstrap;
+\code{'none'} does not perform bootstrap (default is \code{'parametric'}).}
+
+\item{B}{number of bootstrap samples (default is ONLY a 100).}
 }
 \description{
-parabootstrap
+\code{parabootstrap} creates bootstrap samples of the parameters.
+}
+\examples{
+library(MPDiR) # contains the Vernier data
+data(Vernier) # ?Venier for the reference
+fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+                grouping = .(Direction, WaveForm, TempFreq),
+                bootstrap = 'none')
+boot_samples <- parabootstrap(fit)
+head(boot_samples)
 }
 

@@ -1,5 +1,20 @@
-#' plotthresholds_
+#' Plot the thresholds
 #'
+#' \code{plotthresholds_} is the standard evaluation SE function associated
+#' to the non-standard evaluation NSE function \code{plotthresholds}.
+#' \href{http://adv-r.had.co.nz/Computing-on-the-language.html}{SE functions can be more easily called from other functions.}
+#' In SE functions, you need to quote the names of the variables.
+#' @seealso \code{\link{plotthresholds}}
+#' @examples
+#' library(MPDiR) # contains the Vernier data
+#' data(Vernier) # ?Venier for the reference
+#' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+#'                 grouping = .(Direction, WaveForm, TempFreq))
+#'
+#' plotthresholds_(fit, x = 'WaveForm')
+#' plotthresholds_(fit, xpanel = 'Direction')
+#' plotthresholds_(fit, color = 'Direction')
+#' plotthresholds_(fit, color = 'Direction', ypanel = 'WaveForm', geom = 'point')
 #' @export
 plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                            ypanel = NULL, color = NULL, geom = 'bar', ci = T) {

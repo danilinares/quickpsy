@@ -2,12 +2,29 @@
 % Please edit documentation in R/plotcurves_.R
 \name{plotcurves_}
 \alias{plotcurves_}
-\title{plotcurves_}
+\title{Plot the curves}
 \usage{
 plotcurves_(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
   color = NULL, averages = T, curves = T, thresholds = T, ci = T)
 }
 \description{
-plotcurves_
+\code{plotcurves_} is the standard evaluation SE function associated
+to the non-standard evaluation NSE function \code{plotcurves}.
+\href{http://adv-r.had.co.nz/Computing-on-the-language.html}{SE functions can be more easily called from other functions.}
+In SE functions, you need to quote the names of the variables.
+}
+\examples{
+library(MPDiR) # contains the Vernier data
+data(Vernier) # ?Venier for the reference
+fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
+                grouping = .(Direction, WaveForm, TempFreq))
+
+plotcurves_(fit, xpanel = 'Direction')
+plotcurves_(fit, color = 'Direction')
+plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm')
+plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm', ci = F)
+}
+\seealso{
+\code{\link{plotcurves}}
 }
 
