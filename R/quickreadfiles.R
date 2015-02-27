@@ -1,7 +1,8 @@
-#' Reads several files.
+#' Reads several files
 #'
 #' \code{quickreadfiles} builts a data frame from several files.
 #' @param path Path of the file.
+#' @param ... arguments of the form name_var = c('value1', 'value2',..)
 #' @export
 quickreadfiles <- function(path, ...) {
   arguments <- c(as.list(environment()), list(...))

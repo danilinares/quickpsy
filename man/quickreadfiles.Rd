@@ -2,12 +2,14 @@
 % Please edit documentation in R/quickreadfiles.R
 \name{quickreadfiles}
 \alias{quickreadfiles}
-\title{Reads several files.}
+\title{Reads several files}
 \usage{
 quickreadfiles(path, ...)
 }
 \arguments{
 \item{path}{Path of the file.}
+
+\item{...}{asdfasd}
 }
 \description{
 \code{quickreadfiles} builts a data frame from several files.

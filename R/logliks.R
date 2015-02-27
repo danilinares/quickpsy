@@ -1,4 +1,4 @@
-#' Calculates the loglikelihoods.
+#' Calculates the loglikelihoods
 #'
 #' \code{logliks} calculates the loglikelihoods.
 #' @param qp output from quickpsy

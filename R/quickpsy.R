@@ -1,4 +1,4 @@
-#' Fits psychometric functions.
+#' Fits psychometric functions
 #'
 #' \code{quickpsy} fits psychometric functions using maximum likelihood.
 #' @param d Data frame with the data to fit. It should have a

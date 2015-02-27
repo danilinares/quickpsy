@@ -2,7 +2,7 @@
 % Please edit documentation in R/logliks.R
 \name{logliks}
 \alias{logliks}
-\title{Calculates the loglikelihoods.}
+\title{Calculates the loglikelihoods}
 \usage{
 logliks(qp)
 }

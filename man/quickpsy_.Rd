@@ -2,7 +2,7 @@
 % Please edit documentation in R/quickpsy_.R
 \name{quickpsy_}
 \alias{quickpsy_}
-\title{Fits psychometric functions.}
+\title{Fits psychometric functions}
 \usage{
 quickpsy_(d, x = "x", k = "k", n = "n", grouping, random, within, between,
   xmin = NULL, xmax = NULL, log = F, fun = "cum_normal_fun",
