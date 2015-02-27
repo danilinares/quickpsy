@@ -50,7 +50,7 @@ create_sim_dat <- function(d) {
   data.frame(x = d$x, k = k, n = d$n , y = k/d$n)
 }
 
-simdat <- merge(s, expand.grid(n = 160, sample = 1:50, lambda = seq(0,.05, .01))) %>%
+simdat <- merge(s, expand.grid(n = 160, sample = 1:10, lambda = seq(0,.05, .01))) %>%
   group_by(squeme, n, sample, lambda) %>% do(create_sim_dat(.)) 
 # we use only 30 samples to increase speed
 
@@ -134,7 +134,7 @@ ggplot()+
 When the number of parameters to be fitted is 3 or more the minization sometimes reaches local minima. To try to avoid that, differential evolution algorithms could be used (DEoptim)
 
 ```{r, results='hide', fig.align='center', fig.width=5}
-fitWithLapses <- quickpsy(dat, x, k, n, lapses = T, optimize = 'DE', bootstrap = 'none',
+fitWithLapses <- quickpsy(dat, x, k, n, lapses = T, optimization = 'DE', bootstrap = 'none',
                           pini = list(c(10, 1000), c(1,100), c(0, .1))) 
 
 curvesWithLapses <- fitWithLapses$curves %>% mutate(cond = 'With Lapses')

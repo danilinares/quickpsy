@@ -4,6 +4,8 @@
 #' @param path Path of the file.
 #' @param ... arguments of the form name_var = c('value1', 'value2',..)
 #' @export
+#' @examples
+#'
 quickreadfiles <- function(path, ...) {
   arguments <- c(as.list(environment()), list(...))
   arguments[1] <- NULL
