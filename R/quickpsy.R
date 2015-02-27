@@ -1,16 +1,23 @@
 #' Fits psychometric functions
 #'
-#' \code{quickpsy} fits psychometric functions using maximum likelihood.
-#' @param d Data frame with the data to fit. It should have a
+#' \code{quickpsy} fits, by direct maximization of the likelihood
+#' (Prins and Kingdom, 2010; Knoblauch and Maloney, 2012),
+#'  psychometric functions of the form
+#' \deqn{\psi(x) = \gamma + (1 - \gamma - \lambda) * fun(x)}
+#' where \eqn{\gamma} is the guess rate, \eqn{\lambda} is the lapse rate and
+#' \eqn{fun} is a sigmoidal-shape function with asymppotes at 0 and 1.
+#' @param d Data frame with the results of a Yes-No experiment to fit.
+#' It should have a
 #' \href{http://vita.had.co.nz/papers/tidy-data.html}{tidy} form in which
 #' each column corresponds to a variable and each row is an observation.
 #' @param x Name of the explanatory variable.
 #' @param k Name of the response variable. The response variable could be the
-#' number of trials in which a response was given or a vector of 0s (or -1s) and
-#' 1s indicating the response on each trial.
-#' @param n Only necessary if \code{k} refers to the number of trials of a given
-#' response. It corresponds to the name of the variable indicating the total
-#' number of trials.
+#' number of trials in which a yes-type response was given or a vector of 0s
+#' (or -1s; no-type response) and 1s (yes-type response) indicating the
+#' response on each trial.
+#' @param n Only necessary if \code{k} refers to the number of trials
+#' in which a yes-type response was given. It corresponds to the name of the
+#' variable indicating the total number of trials.
 #' @param grouping Name of the grouping variables. It should be specified as
 #' \code{grouping = .(variable_name1, variable_name2)}.
 #' @param random Name of the random variable. It should be specified as
@@ -31,7 +38,7 @@
 #' @param xmax Maximum value of the explanatory variable for which the curves
 #' should be calculated (the default is the maximum value of the explanatory
 #' variable).
-#' @param log If \code{TRUE}, the logarithm of the independent variable is used
+#' @param log If \code{TRUE}, the logarithm of the explanatory variable is used
 #' to fit the curves (default is \code{FALSE}).
 #' @param fun Name of the shape of the curve to fit. It could be a predefined
 #' shape (\code{cum_normal_fun}, \code{logistic_fun}, \code{weibull_fun})
@@ -43,8 +50,18 @@
 #' \code{list(c(para1min, para2max), c(para2min, para2max))} to
 #' constraint the lower and upper bounds of the parameters (when
 #' \code{optimization = 'DE'}, pini should be also a list).
-#' @param guess Guess rate (default is 0).
-#' @param lapses Lapse rate (default is 0).
+#' @param guess Value indicating the guess rate \eqn{\gamma} (default is 0). If
+#' \code{TRUE}, the guess rate is estimated as the i + 1 paramater where
+#' i corresponds to the number of parameters of \code{fun}. If, for
+#' example, \code{fun} is a predefined shape with parameters p1 and p2,
+#' then the guess rate corresponds to parameter p3.
+#' @param lapses Value indicating the lapse rate \eqn{\lambda} (default is 0).
+#'  If \code{TRUE}, the lapse rate is estimated as the i + 1 paramater where
+#' i corresponds to the number of parameters of \code{fun} plus one if
+#' the guess rate is estimated. If, for example, \code{fun} is a
+#' predefined shape with parameters p1 and p2,
+#' then the lapse rate corresponds to parameter p3. If the guess rate is also
+#' estimated, p3 will be the guess rate and p4 the lapse rate.
 #' @param prob Probability to calculate the threshold (default is
 #' \code{guess + .5 * (1 - guess)}).
 #' @param thresholds If \code{FALSE}, thresholds are not calculated
@@ -81,6 +98,12 @@
 #'   \item \code{thresholds} Thresholds.
 #'   \item \code{thresholdsci} Confidence intervals for the thresholds.
 #' }
+#' @references
+#' Knoblauch, K., & Maloney, L. T. (2012). Modeling Psychophysical Data in R.
+#' New York: Springer.
+#'
+#' Prins, N., & Kingdom, F. A. A. (2010). Psychophysics: a practical
+#' introduction. London: Academic Press.
 #' @seealso \code{\link{quickpsy_}}
 #' @examples
 #' library(MPDiR) # contains the Vernier data

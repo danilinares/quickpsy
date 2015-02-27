@@ -13,6 +13,7 @@ inv_cum_normal_fun(prob, p)
 }
 \value{
 \code{x} at each probability.
+#'
 }
 \description{
 Inverse cumulative normal function
@@ -22,5 +23,8 @@ yseq <- seq(0, 1, .01)
 xseq <- inv_cum_normal_fun(yseq, c(2, .5))
 curve <- data.frame(x = xseq, y = yseq)
 ggplot(curve, aes(x = x, y = y)) + geom_line()
+}
+\seealso{
+\code{\link{cum_normal_fun}}
 }
 

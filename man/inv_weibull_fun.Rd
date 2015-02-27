@@ -23,4 +23,7 @@ xseq <- inv_weibull_fun(yseq, c(2, 4))
 curve <- data.frame(x = xseq, y = yseq)
 ggplot(curve, aes(x = x, y = y)) + geom_line()
 }
+\seealso{
+\code{\link{weibull_fun}}
+}
 

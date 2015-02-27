@@ -4,6 +4,7 @@
 #' @param prob Vector of probabilities.
 #' @param p Vector of parameters \code{p = c(\alpha, \beta)}.
 #' @return \code{x} at each probability.
+#' @seealso \code{\link{weibull_fun}}
 #' @examples
 #' yseq <- seq(0, 1, .01)
 #' xseq <- inv_weibull_fun(yseq, c(2, 4))

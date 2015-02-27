@@ -23,4 +23,7 @@ yseq <- logistic_fun(xseq, c(2, 4))
 curve <- data.frame(x = xseq, y = yseq)
 ggplot(curve, aes(x = x, y = y)) + geom_line()
 }
+\seealso{
+\code{\link{inv_logistic_fun}}
+}
 

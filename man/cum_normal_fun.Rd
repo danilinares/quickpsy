@@ -23,4 +23,7 @@ yseq <- cum_normal_fun(xseq, c(2, .5))
 curve <- data.frame(x = xseq, y = yseq)
 ggplot(curve, aes(x = x, y = y)) + geom_line()
 }
+\seealso{
+\code{\link{inv_cum_normal_fun}}
+}
 

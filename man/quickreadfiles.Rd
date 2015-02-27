@@ -4,14 +4,21 @@
 \alias{quickreadfiles}
 \title{Reads several files}
 \usage{
-quickreadfiles(path, ...)
+quickreadfiles(path = getwd(), ...)
 }
 \arguments{
-\item{path}{Path of the file.}
+\item{path}{Path of the file (default is the working directory).}
 
-\item{...}{asdfasd}
+\item{...}{arguments of the form name_var = c('value1', 'value2',..)}
 }
 \description{
-\code{quickreadfiles} builts a data frame from several files.
+\code{quickreadfiles} builts a data frame from several txt files. It
+assumes that in each file, the firt row has the names of the variables.
+}
+\examples{
+#quickreadfiles(participant = c('aa', 'bb'), experiment = c('exp1','exp2'))
+#for example, will build a data frame from the files aaexp1.txt, aaexp2.txt,
+#bbexp1.txt and bbexp2.txt including the names of the variables in the files
+#and the new two variables names participant and experiment.
 }
 

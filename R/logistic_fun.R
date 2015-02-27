@@ -4,6 +4,7 @@
 #' @param x Vector of values of the explanatory variable.
 #' @param p Vector of parameters \eqn{p = c(\alpha, \beta)}.
 #' @return Probability at each \code{x}.
+#' @seealso \code{\link{inv_logistic_fun}}
 #' @examples
 #' xseq <- seq(0, 4, .01)
 #' yseq <- logistic_fun(xseq, c(2, 4))

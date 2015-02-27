@@ -7,7 +7,7 @@
 inv_logistic_fun(q, p)
 }
 \arguments{
-\item{p}{Vector of parameters \code{p = c(\alpha, \beta)}.}
+\item{p}{Vector of parameters \eqn{p = c(\alpha, \beta)}.}
 
 \item{prob}{Vector of probabilities.}
 }
@@ -22,5 +22,8 @@ yseq <- seq(0, 1, .01)
 xseq <- inv_logistic_fun(yseq, c(2, 4))
 curve <- data.frame(x = xseq, y = yseq)
 ggplot(curve, aes(x = x, y = y)) + geom_line()
+}
+\seealso{
+\code{\link{logistic_fun}}
 }
 

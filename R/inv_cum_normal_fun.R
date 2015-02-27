@@ -4,6 +4,7 @@
 #' @param prob Vector of probabilities.
 #' @param p Vector of parameters \code{p = c(mean, standard_deviation)}.
 #' @return \code{x} at each probability.
+#' #' @seealso \code{\link{cum_normal_fun}}
 #' @examples
 #' yseq <- seq(0, 1, .01)
 #' xseq <- inv_cum_normal_fun(yseq, c(2, .5))

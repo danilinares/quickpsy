@@ -4,6 +4,7 @@
 #' @param x Vector of values of the explanatory variable.
 #' @param p Vector of parameters \code{p = c(mean, standard_deviation)}.
 #' @return Probability at each \code{x}.
+#' @seealso \code{\link{inv_cum_normal_fun}}
 #' @examples
 #' xseq <- seq(0,4,.01)
 #' yseq <- cum_normal_fun(xseq, c(2, .5))

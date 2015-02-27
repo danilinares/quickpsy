@@ -65,7 +65,7 @@ p
 
 We use quickpsy to fit a weibull function to each condition using $\lambda = 0$
 
-```{r, warning=FALSE, cache=TRUE}
+```{r, warning=FALSE}
 fit <- quickpsy(simdat, x, k, n, within = .(squeme, lambda, sample), 
                 fun = weibull_fun, bootstrap = 'none', guess =.5, lapses = 0) 
 # we use 'none' for the bootstap because we are doing an explicit bootstrap  (we are fitting by sample)
