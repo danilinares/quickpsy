@@ -32,10 +32,16 @@ plotpara(fit)
 plotthresholds(fit)
 ```
 
-Tutorials
----------
+Help and tutorials
+------------------
 
-You can have information for specific
+For specific functions
+
+``` {.r}
+?plotcurves
+```
+
+You can find further guidande in the vignettes
 
 ``` {.r}
 browseVignettes('quickpsy')
