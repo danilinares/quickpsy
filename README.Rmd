@@ -47,6 +47,7 @@ plotthresholds(fit)
 
 ## Tutorials
 
+You can have information for specific 
 ```R
 browseVignettes('quickpsy')
 ```

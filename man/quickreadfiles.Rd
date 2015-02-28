@@ -9,16 +9,21 @@ quickreadfiles(path = getwd(), ...)
 \arguments{
 \item{path}{Path of the file (default is the working directory).}
 
-\item{...}{arguments of the form name_var = c('value1', 'value2',..)}
+\item{...}{arguments of the form name_var = c('value1', 'value2',..).
+A new column with variable name name_var is addes to the data frame.}
 }
 \description{
 \code{quickreadfiles} builts a data frame from several txt files. It
-assumes that in each file, the firt row has the names of the variables.
+assumes that in each file, the first row has the names of the variables.
 }
 \examples{
-#quickreadfiles(participant = c('aa', 'bb'), experiment = c('exp1','exp2'))
-#for example, will build a data frame from the files aaexp1.txt, aaexp2.txt,
-#bbexp1.txt and bbexp2.txt including the names of the variables in the files
-#and the new two variables names participant and experiment.
+# download the 3 files in
+# https://github.com/danilinares/quickpsy/tree/master/inst/extdata/example1
+# and add them to your working directory
+dat <- quickreadfiles(subject = c('aa', 'bb', 'cc'),
+session = c('1', '2', '3'))
+fit <- quickpsy(dat, phase, resp, grouping=.(subject),
+                lapses = T, guess = T)
+plotcurves(fit)
 }
 
