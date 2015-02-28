@@ -1,4 +1,4 @@
-TRIAL	 FASE	  COND	 RESP	 INTERVAL	 EXC_F
+trial	 phase	  cond	 resp	 interval	 ecc
 0	120	-1	0	1600	2
 1	180	-1	0	800	1
 2	0	-1	0	400	2
