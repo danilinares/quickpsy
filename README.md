@@ -9,11 +9,19 @@ To understand the fundamentals of fitting psychometric functions in R, we recomm
 Features
 --------
 
+-   Fits and plot several conditions simultaneosly.
+
+-   Initial parameters are not necessary.
+
 -   Calculates parametric and non-parametric bootstrap confidence intervals.
 
 -   Guess and lapses can be fixed or estimated as parameters.
 
 -   Fits cumulative normal, logistic, weibull functions or any function defined by the user.
+
+-   It has a function that facilitates the reading of several data files.
+
+-   The optimization can call \*DEoptim\* which uses differential evolution optimization.
 
 Install
 -------
