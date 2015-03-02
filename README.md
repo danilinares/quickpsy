@@ -21,7 +21,7 @@ Features
 
 -   It has a function that facilitates the reading of several data files.
 
--   The optimization can call \(DEoptim\) which uses differential evolution optimization.
+-   The optimization can call *DEoptim* which uses differential evolution optimization.
 
 Install
 -------
