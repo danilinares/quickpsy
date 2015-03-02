@@ -9,7 +9,7 @@ To understand the fundamentals of fitting psychometric functions in R, we recomm
 Features
 --------
 
--   Fits and plot several conditions simultaneosly.
+-   Fits and plots several conditions simultaneosly.
 
 -   Initial parameters are not necessary.
 
@@ -21,7 +21,7 @@ Features
 
 -   It has a function that facilitates the reading of several data files.
 
--   The optimization can call \*DEoptim\* which uses differential evolution optimization.
+-   The optimization can call \(DEoptim\) which uses differential evolution optimization.
 
 Install
 -------
