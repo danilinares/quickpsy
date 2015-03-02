@@ -11,15 +11,98 @@ vignette: >
 
 Here we use *quickpsy* to illustrate the problem of fitting psychometric functions when observers make lapses.
 
+## Lapses can bias threshold estimation, a simple example
+
+Wichmann and Hill (2001) showed that when lapses occur, the estimated threshold could be biased. Consider the following toy example
+```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=5}
+library(dplyr)
+library(ggplot2)
+library(quickpsy)
+
+x <- seq(0,420,60)
+k <- c(0, 0, 4, 18, 20, 20, 19, 20)
+dat <- data.frame(x, k, n = 20)
+
+fitWithoutLapses <- quickpsy(dat, x, k, n, prob = .75) 
+
+curvesWithoutLapses <- fitWithoutLapses$curves %>% mutate(cond = 'Without Lapses')
+
+pWithout <- ggplot()+
+  geom_point(data = fitWithoutLapses$averages, aes(x = x, y = y)) +
+  geom_line(data = curvesWithoutLapses,
+            aes(x = x, y = y, color = cond)) +
+  geom_linerange(data = fitWithoutLapses$thresholds, 
+                 aes(x = thre, ymin = 0, ymax = prob), lty =2) 
+pWithout
+```
+
+Because of the lapses, the fit doesn't seem good and the threshold estimation biased. The problem is not that the likelihood is not correctly maximized. This *weird* fit is the one with the maximum likelihood, given the lapses (Wichmann and Hill, 2001). To be more secure, that the optimization process is not reaching a local maximum, we repeate the fit using Differential Evolution algoriths and obtain the same result
+
+```{r, warning=FALSE, message=FALSE, results='hide', fig.align='center', fig.width=5}
+fitWithoutLapses2 <- quickpsy(dat, x, k, n, prob = .75, optimization = 'DE',
+                              pini = list(c(1, 500), c(1, 500), c(0,1)),
+                              bootstrap = 'none') 
+
+curvesWithoutLapses2 <- fitWithoutLapses2$curves %>% mutate(cond = 'Without Lapses')
+
+pWithout2 <- ggplot()+
+  geom_point(data = fitWithoutLapses2$averages, aes(x = x, y = y)) +
+  geom_line(data = curvesWithoutLapses,
+            aes(x = x, y = y, color = cond)) +
+  geom_linerange(data = fitWithoutLapses2$thresholds, 
+                 aes(x = thre, ymin = 0, ymax = prob), lty =2) 
+pWithout2
+```
+
+Wichmann and Hill (2001) reported that allowing the upper assymptote to vary  — that is, fitting the lapses — eliminates the bias for the threshold, which seems to work in our example
+
+```{r, warning=FALSE, fig.align='center', fig.width=5}
+fitWithLapses <- quickpsy(dat, x, k, n, prob = .75, lapses = T) 
+curvesWithLapses <- fitWithLapses$curves %>% mutate(cond = 'With Lapses')
+
+pWithoutWith <- pWithout +
+  geom_line(data = curvesWithLapses,
+            aes(x = x, y = y, color = cond)) +
+  geom_linerange(data = fitWithLapses$thresholds, 
+                 aes(x = thre, ymin = 0, ymax = prob), lty =2) 
+pWithoutWith
+```
+
+## Lapses can bias threshold estimation, a second example
+
+```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=5}
+data(qpdat)
+
+fitWithoutLapses <- quickpsy(qpdat, phase, resp,grouping = c(ecc, interval ,participant)) 
+
+plotcurves(fitWithoutLapses)
+```
+
+Some fits, like the upper left panel for the blue dots, don't seem  good due to lapses, so let's allow the lapses to vary
+
+```{r, warning=FALSE, message=FALSE, error=TRUE}
+
+fitWithLapses <- quickpsy(qpdat, phase, resp, grouping = c(ecc, interval ,participant), lapses  = T) 
+
+```
+
+We obtain an error in the bootstrap. To understand the error we plot the results without bootstraping
+
+```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=5}
+data(qpdat)
+
+fitWithLapses <- quickpsy(qpdat, phase, resp, grouping = c(ecc, interval ,participant), lapses  = T, bootstrap = 'none') 
+
+plotcurves(fitWithLapses) + ylim (0,1) # we include ggplot ylim to be able to visualize what is going on
+```
+
 ## Lapses bias threshold estimation
 
 Wichmann and Hill (2001) showed that when lapses occur, the estimated threshold is biased. Using simulations like theirs (see the original paper for details), here we replicate this result.
 
 Wichmann and Hill used 7 sampling squemes defined as follow
 ```{r, message=FALSE, fig.align='center', fig.width=5}
-library(dplyr)
-library(ggplot2)
-library(quickpsy)
+
 
 paraweibull <- c(10, 3)
 create_xs <- function(i, f) data.frame(squeme = i,  y = f, x = inv_weibull_fun(f, paraweibull))
