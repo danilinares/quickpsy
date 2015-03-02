@@ -2,7 +2,7 @@
 
 
 
-quickpsy fits psychometric functions for several conditions.
+quickpsy is an R library to fits psychometric functions for several conditions.
 
 Install
 -------
@@ -52,8 +52,16 @@ For specific functions
 ?plotcurves
 ```
 
-You can find further guidande in the vignettes
+You can find further guidande in the vignettes (if you build them)
 
 ``` {.r}
 browseVignettes('quickpsy')
 ```
+
+|Software|Language|Multiple fits|Guess and lapses|Bootstrap|
+|--------|:-------|:------------|:---------------|:--------|
+|modelfree|R|No|No|No|
+|quickpsy|R|Yes|Yes|Yes|
+|psyphy|R|No|Yes|No|
+|psignifit|python|No|Yes|Yes|
+|palamedes|MATLAB|Yes|Yes|Yes|
