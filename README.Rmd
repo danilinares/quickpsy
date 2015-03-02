@@ -18,6 +18,15 @@ quickpsy is an R library developed by [Daniel Linares](http://www.dlinares.org/)
 
 To understand the fundamentals of fitting psychometric functions in R, we recommend the book [Modeling Psychophysical Data in R](http://www.springer.com/gp/book/9781461444749).
 
+## Features
+
+  * Calculates parametric and non-parametric bootstrap confidence intervals. 
+  
+  * Guess and lapses can be fixed or estimated as parameters. 
+ 
+  * Fits cumulative normal, logistic, weibull functions or any function defined by the user. 
+  
+
 ## Install
 
 First, you need to download and install [R](http://cran.rstudio.com) (we also recommend [Rstudio](http://www.rstudio.com/)).
