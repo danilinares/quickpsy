@@ -9,11 +9,12 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-Here we use *quickpsy* to illustrate the problem of fitting psychometric functions when observers make lapses.
+Here we use *quickpsy* to illustrate the problem of fitting psychometric functions when participants make lapses.
 
 ## Lapses can bias threshold estimation, a simple example
 
-Wichmann and Hill (2001) showed that when lapses occur, the estimated threshold could be biased. Consider the following toy example
+Wichmann and Hill (2001) showed that when lapses occur and are not taken into account in the fitting process, the estimated threshold could be biased. Consider the following toy example
+
 ```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=5}
 library(dplyr)
 library(ggplot2)
@@ -25,7 +26,8 @@ dat <- data.frame(x, k, n = 20)
 
 fitWithoutLapses <- quickpsy(dat, x, k, n, prob = .75) 
 
-curvesWithoutLapses <- fitWithoutLapses$curves %>% mutate(cond = 'Without Lapses')
+curvesWithoutLapses <- fitWithoutLapses$curves %>% 
+  mutate(cond = 'Without Lapses')
 
 pWithout <- ggplot()+
   geom_point(data = fitWithoutLapses$averages, aes(x = x, y = y)) +
@@ -36,7 +38,7 @@ pWithout <- ggplot()+
 pWithout
 ```
 
-Because of the lapses, the fit doesn't seem good and the threshold estimation biased. The problem is not that the likelihood is not correctly maximized. This *weird* fit is the one with the maximum likelihood, given the lapses (Wichmann and Hill, 2001). To be more secure, that the optimization process is not reaching a local maximum, we repeate the fit using Differential Evolution algoriths and obtain the same result
+As lapses do occur, the fit doesn't seem good and the threshold biased. The problem is not that the likelihood is not correctly maximized; this *weird* fit is the one with the maximum likelihood, given the lapses (Wichmann and Hill, 2001). To be more secure, that the optimization process is not reaching a local maximum, we repeate the fit using differential evolution algoriths (function `DEoptim`)
 
 ```{r, warning=FALSE, message=FALSE, results='hide', fig.align='center', fig.width=5}
 fitWithoutLapses2 <- quickpsy(dat, x, k, n, prob = .75, optimization = 'DE',
@@ -54,7 +56,9 @@ pWithout2 <- ggplot()+
 pWithout2
 ```
 
-Wichmann and Hill (2001) reported that allowing the upper assymptote to vary  — that is, fitting the lapses — eliminates the bias for the threshold, which seems to work in our example
+and found the the same result. 
+
+Wichmann and Hill (2001) reported that allowing the upper assymptote to vary  — that is, fitting the lapses — eliminates the bias for the threshold, which seems to work in this example
 
 ```{r, warning=FALSE, fig.align='center', fig.width=5}
 fitWithLapses <- quickpsy(dat, x, k, n, prob = .75, lapses = T) 
@@ -70,35 +74,50 @@ pWithoutWith
 
 ## Lapses can bias threshold estimation, a second example
 
-```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=5}
+```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=6, fig.height=5}
 data(qpdat)
-
 fitWithoutLapses <- quickpsy(qpdat, phase, resp,grouping = c(ecc, interval ,participant)) 
 
 plotcurves(fitWithoutLapses)
 ```
 
-Some fits, like the upper left panel for the blue dots, don't seem  good due to lapses, so let's allow the lapses to vary
+Due to lapses, some fits, like the one in the upper left panel for the blue dots, do not seem good, so let's allow the lapses to vary
 
 ```{r, warning=FALSE, message=FALSE, error=TRUE}
-
 fitWithLapses <- quickpsy(qpdat, phase, resp, grouping = c(ecc, interval ,participant), lapses  = T) 
-
 ```
 
 We obtain an error in the bootstrap. To understand the error we plot the results without bootstraping
 
-```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=5}
-data(qpdat)
-
+```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=6, fig.height=5}
 fitWithLapses <- quickpsy(qpdat, phase, resp, grouping = c(ecc, interval ,participant), lapses  = T, bootstrap = 'none') 
 
-plotcurves(fitWithLapses) + ylim (0,1) # we include ggplot ylim to be able to visualize what is going on
+plotcurves(fitWithLapses) + ylim (0,1.5) # we include ggplot ylim to be able to visualize what is going on
 ```
 
-## Lapses bias threshold estimation
+The problem is that, as we did not constraint the values of the upper asymptote, the lapse rate is sometimes negative and consequently the fitted curves go through probabilities larger than one, which causes that the parametric bootstrap samples cannot be calculated. For this reason, *quickpsy* indicates that the bootstrap should be non-parametric. We avoid the error by performing a non-parametric bootstrap
 
-Wichmann and Hill (2001) showed that when lapses occur, the estimated threshold is biased. Using simulations like theirs (see the original paper for details), here we replicate this result.
+```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=6, fig.height=5}
+fitWithLapses <- quickpsy(qpdat, phase, resp, 
+                          grouping = c(ecc, interval ,participant), lapses  = T, 
+                          bootstrap = 'nonparametric') 
+
+plotcurves(fitWithLapses) + ylim (0,1.5) 
+```
+
+Another, possibly better, solution is to perform a parametric bootstrap but constraining the values of the upper asymptote
+
+```{r, warning=FALSE, message=FALSE, fig.align='center', fig.width=6,fig.height=5}
+fitWithLapses <- quickpsy(qpdat, phase, resp, 
+                          grouping = c(ecc, interval ,participant), lapses  = T, 
+                          pini = list(c(20, 1000), c(20, 1000), c(0, .1))) 
+
+plotcurves(fitWithLapses) 
+```
+
+## Wichmann and Hill simulations
+
+Here we replicate the result of Wichmann and Hill (2001) that when lapses occur the estimated threshold is biased,using simulations like theirs (see the original paper for details).
 
 Wichmann and Hill used 7 sampling squemes defined as follow
 ```{r, message=FALSE, fig.align='center', fig.width=5}
@@ -133,7 +152,7 @@ create_sim_dat <- function(d) {
   data.frame(x = d$x, k = k, n = d$n , y = k/d$n)
 }
 
-simdat <- merge(s, expand.grid(n = 160, sample = 1:10, lambda = seq(0,.05, .01))) %>%
+simdat <- merge(s, expand.grid(n = 160, sample = 1:30, lambda = seq(0,.05, .01))) %>%
   group_by(squeme, n, sample, lambda) %>% do(create_sim_dat(.)) 
 # we use only 30 samples to increase speed
 
@@ -142,7 +161,8 @@ simdat <- merge(s, expand.grid(n = 160, sample = 1:10, lambda = seq(0,.05, .01))
 To illustrate the simulated data, we plot the first sample for each sampling scheme (columns) and each value of $\lambda$ (rows)
 
 ```{r, fig.align='center',fig.width=7,fig.height=7}
-p <- ggplot(simdat %>% filter(sample == 1)) + facet_grid(lambda ~ squeme) + geom_point(aes(x = x, y = y))
+p <- ggplot(simdat %>% filter(sample == 1)) + 
+  facet_grid(lambda ~ squeme) + geom_point(aes(x = x, y = y))
 p
 ```
 
@@ -151,8 +171,8 @@ We use quickpsy to fit a weibull function to each condition using $\lambda = 0$
 ```{r, warning=FALSE}
 fit <- quickpsy(simdat, x, k, n, within = .(squeme, lambda, sample), 
                 fun = weibull_fun, bootstrap = 'none', guess =.5, lapses = 0) 
-# we use 'none' for the bootstap because we are doing an explicit bootstrap  (we are fitting by sample)
-# that is, we don't need to bootstrap each of our samples
+# we use 'none' for the bootstap because we are doing an explicit bootstrap
+# (we are fitting by sample), that is, we don't need to bootstrap each of our samples
 ```
 
 and for illustration purposes show the fitted psychometric function for the first sample 
@@ -160,7 +180,8 @@ and for illustration purposes show the fitted psychometric function for the firs
 ```{r,fig.align='center',fig.width=7,fig.height=7}
 p + geom_line(data = curves(fit, xmin = 0, xmax = 18) %>% filter(sample == 1),
               aes(x = x, y =y)) 
-# we use the function curves instead of fit$curves because we want to define the range of the curves manually
+# we use the function curves instead of fit$curves because we want to 
+# define the range of the curves manually
 ```
 
 Replicating Wichmann and Hill, we show that the thresholds are overstimated as $\lambda$ increases (they showed that the slope is also biased)
@@ -174,8 +195,6 @@ ggplot(thre) +
   geom_point(aes(x = lambda, y = threshold, color = factor(squeme)), size = 4) +
   geom_hline(yintercept = real_threshold, lty = 2) 
 ```
-
-## Fitting lapses does not reduce the bias in general
 
 Wichmann and Hill (2001) reported that allowing $\lambda$ to vary within a given small window eliminates the bias for the threshold, but consistent with Prins (2012) we were not able to replicate this finding 
 ```{r,fig.align='center',fig.width=4}
@@ -191,45 +210,7 @@ ggplot(thre_lapses) +
   geom_hline(yintercept = real_threshold, lty = 2) 
 ```
 
-## But for some data, fitting lapses does eliminate the bias 
-
-We illustrate this, with an extreme example
-
-```{r, warning=FALSE, fig.align='center', fig.width=5}
-x <- seq(0,420,60)
-k <- c(0, 0, 4, 18, 20, 20, 19, 20)
-dat <- data.frame(x, k, n = 20)
-
-fitWithoutLapses <- quickpsy(dat, x, k, n) 
-fitWithLapses <- quickpsy(dat, x, k, n, lapses = T) 
-
-curvesWithoutLapses <- fitWithoutLapses$curves %>% mutate(cond = 'Without Lapses')
-curvesWithLapses <- fitWithLapses$curves %>% mutate(cond = 'With Lapses')
-
-ggplot()+
-  geom_point(data = fitWithoutLapses$averages, aes(x = x, y = y)) +
-  geom_line(data = curvesWithoutLapses,
-            aes(x = x, y = y, color = cond)) +
-  geom_line(data = curvesWithLapses,
-            aes(x = x, y = y, color = cond)) 
-```
-
-When the number of parameters to be fitted is 3 or more the minization sometimes reaches local minima. To try to avoid that, differential evolution algorithms could be used (DEoptim)
-
-```{r, results='hide', fig.align='center', fig.width=5}
-fitWithLapses <- quickpsy(dat, x, k, n, lapses = T, optimization = 'DE', bootstrap = 'none',
-                          pini = list(c(10, 1000), c(1,100), c(0, .1))) 
-
-curvesWithLapses <- fitWithLapses$curves %>% mutate(cond = 'With Lapses')
-
-ggplot()+
-  geom_point(data = fitWithoutLapses$averages, aes(x = x, y = y)) +
-  geom_line(data = curvesWithoutLapses,
-            aes(x = x, y = y, color = cond)) +
-  geom_line(data = curvesWithLapses,
-            aes(x = x, y = y, color = cond)) 
-
-```
+So, fitting the lapses not always eliminate the bias in threshold estimation. 
 
 ## References
 

@@ -2,12 +2,12 @@
 
 
 
-quickpsy fits psychometric functions for several conditions. The package is still under construction.
+quickpsy fits psychometric functions for several conditions.
 
 Install
 -------
 
-You need to install the package boot, DEoptim, devtools, dplyr, ggplot2 and tidyr. For example, to install devtools
+You need to install [R](http://cran.rstudio.com). You need to install the package boot, DEoptim, devtools, dplyr, ggplot2 and tidyr. For example, to install devtools
 
 ``` {.r}
 install.packages('devtools')

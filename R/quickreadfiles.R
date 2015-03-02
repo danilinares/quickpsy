@@ -23,7 +23,7 @@ quickreadfiles <- function(path = getwd(), ...) {
 
   namesfun <- function(d) {
     namefile <- paste0(path,'/', paste(unlist(d), collapse = ''), '.txt')
-    data.frame(namefile, exist = file.exists(namefile),stringsAsFactors=F)
+    data.frame(namefile, exist = file.exists(namefile), stringsAsFactors=F)
   }
 
   namefiles <- expand.grid(arguments) %>%

@@ -113,6 +113,8 @@
 #' plotcurves(fit)
 #' plotpara(fit)
 #' plotthresholds(fit)
+#'
+#' thresAndCi <- merge(fit$thresholds, fit$thresholdsci)
 #' @export
 #'
 quickpsy <- function(d, x = x, k = k, n = n, grouping, random, within, between,

@@ -143,6 +143,8 @@ fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
 plotcurves(fit)
 plotpara(fit)
 plotthresholds(fit)
+
+thresAndCi <- merge(fit$thresholds, fit$thresholdsci)
 }
 \references{
 Knoblauch, K., & Maloney, L. T. (2012). Modeling Psychophysical Data in R.
