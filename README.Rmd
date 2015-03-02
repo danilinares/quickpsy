@@ -47,8 +47,9 @@ library(DEoptim)
 library(dplyr)
 library(ggplot2)
 library(tidyr)
-
 library(MPDiR) # contains the Vernier data
+library(quickpsy)
+
 data(Vernier) # ?Venier for the reference
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
                 grouping = .(Direction, WaveForm, TempFreq))
