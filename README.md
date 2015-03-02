@@ -15,9 +15,10 @@ Then, you need to install the package boot, DEoptim, devtools, dplyr, ggplot2 an
 install.packages('devtools')
 ```
 
-and then to install quickpsy from github (the vignettes, which have extra tutorials, take a while to be built; if you don't want to build them \`build\_vignettes = F')
+and then to install quickpsy from github (the vignettes, which have extra tutorials, take a while to be built; if you don't want to build them `build_vignettes = F`)
 
 ``` {.r}
+library(devtools)
 devtools::install_github('danilinares/quickpsy', build_vignettes = T)
 ```
 
@@ -25,6 +26,12 @@ Example
 -------
 
 ``` {.r}
+library(boot)
+library(DEoptim)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
 library(MPDiR) # contains the Vernier data
 data(Vernier) # ?Venier for the reference
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
