@@ -9,7 +9,7 @@ To understand the fundamentals of fitting psychometric functions in R, we recomm
 Features
 --------
 
--   Fits and plots several conditions simultaneosly.
+-   Fits and plots several conditions simultaneosly (using maximum likelihood).
 
 -   Initial parameters are not necessary.
 
