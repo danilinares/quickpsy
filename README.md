@@ -15,12 +15,14 @@ Then, you need to install the package boot, DEoptim, devtools, dplyr, ggplot2 an
 install.packages('devtools')
 ```
 
-and then to install quickpsy from github (the vignettes, which have extra tutorials, take a while to be built; if you don't want to build them `build_vignettes = F`)
+and then to install quickpsy from github
 
 ``` {.r}
 library(devtools)
 devtools::install_github('danilinares/quickpsy', build_vignettes = T)
 ```
+
+The vignettes, which have extra tutorials, take a while to be built. If you don't want to build them use `build_vignettes = F` in the command above).
 
 Example
 -------
