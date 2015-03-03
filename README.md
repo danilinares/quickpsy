@@ -19,7 +19,7 @@ Features
 
 -   Fits cumulative normal, logistic, weibull functions or any function defined by the user.
 
--   It has a function that facilitates the reading of several data files.
+-   Facilitates the reading of several data files.
 
 -   The optimization can call *DEoptim* which uses differential evolution optimization.
 

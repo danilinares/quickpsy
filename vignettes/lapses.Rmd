@@ -152,9 +152,9 @@ create_sim_dat <- function(d) {
   data.frame(x = d$x, k = k, n = d$n , y = k/d$n)
 }
 
-simdat <- merge(s, expand.grid(n = 160, sample = 1:30, lambda = seq(0,.05, .01))) %>%
+simdat <- merge(s, expand.grid(n = 160, sample = 1:10, lambda = seq(0,.05, .01))) %>%
   group_by(squeme, n, sample, lambda) %>% do(create_sim_dat(.)) 
-# we use only 30 samples to increase speed
+# we use only 10 samples to increase decrease the computation time
 
 ```
 

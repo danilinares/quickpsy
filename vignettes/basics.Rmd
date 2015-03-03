@@ -1,0 +1,90 @@
+---
+title: "Basics"
+author: "Daniel Linares and Joan López-Moliner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basics}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+## Reading the files
+
+For the example, download the 3 files in https://github.com/danilinares/quickpsy/tree/master/inst/extdata/example1 and add them to your working directory
+
+The files can be read manually using the R base `read.table` function
+
+```{r, message=FALSE}
+library(boot)
+library(DEoptim)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(quickpsy)
+dat1 <- read.table('aa1.txt', head = T)
+dat2 <- read.table('bb1.txt', head = T)
+dat3 <- read.table('cc2.txt', head = T)
+
+dat1 <- dat1 %>% mutate(subject = 'aa')
+dat2 <- dat2 %>% mutate(subject = 'bb')
+dat3 <- dat3 %>% mutate(subject = 'cc')
+
+dat <- rbind(dat1, dat2, dat3)
+```
+
+or using the *quickpsy* function `quickreadfiles`
+
+```{r}
+dat <- quickreadfiles(subject = c('aa', 'bb', 'cc'),
+                      session = c('1', '2'))
+```
+
+## Fitting 
+
+We use the main function of *quickpsy*, which has the name of the package, to do the fit. We introduce the data, the name of the explanatory variable, the name of the response variable and the name of the grouping variable. 
+
+```{r}
+fit <- quickpsy(dat, phase, resp, grouping=.(subject)) 
+# we can also introduce the name of the arguments: 
+# fit <- quickpsy(d = dat, x = phase, k = resp, grouping=.(subject))
+```
+
+`quickpsy` creates an list of class *quickpsy* with all the results. We can use `names` to obtain the names of the output variables
+
+```{r}
+names(fit)
+```
+
+To obtain the parameters, for example, we can do
+```{r}
+parameters <- fit$para
+parameters
+```
+
+or to get the confidence intervals of the parameters
+```{r}
+fit$paraci
+```
+
+If, for example, we want to have the parameters and the confidence intervals in the same data frame we can just `merge`
+
+```{r}
+merge(fit$para, fit$paraci)
+```
+
+## Plotting
+
+To plot the curves
+
+```{r, fig.align='center', fig.width=5}
+plot1 <- plotcurves(fit)
+plot1
+```
+
+plot1 is a *ggplot* that we can modify accordingly
+
+```{r, fig.align='center', fig.width=5}
+plot1 + theme_classic() + ylab('Proportion')
+```
+
+

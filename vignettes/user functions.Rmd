@@ -1,0 +1,42 @@
+---
+title: "Fitting functions defined by the user"
+author: "Daniel Linares and Joan López-Moliner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Fitting functions defined by the user}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+*quickpsy* can be used to fit sigmoidal functions defined by the user
+
+```{r, message=FALSE, warning=FALSE, fig.align='center'}
+library(gridExtra)
+library(dplyr)
+library(MPDiR)
+library(ggplot2)
+library(quickpsy)
+
+data(qpdat)
+
+gompertz_fun <- function(x, p) exp(-p[1]*exp(-p[2]*x))
+
+fit <- quickpsy(qpdat, phase, resp, fun = gompertz_fun, pini = c(1,.01))
+plotcurves(fit)
+```
+
+or even non-sigmoidal functions
+
+```{r, message=FALSE, warning=FALSE, fig.align='center'}
+n <- 100
+x <- seq(-.3,.3,.1) 
+k <- c(10, 45, 90, 100, 60, 10, 5)
+dat <- data.frame(x, k, n)
+
+gaussian <- function(x, p) exp(-0.5*((x - p[2]) / p[3])^2) / (1 + exp(-p[1]))
+
+fit <- quickpsy(dat, x, k, n, fun = gaussian, pini = c(0, 0, 0), 
+                thresholds = F) # because the threshold is not well defined
+plotcurves(fit)
+```
