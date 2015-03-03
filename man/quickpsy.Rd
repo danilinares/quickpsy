@@ -142,7 +142,7 @@ fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
                 grouping = .(Direction, WaveForm, TempFreq))
 plotcurves(fit)
 plotpara(fit)
-plotthresholds(fit)
+plotthresholds(fit, geom = 'point')
 
 thresAndCi <- merge(fit$thresholds, fit$thresholdsci)
 }

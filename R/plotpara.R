@@ -8,7 +8,7 @@
 #' @param ypanel Name of the variable to be split in vertical panels.
 #' @param color Name of the variable codded by color.
 #' @param geom If \code{'bar'} displays bars.
-#' If \code{'point'} displays points (default is 'bar').
+#' If \code{'point'} displays points (default is \code{'bar'}).
 #' @param ci If \code{FALSE} confidence intervals are not plotted
 #' (default is \code{TRUE}).
 #' @seealso  \code{\link{plotpara_}}
