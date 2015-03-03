@@ -20,7 +20,9 @@ To understand the fundamentals of fitting psychometric functions in R, we recomm
 
 ## Features
 
-- Fits and plots several conditions simultaneosly (using maximum likelihood). 
+- Fits and plots several conditions simultaneosly (using maximum likelihood).
+
+- Exploits the computational speed of [dplyr](http://cran.r-project.org/web/packages/dplyr/index.html).
   
 - Initial parameters are not necessary. 
   

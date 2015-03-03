@@ -11,6 +11,8 @@ Features
 
 -   Fits and plots several conditions simultaneosly (using maximum likelihood).
 
+-   Exploits the computational speed of [dplyr](http://cran.r-project.org/web/packages/dplyr/index.html).
+
 -   Initial parameters are not necessary.
 
 -   Calculates parametric and non-parametric bootstrap confidence intervals.
