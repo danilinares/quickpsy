@@ -38,10 +38,8 @@ and then install quickpsy from github
 
 ``` {.r}
 library(devtools)
-install_github('danilinares/quickpsy', build_vignettes = T)
+install_github('danilinares/quickpsy')
 ```
-
-The vignettes, which have extra tutorials, take a while to be built. If you don't want to build them use `build_vignettes = F` in the command above.
 
 Example
 -------
@@ -70,10 +68,4 @@ For specific functions
 
 ``` {.r}
 ?plotcurves
-```
-
-You can find further guidande in the vignettes (if you built them)
-
-``` {.r}
-browseVignettes('quickpsy')
 ```
