@@ -1,0 +1,36 @@
+---
+title: "Fitting the logarithm of the independent variable"
+author: "Daniel Linares and Joan López-Moliner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Fitting the logarithm of the independent variable}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+To fit psychometric functions using the logarithm of the independent variable, ` log = TRUE` should be added to quickpsy. To illustrate it, we use the data from the classic experiment of Hecht, Shlaer and Pirenne (1942) that is included in the [MPDiR](http://cran.r-project.org/web/packages/MPDiR/index.html) package associated to the book of [Knoblauch and Maloney (2012)](#knoblauch).
+
+```{r, message=FALSE, warning=FALSE, fig.align='center',fig.width=7,fig.height=5}
+library(gridExtra)
+library(dplyr)
+library(quickpsy)
+library(MPDiR)
+library(ggplot2)
+
+data(HSP)
+HSP <- HSP %>% mutate(k = round(N * p / 100)) # to calculate the number of 'yes'
+fit <- quickpsy(HSP, Q, k, N, prob = .6, grouping = .(Run, Obs), log = T)
+
+grid.arrange(
+  plotcurves(fit, xpanel = Run, ypanel = Obs),
+  arrangeGrob(plotpara(fit), plotthresholds(fit)), 
+  ncol = 2)
+```
+
+## References
+
+<a name="knoblauch"></a> Knoblauch, K., & Maloney, L. T. (2012). Modeling Psychophysical Data in R. New York: Springer.
+
+Hecht, S., Shlaer, S., Pirenne, M.H. (1942) Energy, quanta and vision. J. Gen. Physiol. 25, 819– 840.
+
+

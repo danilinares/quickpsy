@@ -71,3 +71,5 @@ For specific functions
 ``` {.r}
 ?plotcurves
 ```
+
+Further information can be found [here](http://www.dlinares.org/quickpsy.html).

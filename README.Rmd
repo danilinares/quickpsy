@@ -82,6 +82,8 @@ For specific functions
 ?plotcurves
 ```
 
+Further information can be found [here](http://www.dlinares.org/quickpsy.html). 
+
 
 
 
