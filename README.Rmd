@@ -84,6 +84,8 @@ To obtain information and examples for specific functions use *?*
 ?plotcurves
 ```
 
+For further information visit [www.dlinares.org/quickpsy.html](http://www.dlinares.org/quickpsy.html)
+
 ## Other R packages
 
 * [psyphy](http://cran.r-project.org/web/packages/psyphy/index.html): it provides links functions to [fit psychometric functions using an approach based on  generalized linear models](http://www.dlinares.org/psychopract.html#fitting-using-generalized-linear-models). 

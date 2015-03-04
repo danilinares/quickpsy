@@ -81,6 +81,8 @@ To obtain information and examples for specific functions use *?*
 ?plotcurves
 ```
 
+For further information visit [www.dlinares.org/quickpsy.html](http://www.dlinares.org/quickpsy.html)
+
 Other R packages
 ----------------
 
