@@ -107,6 +107,8 @@
 #' introduction. London: Academic Press.
 #' @seealso \code{\link{quickpsy_}}
 #' @examples
+#' # make sure that all the requires packages are installed
+#' # and loaded; instructions at https://github.com/danilinares/quickpsy
 #' library(MPDiR) # contains the Vernier data
 #' data(Vernier) # ?Venier for the reference
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
