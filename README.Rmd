@@ -88,7 +88,7 @@ For further information visit [www.dlinares.org/quickpsy.html](http://www.dlinar
 
 ## Other R packages
 
-* [psyphy](http://cran.r-project.org/web/packages/psyphy/index.html): it provides links functions to [fit psychometric functions using an approach based on  generalized linear models](http://www.dlinares.org/psychopract.html#fitting-using-generalized-linear-models). 
+* [psyphy](http://cran.r-project.org/web/packages/psyphy/index.html): among other things, it provides links functions to [fit psychometric functions using an approach based on  generalized linear models](http://www.dlinares.org/psychopract.html#fitting-using-generalized-linear-models). 
 
 * [modelfree](http://personalpages.manchester.ac.uk/staff/d.h.foster/software-modelfree/latest/home): fits psychometric functions using a non-parametric approach.
 
