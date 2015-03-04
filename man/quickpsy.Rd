@@ -121,8 +121,9 @@ A list containing the following components:
   \item \code{ypred} Predicted probabilities at the values of the explanatory
   variable.
   \item \code{curves} Curves.
-  \item \code{para} Fitted parameters
-  \item \code{paraci} Confidence intervals for the parameters
+  \item \code{para} Fitted parameters.
+  \item \code{paraci} Confidence intervals for the parameters.
+  \item \code{curvesbootstrap} Bootstrap curves.
   \item \code{thresholds} Thresholds.
   \item \code{thresholdsci} Confidence intervals for the thresholds.
 }

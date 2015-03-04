@@ -16,14 +16,17 @@
 #' @export
 thresholdsbootstrap <- function(qp, prob = NULL, log = F) {
   if (is.null(prob)) stop('You need to specify the value of prob', call. = F)
+
   if (length(qp$groups) == 0)
-    qp$parabootstrap %>% group_by_('sample') %>%
-      do(one_threshold(., prob, log, qp$funname, qp$guess, qp$lapses,
-                       qp$curves))
+    paraboot <- qp$parabootstrap %>% dplyr::group_by_('sample')
   else
-    qp$parabootstrap %>% group_by_(.dots = c(qp$groups, 'sample')) %>%
-      do(one_threshold(., prob, log, qp$funname, qp$guess, qp$lapses,
-                       qp$curves))
+    paraboot <- qp$parabootstrap %>%
+      dplyr::group_by_(.dots = c(qp$groups, 'sample'))
+
+  allgroups <- as.character(groups(qp$curvesbootstrap))
+
+  paraboot %>% dplyr::do(one_threshold(., prob, log, allgroups,
+                    qp$funname, qp$guess, qp$lapses, qp$curvesbootstrap))
 }
 
 

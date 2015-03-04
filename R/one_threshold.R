@@ -1,10 +1,14 @@
 #' one_threshold
 #' @keywords internal
 #' @export
-one_threshold <- function(d, prob, log, funname, guess, lapses, curves) {
-  para <- d$para
+one_threshold <- function(d, prob, log, groups, funname,
+                          guess, lapses, curves) {
+
+  if (length(groups) == 0) curves <- curves
+  else curves <- dplyr::semi_join(curves, d, by = as.character(groups))
 
   if (funname %in%  names(get_functions())) {
+    para <- d$para
     if (is.numeric(guess) && is.numeric(lapses))
       q <- (prob - guess) / (1 - guess - lapses)
     if (is.logical(guess) && is.logical(lapses))

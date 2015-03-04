@@ -4,7 +4,7 @@
 \alias{one_threshold}
 \title{one_threshold}
 \usage{
-one_threshold(d, prob, log, funname, guess, lapses, curves)
+one_threshold(d, prob, log, groups, funname, guess, lapses, curves)
 }
 \description{
 one_threshold
