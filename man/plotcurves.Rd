@@ -35,7 +35,6 @@ plotcurves(qp, panel = NULL, xpanel = NULL, ypanel = NULL, color = NULL,
 }
 \examples{
 library(MPDiR) # contains the Vernier data
-data(Vernier) # ?Venier for the reference
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
                 grouping = .(Direction, WaveForm, TempFreq))
 plotcurves(fit)

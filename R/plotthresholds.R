@@ -14,7 +14,6 @@
 #' @seealso  \code{\link{plotthresholds_}}
 #' @examples
 #' library(MPDiR) # contains the Vernier data
-#' data(Vernier) # ?Venier for the reference
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
 #'                 grouping = .(Direction, WaveForm, TempFreq))
 #' plotthresholds(fit)
