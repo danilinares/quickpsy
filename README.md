@@ -62,9 +62,8 @@ Example
 -------
 
 ``` {.r}
-library(MPDiR) # contains the Vernier data
+library(MPDiR) # contains the Vernier data; use ?Venier for the reference
 
-data(Vernier) # Use ?Venier for the reference
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N, 
                 grouping = .(Direction, WaveForm, TempFreq))
 plotcurves(fit)
