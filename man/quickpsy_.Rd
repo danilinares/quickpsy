@@ -6,7 +6,7 @@
 \usage{
 quickpsy_(d, x = "x", k = "k", n = "n", grouping, random, within, between,
   xmin = NULL, xmax = NULL, log = F, fun = "cum_normal_fun",
-  pini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
+  parini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
   logliks = F, bootstrap = "parametric", B = 100, ci = 0.95,
   optimization = "optim")
 }

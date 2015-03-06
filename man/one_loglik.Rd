@@ -4,7 +4,7 @@
 \alias{one_loglik}
 \title{one_loglik}
 \usage{
-one_loglik(d, x, k, n, psyfunguesslapses, groups, para)
+one_loglik(d, x, k, n, psyfunguesslapses, groups, par)
 }
 \description{
 one_loglik

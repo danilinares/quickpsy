@@ -1,7 +1,7 @@
 #' @keywords internal
 #' @export
-pini <- function(d, x, k, n, guess, lapses, psyfun) {
-  calculate_pini <- function(d, x, k, n, guess, lapses, psyfun) {
+parini <- function(d, x, k, n, guess, lapses, psyfun) {
+  calculate_parini <- function(d, x, k, n, guess, lapses, psyfun) {
     ntrials <- unique(d[[n]])
     y <- d[[k]] / d[[n]]
     if (is.numeric(guess) && is.numeric(lapses)) {
@@ -68,6 +68,6 @@ pini <- function(d, x, k, n, guess, lapses, psyfun) {
     }
     data.frame(paran = paste0('p', seq(1, length(para))), para)
   }
-  d %>% dplyr::do(calculate_pini(., x, k, n, guess, lapses, psyfun))
+  d %>% dplyr::do(calculate_parini(., x, k, n, guess, lapses, psyfun))
 }
 

@@ -4,8 +4,8 @@
 \alias{one_bootstrap}
 \title{one_bootstrap}
 \usage{
-one_bootstrap(d, x, k, n, psyfunguesslapses, funname, guess, lapses, pini,
-  piniset, optimization, bootstrap, B, groups, ypred)
+one_bootstrap(d, x, k, n, psyfunguesslapses, funname, guess, lapses, parini,
+  pariniset, optimization, bootstrap, B, groups, ypred)
 }
 \description{
 one_bootstrap

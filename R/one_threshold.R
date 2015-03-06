@@ -8,15 +8,15 @@ one_threshold <- function(d, prob, log, groups, funname,
   else curves <- dplyr::semi_join(curves, d, by = as.character(groups))
 
   if (funname %in%  names(get_functions())) {
-    para <- d$para
+    par <- d$par
     if (is.numeric(guess) && is.numeric(lapses))
       q <- (prob - guess) / (1 - guess - lapses)
     if (is.logical(guess) && is.logical(lapses))
-      q <- (prob - para[3]) / (1 - para[3] - para[4])
+      q <- (prob - par[3]) / (1 - par[3] - par[4])
     if (is.logical(guess) && is.numeric(lapses))
-      q <- (prob - para[3]) / (1 - para[3] - lapses)
+      q <- (prob - par[3]) / (1 - par[3] - lapses)
     if (is.numeric(guess) && is.logical(lapses))
-      q <- (prob - guess) / (1 - guess - para[3])
+      q <- (prob - guess) / (1 - guess - par[3])
 
     if (q < 0 || q > 1) {
       warning('probabilities not whitin 0 and 1')
@@ -24,11 +24,11 @@ one_threshold <- function(d, prob, log, groups, funname,
     }
     else {
       if (funname == 'cum_normal_fun')
-        thre <- inv_cum_normal_fun(q, c(para[1], para[2]))
+        thre <- inv_cum_normal_fun(q, c(par[1], par[2]))
       if (funname == 'logistic_fun')
-        thre <- inv_logistic_fun(q, c(para[1], para[2]))
+        thre <- inv_logistic_fun(q, c(par[1], par[2]))
       if (funname == 'weibull_fun')
-        thre <- inv_weibull_fun(q, c(para[1], para[2]))
+        thre <- inv_weibull_fun(q, c(par[1], par[2]))
     }
   }
   else {

@@ -14,7 +14,7 @@
 #' @export
 quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
                       between, xmin = NULL, xmax = NULL, log = F,
-                      fun = 'cum_normal_fun', pini = NULL, guess = 0,
+                      fun = 'cum_normal_fun', parini = NULL, guess = 0,
                       lapses = 0, prob = NULL, thresholds = T,  logliks = F,
                       bootstrap = 'parametric', B = 100, ci = .95,
                       optimization = 'optim') {
@@ -24,13 +24,13 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
   if (!is.null(prob)) thresholds <- T
 
   if (missing(n)) n <- NULL
-  if (is.null(pini)) piniset <- F
-  else piniset <- T
+  if (is.null(parini)) pariniset <- F
+  else pariniset <- T
 
   qp <- fitpsy(d, x, k, n, random, within, between, grouping, xmin, xmax, log,
-               fun, pini, piniset, guess, lapses, optimization)
+               fun, parini, pariniset, guess, lapses, optimization)
 
-  qp <- c(qp, list(piniset = piniset))
+  qp <- c(qp, list(pariniset = pariniset))
 
   qp <- c(qp, list(ypred = ypred(qp)))
   if (sum(qp$ypred$ypred < 0) + sum(qp$ypred$ypred > 1) > 0)
@@ -49,8 +49,8 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
   if (logliks) qp <- c(qp, list(logliks = logliks(qp)))
 
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
-    qp <- c(qp, list(parabootstrap = parabootstrap(qp, bootstrap, B)))
-    qp <- c(qp, list(paraci = paraci(qp, ci)))
+    qp <- c(qp, list(parbootstrap = parbootstrap(qp, bootstrap, B)))
+    qp <- c(qp, list(parci = parci(qp, ci)))
     if (thresholds) {
       qp <- c(qp, list(curvesbootstrap = curvesbootstrap(qp, log = log)))
       qp <- c(qp,

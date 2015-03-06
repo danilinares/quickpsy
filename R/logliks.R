@@ -12,7 +12,7 @@
 logliks <- function(qp) {
   qp$averages %>%
     dplyr::do(one_loglik(., qp$x, qp$k, qp$n, qp$psyfunguesslapses, qp$groups,
-                  qp$para))
+                  qp$par))
 }
 
 

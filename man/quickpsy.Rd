@@ -6,7 +6,7 @@
 \usage{
 quickpsy(d, x = x, k = k, n = n, grouping, random, within, between,
   xmin = NULL, xmax = NULL, log = F, fun = cum_normal_fun,
-  pini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
+  parini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
   logliks = F, bootstrap = "parametric", B = 100, ci = 0.95,
   optimization = "optim")
 }
@@ -61,12 +61,12 @@ shape (\code{cum_normal_fun}, \code{logistic_fun}, \code{weibull_fun})
 or the name of a function introduced by the user
 (default is \code{cum_normal_fun}).}
 
-\item{pini}{Initial parameters. quickpsy calculates default
+\item{parini}{Initial parameters. quickpsy calculates default
 initial parameters using probit analysis, but it is also possible to
 specify a vector of initial parameters or a list of the form
-\code{list(c(para1min, para2max), c(para2min, para2max))} to
+\code{list(c(par1min, par2max), c(par2min, par2max))} to
 constraint the lower and upper bounds of the parameters (when
-\code{optimization = 'DE'}, pini should be also a list).}
+\code{optimization = 'DE'}, parini should be also a list).}
 
 \item{guess}{Value indicating the guess rate \eqn{\gamma} (default is 0). If
 \code{TRUE}, the guess rate is estimated as the i + 1 paramater where
@@ -104,7 +104,7 @@ the \code{optim} function. It can also be \code{'DE'} which uses de function
 \code{DEoptim} from the package DEoptim, which performs differential
 evolution optimization. Using \code{DEoptim}, it is less likely that the
 optimization finishes in a local minimum, but the optimization is slow.
-When \code{'DE'} is used, \code{pini} should be specified as a list with
+When \code{'DE'} is used, \code{parini} should be specified as a list with
 lower and upper bounds.}
 }
 \value{
@@ -115,9 +115,9 @@ A list containing the following components:
   \item \code{funname} String with the name of the shape of the curve.
   \item \code{psyfunguesslapses} Curve including guess and lapses.
   \item \code{limits} Limits of the curves.
-  \item \code{pini} Initial parameters.
+  \item \code{parini} Initial parameters.
   \item \code{optimization} Method to optimize.
-  \item \code{piniset} \code{FALSE} if initial parameters are not given.
+  \item \code{pariniset} \code{FALSE} if initial parameters are not given.
   \item \code{ypred} Predicted probabilities at the values of the explanatory
   variable.
   \item \code{curves} Curves.

@@ -1,6 +1,6 @@
 #' Plot the values of the parameters
 #'
-#' \code{plotcurves} plot the values of the parameters.
+#' \code{plotpar} plot the values of the parameters.
 #' @param qp output from quickpsy.
 #' @param x Name of the variable to displayed in the x-axis.
 #' @param panel Name of the variable to be split in panels.
@@ -11,18 +11,18 @@
 #' If \code{'point'} displays points (default is \code{'bar'}).
 #' @param ci If \code{FALSE} confidence intervals are not plotted
 #' (default is \code{TRUE}).
-#' @seealso  \code{\link{plotpara_}}
+#' @seealso  \code{\link{plotpar_}}
 #' @examples
 #' library(MPDiR) # contains the Vernier data
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
 #'                 grouping = .(Direction, WaveForm, TempFreq))
-#' plotpara(fit)
-#' plotpara(fit, x = WaveForm)
-#' plotpara(fit, xpanel = Direction)
-#' plotpara(fit, color = Direction)
-#' plotpara(fit, color = Direction, ypanel = WaveForm, geom = 'point')
+#' plotpar(fit)
+#' plotpar(fit, x = WaveForm)
+#' plotpar(fit, xpanel = Direction)
+#' plotpar(fit, color = Direction)
+#' plotpar(fit, color = Direction, ypanel = WaveForm, geom = 'point')
 #' @export
-plotpara <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
+plotpar <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                            ypanel = NULL, color = NULL, geom = 'bar', ci = T) {
 
   if (!missing(x)) x <- deparse(substitute(x))
@@ -31,5 +31,5 @@ plotpara <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
   if (!missing(ypanel)) ypanel <- deparse(substitute(ypanel))
   if (!missing(color)) color <- deparse(substitute(color))
 
- plotpara_(qp, x, panel, xpanel, ypanel, color, geom)
+ plotpar_(qp, x, panel, xpanel, ypanel, color, geom)
 }
