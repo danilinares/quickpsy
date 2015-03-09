@@ -10,7 +10,7 @@ one_parameters <- function(d, x, k, n, psyfunguesslapses, funname, parini,
     else if (is.list(parini)) {
       parini <- matrix(unlist(parini), ncol = 2, byrow = T)
       mod <- DEoptim::DEoptim(nllfun, lower = parini[,1], upper = parini[,2])$optim
-      par <- mod$bestmem
+      para <- mod$bestmem
     }
     else
       stop('parini should be specified as a list of the type list(c(par1min, par1max), c(par2min, par2max),...', call. = F)
@@ -41,12 +41,12 @@ one_parameters <- function(d, x, k, n, psyfunguesslapses, funname, parini,
         if (parini[2] < 0) parini[2] <- 0
       }
 
-      par <- optim(parini, nllfun)$par
+      para <- optim(parini, nllfun)$par
     }
   }
   if (optimization != 'DE' && optimization != 'optim')
     stop('optimization should be \'optim \' or \'DE\'.', call. = F)
-  data.frame(parn = paste0('p', seq(1, length(par))), par)
+  data.frame(parn = paste0('p', seq(1, length(para))), par = para)
 }
 
 
