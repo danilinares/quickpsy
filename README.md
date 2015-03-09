@@ -35,13 +35,11 @@ In R, install the following packages: boot, DEoptim, dplyr, ggplot2, tidyr and d
 ``` {.r}
 install.packages('boot')
 install.packages('DEoptim')
-install.packages('dplyr')
-install.packages('ggplot2')
 install.packages('tidyr')
 install.packages('devtools')
 ```
 
-Install quickpsy from github and load the package
+Install quickpsy from github (will also install dplyr and ggplot2) and load the package
 
 ``` {.r}
 install_github('danilinares/quickpsy')
