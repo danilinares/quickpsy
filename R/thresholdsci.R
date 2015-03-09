@@ -1,5 +1,4 @@
-#' thresholdsci
-#'
+#' @keywords internal
 #' @export
 thresholdsci <- function(qp, ci = .95, method = 'percent') {
   if (length(qp$groups) == 0)

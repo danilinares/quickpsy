@@ -41,27 +41,17 @@ install.packages('tidyr')
 install.packages('devtools')
 ```
 
-Load the packages
-
-``` {.r}
-library(boot)
-library(DEoptim)
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-```
-
 Install quickpsy from github and load the package
 
 ``` {.r}
 install_github('danilinares/quickpsy')
-library(quickpsy)
 ```
 
 Example
 -------
 
 ``` {.r}
+library(quickpsy)
 library(MPDiR) # contains the Vernier data; use ?Venier for the reference
 
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N, 

@@ -51,12 +51,12 @@
 #' constraint the lower and upper bounds of the parameters (when
 #' \code{optimization = 'DE'}, parini should be also a list).
 #' @param guess Value indicating the guess rate \eqn{\gamma} (default is 0). If
-#' \code{TRUE}, the guess rate is estimated as the i + 1 paramater where
+#' \code{TRUE}, the guess rate is estimated as the i + 1 paramEter where
 #' i corresponds to the number of parameters of \code{fun}. If, for
 #' example, \code{fun} is a predefined shape with parameters p1 and p2,
 #' then the guess rate corresponds to parameter p3.
 #' @param lapses Value indicating the lapse rate \eqn{\lambda} (default is 0).
-#'  If \code{TRUE}, the lapse rate is estimated as the i + 1 paramater where
+#'  If \code{TRUE}, the lapse rate is estimated as the i + 1 parameter where
 #' i corresponds to the number of parameters of \code{fun} plus one if
 #' the guess rate is estimated. If, for example, \code{fun} is a
 #' predefined shape with parameters p1 and p2,
@@ -68,15 +68,15 @@
 #' (default is \code{TRUE}).
 #' @param logliks If \code{TRUE}, the loglikelihoods are calculated
 #'  (default is \code{FALSE}).
-#' @param bootstrap \code{'parametric'} performs parametric bootsrap;
+#' @param bootstrap \code{'parametric'} performs parametric bootstrap;
 #' \code{'nonparametric'} performs non-parametric bootstrap;
 #' \code{'none'} does not perform bootstrap (default is \code{'parametric'}).
-#' @param B number of bootstrap samples (default is ONLY a 100).
+#' @param B number of bootstrap samples (default is 100 ONLY).
 #' @param ci Confidence intervals level based on percentiles (default is .95).
-#' @param optimization Method to optimize. The default is 'optim' which uses
+#' @param optimization Method used for optimizization. The default is 'optim' which uses
 #' the \code{optim} function. It can also be \code{'DE'} which uses de function
 #' \code{DEoptim} from the package DEoptim, which performs differential
-#' evolution optimization. Using \code{DEoptim}, it is less likely that the
+#' evolution optimization. By using \code{DEoptim}, it is less likely that the
 #' optimization finishes in a local minimum, but the optimization is slow.
 #' When \code{'DE'} is used, \code{parini} should be specified as a list with
 #' lower and upper bounds.
@@ -113,7 +113,7 @@
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
 #'                 grouping = .(Direction, WaveForm, TempFreq))
 #' plotcurves(fit)
-#' plotpara(fit)
+#' plotpar(fit)
 #' plotthresholds(fit, geom = 'point')
 #' @export
 #'

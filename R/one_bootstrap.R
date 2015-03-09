@@ -6,7 +6,7 @@ one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
                           groups, ypred) {
 
 
-  if (length(groups) != 0) ypred <- dplyr::semi_join(ypred, d, by = groups)
+  if (length(groups) != 0) ypred <- semi_join(ypred, d, by = groups)
 
   if (bootstrap == 'parametric') ypred <- ypred$ypred
   if (bootstrap == 'nonparametric') ypred <- d[[k]] / d[[n]]
@@ -27,7 +27,7 @@ one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
   fake_par <- b$t
   colnames(fake_par) <- paste0('p',1:length(fake_par[1,]))
   long <- data.frame(fake_par, sample = 1:length(fake_par[,1]))
-  long %>% tidyr::gather(parn, par, -sample) %>% dplyr::arrange(sample)
+  long %>% tidyr::gather(parn, par, -sample) %>% arrange(sample)
 
 }
 

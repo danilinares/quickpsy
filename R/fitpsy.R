@@ -8,7 +8,7 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
   if (is.logical(guess) && !guess) guess <- 0
   if (is.logical(lapses) && !lapses) lapses <- 0
 
-  d <- d  %>% dplyr::ungroup()
+  d <- d  %>% ungroup()
   groups <- c()
   if (!missing(random)) groups <- c(groups, random)
   if (!missing(within)) groups <- c(groups, within)
@@ -16,14 +16,14 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
   if (!missing(grouping)) groups <- c(groups, grouping)
   if (is.null(n)) {
     d[[k]][d[[k]] == -1] <- 0
-    d <- d %>% dplyr::group_by_(.dots=c(groups, x)) %>%
-      dplyr::summarise_(n = 'n()', k = paste0('sum(',k,')'))
+    d <- d %>% group_by_(.dots=c(groups, x)) %>%
+      summarise_(n = 'n()', k = paste0('sum(',k,')'))
     names(d)[names(d) == 'k'] <- k
     n <- 'n'
   }
 
   if (!(missing(random) && missing(within) && missing(between) && missing(grouping)))
-    d <- d %>% dplyr::group_by_(.dots=groups)
+    d <- d %>% group_by_(.dots=groups)
 
   d$y <- d[[k]] / d[[n]]
 

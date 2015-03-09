@@ -21,33 +21,33 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
   if (!('parci' %in% names(qp))) ci <- F
 
-  p <- ggplot2::ggplot()
-  if (qp$log) p <- p + ggplot2::ylab(paste0('log(', qp$x, ')'))
-  else p <- p + ggplot2::ylab(qp$x)
+  p <- ggplot()
+  if (qp$log) p <- p + ylab(paste0('log(', qp$x, ')'))
+  else p <- p + ylab(qp$x)
 
   groups <- qp$groups
   ngroup <- length(groups)
 
-  if (ngroup != 3) p <- p + ggplot2::facet_wrap(~parn, scales = 'free')
+  if (ngroup != 3) p <- p + facet_wrap(~parn, scales = 'free')
 
   if (ngroup == 0) { ###########################################################
 
     if (geom == 'bar') {
-      p <- p + ggplot2::geom_bar(data = qp$par,
+      p <- p + geom_bar(data = qp$par,
                         aes_string(x = 0, y = 'par'), fill = 'grey',
                         stat = 'identity', position = 'dodge') +
-               ggplot2::theme(axis.title.x = element_blank(),
+               theme(axis.title.x = element_blank(),
                         axis.text.x = element_blank())
-      if (ci) p <- p + ggplot2::geom_errorbar(data = qp$parci, width = .5,
+      if (ci) p <- p + geom_errorbar(data = qp$parci, width = .5,
                  aes_string(x = 0, ymin = 'parinf', ymax = 'parsup'),
                  stat = 'identity', position = 'dodge')
     }
     if (geom == 'point') {
-      p <- p + ggplot2::geom_point(data = qp$par,
+      p <- p + geom_point(data = qp$par,
                         aes_string(x = 0, y = 'par')) +
-               ggplot2::theme(axis.title.x = element_blank(),
+               theme(axis.title.x = element_blank(),
                         axis.text.x = element_blank())
-      if (ci) p <- p + ggplot2::geom_linerange(data = qp$parci,
+      if (ci) p <- p + geom_linerange(data = qp$parci,
                        aes_string(x = 0, ymin = 'parinf', ymax = 'parsup'),
                        stat = 'identity', position = 'dodge')
     }
@@ -59,20 +59,20 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
     if (!is.null(color)) {
       if (geom == 'bar') {
         qp$par[[color]] <- factor(qp$par[[color]])
-        p <- p + ggplot2::geom_bar(data = qp$par,
+        p <- p + geom_bar(data = qp$par,
                    aes_string(x = color,fill = color, y = 'par'),
                    stat = 'identity', position = 'dodge')
         if (ci) {
           qp$parci[[color]] <- factor(qp$parci[[color]])
-          p <- p + ggplot2::geom_errorbar(data = qp$parci,
+          p <- p + geom_errorbar(data = qp$parci,
                    aes_string(x = color, ymin = 'parinf', ymax = 'parsup'),
                    stat = 'identity', position = 'dodge', width = .5)
         }
       }
       if (geom == 'point') {
-        p <- p + ggplot2::geom_point(data = qp$par,
+        p <- p + geom_point(data = qp$par,
                           aes_string(x = color, color = color, y = 'par'))
-        if (ci) p <- p + ggplot2::geom_linerange(data = qp$parci,
+        if (ci) p <- p + geom_linerange(data = qp$parci,
                    aes_string(x = color, color = color, ymin = 'parinf',
                    ymax = 'parsup'), stat = 'identity', position = 'dodge')
       }
@@ -80,23 +80,23 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
     if (is.null(color) && !is.null(x)) {
       if (geom == 'bar') {
         qp$par[[x]] <- factor(qp$par[[x]])
-        p <- p + ggplot2::geom_bar(data = qp$par,
+        p <- p + geom_bar(data = qp$par,
                           aes_string(x = x, y = 'par'), fill = 'grey',
                           stat = 'identity', position = 'dodge')
         if (ci) {
           qp$parci[[x]] <- factor(qp$parci[[x]])
-          p <- p + ggplot2::geom_errorbar(data = qp$parci,
+          p <- p + geom_errorbar(data = qp$parci,
                          aes_string(x = x, width = .5, ymin = 'parinf',
                          ymax = 'parsup'), stat = 'identity',
                          position = 'dodge')
         }
       }
       if (geom == 'point') {
-        p <- p + ggplot2::geom_point(data = qp$par,
+        p <- p + geom_point(data = qp$par,
                  aes_string(x = x, y = 'par')) +
-                  ggplot2::geom_line(data = qp$par,
+                  geom_line(data = qp$par,
                                      aes_string(x = x, y = 'par'))
-        if (ci) p <- p + ggplot2::geom_linerange(data = qp$parci,
+        if (ci) p <- p + geom_linerange(data = qp$parci,
                          aes_string(x = x, ymin = 'parinf', ymax = 'parsup'),
                          stat = 'identity', position = 'dodge')
       }
@@ -131,16 +131,16 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
     }
     if (is.null(xpanel) && is.null(ypanel) && is.null(panel)) {
       panel <- groups[[1]]
-      p <- p + ggplot2::facet_grid(as.formula(paste0(panel, '~parn')),
+      p <- p + facet_grid(as.formula(paste0(panel, '~parn')),
                                    scales = 'free_y')
     }
     else {
       if (!is.null(xpanel)) p <- p +
-        ggplot2::facet_grid(as.formula(paste0('parn~',xpanel)),
+        facet_grid(as.formula(paste0('parn~',xpanel)),
                             scales = 'free_y')
 
       if (!is.null(ypanel)) p <- p +
-        ggplot2::facet_grid(as.formula(paste0(ypanel,'~parn')),
+        facet_grid(as.formula(paste0(ypanel,'~parn')),
                             scales = 'free_y')
     }
   }
@@ -150,13 +150,13 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
     if (geom == 'bar') {
       qp$par[[x]] <- factor(qp$par[[x]])
-      p <- p + ggplot2::geom_bar(data = qp$par,
+      p <- p + geom_bar(data = qp$par,
                aes_string(x = x, fill = color, y = 'par'),
                stat = 'identity', position = 'dodge')
       if (ci) {
         qp$parci[[x]] <- factor(qp$parci[[x]])
         qp$parci[[color]] <- factor(qp$parci[[color]])
-        p <- p + ggplot2::geom_errorbar(data = qp$parci, width = .5,
+        p <- p + geom_errorbar(data = qp$parci, width = .5,
                  aes_string(x = x, fill = color, ymin = 'parinf',
                  ymax = 'parsup'), stat = 'identity',
                 position = position_dodge(width=0.9))
@@ -164,13 +164,13 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
     }
 
     if (geom == 'point') {
-      p <- p + ggplot2::geom_point(data = qp$par,
+      p <- p + geom_point(data = qp$par,
                aes_string(x = x, color = color, y = 'par')) +
-               ggplot2::geom_line(data = qp$par, aes_string(x = x,
+               geom_line(data = qp$par, aes_string(x = x,
                         color = color, y = 'par', group =color))
       if (ci) {
         qp$parci[[color]] <- factor(qp$parci[[color]])
-        p <- p + ggplot2::geom_linerange(data = qp$parci,
+        p <- p + geom_linerange(data = qp$parci,
                                aes_string(x = x, color = color,
                                           ymin = 'parinf', ymax = 'parsup'))
       }

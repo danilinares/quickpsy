@@ -5,7 +5,7 @@ one_threshold <- function(d, prob, log, groups, funname,
                           guess, lapses, curves) {
 
   if (length(groups) == 0) curves <- curves
-  else curves <- dplyr::semi_join(curves, d, by = as.character(groups))
+  else curves <- semi_join(curves, d, by = as.character(groups))
 
   if (funname %in%  names(get_functions())) {
     par <- d$par
