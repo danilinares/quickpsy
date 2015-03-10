@@ -42,6 +42,7 @@ install.packages('devtools')
 Install quickpsy from github (will also install dplyr and ggplot2) and load the package
 
 ``` {.r}
+library(devtools)
 install_github('danilinares/quickpsy')
 ```
 
