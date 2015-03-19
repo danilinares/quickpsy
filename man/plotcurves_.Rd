@@ -5,7 +5,31 @@
 \title{Plot the curves}
 \usage{
 plotcurves_(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
-  color = NULL, averages = T, curves = T, thresholds = T, ci = T)
+  color = NULL, averages = TRUE, curves = TRUE, thresholds = TRUE,
+  ci = TRUE)
+}
+\arguments{
+\item{qp}{output from quickpsy}
+
+\item{panel}{Name of the variable to be split in panels.}
+
+\item{xpanel}{Name of the variable to be split in horizontal panels.}
+
+\item{ypanel}{Name of the variable to be split in vertical panels.}
+
+\item{color}{Name of the variable codded by color.}
+
+\item{averages}{If \code{FALSE} averaged probabilities are not plotted
+(default is \code{TRUE}).}
+
+\item{curves}{If \code{FALSE} curves are not plotted
+(default is \code{TRUE})}
+
+\item{thresholds}{If \code{FALSE} thresholds  are not plotted
+(default is \code{TRUE})}
+
+\item{ci}{If \code{FALSE} confidence intervals are not plotted
+(default is \code{TRUE})}
 }
 \description{
 \code{plotcurves_} is the standard evaluation SE function associated
@@ -17,12 +41,12 @@ In SE functions, you need to quote the names of the variables.
 library(MPDiR) # contains the Vernier data
 data(Vernier) # ?Venier for the reference
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq))
+                grouping = .(Direction, WaveForm, TempFreq), B = 20)
 
 plotcurves_(fit, xpanel = 'Direction')
 plotcurves_(fit, color = 'Direction')
 plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm')
-plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm', ci = F)
+plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm', ci = FALSE)
 }
 \seealso{
 \code{\link{plotcurves}}

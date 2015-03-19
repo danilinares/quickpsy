@@ -4,7 +4,7 @@
 \alias{thresholds}
 \title{Calculates the thresholds}
 \usage{
-thresholds(qp, prob = NULL, log = F)
+thresholds(qp, prob = NULL, log = FALSE)
 }
 \arguments{
 \item{qp}{output from quickpsy}
@@ -22,7 +22,7 @@ library(MPDiR) # contains the Vernier data
 data(Vernier) # ?Venier for the reference
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
                 grouping = .(Direction, WaveForm, TempFreq),
-                thresholds = F)
+                thresholds = FALSE)
 thresholds(fit, prob = .5)
 }
 

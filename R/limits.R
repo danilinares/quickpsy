@@ -1,3 +1,5 @@
+#' Creates the limits
+#' \code{limits} creates the limits
 #' @keywords internal
 #' @export
 limits <- function(d, x, xmin, xmax, log) {

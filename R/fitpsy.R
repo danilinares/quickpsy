@@ -1,3 +1,5 @@
+#' Fits the curve
+#' \code{fitpsy} fits de curve
 #' @keywords internal
 #' @export
 fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,

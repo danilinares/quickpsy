@@ -1,20 +1,21 @@
 Package: quickpsy
-Title: Fit psychometric functions for several conditions.
-Version: 0.1
-Author: as.person(c(
-    "Daniel Linares <danilinares@gmail.com> [aut, cre]",
-    "Joan López-Moliner <j.lopezmoliner@gmail.com> [aut, cre]"
-  ))
-Description: What the package does (one paragraph)
+Type: Package
+Title: Fits Psychometric Functions for Multiple Groups
+Version: 0.1.0
+Authors@R: c(
+    person("Linares", "Daniel", email = "danilinares@gmail.com", role = c("aut","cre")),
+    person("López-Moliner", "Joan", email = "j.lopezmoliner@gmail.com", role = "aut"))
+URL: http://dlinares.org/quickpsy.html
+Description: Quickly fits and plots psychometric functions (normal, logistic, weibull or any or any function defined by the user) for multiple groups
 Depends:
     R (>= 3.1.1),
-    dplyr,
-    ggplot2
-Import:
     boot,
-    DEoptim,  
+    DEoptim,
+    dplyr,
+    ggplot2,
     tidyr
-License: What license is it under?
+Imports:
+	MPDiR
+Encoding: UTF-8
+License: MIT + file LICENSE
 LazyData: true
-VignetteBuilder: knitr
-License: GPL-2

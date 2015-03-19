@@ -32,7 +32,7 @@ If \code{'point'} displays points (default is 'bar').}
 \examples{
 library(MPDiR) # contains the Vernier data
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq))
+                grouping = .(Direction, WaveForm, TempFreq), B = 20)
 plotthresholds(fit)
 plotthresholds(fit, x = WaveForm)
 plotthresholds(fit, xpanel = Direction)

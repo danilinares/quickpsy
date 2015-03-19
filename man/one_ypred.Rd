@@ -2,12 +2,16 @@
 % Please edit documentation in R/one_ypred.R
 \name{one_ypred}
 \alias{one_ypred}
-\title{one_ypred}
+\title{Calculate the predictions of the response variable for one condition
+\code{one_ypred} calculate the predictions of the response variable for one
+condition}
 \usage{
 one_ypred(d, log, groups, averages, x, psyfunguesslapses)
 }
 \description{
-one_ypred
+Calculate the predictions of the response variable for one condition
+\code{one_ypred} calculate the predictions of the response variable for one
+condition
 }
 \keyword{internal}
 

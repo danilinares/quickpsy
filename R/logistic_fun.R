@@ -11,5 +11,5 @@
 #' curve <- data.frame(x = xseq, y = yseq)
 #' ggplot(curve, aes(x = x, y = y)) + geom_line()
 #' @export
-logistic_fun <- function(x,p) (1 + exp(-p[2] * (x - p[1])))^(-1)
+logistic_fun <- function(x, p) (1 + exp(-p[2] * (x - p[1])))^(-1)
 

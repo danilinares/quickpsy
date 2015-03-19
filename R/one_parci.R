@@ -1,4 +1,5 @@
-#' one_parci
+#' Calculates the confidence intervals for one condition
+#' \code{one_parci} calculates the confidence intervals for one condition
 #' @keywords internal
 #' @export
 one_parci <- function(d, ci) {

@@ -1,3 +1,5 @@
+#' Calculates the parameters
+#' \code{parameters} calculates the parameters
 #' @keywords internal
 #' @export
 parameters <- function(d, x, k, n, psyfunguesslapses, funname,

@@ -4,23 +4,38 @@
 #' to the non-standard evaluation NSE function \code{plotcurves}.
 #' \href{http://adv-r.had.co.nz/Computing-on-the-language.html}{SE functions can be more easily called from other functions.}
 #' In SE functions, you need to quote the names of the variables.
+#' @param qp output from quickpsy
+#' @param panel Name of the variable to be split in panels.
+#' @param xpanel Name of the variable to be split in horizontal panels.
+#' @param ypanel Name of the variable to be split in vertical panels.
+#' @param color Name of the variable codded by color.
+#' @param averages If \code{FALSE} averaged probabilities are not plotted
+#' (default is \code{TRUE}).
+#' @param curves If \code{FALSE} curves are not plotted
+#' (default is \code{TRUE})
+#' @param thresholds If \code{FALSE} thresholds  are not plotted
+#' (default is \code{TRUE})
+#' @param ci If \code{FALSE} confidence intervals are not plotted
+#' (default is \code{TRUE})
 #' @seealso \code{\link{plotcurves}}
 #' @examples
 #' library(MPDiR) # contains the Vernier data
 #' data(Vernier) # ?Venier for the reference
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = .(Direction, WaveForm, TempFreq))
+#'                 grouping = .(Direction, WaveForm, TempFreq), B = 20)
 #'
 #' plotcurves_(fit, xpanel = 'Direction')
 #' plotcurves_(fit, color = 'Direction')
 #' plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm')
-#' plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm', ci = F)
+#' plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm', ci = FALSE)
+#' @import ggplot2
 #' @export
 plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
-               color = NULL, averages = T, curves = T, thresholds = T, ci = T) {
+               color = NULL, averages = TRUE, curves = TRUE,
+               thresholds = TRUE, ci = TRUE) {
 
-  if (!('thresholds' %in% names(qp))) thresholds <- F
-  if (!('thresholdsci' %in% names(qp))) ci <- F
+  if (!('thresholds' %in% names(qp))) thresholds <- FALSE
+  if (!('thresholdsci' %in% names(qp))) ci <- FALSE
 
   if (is.logical(qp$guess)) qp$guess <- 0
   if (is.logical(qp$lapses)) qp$lapses <- 0

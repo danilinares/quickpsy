@@ -36,12 +36,12 @@ plotcurves(qp, panel = NULL, xpanel = NULL, ypanel = NULL, color = NULL,
 \examples{
 library(MPDiR) # contains the Vernier data
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq))
+                grouping = .(Direction, WaveForm, TempFreq), B = 20)
 plotcurves(fit)
 plotcurves(fit, xpanel = Direction)
 plotcurves(fit, color = Direction)
 plotcurves(fit, xpanel = Direction, color = WaveForm)
-plotcurves(fit, xpanel = Direction, color = WaveForm, ci = F)
+plotcurves(fit, xpanel = Direction, color = WaveForm, ci = FALSE)
 }
 \seealso{
 \code{\link{plotcurves_}}

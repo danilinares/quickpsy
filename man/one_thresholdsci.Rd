@@ -2,12 +2,16 @@
 % Please edit documentation in R/one_thresholdsci.R
 \name{one_thresholdsci}
 \alias{one_thresholdsci}
-\title{one_thresholdsci}
+\title{Calculates the confidence intervals for the threshold of one condition
+\code{one_thresholdsci} calculates the confidence intervals for the threshold
+of one condition}
 \usage{
 one_thresholdsci(d, ci, method)
 }
 \description{
-one_thresholdsci
+Calculates the confidence intervals for the threshold of one condition
+\code{one_thresholdsci} calculates the confidence intervals for the threshold
+of one condition
 }
 \keyword{internal}
 

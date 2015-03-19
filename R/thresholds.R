@@ -11,11 +11,11 @@
 #' data(Vernier) # ?Venier for the reference
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
 #'                 grouping = .(Direction, WaveForm, TempFreq),
-#'                 thresholds = F)
+#'                 thresholds = FALSE)
 #' thresholds(fit, prob = .5)
 #' @export
-thresholds <- function(qp, prob = NULL, log = F) {
-  if (is.null(prob)) stop('You need to specify the value of prob', call. = F)
+thresholds <- function(qp, prob = NULL, log = FALSE) {
+  if (is.null(prob)) stop('You need to specify the value of prob', call. = FALSE)
     qp$par %>% do(one_threshold(., prob, log, qp$groups,
                                qp$funname, qp$guess, qp$lapses, qp$curves))
 }

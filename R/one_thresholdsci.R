@@ -1,4 +1,6 @@
-#' one_thresholdsci
+#' Calculates the confidence intervals for the threshold of one condition
+#' \code{one_thresholdsci} calculates the confidence intervals for the threshold
+#' of one condition
 #' @keywords internal
 #' @export
 one_thresholdsci <- function(d, ci, method) {

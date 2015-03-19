@@ -1,6 +1,9 @@
-#' one_bootstrap
+#' Performs the bootstrap for one condition
+#' \code{one_bootstrap} performs the bootstrap for one condition
+#' @import boot DEoptim tidyr
 #' @keywords internal
 #' @export
+parn <- 'No te quejes'
 one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
                            guess, lapses, parini, pariniset, optimization, bootstrap, B,
                           groups, ypred) {
@@ -22,12 +25,12 @@ one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
     f
   }
 
-  b <- boot::boot(d, calculate_par, R = B, sim = 'parametric',
+  b <- boot(d, calculate_par, R = B, sim = 'parametric',
             ran.gen = create_fake_data, mle = ypred)
   fake_par <- b$t
   colnames(fake_par) <- paste0('p',1:length(fake_par[1,]))
   long <- data.frame(fake_par, sample = 1:length(fake_par[,1]))
-  long %>% tidyr::gather(parn, par, -sample) %>% arrange(sample)
+  long %>% gather(parn, par, -sample) %>% arrange(sample)
 
 }
 

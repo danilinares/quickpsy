@@ -1,3 +1,5 @@
+#' Creates the curve for one condition
+#' \code{one_curve} Creates the curve for one condition
 #' @keywords internal
 #' @export
 

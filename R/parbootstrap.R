@@ -16,7 +16,7 @@
 #' boot_samples <- parbootstrap(fit)
 #' head(boot_samples)
 #' @export
-parbootstrap <- function(qp, bootstrap = 'parametric', B = 100) {
+parbootstrap <- function(qp, bootstrap = 'parametric', B = 10) {
   qp$averages %>% do(one_bootstrap(., qp$x, qp$k, qp$n,
                   qp$psyfunguesslapses, qp$funname, qp$guess, qp$lapses,
                   qp$parini, qp$pariniset, qp$optimization, bootstrap, B,

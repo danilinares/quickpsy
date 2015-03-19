@@ -4,12 +4,21 @@
 #' to the non-standard evaluation NSE function \code{plotpar}.
 #' \href{http://adv-r.had.co.nz/Computing-on-the-language.html}{SE functions can be more easily called from other functions.}
 #' In SE functions, you need to quote the names of the variables.
+#' @param qp output from quickpsy.
+#' @param x Name of the variable to displayed in the x-axis.
+#' @param panel Name of the variable to be split in panels.
+#' @param xpanel Name of the variable to be split in horizontal panels.
+#' @param ypanel Name of the variable to be split in vertical panels.
+#' @param color Name of the variable codded by color.
+#' @param geom If \code{'bar'} displays bars.
+#' If \code{'point'} displays points (default is \code{'bar'}).
+#' @param ci If \code{FALSE} confidence intervals are not plotted
+#' (default is \code{TRUE}).
 #' @seealso \code{\link{plotpar}}
 #' @examples
-#' #' library(MPDiR) # contains the Vernier data
-#' data(Vernier) # ?Venier for the reference
+#' library(MPDiR) # contains the Vernier data
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = .(Direction, WaveForm, TempFreq))
+#'                 grouping = .(Direction, WaveForm, TempFreq), B = 20)
 #'
 #' plotpar_(fit, x = 'WaveForm')
 #' plotpar_(fit, xpanel = 'Direction')

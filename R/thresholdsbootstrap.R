@@ -1,3 +1,5 @@
+#' Calculates bootstrap thresholds
+#' \code{thresholdsbootstrap} calculates bootstrap thresholds
 #' @keywords internal
 #' @export
 thresholdsbootstrap <- function(qp, prob = NULL, log = F) {

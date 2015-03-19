@@ -1,7 +1,7 @@
 #' Inverse logistic  function
 #'
 #' Inverse logistic function
-#' @param prob Vector of probabilities.
+#' @param q Vector of probabilities.
 #' @param p Vector of parameters \eqn{p = c(\alpha, \beta)}.
 #' @return \code{x} at each probability.
 #' @seealso \code{\link{logistic_fun}}

@@ -2,12 +2,14 @@
 % Please edit documentation in R/one_limit.R
 \name{one_limit}
 \alias{one_limit}
-\title{one_limit}
+\title{Creates the limits for one condition
+\code{one_limit} creates the limits for one condition}
 \usage{
 one_limit(d, x, xmin, xmax, log)
 }
 \description{
-one_limit
+Creates the limits for one condition
+\code{one_limit} creates the limits for one condition
 }
 \keyword{internal}
 

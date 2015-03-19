@@ -2,11 +2,15 @@
 % Please edit documentation in R/one_threshold.R
 \name{one_threshold}
 \alias{one_threshold}
-\title{one_threshold}
+\title{Calculates the threshold for one condition
+\code{one_threshold} calculates the threshold for one condition
+one_threshold}
 \usage{
 one_threshold(d, prob, log, groups, funname, guess, lapses, curves)
 }
 \description{
+Calculates the threshold for one condition
+\code{one_threshold} calculates the threshold for one condition
 one_threshold
 }
 \keyword{internal}

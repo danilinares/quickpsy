@@ -1,4 +1,6 @@
-#' one_ypred
+#' Calculate the predictions of the response variable for one condition
+#' \code{one_ypred} calculate the predictions of the response variable for one
+#' condition
 #' @keywords internal
 #' @export
 one_ypred <- function(d,log, groups, averages, x, psyfunguesslapses) {

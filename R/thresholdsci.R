@@ -1,3 +1,5 @@
+#' Calculates the confidence intervals for the thresholds
+#' \code{thresholdsci} calculates the confidence intervals for the thresholds
 #' @keywords internal
 #' @export
 thresholdsci <- function(qp, ci = .95, method = 'percent') {

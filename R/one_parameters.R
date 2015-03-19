@@ -1,3 +1,5 @@
+#' Obtains the parameters for one condition
+#' \code{one_parameters} obtains the parameters for one condition
 #' @keywords internal
 #' @export
 one_parameters <- function(d, x, k, n, psyfunguesslapses, funname, parini,
@@ -9,7 +11,7 @@ one_parameters <- function(d, x, k, n, psyfunguesslapses, funname, parini,
       stop('parini should be specified as a list of the type list(c(par1min, par1max), c(par2min, par2max),...', call. = F)
     else if (is.list(parini)) {
       parini <- matrix(unlist(parini), ncol = 2, byrow = T)
-      mod <- DEoptim::DEoptim(nllfun, lower = parini[,1], upper = parini[,2])$optim
+      mod <- DEoptim(nllfun, lower = parini[,1], upper = parini[,2])$optim
       para <- mod$bestmem
     }
     else

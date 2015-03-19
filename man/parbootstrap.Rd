@@ -4,7 +4,7 @@
 \alias{parbootstrap}
 \title{Creates bootstrap samples of the parameters}
 \usage{
-parbootstrap(qp, bootstrap = "parametric", B = 100)
+parbootstrap(qp, bootstrap = "parametric", B = 10)
 }
 \arguments{
 \item{qp}{output from quickpsy}

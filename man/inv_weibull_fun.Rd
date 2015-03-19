@@ -4,12 +4,12 @@
 \alias{inv_weibull_fun}
 \title{Inverse weibull  function}
 \usage{
-inv_weibull_fun(x, p)
+inv_weibull_fun(q, p)
 }
 \arguments{
-\item{p}{Vector of parameters \code{p = c(\alpha, \beta)}.}
+\item{q}{Vector of probabilities.}
 
-\item{prob}{Vector of probabilities.}
+\item{p}{Vector of parameters p = c(alpha, beta).}
 }
 \value{
 \code{x} at each probability.

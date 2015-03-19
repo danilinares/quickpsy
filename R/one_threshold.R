@@ -1,3 +1,5 @@
+#' Calculates the threshold for one condition
+#' \code{one_threshold} calculates the threshold for one condition
 #' one_threshold
 #' @keywords internal
 #' @export

@@ -1,3 +1,5 @@
+#' Creates the loglik for one condition
+#' \code{one_loglik} creates the loglik for one condition
 #' one_loglik
 #' @keywords internal
 #' @export

@@ -1,3 +1,5 @@
+#' Creates the bootstrap curves
+#' \code{curvesbootstrap} creates the bootstrap curves
 #' @keywords internal
 #' @export
 curvesbootstrap <- function(qp, xmin = NULL, xmax = NULL, log = F) {

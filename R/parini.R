@@ -1,3 +1,5 @@
+#' Calculates some initial parameters
+#' \code{parini} calculates some initial parameters
 #' @keywords internal
 #' @export
 parini <- function(d, x, k, n, guess, lapses, psyfun) {

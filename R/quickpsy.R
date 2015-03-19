@@ -116,11 +116,13 @@
 #' plotpar(fit)
 #' plotthresholds(fit, geom = 'point')
 #' @export
-#'
+#' @import MPDiR
+
+
 quickpsy <- function(d, x = x, k = k, n = n, grouping, random, within, between,
-                     xmin = NULL, xmax = NULL, log = F,
+                     xmin = NULL, xmax = NULL, log = FALSE,
                      fun = cum_normal_fun, parini = NULL, guess = 0, lapses = 0,
-                     prob = NULL, thresholds = T, logliks = F,
+                     prob = NULL, thresholds = T, logliks = FALSE,
                      bootstrap = 'parametric', B = 100, ci = .95,
                      optimization = 'optim') {
 
@@ -139,3 +141,17 @@ quickpsy <- function(d, x = x, k = k, n = n, grouping, random, within, between,
             parini, guess, lapses, prob, thresholds, logliks, bootstrap,
             B, ci, optimization)
 }
+
+#' Data set for demonstration
+#'
+#' It is part of the data associated with the paper 'Motion signal and
+#' the perceived positions of moving objects'.
+#' @name qpdat
+#' @docType data
+#' @references Linares, D., López-Moliner, J., & Johnston, A. (2007). Motion
+#'signal and the perceived positions of moving objects. Journal of Vision,
+#' 7(7), 1.
+
+NULL
+
+

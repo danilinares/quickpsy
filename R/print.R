@@ -1,8 +1,8 @@
 #' @export
-print.quickpsy <- function(qp)
+print.quickpsy <- function(x,...)
 {
-  print(qp$par)
-  print(qp$parci)
-  if ('thresholds' %in% names(qp)) print(qp$thresholds)
-  if ('thresholdsci' %in% names(qp)) print(qp$thresholdsci)
+  print(x$par)
+  print(x$parci)
+  if ('thresholds' %in% names(x)) print(x$thresholds)
+  if ('thresholdsci' %in% names(x)) print(x$thresholdsci)
 }

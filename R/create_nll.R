@@ -1,3 +1,5 @@
+#' Creates the negative log-likelihood function
+#' \code{create_nll} Creates the negative log-likelihood function
 #' @keywords internal
 #' @export
 create_nll <- function(d, x, k, n, psyfunguesslapses){

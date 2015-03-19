@@ -2,12 +2,14 @@
 % Please edit documentation in R/one_parci.R
 \name{one_parci}
 \alias{one_parci}
-\title{one_parci}
+\title{Calculates the confidence intervals for one condition
+\code{one_parci} calculates the confidence intervals for one condition}
 \usage{
 one_parci(d, ci)
 }
 \description{
-one_parci
+Calculates the confidence intervals for one condition
+\code{one_parci} calculates the confidence intervals for one condition
 }
 \keyword{internal}
 

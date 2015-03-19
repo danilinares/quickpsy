@@ -7,9 +7,9 @@
 inv_logistic_fun(q, p)
 }
 \arguments{
-\item{p}{Vector of parameters \eqn{p = c(\alpha, \beta)}.}
+\item{q}{Vector of probabilities.}
 
-\item{prob}{Vector of probabilities.}
+\item{p}{Vector of parameters \eqn{p = c(\alpha, \beta)}.}
 }
 \value{
 \code{x} at each probability.

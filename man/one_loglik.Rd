@@ -2,11 +2,15 @@
 % Please edit documentation in R/one_loglik.R
 \name{one_loglik}
 \alias{one_loglik}
-\title{one_loglik}
+\title{Creates the loglik for one condition
+\code{one_loglik} creates the loglik for one condition
+one_loglik}
 \usage{
 one_loglik(d, x, k, n, psyfunguesslapses, groups, par)
 }
 \description{
+Creates the loglik for one condition
+\code{one_loglik} creates the loglik for one condition
 one_loglik
 }
 \keyword{internal}

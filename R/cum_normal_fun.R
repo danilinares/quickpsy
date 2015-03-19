@@ -11,4 +11,4 @@
 #' curve <- data.frame(x = xseq, y = yseq)
 #' ggplot(curve, aes(x = x, y = y)) + geom_line()
 #' @export
-cum_normal_fun <- function(x, p) pnorm(x, p[1], p[2])
+cum_normal_fun <- function(x, p) suppressWarnings(pnorm(x, p[1], p[2]))

@@ -15,7 +15,7 @@ logliks(qp)
 \examples{
 library(MPDiR) # contains the Vernier data
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq))
+                grouping = .(Direction, WaveForm, TempFreq), B = 20)
 logliks(fit)
 }
 
