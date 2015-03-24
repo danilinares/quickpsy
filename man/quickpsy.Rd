@@ -141,7 +141,7 @@ where \eqn{\gamma} is the guess rate, \eqn{\lambda} is the lapse rate and
 # and loaded; instructions at https://github.com/danilinares/quickpsy
 library(MPDiR) # contains the Vernier data; use ?Vernier for the reference
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq))
+                grouping = .(Direction, WaveForm, TempFreq), B = 10)
 plotcurves(fit)
 plotpar(fit)
 plotthresholds(fit, geom = 'point')

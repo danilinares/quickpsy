@@ -15,7 +15,7 @@
 #' @examples
 #' library(MPDiR) # contains the Vernier data
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = .(Direction, WaveForm, TempFreq), B = 20)
+#'                 grouping = .(Direction, WaveForm, TempFreq), B = 10)
 #' plotpar(fit)
 #' plotpar(fit, x = WaveForm)
 #' plotpar(fit, xpanel = Direction)

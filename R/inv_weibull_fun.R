@@ -1,6 +1,6 @@
-#' Inverse weibull  function
+#' Inverse Weibull  function
 #'
-#' Inverse weibull function
+#' Inverse Weibull function
 #' @param q Vector of probabilities.
 #' @param p Vector of parameters p = c(alpha, beta).
 #' @return \code{x} at each probability.

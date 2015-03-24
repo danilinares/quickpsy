@@ -15,11 +15,10 @@
 #' @examples
 #' library(MPDiR) # contains the Vernier data
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = .(Direction, WaveForm, TempFreq), B = 20)
+#'                 grouping = .(Direction, WaveForm, TempFreq), B = 10)
 #' plotthresholds(fit)
 #' plotthresholds(fit, x = WaveForm)
 #' plotthresholds(fit, xpanel = Direction)
-#' plotthresholds(fit, color = Direction)
 #' plotthresholds(fit, color = Direction, ypanel = WaveForm, geom = 'point')
 #' @export
 plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,

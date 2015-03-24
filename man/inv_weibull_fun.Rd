@@ -2,7 +2,7 @@
 % Please edit documentation in R/inv_weibull_fun.R
 \name{inv_weibull_fun}
 \alias{inv_weibull_fun}
-\title{Inverse weibull  function}
+\title{Inverse Weibull  function}
 \usage{
 inv_weibull_fun(q, p)
 }
@@ -15,7 +15,7 @@ inv_weibull_fun(q, p)
 \code{x} at each probability.
 }
 \description{
-Inverse weibull function
+Inverse Weibull function
 }
 \examples{
 yseq <- seq(0, 1, .01)

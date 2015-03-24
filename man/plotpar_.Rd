@@ -35,7 +35,7 @@ In SE functions, you need to quote the names of the variables.
 \examples{
 library(MPDiR) # contains the Vernier data
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq), B = 20)
+                grouping = .(Direction, WaveForm, TempFreq), B = 10)
 
 plotpar_(fit, x = 'WaveForm')
 plotpar_(fit, xpanel = 'Direction')

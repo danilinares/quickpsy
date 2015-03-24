@@ -16,7 +16,7 @@
 #' @export
 
 quickreadfiles <- function(path = getwd(), ...) {
-  exist <- 'No te quejes'
+
   arguments <- c(as.list(environment()), list(...))
   arguments[1] <- NULL
 
@@ -33,5 +33,4 @@ quickreadfiles <- function(path = getwd(), ...) {
   namefiles %>% filter(exist) %>%
     group_by_(.dots = names(arguments)) %>%
     do(read.table(.$namefile, header = T))
-
 }

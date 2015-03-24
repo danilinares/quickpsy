@@ -22,11 +22,10 @@
 #' library(MPDiR) # contains the Vernier data
 #' data(Vernier) # ?Venier for the reference
 #' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = .(Direction, WaveForm, TempFreq), B = 20)
+#'                 grouping = .(Direction, WaveForm, TempFreq), B = 10)
 #'
 #' plotcurves_(fit, xpanel = 'Direction')
 #' plotcurves_(fit, color = 'Direction')
-#' plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm')
 #' plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm', ci = FALSE)
 #' @import ggplot2
 #' @export
