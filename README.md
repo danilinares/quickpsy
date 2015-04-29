@@ -39,7 +39,13 @@ install.packages('tidyr')
 install.packages('devtools')
 ```
 
-Install quickpsy from github (will also install dplyr and ggplot2) and load the package
+Quickpsy can be installed from CRAN
+
+``` {.r}
+install.packages('quickspy')
+```
+
+To install the latest developed version, you can install quickpsy from github (which will also install dplyr and ggplot2)
 
 ``` {.r}
 library(devtools)

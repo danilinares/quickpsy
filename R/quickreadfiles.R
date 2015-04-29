@@ -19,6 +19,7 @@ quickreadfiles <- function(path = getwd(), ...) {
 
   arguments <- c(as.list(environment()), list(...))
   arguments[1] <- NULL
+  exist<-NULL # Joan added 1-4-2015
 
   namesfun <- function(d) {
     namefile <- paste0(path,'/', paste(unlist(d), collapse = ''), '.txt')

@@ -1,4 +1,29 @@
-## Resubmission
+## Resubmission 
+
+This is a resubmission in which I eliminated the NOTE "Non-standard file/directory found at top level" by eliminating the file cran-comments.html.
+
+## Resubmission 3
+
+This is a resubmission. In this version I tested the following environments:
+
+* local OS X install, R 3.2.0
+* local OS X install, R 3.3.0 (devel)
+* local windows, R 3.2.0
+* local windows, R 3.3.0 (devel)
+* win-builder (devel and release)
+
+
+## Resubmission 2
+
+This is a resubmission. In this version I:
+
+* capitalized the word weibull.
+
+* further shorten the computation time of the examples to comply with the guide lines.
+
+
+
+## Resubmission 1
 
 This is a resubmission. In this version I:
 
