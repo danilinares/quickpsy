@@ -42,7 +42,7 @@ install.packages('devtools')
 Quickpsy can be installed from CRAN
 
 ``` {.r}
-install.packages('quickspy')
+install.packages('quickpsy')
 ```
 
 To install the latest developed version, you can install quickpsy from github (which will also install dplyr and ggplot2)
