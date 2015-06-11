@@ -1,4 +1,4 @@
-#' Fits psychometric functions
+?quic?q#' Fits psychometric functions
 #'
 #' \code{quickpsy_} is the standard evaluation SE function associated
 #' to the non-standard evaluation NSE function \code{quickpsy}.
