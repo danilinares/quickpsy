@@ -59,8 +59,6 @@ library(MPDiR) # contains the Vernier data; use ?Venier for the reference
 fit <- quickpsy(Vernier, Phaseshift, NumUpward, N, 
                 grouping = .(Direction, WaveForm, TempFreq))
 plotcurves(fit)
-plotpar(fit)
-plotthresholds(fit)
 ```
 
 ![Caption for the picture.](vernierFitPlot.png)
