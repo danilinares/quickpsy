@@ -40,7 +40,7 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
   if (!pariniset)
     if (funname %in% names(get_functions()))
       parini <- parini(d, x, k, n, guess, lapses, funname)
-    else stop('Initial parameters should be set.')
+    else stop('parini (initial parameters) must be specified.')
 
   par <- parameters(d, x, k, n, psyfunguesslapses, funname,
                      parini, pariniset, guess, lapses, optimization, groups)
