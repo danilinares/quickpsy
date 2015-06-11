@@ -65,6 +65,11 @@ plotthresholds(fit)
 
 ![Caption for the picture.](vernierFitPlot.png)
 
+``` r
+plotpar(fit)
+plotthresholds(fit)
+```
+
 Help
 ----
 
