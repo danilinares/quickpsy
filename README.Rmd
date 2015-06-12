@@ -71,12 +71,19 @@ fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
 plotcurves(fit)
 ```
 
-![Caption for the picture.](vernierFitPlot.png)
+![plots of vernier fits.](vernierFitPlot.png)
 
 ```R 
-plotpar(fit)
+plotpar(fit) #plot the parameters
+```
+
+![params of vernier fits](vernierParamsPlot.png)
+
+```R 
 plotthresholds(fit)
 ```
+
+![thresholds of vernier fits](vernierThreshesPlot.png)
 
 ## Help 
 
@@ -85,7 +92,7 @@ To obtain information and examples for specific functions use *?*
 ?plotcurves
 ```
 
-For further information visit [www.dlinares.org/quickpsy.html](http://www.dlinares.org/quickpsy.html)
+For more examples and information visit [www.dlinares.org/quickpsy.html](http://www.dlinares.org/quickpsy.html)
 
 ## Other R packages
 
