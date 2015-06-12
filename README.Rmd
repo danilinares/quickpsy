@@ -50,7 +50,7 @@ install.packages('devtools')
 
 Quickpsy can be installed from CRAN
 ```R
-install.packages('quickspy')
+install.packages('quickpsy')
 ```
 
 To install the latest developed version, you can install quickpsy from github
