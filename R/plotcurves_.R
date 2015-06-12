@@ -137,9 +137,15 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
 
       if (thresholds) {
         qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
+        # get present axis limits
+        axisYrange <- ggplot_build(p)$panel$ranges[[1]]$y.range
         p <- p + geom_linerange(data = qp$thresholds,
-                    aes_string(x = 'thre', ymin = qp$guess,
+                    aes_string(x = 'thre', 
+                    		   ymin = axisYrange[1] - .2, #make sure extends below axis line
                                ymax = qp$thresholds$prob, color = color))
+        #Because threshline extended below axis limit, axis automatically scaled below it.
+        #Restore it to its former values
+    	p <- p + coord_cartesian(ylim=axisYrange)
       }
       if (ci) {
         qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
