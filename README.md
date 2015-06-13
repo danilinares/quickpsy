@@ -39,7 +39,7 @@ install.packages('devtools')
 Quickpsy can be installed from CRAN
 
 ``` r
-install.packages('quickspy')
+install.packages('quickpsy')
 ```
 
 To install the latest developed version, you can install quickpsy from github (which will also install dplyr and ggplot2)
@@ -61,12 +61,19 @@ fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
 plotcurves(fit)
 ```
 
-![Caption for the picture.](vernierFitPlot.png)
+![plots of vernier fits.](vernierFitPlot.png)
 
 ``` r
-plotpar(fit)
+plotpar(fit) #plot the parameters
+```
+
+![params of vernier fits](vernierParamsPlot.png)
+
+``` r
 plotthresholds(fit)
 ```
+
+![thresholds of vernier fits](vernierThreshesPlot.png)
 
 Help
 ----
@@ -77,7 +84,7 @@ To obtain information and examples for specific functions use *?*
 ?plotcurves
 ```
 
-For further information visit [www.dlinares.org/quickpsy.html](http://www.dlinares.org/quickpsy.html)
+For more examples and information visit [www.dlinares.org/quickpsy.html](http://www.dlinares.org/quickpsy.html)
 
 Other R packages
 ----------------
