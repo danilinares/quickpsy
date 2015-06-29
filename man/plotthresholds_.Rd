@@ -5,7 +5,7 @@
 \title{Plot the thresholds}
 \usage{
 plotthresholds_(qp, x = NULL, panel = NULL, xpanel = NULL,
-  ypanel = NULL, color = NULL, geom = "bar", ci = T)
+  ypanel = NULL, color = NULL, geom = "bar", ci = T, sizeerrorbar)
 }
 \arguments{
 \item{qp}{output from quickpsy.}

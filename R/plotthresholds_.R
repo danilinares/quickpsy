@@ -26,7 +26,8 @@
 #' plotthresholds_(fit, color = 'Direction', ypanel = 'WaveForm', geom = 'point')
 #' @export
 plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
-                           ypanel = NULL, color = NULL, geom = 'bar', ci = T) {
+                           ypanel = NULL, color = NULL, geom = 'bar', ci = T,
+                           sizeerrorbar) {
 
   if (!('thresholds' %in% names(qp)))
     stop('To plot the thresholds, quickpsy should be called with thresholds = TRUE', call. = F)
@@ -47,7 +48,8 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                axis.text.x = element_blank())
       if (ci) p <- p + geom_errorbar(data = qp$thresholdsci,
                        aes_string(x = 0, ymin = 'threinf', ymax = 'thresup'),
-                       stat = 'identity', position = 'dodge', width = .5)
+                       stat = 'identity', position = 'dodge', width = .5,
+                       size=sizeerrorbar)
     }
 
     if (geom == 'point') {
@@ -75,7 +77,8 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
           p <- p + geom_errorbar(data = qp$thresholdsci,
                          aes_string(x = color, ymin = 'threinf',
                          ymax = 'thresup'), stat = 'identity',
-                         position = 'dodge', width = .5)
+                         position = 'dodge', width = .5,
+                         size=sizeerrorbar)
         }
 
       }
@@ -95,7 +98,8 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                           stat = 'identity', position = 'dodge')
         if (ci) p <- p + geom_errorbar(data = qp$thresholdsci,
                          aes_string(x = x, ymin = 'threinf', ymax = 'thresup'),
-                         stat = 'identity', position = 'dodge', width = .5)
+                         stat = 'identity', position = 'dodge', width = .5,
+                         size=sizeerrorbar)
       }
 
       if (geom == 'point') {
@@ -136,6 +140,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
           p <- p + geom_errorbar(data = qp$thresholdsci, width =.5,
                                  aes_string(x = x, fill = color, ymin = 'threinf',
                                             ymax = 'thresup'), stat = 'identity',
+                                 size=sizeerrorbar,
                                  position = position_dodge(.9))
         }
       }
@@ -173,6 +178,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
           p <- p + geom_errorbar(data = qp$thresholdsci, width =.5,
                                  aes_string(x = x, ymin = 'threinf',
                                             ymax = 'thresup'), stat = 'identity',
+                                 size=sizeerrorbar,
                                  position = position_dodge(.9))
         }
       }
@@ -236,6 +242,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
         p <- p + geom_errorbar(data = qp$thresholdsci, width =.5,
                                aes_string(x = x, fill = color, ymin = 'threinf',
                                           ymax = 'thresup'), stat = 'identity',
+                               size=sizeerrorbar,
                                position = position_dodge(.9))
       }
     }
@@ -254,35 +261,6 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
   }
 
-#   if (ngroup == 2 || ngroup == 3) {
-#     qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
-#
-#     if (geom == 'bar') {
-#       qp$thresholds[[x]] <- factor(qp$thresholds[[x]])
-#       p <- p + geom_bar(data = qp$thresholds,
-#                aes_string(x = x, fill = color, y = 'thre'),
-#                stat = 'identity', position = 'dodge')
-#       if (ci) {
-#         qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
-#         qp$thresholdsci[[x]] <- factor(qp$thresholdsci[[x]])
-#         p <- p + geom_errorbar(data = qp$thresholdsci, width =.5,
-#                  aes_string(x = x, fill = color, ymin = 'threinf',
-#                  ymax = 'thresup'), stat = 'identity',
-#                  position = position_dodge(.9))
-#       }
-#     }
-#     if (geom == 'point') {
-#       p <- p + geom_point(data = qp$thresholds,
-#                aes_string(x = x, color = color, y = 'thre')) +
-#                geom_line(data = qp$thresholds,
-#               aes_string(x = x, color = color, group = color, y = 'thre'))
-#       if (ci) {
-#         qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
-#         p <- p + geom_linerange(data = qp$thresholdsci,
-#                  aes_string(x = x, color = color, group = color,
-#                 ymin = 'threinf', ymax = 'thresup'))
-#       }
-#     }
-#   }
+
   p
 }
