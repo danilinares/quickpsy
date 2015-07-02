@@ -112,6 +112,8 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
 
   qp <- c(qp, list(curves = curves(qp, xmin, xmax, log)))
 
+  qp <- c(qp, list(sse=sse(qp)))
+
   if (thresholds) {
     if (is.null(prob))
       if (is.logical(guess) && guess) prob <- .5
