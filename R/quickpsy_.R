@@ -45,7 +45,7 @@
 #' @param parini Initial parameters. quickpsy calculates default
 #' initial parameters using probit analysis, but it is also possible to
 #' specify a vector of initial parameters or a list of the form
-#' \code{list(c(par1min, par2max), c(par2min, par2max))} to
+#' \code{list(c(par1min, par1max), c(par2min, par2max))} to
 #' constraint the lower and upper bounds of the parameters (when
 #' \code{optimization = 'DE'}, parini should be also a list).
 #' @param guess Value indicating the guess rate \eqn{\gamma} (default is 0). If
@@ -98,8 +98,9 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
 
   if (missing(n)) n <- NULL
   if (is.null(parini)) pariniset <- FALSE
-  else pariniset <- T
+  else pariniset <- TRUE
 
+  cat('Estimating parameters...\n')
   qp <- fitpsy(d, x, k, n, random, within, between, grouping, xmin, xmax, log,
                fun, parini, pariniset, guess, lapses, optimization)
 
@@ -124,13 +125,27 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
   if (logliks) qp <- c(qp, list(logliks = logliks(qp)))
 
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
+    cat('Performing bootstrap...\n')
     qp <- c(qp, list(parbootstrap = parbootstrap(qp, bootstrap, B)))
     qp <- c(qp, list(parci = parci(qp, ci)))
+     if (!(
+       (length(qp$groups)==0) ||
+       (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)
+       )) {
+       qp <- c(qp, list(parcomparisons = parcomparisons(qp, ci)))
+     }
     if (thresholds) {
       qp <- c(qp, list(curvesbootstrap = curvesbootstrap(qp, log = log)))
       qp <- c(qp,
               list(thresholdsbootstrap = thresholdsbootstrap(qp, prob, log)))
       qp <- c(qp, list(thresholdsci = thresholdsci(qp, ci)))
+
+      if (!(
+        (length(qp$groups)==0) ||
+        (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)
+      )) {
+        qp <- c(qp, list(thresholdcomparisons = thresholdcomparisons(qp, ci)))
+      }
     }
   }
   else if (bootstrap != 'none')

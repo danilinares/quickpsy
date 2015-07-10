@@ -68,7 +68,7 @@ parini <- function(d, x, k, n, guess, lapses, psyfun) {
       if (lapses) para <- c(p1, p2, lap)
       if (!lapses) para <- c(p1, p2)
     }
-    data.frame(paran = paste0('p', seq(1, length(para))), para)
+    data.frame(paran = paste0('p', seq(1, length(para))), par = para)
   }
   d %>% do(calculate_parini(., x, k, n, guess, lapses, psyfun))
 }
