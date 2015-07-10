@@ -5,9 +5,9 @@
 #' @export
 parn <- 'No te quejes'
 one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
-                           guess, lapses, parini, pariniset, optimization, bootstrap, B,
+                           guess, lapses, parini, pariniset, optimization,
+                          bootstrap, B,
                           groups, ypred) {
-
 
   if (length(groups) != 0) ypred <- semi_join(ypred, d, by = groups)
 

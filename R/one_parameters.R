@@ -32,8 +32,8 @@ one_parameters <- function(d, x, k, n, psyfunguesslapses, funname, parini,
       }
     }
     else {
-      if (length(groups) == 0) parini <- parini$para
-      else parini <- semi_join(parini, d, by = groups)$para
+      if (length(groups) == 0) parini <- parini$par
+      else parini <- semi_join(parini, d, by = groups)$par
 
       if (funname == 'weibull_fun') {
         if (parini[1] < 0) parini[1] <- .Machine$double.eps
