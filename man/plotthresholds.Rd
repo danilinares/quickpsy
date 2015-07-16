@@ -20,11 +20,13 @@ plotthresholds(qp, x = NULL, panel = NULL, xpanel = NULL, ypanel = NULL,
 
 \item{color}{Name of the variable codded by color.}
 
-\item{geom}{If \code{'bar'} displays bars.
-If \code{'point'} displays points (default is 'bar').}
+\item{geom}{If \code{'bar'} displays bars.}
 
 \item{ci}{If \code{FALSE} confidence intervals are not plotted
 (default is \code{TRUE}).}
+
+\item{sizeerrorbar}{Line width of the error bars.
+If \code{'point'} displays points (default is 'bar').}
 }
 \description{
 \code{plotthresholds} plot the thresholds.

@@ -8,6 +8,7 @@
 #' @param ypanel Name of the variable to be split in vertical panels.
 #' @param color Name of the variable codded by color.
 #' @param geom If \code{'bar'} displays bars.
+#' @param sizeerrorbar Line width of the error bars.
 #' If \code{'point'} displays points (default is 'bar').
 #' @param ci If \code{FALSE} confidence intervals are not plotted
 #' (default is \code{TRUE}).
@@ -23,7 +24,7 @@
 #' @export
 plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                            ypanel = NULL, color = NULL, geom = 'bar', ci = T,
-                           sizeerrorbar=1) {
+                           sizeerrorbar = 1) {
 
   if (!missing(x)) x <- deparse(substitute(x))
   if (!missing(panel)) panel <- deparse(substitute(panel))

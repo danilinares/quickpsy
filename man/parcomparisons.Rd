@@ -15,4 +15,5 @@ Pair comparisons of the parameters using bootstrap
 difference in the parameters for two groups for all possible pairs
 of groups
 }
+\keyword{internal}
 

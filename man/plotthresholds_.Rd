@@ -5,7 +5,7 @@
 \title{Plot the thresholds}
 \usage{
 plotthresholds_(qp, x = NULL, panel = NULL, xpanel = NULL,
-  ypanel = NULL, color = NULL, geom = "bar", ci = T, sizeerrorbar)
+  ypanel = NULL, color = NULL, geom = "bar", ci = T, sizeerrorbar = 1)
 }
 \arguments{
 \item{qp}{output from quickpsy.}
@@ -20,11 +20,13 @@ plotthresholds_(qp, x = NULL, panel = NULL, xpanel = NULL,
 
 \item{color}{Name of the variable codded by color.}
 
-\item{geom}{If \code{'bar'} displays bars.
-If \code{'point'} displays points (default is 'bar').}
+\item{geom}{If \code{'bar'} displays bars.}
 
 \item{ci}{If \code{FALSE} confidence intervals are not plotted
 (default is \code{TRUE}).}
+
+\item{sizeerrorbar}{Line width of the error bars.
+If \code{'point'} displays points (default is 'bar').}
 }
 \description{
 \code{plotthresholds_} is the standard evaluation SE function associated
