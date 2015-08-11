@@ -21,7 +21,7 @@ one_threshold <- function(d, prob, log, groups, funname,
       q <- (prob - guess) / (1 - guess - par[3])
 
     if (q < 0 || q > 1) {
-      warning('probabilities not whitin 0 and 1')
+      warning('probability not between 0 and 1')
       thre <- approx(curves$y,curves$x, xout= prob)$y
     }
     else {
