@@ -22,6 +22,9 @@ one_threshold <- function(d, prob, log, groups, funname,
 
     if (q < 0 || q > 1) {
       warning('probabilities not whitin 0 and 1')
+      if (length(unique(curves$y))==1) {
+        stop('To find threshold, need at least 2 distinct y values in fitted curve')
+      }
       thre <- approx(curves$y,curves$x, xout= prob)$y
     }
     else {
@@ -34,6 +37,9 @@ one_threshold <- function(d, prob, log, groups, funname,
     }
   }
   else {
+    if (length(unique(curves$y))==1) {
+      stop('To find threshold, need at least 2 distinct y values in fitted curve')
+    }
     thre <- approx(curves$y,curves$x, xout= prob)$y
   }
   if (log) thre <- exp(thre)
