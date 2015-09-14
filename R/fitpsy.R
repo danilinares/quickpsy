@@ -48,7 +48,8 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
 
   list(x = x, k = k , n = n, guess = guess, lapses = lapses, averages = d,
        groups = groups, funname = funname, log = log,
-       psyfunguesslapses = psyfunguesslapses, limits = limits, parini = parini,
+       psyfunguesslapses = psyfunguesslapses, limits = limits,
+       pariniset = pariniset, parini = parini,
        optimization = optimization, par = par)
 }
 
