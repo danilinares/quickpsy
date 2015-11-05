@@ -5,8 +5,8 @@
 #' @keywords internal
 #' @export
 one_thresholdcomparisons <- function(d, thresholds, groups, ci) {
-  condlevels <- d %>% filter(sample==1) %>% ungroup()
-  condlevels <- condlevels %>% select(match(groups,names(condlevels)))
+  condlevels <- d tidyr::%>% filter(sample==1) tidyr::%>% ungroup()
+  condlevels <- condlevels tidyr::%>% select(match(groups,names(condlevels)))
 
   combinations <- as.data.frame(t(combn(nrow(condlevels),2)))
 
@@ -16,7 +16,7 @@ one_thresholdcomparisons <- function(d, thresholds, groups, ci) {
     names(cond2) <- paste0(names(cond2), '2')
     cbind(cond1, cond2)
   }
-  pairnames <- combinations %>% group_by(V1, V2) %>%
+  pairnames <- combinations tidyr::%>% group_by(V1, V2) tidyr::%>%
     do(putnames(.))
 
   one_difcom <- function(f) {
@@ -24,8 +24,8 @@ one_thresholdcomparisons <- function(d, thresholds, groups, ci) {
     cond2 <- semi_join(thresholds, condlevels[f$V2,], by=groups)
     data.frame(dif= cond1$thre -cond2$thre)
   }
-  dif <- pairnames %>% group_by_(.dots = names(pairnames))%>%
-    do(one_difcom(.)) %>% ungroup() %>% select(-V1, -V2)
+  dif <- pairnames tidyr::%>% group_by_(.dots = names(pairnames)) tidyr::%>%
+    do(one_difcom(.)) tidyr::%>% ungroup() tidyr::%>% select(-V1, -V2)
 
 
   one_bootcom <- function(f) {
@@ -37,8 +37,8 @@ one_thresholdcomparisons <- function(d, thresholds, groups, ci) {
                 difsup = quantile(diffe, 1 - .5*(1 - ci))[[1]],
                 signif = ifelse(difinf * difsup < 0,' ','*'))
   }
-  ci <- pairnames %>% group_by_(.dots = names(pairnames))%>%
-    do(one_bootcom(.)) %>% ungroup() %>% select(-V1, -V2)
+  ci <- pairnames tidyr::%>% group_by_(.dots = names(pairnames)) tidyr::%>%
+    do(one_bootcom(.)) tidyr::%>% ungroup() %>% select(-V1, -V2)
 
   merge(dif,ci)
 }

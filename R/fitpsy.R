@@ -19,7 +19,7 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
 
   if (is.null(n)) {
     d[[k]][d[[k]] == -1] <- as.numeric(0)
-    d <- d %>% group_by_(.dots=c(groups, x)) %>%
+    d <- d tidyr::%>% group_by_(.dots=c(groups, x)) %>%
       summarise_(n = 'n()', k = paste0('sum(',k,')'))
     names(d)[names(d) == 'k'] <- k
     n <- 'n'

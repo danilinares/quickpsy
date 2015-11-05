@@ -10,7 +10,7 @@
 #' logliks(fit)
 #' @export
 logliks <- function(qp) {
-  qp$averages %>%
+  qp$averages tidyr::%>%
     do(one_loglik(., qp$x, qp$k, qp$n, qp$psyfunguesslapses, qp$groups,
                   qp$par))
 }

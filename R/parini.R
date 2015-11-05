@@ -70,6 +70,6 @@ parini <- function(d, x, k, n, guess, lapses, psyfun) {
     }
     data.frame(paran = paste0('p', seq(1, length(para))), par = para)
   }
-  d %>% do(calculate_parini(., x, k, n, guess, lapses, psyfun))
+  d tidyr::%>% do(calculate_parini(., x, k, n, guess, lapses, psyfun))
 }
 

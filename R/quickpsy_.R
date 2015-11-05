@@ -134,8 +134,9 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
        )) {
        qp <- c(qp, list(parcomparisons = parcomparisons(qp, ci)))
      }
+    qp <- c(qp, list(curvesbootstrap = curvesbootstrap(qp, log = log)))
     if (thresholds) {
-      qp <- c(qp, list(curvesbootstrap = curvesbootstrap(qp, log = log)))
+
       qp <- c(qp,
               list(thresholdsbootstrap = thresholdsbootstrap(qp, prob, log)))
       qp <- c(qp, list(thresholdsci = thresholdsci(qp, ci)))

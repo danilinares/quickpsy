@@ -4,5 +4,5 @@
 #' @param qp output from quickpsy
 #' @export
 sse <- function(qp) {
-  qp$ypred %>% do(one_sse(., qp$groups, qp$averages))
+  qp$ypred tidyr::%>% do(one_sse(., qp$groups, qp$averages))
 }

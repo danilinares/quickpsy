@@ -13,7 +13,7 @@ thresholdsbootstrap <- function(qp, prob = NULL, log = F) {
 
   allgroups <- as.character(groups(qp$curvesbootstrap))
 
-  parboot %>% do(one_threshold(., prob, log, allgroups,
+  parboot tidyr::%>% do(one_threshold(., prob, log, allgroups,
                     qp$funname, qp$guess, qp$lapses, qp$curvesbootstrap))
 }
 

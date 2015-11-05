@@ -5,6 +5,6 @@
 parameters <- function(d, x, k, n, psyfunguesslapses, funname,
                     parini, pariniset, guess, lapses, optimization, groups) {
 
-  d %>% do(one_parameters(., x, k, n, psyfunguesslapses, funname,
+  d tidyr::%>% do(one_parameters(., x, k, n, psyfunguesslapses, funname,
                   parini, pariniset, guess, lapses, optimization, groups))
 }

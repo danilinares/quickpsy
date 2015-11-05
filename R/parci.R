@@ -3,6 +3,6 @@
 #' @keywords internal
 #' @export
 parci <- function(qp, ci = .95) {
-  qp$parbootstrap %>% group_by_(.dots = c(qp$groups, 'parn')) %>%
+  qp$parbootstrap %>% group_by_(.dots = c(qp$groups, 'parn')) tidyr::%>%
     do(one_parci(., ci))
 }

@@ -6,16 +6,17 @@ Authors@R: c(
     person("Linares", "Daniel", email = "danilinares@gmail.com", role = c("aut","cre")),
     person("López-Moliner", "Joan", email = "j.lopezmoliner@gmail.com", role = "aut"))
 URL: http://dlinares.org/quickpsy.html
-Description: Quickly fits and plots psychometric functions (normal, logistic, Weibull or any or any function defined by the user) for multiple groups.
+Description: Quickly fits and plots psychometric functions (normal, logistic,
+    Weibull or any or any function defined by the user) for multiple groups.
 Depends:
     R (>= 3.1.1),
     boot,
     DEoptim,
     dplyr,
-    ggplot2,
-    tidyr
+    ggplot2
 Imports:
-	MPDiR
+    MPDiR
 Encoding: UTF-8
 License: MIT + file LICENSE
 LazyData: true
+RoxygenNote: 5.0.0
