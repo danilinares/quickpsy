@@ -136,22 +136,13 @@ quickpsy <- function(d, x = x, k = k, n = n, grouping, random, within, between,
   if (!missing(between)) between <- as.character(substitute(between))[-1]
   if (!missing(grouping)) grouping <- as.character(substitute(grouping))[-1]
 
+
   ### calling the standard evaluation of quickpsy
   quickpsy_(d, x, k, n, grouping, random, within, between, xmin, xmax, log, fun,
             parini, guess, lapses, prob, thresholds, logliks, bootstrap,
             B, ci, optimization)
 }
 
-#' Data set for demonstration
-#'
-#' It is part of the data associated with the paper 'Motion signal and
-#' the perceived positions of moving objects'.
-#' @name qpdat
-#' @docType data
-#' @references Linares, D., López-Moliner, J., & Johnston, A. (2007). Motion
-#'signal and the perceived positions of moving objects. Journal of Vision,
-#' 7(7), 1.
 
-NULL
 
 

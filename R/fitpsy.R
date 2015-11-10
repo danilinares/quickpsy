@@ -17,9 +17,10 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
   if (!missing(between)) groups <- c(groups, between)
   if (!missing(grouping)) groups <- c(groups, grouping)
 
+
   if (is.null(n)) {
     d[[k]][d[[k]] == -1] <- as.numeric(0)
-    d <- d tidyr::%>% group_by_(.dots=c(groups, x)) %>%
+    d <- d %>% group_by_(.dots=c(groups, x)) %>%
       summarise_(n = 'n()', k = paste0('sum(',k,')'))
     names(d)[names(d) == 'k'] <- k
     n <- 'n'
@@ -28,7 +29,7 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
   if (!(missing(random) && missing(within) && missing(between) && missing(grouping)))
     d <- d %>% group_by_(.dots=groups)
 
-  d$y <- d[[k]] / d[[n]]
+  d$yq <- d[[k]] / d[[n]]
 
   if (log) d[[x]] <- log(d[[x]])
 
@@ -46,7 +47,8 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
   par <- parameters(d, x, k, n, psyfunguesslapses, funname,
                      parini, pariniset, guess, lapses, optimization, groups)
 
-  list(x = x, k = k , n = n, guess = guess, lapses = lapses, averages = d,
+  list(x = x, k = k , n = n, guess = guess, lapses = lapses,
+       averages = d %>% rename(y=yq),
        groups = groups, funname = funname, log = log,
        psyfunguesslapses = psyfunguesslapses, limits = limits,
        pariniset = pariniset, parini = parini,

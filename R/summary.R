@@ -1,7 +1,10 @@
+#' Plot the parameters and its confidence intervals
+#' \code{summary} Plot the parameters and its confidence intervals
+#' @param object An object for which a summary is desired.
+#' @param ... Additional arguments affecting the summary produced.
 #' @export
-summary.quickpsy <- function(x,...)
+summary.quickpsy <- function(object,...)
 {
-  print(x$par)
-  print(x$parci)
-  print(x$sse)
+  print(object$par)
+  print(object$parci)
 }

@@ -11,7 +11,7 @@
 #' ypred(fit)
 #' @export
 ypred <- function(qp) {
-  qp$par tidyr::%>% do(one_ypred(., log, qp$groups, qp$averages, qp$x,
+  qp$par %>% do(one_ypred(., log, qp$groups, qp$averages, qp$x,
                            qp$psyfunguesslapses))
 
 }

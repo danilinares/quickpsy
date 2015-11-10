@@ -27,11 +27,11 @@ quickreadfiles <- function(path = getwd(), ...) {
   }
 
 
-  namefiles <- expand.grid(arguments) tidyr::%>%
-    group_by_(.dots = names(arguments)) tidyr::%>%
+  namefiles <- expand.grid(arguments) %>%
+    group_by_(.dots = names(arguments)) %>%
     do(namesfun(.))
 
-  namefiles tidyr::%>% filter(exist) tidyr::%>%
-    group_by_(.dots = names(arguments)) tidyr::%>%
+  namefiles %>% filter(exist) %>%
+    group_by_(.dots = names(arguments)) %>%
     do(read.table(.$namefile, header = T))
 }

@@ -13,7 +13,8 @@ Depends:
     boot,
     DEoptim,
     dplyr,
-    ggplot2
+    ggplot2,
+    tidyr
 Imports:
     MPDiR
 Encoding: UTF-8

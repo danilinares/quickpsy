@@ -1,6 +1,7 @@
 #' Performs the bootstrap for one condition
 #' \code{one_bootstrap} performs the bootstrap for one condition
-#' @import boot DEoptim tidyr
+#' @import boot DEoptim
+#' @importFrom tidyr gather
 #' @keywords internal
 #' @export
 parn <- 'No te quejes'
@@ -30,7 +31,7 @@ one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
   fake_par <- b$t
   colnames(fake_par) <- paste0('p',1:length(fake_par[1,]))
   long <- data.frame(fake_par, sample = 1:length(fake_par[,1]))
-  long tidyr::%>% tidyr::gather(parn, par, -sample) tidyr::%>% arrange(sample)
+  long %>% gather(parn, par, -sample) %>% arrange(sample)
 
 }
 

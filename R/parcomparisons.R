@@ -6,6 +6,6 @@
 #' @export
 
 parcomparisons <- function(qp, ci = .95) {
-  qp$parbootstrap tidyr::%>% group_by_(.dots = 'parn') tidyr::%>%
+  qp$parbootstrap %>% group_by_(.dots = 'parn') %>%
     do(one_parcomparisons(., qp$par, qp$groups, ci))
 }

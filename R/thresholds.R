@@ -16,7 +16,7 @@
 #' @export
 thresholds <- function(qp, prob = NULL, log = FALSE) {
   if (is.null(prob)) stop('You need to specify the value of prob', call. = FALSE)
-    qp$par tidyr::%>% do(one_threshold(., prob, log, qp$groups,
+    qp$par %>% do(one_threshold(., prob, log, qp$groups,
                                qp$funname, qp$guess, qp$lapses, qp$curves))
 }
 
