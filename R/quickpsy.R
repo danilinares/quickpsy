@@ -117,6 +117,10 @@
 #' plotthresholds(fit, geom = 'point')
 #' @export
 #' @import MPDiR
+#' @importFrom  graphics par
+#' @importFrom stats approx as.formula lm median optim pnorm pweibull qnorm
+#' quantile qweibull rbinom
+#' @importFrom utils combn head read.table tail
 
 
 quickpsy <- function(d, x = x, k = k, n = n, grouping, random, within, between,
@@ -143,6 +147,16 @@ quickpsy <- function(d, x = x, k = k, n = n, grouping, random, within, between,
             B, ci, optimization)
 }
 
+#' Data set for demonstration
+#'
+#' It is part of the data associated with the paper 'Motion signal and
+#' the perceived positions of moving objects'.
+#' @name qpdat
+#' @docType data
+#' @references Linares, D., López-Moliner, J., & Johnston, A. (2007). Motion
+#'signal and the perceived positions of moving objects. Journal of Vision,
+#' 7(7), 1.
 
+'qpdat'
 
 

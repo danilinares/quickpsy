@@ -114,7 +114,7 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
 ### plotting ###################################################################
   if (ngroup == 0) {
    if (averages) p <- p + geom_point(data = qp$averages,
-                          aes_string(x = qp$x, y = 'y'))
+                          aes_string(x = qp$x, y = 'prob'))
    if (curves) p <- p + geom_line(data = qp$curves,
                         aes_string(x = 'x', y = 'y'))
    if (thresholds) p <- p + geom_linerange(data = qp$thresholds,
@@ -130,7 +130,7 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
       qp$curves[[color]] <- factor(qp$curves[[color]])
 
       if (averages) p <- p + geom_point(data = qp$averages,
-                  aes_string(x = qp$x, y = 'y', color = color))
+                  aes_string(x = qp$x, y = 'prob', color = color))
 
       if (curves) p <- p + geom_line(data = qp$curves,
                     aes_string(x = 'x', y = 'y', color = color))
@@ -140,7 +140,7 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
         # get present axis limits
         axisYrange <- ggplot_build(p)$panel$ranges[[1]]$y.range
         p <- p + geom_linerange(data = qp$thresholds,
-                    aes_string(x = 'thre', 
+                    aes_string(x = 'thre',
                     		   ymin = axisYrange[1] - .2, #make sure extends below axis line
                                ymax = qp$thresholds$prob, color = color))
         #Because threshline extended below axis limit, axis automatically scaled below it.
@@ -156,7 +156,7 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
     }
     else {
       if (averages) p <- p + geom_point(data = qp$averages,
-                        aes_string(x = qp$x, y = 'y'))
+                        aes_string(x = qp$x, y = 'prob'))
       if (curves) p <- p + geom_line(data = qp$curves,
                          aes_string(x = 'x', y = 'y'))
       if (thresholds) p <- p + geom_linerange(data = qp$thresholds,

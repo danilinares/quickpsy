@@ -1,6 +1,26 @@
 ## Resubmission 
 
-This is a resubmission in which I eliminated the NOTE "Non-standard file/directory found at top level" by eliminating the file cran-comments.html.
+We defined several 'Undefined global functions or variables' using importFrom
+
+## New submission
+
+Our package was removed from CRAN because we did not correct check problems. We are sorry for that. We now solved the check problems and hope you can consider again our package to be on CRAN. 
+
+There are no ERRORs and WARNINGs
+
+There was one NOTE about the submission procedure:
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Linares Daniel <danilinares@gmail.com>’
+New submission
+
+In this version we tested the following environments:
+
+* local OS X install, R 3.2.2
+* local OS X install, R 3.3.0 (devel)
+* local windows, R 3.2.0
+* win-builder (devel and release)
+
 
 ## Resubmission 3
 

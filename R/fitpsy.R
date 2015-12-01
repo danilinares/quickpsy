@@ -29,7 +29,8 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
   if (!(missing(random) && missing(within) && missing(between) && missing(grouping)))
     d <- d %>% group_by_(.dots=groups)
 
-  d$yq <- d[[k]] / d[[n]]
+  prob <- NULL
+  d$prob <- d[[k]] / d[[n]]
 
   if (log) d[[x]] <- log(d[[x]])
 
@@ -48,7 +49,7 @@ fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
                      parini, pariniset, guess, lapses, optimization, groups)
 
   list(x = x, k = k , n = n, guess = guess, lapses = lapses,
-       averages = d %>% rename(y=yq),
+       averages = d,
        groups = groups, funname = funname, log = log,
        psyfunguesslapses = psyfunguesslapses, limits = limits,
        pariniset = pariniset, parini = parini,
