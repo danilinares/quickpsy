@@ -5,7 +5,7 @@
 #' @export
 one_sse <- function(d, groups, averages) {
   if (length(groups) != 0) averages <- semi_join(averages, d, by = groups)
-  data.frame(sse = sum((averages$y-d$ypred)^2))
+  data.frame(sse = sum((averages$prob-d$ypred)^2))
 }
 
 
