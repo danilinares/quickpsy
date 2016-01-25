@@ -128,6 +128,7 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
     cat('Performing bootstrap...\n')
     qp <- c(qp, list(parbootstrap = parbootstrap(qp, bootstrap, B)))
     qp <- c(qp, list(parci = parci(qp, ci)))
+
      if (!(
        (length(qp$groups)==0) ||
        (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)
@@ -139,7 +140,6 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
       qp <- c(qp,
               list(thresholdsbootstrap = thresholdsbootstrap(qp, prob, log)))
       qp <- c(qp, list(thresholdsci = thresholdsci(qp, ci)))
-
       if (!(
         (length(qp$groups)==0) ||
         (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)

@@ -11,7 +11,9 @@ one_parcomparisons <- function(d, para, groups, ci) {
   difinf <- NULL
   difsup <- NULL
   condlevels <- d %>% filter(sample==1)
-  if (length(groups) != 0) para <- semi_join(para, condlevels, by ='parn')
+  para$parn <- as.character(para$parn)
+  if (length(groups) != 0) para <- semi_join(para, condlevels,
+                                             by = 'parn')
   condlevels <- condlevels %>% select(match(groups,names(condlevels)))
 
   combinations <- as.data.frame(t(combn(nrow(condlevels),2)))
