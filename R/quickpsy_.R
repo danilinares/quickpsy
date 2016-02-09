@@ -153,6 +153,10 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
 
   if (log) qp$averages[[x]] <- exp(qp$averages[[x]])
 
+  qp <- c(qp,list(logliks = logliks(qp)))
+  qp <- c(qp,list(loglikssaturated = loglikssaturated(qp)))
+  qp <- c(qp,list(deviance = deviance(qp)))
+
   class(qp) <- 'quickpsy'
   qp
 }
