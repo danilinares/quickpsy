@@ -100,7 +100,7 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
   if (is.null(parini)) pariniset <- FALSE
   else pariniset <- TRUE
 
-  cat('Estimating parameters...\n')
+  #cat('Estimating parameters...\n')
   qp <- fitpsy(d, x, k, n, random, within, between, grouping, xmin, xmax, log,
                fun, parini, pariniset, guess, lapses, optimization)
 
@@ -125,7 +125,7 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
   if (logliks) qp <- c(qp, list(logliks = logliks(qp)))
 
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
-    cat('Performing bootstrap...\n')
+    #cat('Performing bootstrap...\n')
     qp <- c(qp, list(parbootstrap = parbootstrap(qp, bootstrap, B)))
     qp <- c(qp, list(parci = parci(qp, ci)))
 
