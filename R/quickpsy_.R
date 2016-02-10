@@ -87,8 +87,8 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
                       between, xmin = NULL, xmax = NULL, log = FALSE,
                       fun = 'cum_normal_fun', parini = NULL, guess = 0,
                       lapses = 0, prob = NULL, thresholds = T,
-                      bootstrap = 'parametric', B = 100, ci = .95,
-                      optimization = 'optim') {
+                      bootstrap = 'parametric', B = 100,
+                      ci = .95, optimization = 'optim') {
 
   options(dplyr.print_max = 1e9)
 
@@ -122,6 +122,7 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
   qp <- c(qp, list(logliks = logliks(qp)))
   qp <- c(qp, list(loglikssaturated = loglikssaturated(qp)))
   qp <- c(qp, list(deviance = deviance(qp)))
+
 
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
     qp <- c(qp, list(parbootstrap = parbootstrap(qp, bootstrap, B)))

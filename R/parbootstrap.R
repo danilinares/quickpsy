@@ -6,7 +6,6 @@
 #' \code{'nonparametric'} performs non-parametric bootstrap;
 #' \code{'none'} does not perform bootstrap (default is \code{'parametric'}).
 #' @param B number of bootstrap samples (default is 100 ONLY).
-#' @export
 #' @examples
 #' library(MPDiR) # contains the Vernier data
 #' data(Vernier) # ?Venier for the reference
