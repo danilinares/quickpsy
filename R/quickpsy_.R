@@ -91,6 +91,7 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
                       optimization = 'optim') {
 
   options(dplyr.print_max = 1e9)
+  print('kk')
 
   if (!is.null(prob)) thresholds <- T
 
