@@ -92,11 +92,6 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
 
   options(dplyr.print_max = 1e9)
 
-
-print('esto lo he escrito en master')
-print('esto lo he escrito en devboot')
-
-
   if (!is.null(prob)) thresholds <- T
 
   if (missing(n)) n <- NULL
