@@ -7,8 +7,7 @@
 quickpsy(d, x = x, k = k, n = n, grouping, random, within, between,
   xmin = NULL, xmax = NULL, log = FALSE, fun = cum_normal_fun,
   parini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
-  logliks = FALSE, bootstrap = "parametric", B = 100, ci = 0.95,
-  optimization = "optim")
+  bootstrap = "parametric", B = 100, ci = 0.95, optimization = "optim")
 }
 \arguments{
 \item{d}{Data frame with the results of a Yes-No experiment to fit.
@@ -88,9 +87,6 @@ estimated, p3 will be the guess rate and p4 the lapse rate.}
 \item{thresholds}{If \code{FALSE}, thresholds are not calculated
 (default is \code{TRUE}).}
 
-\item{logliks}{If \code{TRUE}, the loglikelihoods are calculated
-(default is \code{FALSE}).}
-
 \item{bootstrap}{\code{'parametric'} performs parametric bootstrap;
 \code{'nonparametric'} performs non-parametric bootstrap;
 \code{'none'} does not perform bootstrap (default is \code{'parametric'}).}
@@ -106,6 +102,9 @@ evolution optimization. By using \code{DEoptim}, it is less likely that the
 optimization finishes in a local minimum, but the optimization is slow.
 When \code{'DE'} is used, \code{parini} should be specified as a list with
 lower and upper bounds.}
+
+\item{logliks}{If \code{TRUE}, the loglikelihoods are calculated
+(default is \code{FALSE}).}
 }
 \value{
 A list containing the following components:
@@ -126,6 +125,9 @@ A list containing the following components:
   \item \code{curvesbootstrap} Bootstrap curves.
   \item \code{thresholds} Thresholds.
   \item \code{thresholdsci} Confidence intervals for the thresholds.
+  \item \code{logliks} Log-likelihoods of the model.
+  \item \code{loglikssaturated} Log-likelihoods of the saturated model.
+  \item \code{deviance} Deviance of the model.
 }
 }
 \description{
@@ -150,7 +152,7 @@ plotthresholds(fit, geom = 'point')
 Knoblauch, K., & Maloney, L. T. (2012). Modeling Psychophysical Data in R.
 New York: Springer.
 
-Prins, N., & Kingdom, F. A. A. (2010). Psychophysics: a practical
+Prins, N., & Kingdom, F. A. A. (2016). Psychophysics: a practical
 introduction. London: Academic Press.
 }
 \seealso{

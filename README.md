@@ -14,13 +14,13 @@ Features
 
 -   Calculates parametric and non-parametric bootstrap confidence intervals.
 
+-   Compares parameters and thresholds for different conditions using bootstrap.
+
 -   Guess and lapses can be fixed or free as parameters.
 
 -   Fits cumulative normal, logistic, weibull functions or any function defined by the user.
 
 -   Facilitates the reading of several data files.
-
--   The optimization can call *DEoptim* which uses differential evolution optimization.
 
 Install
 -------

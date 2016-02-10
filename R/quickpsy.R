@@ -98,12 +98,15 @@
 #'   \item \code{curvesbootstrap} Bootstrap curves.
 #'   \item \code{thresholds} Thresholds.
 #'   \item \code{thresholdsci} Confidence intervals for the thresholds.
+#'   \item \code{logliks} Log-likelihoods of the model.
+#'   \item \code{loglikssaturated} Log-likelihoods of the saturated model.
+#'   \item \code{deviance} Deviance of the model.
 #' }
 #' @references
 #' Knoblauch, K., & Maloney, L. T. (2012). Modeling Psychophysical Data in R.
 #' New York: Springer.
 #'
-#' Prins, N., & Kingdom, F. A. A. (2010). Psychophysics: a practical
+#' Prins, N., & Kingdom, F. A. A. (2016). Psychophysics: a practical
 #' introduction. London: Academic Press.
 #' @seealso \code{\link{quickpsy_}}
 #' @examples
@@ -126,7 +129,7 @@
 quickpsy <- function(d, x = x, k = k, n = n, grouping, random, within, between,
                      xmin = NULL, xmax = NULL, log = FALSE,
                      fun = cum_normal_fun, parini = NULL, guess = 0, lapses = 0,
-                     prob = NULL, thresholds = T, logliks = FALSE,
+                     prob = NULL, thresholds = T,
                      bootstrap = 'parametric', B = 100, ci = .95,
                      optimization = 'optim') {
 
@@ -143,7 +146,7 @@ quickpsy <- function(d, x = x, k = k, n = n, grouping, random, within, between,
 
   ### calling the standard evaluation of quickpsy
   quickpsy_(d, x, k, n, grouping, random, within, between, xmin, xmax, log, fun,
-            parini, guess, lapses, prob, thresholds, logliks, bootstrap,
+            parini, guess, lapses, prob, thresholds, bootstrap,
             B, ci, optimization)
 }
 

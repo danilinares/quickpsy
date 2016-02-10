@@ -64,8 +64,6 @@
 #' \code{guess + .5 * (1 - guess)}).
 #' @param thresholds If \code{FALSE}, thresholds are not calculated
 #' (default is \code{TRUE}).
-#' @param logliks If \code{TRUE}, the loglikelihoods are calculated
-#'  (default is \code{FALSE}).
 #' @param bootstrap \code{'parametric'} performs parametric bootstrap;
 #' \code{'nonparametric'} performs non-parametric bootstrap;
 #' \code{'none'} does not perform bootstrap (default is \code{'parametric'}).
@@ -88,7 +86,7 @@
 quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
                       between, xmin = NULL, xmax = NULL, log = FALSE,
                       fun = 'cum_normal_fun', parini = NULL, guess = 0,
-                      lapses = 0, prob = NULL, thresholds = T,  logliks = FALSE,
+                      lapses = 0, prob = NULL, thresholds = T,
                       bootstrap = 'parametric', B = 100, ci = .95,
                       optimization = 'optim') {
 
@@ -122,7 +120,9 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
     qp <- c(qp, list(thresholds = thresholds(qp, prob, log)))
   }
 
-  if (logliks) qp <- c(qp, list(logliks = logliks(qp)))
+  qp <- c(qp, list(logliks = logliks(qp)))
+  qp <- c(qp, list(loglikssaturated = loglikssaturated(qp)))
+  qp <- c(qp, list(deviance = deviance(qp)))
 
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
     #cat('Performing bootstrap...\n')
@@ -135,7 +135,9 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
        )) {
        qp <- c(qp, list(parcomparisons = parcomparisons(qp, ci)))
      }
+
     qp <- c(qp, list(curvesbootstrap = curvesbootstrap(qp, log = log)))
+
     if (thresholds) {
       qp <- c(qp,
               list(thresholdsbootstrap = thresholdsbootstrap(qp, prob, log)))
@@ -153,9 +155,6 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
 
   if (log) qp$averages[[x]] <- exp(qp$averages[[x]])
 
-  qp <- c(qp,list(logliks = logliks(qp)))
-  qp <- c(qp,list(loglikssaturated = loglikssaturated(qp)))
-  qp <- c(qp,list(deviance = deviance(qp)))
 
   class(qp) <- 'quickpsy'
   qp

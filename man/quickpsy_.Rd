@@ -7,8 +7,7 @@
 quickpsy_(d, x = "x", k = "k", n = "n", grouping, random, within, between,
   xmin = NULL, xmax = NULL, log = FALSE, fun = "cum_normal_fun",
   parini = NULL, guess = 0, lapses = 0, prob = NULL, thresholds = T,
-  logliks = FALSE, bootstrap = "parametric", B = 100, ci = 0.95,
-  optimization = "optim")
+  bootstrap = "parametric", B = 100, ci = 0.95, optimization = "optim")
 }
 \arguments{
 \item{d}{Data frame with the results of a Yes-No experiment to fit.
@@ -87,9 +86,6 @@ estimated, p3 will be the guess rate and p4 the lapse rate.}
 
 \item{thresholds}{If \code{FALSE}, thresholds are not calculated
 (default is \code{TRUE}).}
-
-\item{logliks}{If \code{TRUE}, the loglikelihoods are calculated
-(default is \code{FALSE}).}
 
 \item{bootstrap}{\code{'parametric'} performs parametric bootstrap;
 \code{'nonparametric'} performs non-parametric bootstrap;
