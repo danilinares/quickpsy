@@ -92,6 +92,7 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
 
   options(dplyr.print_max = 1e9)
 print('acabo de crear devboot')
+print('no esta en github')
   if (!is.null(prob)) thresholds <- T
 
   if (missing(n)) n <- NULL
