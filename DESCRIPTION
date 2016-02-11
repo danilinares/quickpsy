@@ -10,7 +10,6 @@ Description: Quickly fits and plots psychometric functions (normal, logistic,
     Weibull or any or any function defined by the user) for multiple groups.
 Depends:
     R (>= 3.1.1),
-    boot,
     DEoptim,
     dplyr,
     ggplot2,
