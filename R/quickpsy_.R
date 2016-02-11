@@ -125,29 +125,30 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
 
 
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
-    qp <- c(qp, list(parbootstrap = parbootstrap(qp, bootstrap, B)))
-    qp <- c(qp, list(parci = parci(qp, ci)))
+    qp <- c(qp, list(avbootstrap = avbootstrap(qp, bootstrap, B)))
+    qp <- c(qp, list(parbootstrap = parbootstrap(qp)))
+   # qp <- c(qp, list(parci = parci(qp, ci)))
 
-     if (!(
-       (length(qp$groups)==0) ||
-       (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)
-       )) {
-       qp <- c(qp, list(parcomparisons = parcomparisons(qp, ci)))
-     }
+#      if (!(
+#        (length(qp$groups)==0) ||
+#        (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)
+#        )) {
+#        qp <- c(qp, list(parcomparisons = parcomparisons(qp, ci)))
+#      }
+#
+#     qp <- c(qp, list(curvesbootstrap = curvesbootstrap(qp, log = log)))
 
-    qp <- c(qp, list(curvesbootstrap = curvesbootstrap(qp, log = log)))
-
-    if (thresholds) {
-      qp <- c(qp,
-              list(thresholdsbootstrap = thresholdsbootstrap(qp, prob, log)))
-      qp <- c(qp, list(thresholdsci = thresholdsci(qp, ci)))
-      if (!(
-        (length(qp$groups)==0) ||
-        (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)
-      )) {
-        qp <- c(qp, list(thresholdcomparisons = thresholdcomparisons(qp, ci)))
-      }
-    }
+#     if (thresholds) {
+#       qp <- c(qp,
+#               list(thresholdsbootstrap = thresholdsbootstrap(qp, prob, log)))
+#       qp <- c(qp, list(thresholdsci = thresholdsci(qp, ci)))
+#       if (!(
+#         (length(qp$groups)==0) ||
+#         (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)
+#       )) {
+#         qp <- c(qp, list(thresholdcomparisons = thresholdcomparisons(qp, ci)))
+#       }
+#     }
   }
   else if (bootstrap != 'none')
     stop('Bootstrap should be \'parametric\', \'nonparametric\' or \'none\'.', call. = FALSE)

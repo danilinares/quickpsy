@@ -15,7 +15,7 @@
 #' boot_samples <- parbootstrap(fit)
 #' head(boot_samples)
 #' @export
-parbootstrap <- function(qp) {
+avbootstrap <- function(qp, bootstrap = 'parametric', B = 100) {
   if (qp$pariniset) {
     if (is.atomic(parini)) {
       parini <- qp$par
@@ -31,23 +31,8 @@ parbootstrap <- function(qp) {
     pariniset <- FALSE
   }
 
-  if (length(qp$groups) == 0)
-    avboot <- qp$avbootstrap %>% group_by_('sample')
-  else
-    avboot <- qp$avbootstrap %>%
-      group_by_(.dots = c(qp$groups, 'sample'))
-
-#   avboot %>%
-#     do(one_bootstrap(., qp$x, qp$k, qp$n,
-#                   qp$psyfunguesslapses, qp$funname, qp$guess, qp$lapses,
-#                   parini, pariniset, qp$optimization,
-#                   qp$groups, qp$ypred))
-
-  avboot %>%
-    do(one_parameters(., qp$x, qp$k, qp$n, qp$psyfunguesslapses, qp$funname,
-                      parini, pariniset, qp$guess, qp$lapses,
-                      qp$optimization, qp$groups))
-
+  qp$averages %>% do(one_bootstrapav(., qp$x, qp$k, qp$n,
+                  qp$psyfunguesslapses, qp$funname, qp$guess, qp$lapses,
+                  parini, pariniset, qp$optimization, bootstrap, B,
+                  qp$groups, qp$ypred))
 }
-
-

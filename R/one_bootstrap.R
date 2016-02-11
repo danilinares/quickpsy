@@ -7,12 +7,11 @@
 parn <- 'No te quejes'
 one_bootstrap <- function(d, x, k, n, psyfunguesslapses, funname,
                            guess, lapses, parini, pariniset, optimization,
-                          bootstrap, B,
-                          groups, ypred) {
-  if (length(groups) != 0) ypred <- semi_join(ypred, d, by = groups)
+                           groups, ypred) {
 
-  if (bootstrap == 'parametric') ypred <- ypred$ypred
-  if (bootstrap == 'nonparametric') ypred <- d[[k]] / d[[n]]
+
+
+  d
 
   calculate_par <- function(f)
     parameters(f, x, k, n, psyfunguesslapses, funname,
