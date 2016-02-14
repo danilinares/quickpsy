@@ -35,6 +35,10 @@ To understand the fundamentals of fitting psychometric functions in R, we recomm
 - Fits cumulative normal, logistic, weibull functions or any function defined by the user. 
   
 - Facilitates the reading of several data files.
+
+- Performs goodness-of-fit.
+
+
   
 ## Install
 

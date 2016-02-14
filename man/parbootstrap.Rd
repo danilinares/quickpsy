@@ -8,12 +8,6 @@ parbootstrap(qp)
 }
 \arguments{
 \item{qp}{output from quickpsy}
-
-\item{bootstrap}{\code{'parametric'} performs parametric bootstrap;
-\code{'nonparametric'} performs non-parametric bootstrap;
-\code{'none'} does not perform bootstrap (default is \code{'parametric'}).}
-
-\item{B}{number of bootstrap samples (default is 100 ONLY).}
 }
 \description{
 \code{parbootstrap} creates bootstrap samples of the parameters.

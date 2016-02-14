@@ -127,7 +127,8 @@ A list containing the following components:
   \item \code{thresholdsci} Confidence intervals for the thresholds.
   \item \code{logliks} Log-likelihoods of the model.
   \item \code{loglikssaturated} Log-likelihoods of the saturated model.
-  \item \code{deviance} Deviance of the model.
+  \item \code{deviance} Deviance of the model and the p-value calculated by
+   bootstraping.
 }
 }
 \description{

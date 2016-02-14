@@ -1,6 +1,6 @@
-#' Calculates the saturated loglikelihoods
+#' Calculates the loglikelihoods of the saturated model
 #'
-#' \code{loglikssaturated} calculates the saturated loglikelihoods.
+#' \code{loglikssaturated} calculates the  loglikelihoods of the saturated model.
 #' @param qp output from quickpsy
 #' @export
 #' @examples

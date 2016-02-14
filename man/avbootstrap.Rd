@@ -2,7 +2,7 @@
 % Please edit documentation in R/avbootstrap.R
 \name{avbootstrap}
 \alias{avbootstrap}
-\title{Creates bootstrap samples of the parameters}
+\title{Creates bootstrap samples}
 \usage{
 avbootstrap(qp, bootstrap = "parametric", B = 100)
 }
@@ -16,7 +16,7 @@ avbootstrap(qp, bootstrap = "parametric", B = 100)
 \item{B}{number of bootstrap samples (default is 100 ONLY).}
 }
 \description{
-\code{parbootstrap} creates bootstrap samples of the parameters.
+\code{avbootstrap} creates bootstrap samples
 }
 \examples{
 library(MPDiR) # contains the Vernier data

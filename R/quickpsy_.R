@@ -129,6 +129,13 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
     qp <- c(qp, list(parbootstrap = parbootstrap(qp)))
     qp <- c(qp, list(parci = parci(qp, ci)))
 
+    qp <- c(qp, list(logliksboot = logliksboot(qp)))
+    qp <- c(qp, list(logliksbootsaturated = logliksbootsaturated(qp)))
+    qp <- c(qp, list(devianceboot = devianceboot(qp)))
+    deviancep <- deviancep(qp)
+    qp$deviance <- merge(qp$deviance, deviancep)
+    #qp <- c(qp, list(deviance = merge(deviance,deviancep)))
+
      if (!(
        (length(qp$groups)==0) ||
        (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)
@@ -154,7 +161,6 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
     stop('Bootstrap should be \'parametric\', \'nonparametric\' or \'none\'.', call. = FALSE)
 
   if (log) qp$averages[[x]] <- exp(qp$averages[[x]])
-
 
   class(qp) <- 'quickpsy'
   qp

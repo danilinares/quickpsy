@@ -1,7 +1,5 @@
-#' Performs the bootstrap for one condition
-#' \code{one_bootstrap} performs the bootstrap for one condition
-#' @import boot DEoptim
-#' @importFrom tidyr gather
+#' Creates one bootstrap sample
+#' \code{one_bootstrapav} creates one bootstrap sample
 #' @keywords internal
 #' @export
 parn <- 'No te quejes'

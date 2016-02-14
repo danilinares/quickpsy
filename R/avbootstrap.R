@@ -1,6 +1,6 @@
-#' Creates bootstrap samples of the parameters
+#' Creates bootstrap samples 
 #'
-#' \code{parbootstrap} creates bootstrap samples of the parameters.
+#' \code{avbootstrap} creates bootstrap samples
 #' @param qp output from quickpsy
 #' @param bootstrap \code{'parametric'} performs parametric bootstrap;
 #' \code{'nonparametric'} performs non-parametric bootstrap;

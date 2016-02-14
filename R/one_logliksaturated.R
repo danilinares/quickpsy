@@ -1,5 +1,5 @@
-#' Creates the saturated loglik for one condition
-#' \code{one_logliksaturated} creates the saturated loglik for one condition
+#' Creates the loglik for the saturated model for one condition
+#' \code{one_logliksaturated} creates the  loglik for the saturated model for one condition
 #' one_loglik
 #' @keywords internal
 #' @export

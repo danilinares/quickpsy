@@ -2,10 +2,6 @@
 #'
 #' \code{parbootstrap} creates bootstrap samples of the parameters.
 #' @param qp output from quickpsy
-#' @param bootstrap \code{'parametric'} performs parametric bootstrap;
-#' \code{'nonparametric'} performs non-parametric bootstrap;
-#' \code{'none'} does not perform bootstrap (default is \code{'parametric'}).
-#' @param B number of bootstrap samples (default is 100 ONLY).
 #' @examples
 #' library(MPDiR) # contains the Vernier data
 #' data(Vernier) # ?Venier for the reference
@@ -36,12 +32,6 @@ parbootstrap <- function(qp) {
   else
     avboot <- qp$avbootstrap %>%
       group_by_(.dots = c(qp$groups, 'sample'))
-
-#   avboot %>%
-#     do(one_bootstrap(., qp$x, qp$k, qp$n,
-#                   qp$psyfunguesslapses, qp$funname, qp$guess, qp$lapses,
-#                   parini, pariniset, qp$optimization,
-#                   qp$groups, qp$ypred))
 
   avboot %>%
     do(one_parameters(., qp$x, qp$k, qp$n, qp$psyfunguesslapses, qp$funname,

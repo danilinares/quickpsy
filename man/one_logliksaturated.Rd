@@ -2,15 +2,15 @@
 % Please edit documentation in R/one_logliksaturated.R
 \name{one_logliksaturated}
 \alias{one_logliksaturated}
-\title{Creates the saturated loglik for one condition
-\code{one_logliksaturated} creates the saturated loglik for one condition
+\title{Creates the loglik for the saturated model for one condition
+\code{one_logliksaturated} creates the  loglik for the saturated model for one condition
 one_loglik}
 \usage{
 one_logliksaturated(d, x, k, n, psyfunguesslapses, groups, par)
 }
 \description{
-Creates the saturated loglik for one condition
-\code{one_logliksaturated} creates the saturated loglik for one condition
+Creates the loglik for the saturated model for one condition
+\code{one_logliksaturated} creates the  loglik for the saturated model for one condition
 one_loglik
 }
 \keyword{internal}
