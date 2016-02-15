@@ -129,6 +129,8 @@ A list containing the following components:
   \item \code{loglikssaturated} Log-likelihoods of the saturated model.
   \item \code{deviance} Deviance of the model and the p-value calculated by
    bootstraping.
+  \item \code{aic} AIC of the model defined as \deqn{ - 2 * loglik + 2  *k}
+  where k is the number of parameters of the model.
 }
 }
 \description{
@@ -150,6 +152,10 @@ plotpar(fit)
 plotthresholds(fit, geom = 'point')
 }
 \references{
+Burnham, K. P., & Anderson, D. R. (2003). Model selection and multimodel
+inference: a practical information-theoretic approach. Springer Science &
+Business Media.
+
 Knoblauch, K., & Maloney, L. T. (2012). Modeling Psychophysical Data in R.
 New York: Springer.
 

@@ -134,7 +134,9 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
     qp <- c(qp, list(devianceboot = devianceboot(qp)))
     deviancep <- deviancep(qp)
     qp$deviance <- merge(qp$deviance, deviancep)
-    #qp <- c(qp, list(deviance = merge(deviance,deviancep)))
+
+    qp <- c(qp, list(aic = aic(qp)))
+
 
      if (!(
        (length(qp$groups)==0) ||

@@ -3,7 +3,7 @@
 #' @keywords internal
 #' @export
 fitpsy <- function(d, x, k, n, random, within, between, grouping, xmin, xmax,
-                   log, funname, parini, pariniset, guess, lapses, optimization) {
+          log, funname, parini, pariniset, guess, lapses, optimization) {
 
   fun <- get(funname)
 

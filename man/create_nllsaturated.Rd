@@ -2,14 +2,14 @@
 % Please edit documentation in R/create_nllsaturated.R
 \name{create_nllsaturated}
 \alias{create_nllsaturated}
-\title{Creates the saturated negative log-likelihood function
-\code{create_nll} Creates the saturated negative log-likelihood function}
+\title{Creates the full saturated negative log-likelihood function
+\code{create_nll} Creates the full saturated negative log-likelihood function}
 \usage{
 create_nllsaturated(d, x, k, n, psyfunguesslapses)
 }
 \description{
-Creates the saturated negative log-likelihood function
-\code{create_nll} Creates the saturated negative log-likelihood function
+Creates the full saturated negative log-likelihood function
+\code{create_nll} Creates the full saturated negative log-likelihood function
 }
 \keyword{internal}
 

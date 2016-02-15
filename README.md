@@ -22,7 +22,9 @@ Features
 
 -   Facilitates the reading of several data files.
 
--   Performs goodness-of-fit.
+-   Performs goodness-of-fit (deviance).
+
+-   Computes AIC.
 
 Install
 -------
