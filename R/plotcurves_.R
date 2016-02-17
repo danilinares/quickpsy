@@ -34,7 +34,7 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
                thresholds = TRUE, ci = TRUE) {
 
   if (!('thresholds' %in% names(qp))) thresholds <- FALSE
-  if (!('thresholdsci' %in% names(qp))) ci <- FALSE
+  if (!('threinf' %in% names(qp$thresholds))) ci <- FALSE
 
   if (is.logical(qp$guess)) qp$guess <- 0
   if (is.logical(qp$lapses)) qp$lapses <- 0
@@ -120,7 +120,7 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
    if (thresholds) p <- p + geom_linerange(data = qp$thresholds,
                         aes_string(x = 'thre', ymin = qp$guess,
                             ymax = qp$thresholds$prob))
-   if (ci) p <- p + geom_errorbarh(data = qp$thresholdsci,
+   if (ci) p <- p + geom_errorbarh(data = qp$thresholds,
                     height = .03, aes_string(x = 'threinf', xmin = 'threinf',
                     xmax = 'thresup', y = qp$thresholds$prob))
   }
@@ -148,8 +148,8 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
     	p <- p + coord_cartesian(ylim=axisYrange)
       }
       if (ci) {
-        qp$thresholdsci[[color]] <- factor(qp$thresholdsci[[color]])
-        p <- p + geom_errorbarh(data = qp$thresholdsci,
+        qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
+        p <- p + geom_errorbarh(data = qp$thresholds,
                        height = .03, aes_string(x = 'threinf', xmin = 'threinf',
                        color = color, xmax = 'thresup', y = qp$thresholds$prob))
       }
@@ -162,7 +162,7 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
       if (thresholds) p <- p + geom_linerange(data = qp$thresholds,
                         aes_string(x = 'thre', ymin = qp$guess,
                                ymax = qp$thresholds$prob))
-      if (ci) p <- p + geom_errorbarh(data = qp$thresholdsci,
+      if (ci) p <- p + geom_errorbarh(data = qp$thresholds,
                        height = .03, aes_string(x = 'threinf', xmin = 'threinf',
                        xmax = 'thresup', y = qp$thresholds$prob))
     }
