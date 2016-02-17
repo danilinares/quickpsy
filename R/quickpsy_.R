@@ -151,7 +151,8 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
     if (thresholds) {
       qp <- c(qp,
               list(thresholdsbootstrap = thresholdsbootstrap(qp, prob, log)))
-      qp <- c(qp, list(thresholdsci = thresholdsci(qp, ci)))
+      thresholdsci = thresholdsci(qp, ci)
+      qp$thresholds <- merge(qp$thresholds, thresholdsci)
       if (!(
         (length(qp$groups)==0) ||
         (length(qp$groups)==1 && nrow(unique(qp$averages[qp$groups]))==1)
