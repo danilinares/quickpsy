@@ -74,7 +74,6 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                    aes_string(x = color,fill = color, y = 'thre'),
                    stat = 'identity', position = 'dodge')
         if (ci) {
-          qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
           p <- p + geom_errorbar(data = qp$thresholds,
                          aes_string(x = color, ymin = 'threinf',
                          ymax = 'thresup'), stat = 'identity',
@@ -136,8 +135,6 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                           aes_string(x = x, fill = color, y = 'thre'),
                           stat = 'identity', position = 'dodge')
         if (ci) {
-          qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
-          qp$thresholds[[x]] <- factor(qp$thresholds[[x]])
           p <- p + geom_errorbar(data = qp$thresholds, width =.5,
                                  aes_string(x = x, fill = color, ymin = 'threinf',
                                             ymax = 'thresup'), stat = 'identity',
@@ -151,7 +148,6 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
           geom_line(data = qp$thresholds,
                     aes_string(x = x, color = color, group = color, y = 'thre'))
         if (ci) {
-          qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
           p <- p + geom_linerange(data = qp$thresholds,
                                   aes_string(x = x, color = color, group = color,
                                              ymin = 'threinf', ymax = 'thresup'))
@@ -175,7 +171,6 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                           aes_string(x = x, y = 'thre'),
                           stat = 'identity', position = 'dodge')
         if (ci) {
-          qp$thresholds[[x]] <- factor(qp$thresholds[[x]])
           p <- p + geom_errorbar(data = qp$thresholds, width =.5,
                                  aes_string(x = x, ymin = 'threinf',
                                             ymax = 'thresup'), stat = 'identity',
@@ -238,8 +233,6 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                         aes_string(x = x, fill = color, y = 'thre'),
                         stat = 'identity', position = 'dodge')
       if (ci) {
-        qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
-        qp$thresholds[[x]] <- factor(qp$thresholds[[x]])
         p <- p + geom_errorbar(data = qp$thresholds, width =.5,
                                aes_string(x = x, fill = color, ymin = 'threinf',
                                           ymax = 'thresup'), stat = 'identity',
@@ -253,7 +246,6 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
         geom_line(data = qp$thresholds,
                   aes_string(x = x, color = color, group = color, y = 'thre'))
       if (ci) {
-        qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
         p <- p + geom_linerange(data = qp$thresholds,
                                 aes_string(x = x, color = color, group = color,
                                            ymin = 'threinf', ymax = 'thresup'))

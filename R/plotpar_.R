@@ -72,7 +72,6 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                    aes_string(x = color,fill = color, y = 'par'),
                    stat = 'identity', position = 'dodge')
         if (ci) {
-          qp$par[[color]] <- factor(qp$par[[color]])
           p <- p + geom_errorbar(data = qp$par,
                    aes_string(x = color, ymin = 'parinf', ymax = 'parsup'),
                    stat = 'identity', position = 'dodge', width = .5)
@@ -93,7 +92,6 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                           aes_string(x = x, y = 'par'), fill = 'grey',
                           stat = 'identity', position = 'dodge')
         if (ci) {
-          qp$par[[x]] <- factor(qp$par[[x]])
           p <- p + geom_errorbar(data = qp$par,
                          aes_string(x = x, width = .5, ymin = 'parinf',
                          ymax = 'parsup'), stat = 'identity',
@@ -163,8 +161,6 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                aes_string(x = x, fill = color, y = 'par'),
                stat = 'identity', position = 'dodge')
       if (ci) {
-        qp$par[[x]] <- factor(qp$par[[x]])
-        qp$par[[color]] <- factor(qp$par[[color]])
         p <- p + geom_errorbar(data = qp$par, width = .5,
                  aes_string(x = x, fill = color, ymin = 'parinf',
                  ymax = 'parsup'), stat = 'identity',
@@ -178,7 +174,6 @@ plotpar_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                geom_line(data = qp$par, aes_string(x = x,
                         color = color, y = 'par', group =color))
       if (ci) {
-        qp$par[[color]] <- factor(qp$par[[color]])
         p <- p + geom_linerange(data = qp$par,
                                aes_string(x = x, color = color,
                                           ymin = 'parinf', ymax = 'parsup'))

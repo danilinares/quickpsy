@@ -148,7 +148,6 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
     	p <- p + coord_cartesian(ylim=axisYrange)
       }
       if (ci) {
-        qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
         p <- p + geom_errorbarh(data = qp$thresholds,
                        height = .03, aes_string(x = 'threinf', xmin = 'threinf',
                        color = color, xmax = 'thresup', y = qp$thresholds$prob))
