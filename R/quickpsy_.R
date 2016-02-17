@@ -127,7 +127,8 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
   if (bootstrap == 'parametric' || bootstrap == 'nonparametric') {
     qp <- c(qp, list(avbootstrap = avbootstrap(qp, bootstrap, B)))
     qp <- c(qp, list(parbootstrap = parbootstrap(qp)))
-    qp <- c(qp, list(parci = parci(qp, ci)))
+    parci <- parci(qp, ci)
+    qp$par <- merge(qp$par, parci)
 
     qp <- c(qp, list(logliksboot = logliksboot(qp)))
     qp <- c(qp, list(logliksbootsaturated = logliksbootsaturated(qp)))
