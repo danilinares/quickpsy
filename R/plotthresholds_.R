@@ -28,7 +28,7 @@
 #' @export
 plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                            ypanel = NULL, color = NULL, geom = 'bar', ci = T,
-                           sizeerrorbar = 1) {
+                           sizeerrorbar = .5) {
 
   if (!('thresholds' %in% names(qp)))
     stop('To plot the thresholds, quickpsy should be called with thresholds = TRUE', call. = F)
