@@ -3,6 +3,7 @@
 #' \code{quickreadfiles} builts a data frame from several txt files. It
 #' assumes that in each file, the first row has the names of the variables.
 #' @param path Path of the file (default is the working directory).
+#' @param extension Specify whether the file extension is 'txt' or 'csv'.
 #' @param ... arguments of the form name_var = c('value1', 'value2',..).
 #' A new column with variable name name_var is addes to the data frame.
 #' @examples
@@ -15,14 +16,24 @@
 #' @import dplyr
 #' @export
 
-quickreadfiles <- function(path = getwd(), ...) {
+quickreadfiles <- function(path = getwd(), extension = 'txt', ...) {
 
   arguments <- c(as.list(environment()), list(...))
   arguments[1] <- NULL
   exist<-NULL # Joan added 1-4-2015
 
+  if (extension == 'txt') {
+    extensiondot <- '.txt'
+    funread <- read.table
+  }
+  else if (extension == 'csv') {
+    extensiondot <- '.csv'
+    funread <- read.csv
+  }
+  else stop('The extension of the files should be txt of csv')
+
   namesfun <- function(d) {
-    namefile <- paste0(path,'/', paste(unlist(d), collapse = ''), '.txt')
+    namefile <- paste0(path,'/', paste(unlist(d), collapse = ''), extensiondot)
     data.frame(namefile, exist = file.exists(namefile), stringsAsFactors=F)
   }
 
@@ -33,5 +44,5 @@ quickreadfiles <- function(path = getwd(), ...) {
 
   namefiles %>% filter(exist) %>%
     group_by_(.dots = names(arguments)) %>%
-    do(read.table(.$namefile, header = T))
+    do(funread(.$namefile, header = T))
 }

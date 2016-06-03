@@ -4,10 +4,12 @@
 \alias{quickreadfiles}
 \title{Reads several files}
 \usage{
-quickreadfiles(path = getwd(), ...)
+quickreadfiles(path = getwd(), extension = "txt", ...)
 }
 \arguments{
 \item{path}{Path of the file (default is the working directory).}
+
+\item{extension}{Specify whether the file extension is 'txt' or 'csv'.}
 
 \item{...}{arguments of the form name_var = c('value1', 'value2',..).
 A new column with variable name name_var is addes to the data frame.}
