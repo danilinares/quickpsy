@@ -77,11 +77,6 @@
 #' When \code{'DE'} is used, \code{parini} should be specified as a list with
 #' lower and upper bounds.
 #' @seealso \code{\link{quickpsy}}
-#' @examples
-#' library(MPDiR) # contains the Vernier data
-#' fit <- quickpsy_(Vernier, 'Phaseshift', 'NumUpward', 'N',
-#'                 grouping = c('Direction', 'WaveForm', 'TempFreq'), B = 20)
-#' plotcurves(fit)
 #' @export
 quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
                       between, xmin = NULL, xmax = NULL, log = FALSE,

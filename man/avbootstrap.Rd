@@ -18,13 +18,4 @@ avbootstrap(qp, bootstrap = "parametric", B = 100)
 \description{
 \code{avbootstrap} creates bootstrap samples
 }
-\examples{
-library(MPDiR) # contains the Vernier data
-data(Vernier) # ?Venier for the reference
-fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq),
-                bootstrap = 'none')
-boot_samples <- parbootstrap(fit)
-head(boot_samples)
-}
 

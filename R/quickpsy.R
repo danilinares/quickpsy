@@ -125,13 +125,13 @@
 #' plotcurves(fit)
 #' plotpar(fit)
 #' plotthresholds(fit, geom = 'point')
+
 #' @export
 #' @import MPDiR
 #' @importFrom  graphics par
 #' @importFrom stats approx as.formula lm median optim pnorm pweibull qnorm
 #' quantile qweibull rbinom
 #' @importFrom utils combn head read.table tail
-
 
 quickpsy <- function(d, x = x, k = k, n = n, grouping, random, within, between,
                      xmin = NULL, xmax = NULL, log = FALSE,

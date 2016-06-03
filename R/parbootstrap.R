@@ -2,14 +2,6 @@
 #'
 #' \code{parbootstrap} creates bootstrap samples of the parameters.
 #' @param qp output from quickpsy
-#' @examples
-#' library(MPDiR) # contains the Vernier data
-#' data(Vernier) # ?Venier for the reference
-#' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = .(Direction, WaveForm, TempFreq),
-#'                 bootstrap = 'none')
-#' boot_samples <- parbootstrap(fit)
-#' head(boot_samples)
 #' @export
 parbootstrap <- function(qp) {
   if (qp$pariniset) {

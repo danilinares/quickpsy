@@ -109,12 +109,6 @@ to the non-standard evaluation NSE function \code{quickpsy}.
 \href{http://adv-r.had.co.nz/Computing-on-the-language.html}{SE functions can be more easily called from other functions.}
 In SE functions, you need to quote the names of the variables.
 }
-\examples{
-library(MPDiR) # contains the Vernier data
-fit <- quickpsy_(Vernier, 'Phaseshift', 'NumUpward', 'N',
-                grouping = c('Direction', 'WaveForm', 'TempFreq'), B = 20)
-plotcurves(fit)
-}
 \seealso{
 \code{\link{quickpsy}}
 }

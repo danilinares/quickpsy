@@ -1,4 +1,4 @@
-#' Creates bootstrap samples 
+#' Creates bootstrap samples
 #'
 #' \code{avbootstrap} creates bootstrap samples
 #' @param qp output from quickpsy
@@ -6,14 +6,6 @@
 #' \code{'nonparametric'} performs non-parametric bootstrap;
 #' \code{'none'} does not perform bootstrap (default is \code{'parametric'}).
 #' @param B number of bootstrap samples (default is 100 ONLY).
-#' @examples
-#' library(MPDiR) # contains the Vernier data
-#' data(Vernier) # ?Venier for the reference
-#' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = .(Direction, WaveForm, TempFreq),
-#'                 bootstrap = 'none')
-#' boot_samples <- parbootstrap(fit)
-#' head(boot_samples)
 #' @export
 avbootstrap <- function(qp, bootstrap = 'parametric', B = 100) {
   if (qp$pariniset) {
