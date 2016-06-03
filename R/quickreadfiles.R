@@ -20,6 +20,7 @@ quickreadfiles <- function(path = getwd(), extension = 'txt', ...) {
 
   arguments <- c(as.list(environment()), list(...))
   arguments[1] <- NULL
+  arguments[1] <- NULL
   exist<-NULL # Joan added 1-4-2015
 
   if (extension == 'txt') {
