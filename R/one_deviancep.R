@@ -3,6 +3,7 @@
 #' \code{one_deviancep} calculates the probability of obtaining the deviance value
 #' or larger if the parametric model holds for one condition
 #' @keywords internal
+#' @importFrom stats ecdf
 #' @export
 one_deviancep <- function(d, groups, deviance) {
   if (length(groups) != 0) deviance <- semi_join(deviance, d, by = groups)

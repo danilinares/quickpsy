@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-quickpsy is an R package developed by [Daniel Linares](http://www.dlinares.org) and [Joan López-Moliner](http://www.ub.edu/viscagroup/joan/) to quickly fit and plot psychometric functions for multiple conditions. It makes an extensive use of Hadley Wickham's packages [ggplot2](http://ggplot2.org/) and [dplyr](http://cran.r-project.org/web/packages/dplyr/index.html).
+quickpsy is an R package developed by [Daniel Linares](http://www.dlinares.org) and [Joan López-Moliner](http://www.ub.edu/viscagroup/joan/) to quickly fit and plot psychometric functions for multiple conditions. It makes an extensive use of Hadley Wickham's packages [ggplot2](http://ggplot2.org/) and [dplyr](http://cran.r-project.org/package=dplyr).
 
 To understand the fundamentals of fitting psychometric functions in R, we recommend the book [Modeling Psychophysical Data in R](http://www.springer.com/gp/book/9781461444749).
 
@@ -8,7 +8,7 @@ Features
 
 -   Fits and plots multiple conditions with minimal coding.
 
--   Exploits the computational speed of [dplyr](http://cran.r-project.org/web/packages/dplyr/index.html).
+-   Exploits the computational speed of [dplyr](http://cran.r-project.org/package=dplyr).
 
 -   The user does not need to introduce initial parameters.
 
@@ -29,7 +29,7 @@ Features
 Install
 -------
 
-Download and install [R](http://cran.rstudio.com) (we also recommend [Rstudio](http://www.rstudio.com/)).
+Download and install [R](http://cran.rstudio.com) (we also recommend [Rstudio](https://www.rstudio.com/)).
 
 In R, install the following packages: boot, DEoptim, dplyr, ggplot2, tidyr and devtools.
 
@@ -93,6 +93,6 @@ For more examples and information visit [www.dlinares.org/quickpsy.html](http://
 Other R packages
 ----------------
 
--   [psyphy](http://cran.r-project.org/web/packages/psyphy/index.html): among other things, it provides links functions to [fit psychometric functions using an approach based on generalized linear models](http://www.dlinares.org/psychopract.html#fitting-using-generalized-linear-models).
+-   [psyphy](http://cran.r-project.org/package=psyphy): among other things, it provides links functions to [fit psychometric functions using an approach based on generalized linear models](http://www.dlinares.org/psychopract.html#fitting-using-generalized-linear-models).
 
 -   [modelfree](http://personalpages.manchester.ac.uk/staff/d.h.foster/software-modelfree/latest/home): fits psychometric functions using a non-parametric approach.

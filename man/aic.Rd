@@ -12,10 +12,4 @@ aic(qp)
 \description{
 \code{aic} calculates the AICs.
 }
-\examples{
-library(MPDiR) # contains the Vernier data
-fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq), B = 20)
-aic(fit)
-}
 

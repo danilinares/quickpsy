@@ -13,6 +13,7 @@
 #' # dat <- quickreadfiles(subject = c('aa', 'bb', 'cc'), session = c('1', '2'))
 #' # fit <- quickpsy(dat, phase, resp, grouping=.(subject), lapses = T, guess = T)
 #' # plotcurves(fit)
+#' @importFrom utils read.csv
 #' @import dplyr
 #' @export
 
