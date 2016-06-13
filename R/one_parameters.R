@@ -1,6 +1,7 @@
 #' Obtains the parameters for one condition
 #' \code{one_parameters} obtains the parameters for one condition
 #' @keywords internal
+#' @importFrom DEoptim DEoptim
 #' @export
 one_parameters <- function(d, x, k, n, psyfunguesslapses, funname, parini,
                            pariniset, guess, lapses, optimization, groups) {

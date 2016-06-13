@@ -102,9 +102,6 @@ evolution optimization. By using \code{DEoptim}, it is less likely that the
 optimization finishes in a local minimum, but the optimization is slow.
 When \code{'DE'} is used, \code{parini} should be specified as a list with
 lower and upper bounds.}
-
-\item{logliks}{If \code{TRUE}, the loglikelihoods are calculated
-(default is \code{FALSE}).}
 }
 \value{
 A list containing the following components:

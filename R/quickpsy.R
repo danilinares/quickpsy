@@ -66,8 +66,6 @@
 #' \code{guess + .5 * (1 - guess)}).
 #' @param thresholds If \code{FALSE}, thresholds are not calculated
 #' (default is \code{TRUE}).
-#' @param logliks If \code{TRUE}, the loglikelihoods are calculated
-#'  (default is \code{FALSE}).
 #' @param bootstrap \code{'parametric'} performs parametric bootstrap;
 #' \code{'nonparametric'} performs non-parametric bootstrap;
 #' \code{'none'} does not perform bootstrap (default is \code{'parametric'}).

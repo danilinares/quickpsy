@@ -2,7 +2,8 @@
 % Please edit documentation in R/logliks.R
 \name{logliks}
 \alias{logliks}
-\title{Calculates the loglikelihoods}
+\title{Calculates the loglikelihoods
+\code{logliks} calculates the loglikelihoods.}
 \usage{
 logliks(qp)
 }
@@ -10,12 +11,7 @@ logliks(qp)
 \item{qp}{output from quickpsy}
 }
 \description{
+Calculates the loglikelihoods
 \code{logliks} calculates the loglikelihoods.
-}
-\examples{
-library(MPDiR) # contains the Vernier data
-fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq), B = 20)
-logliks(fit)
 }
 
