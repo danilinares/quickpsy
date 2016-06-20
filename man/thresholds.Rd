@@ -15,14 +15,11 @@ thresholds(qp, prob = NULL, log = FALSE)
 has been used to fit the curves (default is \code{FALSE}).}
 }
 \description{
-\code{thresholds} alculates the thresholds
+Calculates the thresholds
 }
-\examples{
-library(MPDiR) # contains the Vernier data
-data(Vernier) # ?Venier for the reference
-fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq), B =20,
-                thresholds = FALSE)
-thresholds(fit, prob = .5)
-}
+\keyword{Calculates}
+\keyword{\code{thresholds}}
+\keyword{internal}
+\keyword{the}
+\keyword{thresholds}
 

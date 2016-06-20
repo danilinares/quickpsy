@@ -123,7 +123,8 @@ quickpsy_ <- function(d, x = 'x', k = 'k', n = 'n', grouping, random, within,
     qp <- c(qp, list(avbootstrap = avbootstrap(qp, bootstrap, B)))
     qp <- c(qp, list(parbootstrap = parbootstrap(qp)))
     parci <- parci(qp, ci)
-    qp$par <- merge(qp$par, parci)
+    qp$par <- full_join(qp$par, parci, by= c('parn',qp$groups))
+
 
     qp <- c(qp, list(logliksboot = logliksboot(qp)))
     qp <- c(qp, list(logliksbootsaturated = logliksbootsaturated(qp)))
