@@ -46,5 +46,6 @@ quickreadfiles <- function(path = getwd(), extension = 'txt', ...) {
 
   namefiles %>% filter(exist) %>%
     group_by_(.dots = names(arguments)) %>%
-    do(funread(.$namefile, header = T))
+    do(funread(.$namefile, header = T)) %>%
+    ungroup()
 }
