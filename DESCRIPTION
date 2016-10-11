@@ -1,7 +1,7 @@
 Package: quickpsy
 Type: Package
 Title: Fits Psychometric Functions for Multiple Groups
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(
     person("Linares", "Daniel", email = "danilinares@gmail.com", role = c("aut","cre")),
     person("López-Moliner", "Joan", email = "j.lopezmoliner@gmail.com", role = "aut"))

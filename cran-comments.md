@@ -1,3 +1,21 @@
+## New submission
+
+We fixed bugs. 
+
+There are no ERRORs and WARNINGs
+
+There was one NOTE about the submission procedure:
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Linares Daniel <danilinares@gmail.com>’
+New submission
+
+In this version we tested the following environments:
+
+* local OS X install, R 3.3.1
+* local windows, R 3.2.0
+* win-builder (devel and release)
+
 ## Resubmission 
 
 We eliminated the errors concerning the URLs.
