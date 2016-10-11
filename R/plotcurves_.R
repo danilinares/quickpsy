@@ -57,7 +57,6 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
     if (!is.null(ypanel)) groups <- setdiff(groups, ypanel)
     if (!is.null(panel)) groups <- setdiff(groups, panel)
     if (length(groups) == 1) color <- groups[[1]]
-
     if (!is.null(panel)) p <- p +
       facet_wrap(as.formula(paste0('~',panel)))
     if (!is.null(xpanel)) p <- p +
@@ -138,7 +137,7 @@ plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
       if (thresholds) {
         qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
         # get present axis limits
-        axisYrange <- ggplot_build(p)$panel$ranges[[1]]$y.range
+        axisYrange <- ggplot_build(p)$layout$panel_ranges[[1]]$y.range
         p <- p + geom_linerange(data = qp$thresholds,
                     aes_string(x = 'thre',
                     		   ymin = axisYrange[1] - .2, #make sure extends below axis line

@@ -234,7 +234,7 @@ plotthresholds_ <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                         stat = 'identity', position = 'dodge')
       if (ci) {
         p <- p + geom_errorbar(data = qp$thresholds, width =.5,
-                               aes_string(x = x, fill = color, ymin = 'threinf',
+                               aes_string(x = x, group = color, ymin = 'threinf',
                                           ymax = 'thresup'), stat = 'identity',
                                size=sizeerrorbar,
                                position = position_dodge(.9))
