@@ -4,10 +4,15 @@ We fixed bugs.
 
 There are no ERRORs and WARNINGs
 
-There was one NOTE about the submission procedure:
+There was two NOTEs about the submission procedure:
 
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Linares Daniel <danilinares@gmail.com>’
+
+* plotcurves_: no visible global function definition for 'packageVersion'
+This note is caused because we are working around a difference between versions 
+of ggplot2. 
+
 New submission
 
 In this version we tested the following environments:
