@@ -28,6 +28,7 @@
 #' plotcurves_(fit, color = 'Direction')
 #' plotcurves_(fit, xpanel = 'Direction', color = 'WaveForm', ci = FALSE)
 #' @import ggplot2
+#' @importFrom utils packageVersion
 #' @export
 plotcurves_ <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
                color = NULL, averages = TRUE, curves = TRUE,

@@ -1,3 +1,9 @@
+## Resubmission 
+
+We changed the CRAN url to their canonical form. 
+
+We used importFrom as suggested to eliminate the NOTE in plotcurves_.
+
 ## New submission
 
 We fixed bugs. 
