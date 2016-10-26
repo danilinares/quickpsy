@@ -1,6 +1,10 @@
 ## Resubmission 
 
-We changed the CRAN url to their canonical form. 
+We changed the CRAN urls to their canonical form. 
+
+## Resubmission 
+
+We changed the CRAN urls to their canonical form. 
 
 We used importFrom as suggested to eliminate the NOTE in plotcurves_.
 

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-quickpsy is an R package developed by [Daniel Linares](http://www.dlinares.org) and [Joan López-Moliner](http://www.ub.edu/viscagroup/joan/) to quickly fit and plot psychometric functions for multiple conditions. It makes an extensive use of  Hadley Wickham's packages [ggplot2](http://ggplot2.org/) and [dplyr](https://cran.r-project.org/web/packages/dplyr/).
+quickpsy is an R package developed by [Daniel Linares](http://www.dlinares.org) and [Joan López-Moliner](http://www.ub.edu/viscagroup/joan/) to quickly fit and plot psychometric functions for multiple conditions. It makes an extensive use of  Hadley Wickham's packages [ggplot2](http://ggplot2.org/) and [dplyr](https://CRAN.R-project.org/package=dplyr).
  
 To understand the fundamentals of fitting psychometric functions in R, we recommend the book [Modeling Psychophysical Data in R](http://www.springer.com/gp/book/9781461444749).
 
@@ -22,7 +22,7 @@ To understand the fundamentals of fitting psychometric functions in R, we recomm
 
 - Fits and plots multiple conditions with minimal coding.
 
-- Exploits the computational speed of [dplyr](https://cran.r-project.org/web/packages/dplyr/).
+- Exploits the computational speed of [dplyr](https://CRAN.R-project.org/package=dplyr).
   
 - The user does not need to introduce initial parameters.
   
@@ -102,7 +102,7 @@ For more examples and information visit [www.dlinares.org/quickpsy.html](http://
 
 ## Other R packages
 
-* [psyphy](https://cran.r-project.org/web/packages/psyphy/): among other things, it provides links functions to [fit psychometric functions using an approach based on  generalized linear models](http://www.dlinares.org/psychopract.html#fitting-using-generalized-linear-models). 
+* [psyphy](https://CRAN.R-project.org/package=psyphy): among other things, it provides links functions to [fit psychometric functions using an approach based on  generalized linear models](http://www.dlinares.org/psychopract.html#fitting-using-generalized-linear-models). 
 
 * [modelfree](http://personalpages.manchester.ac.uk/staff/d.h.foster/software-modelfree/latest/home): fits psychometric functions using a non-parametric approach.
 
