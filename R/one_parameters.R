@@ -17,7 +17,7 @@ one_parameters <- function(d, x, k, n, psyfunguesslapses, funname, parini,
     }
     else
       stop('parini should be specified as a list of the type list(c(par1min, par1max), c(par2min, par2max),...', call. = F)
-
+d
   }
   if (optimization== 'optim') {
 
