@@ -8,8 +8,6 @@ Features
 
 -   Fits and plots multiple conditions with minimal coding.
 
--   Exploits the computational speed of [dplyr](https://CRAN.R-project.org/package=dplyr).
-
 -   The user does not need to introduce initial parameters.
 
 -   Calculates parametric and non-parametric bootstrap confidence intervals.
@@ -31,26 +29,10 @@ Install
 
 Download and install [R](https://www.r-project.org/) (we also recommend [Rstudio](https://www.rstudio.com/)).
 
-In R, install the following packages: boot, DEoptim, dplyr, ggplot2, tidyr and devtools.
-
-``` r
-install.packages('boot')
-install.packages('DEoptim')
-install.packages('tidyr')
-install.packages('devtools')
-```
-
-Quickpsy can be installed from CRAN
+Type on the console
 
 ``` r
 install.packages('quickpsy')
-```
-
-To install the latest developed version, you can install quickpsy from github (which will also install dplyr and ggplot2)
-
-``` r
-library(devtools)
-install_github('danilinares/quickpsy')
 ```
 
 Example
