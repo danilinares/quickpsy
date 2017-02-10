@@ -67,7 +67,8 @@ Help
 To obtain information and examples for specific functions use *?*
 
 ``` r
-?plotcurves
+?plotthresholds
+?quikcpsy
 ```
 
 For more examples and information visit [www.dlinares.org/quickpsy.html](http://www.dlinares.org/quickpsy.html)
