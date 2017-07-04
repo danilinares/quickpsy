@@ -1,4 +1,4 @@
-#' Fits psychometric functionss
+#' Fits psychometric functions
 #'
 #' \code{quickpsy} fits, by direct maximization of the likelihood
 #' (Prins and Kingdom, 2010; Knoblauch and Maloney, 2012),
