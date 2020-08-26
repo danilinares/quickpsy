@@ -1,0 +1,19 @@
+citHeader("To cite quickpsy in publications use:")
+
+citEntry(entry = "Article",
+         title        = "{quickpsy}: An R package to fit psychometric functions for multiple groups",
+         author       = personList(as.person("Daniel Linares"),
+                                   as.person("Joan López-Moliner")),
+         journal      = "The R Journal",
+         year         = "2016",
+         volume       = "8",
+         number       = "1",
+         pages        = "122--131",
+         url          = "https://doi.org/10.32614/RJ-2016-008",
+
+         textVersion  =
+           paste("Daniel Linares, Joan López-Moliner (2016).",
+                 "quickpsy: An R package to fit psychometric functions for multiple groups",
+                 "The R Journal,  8(1), 122-131.",
+                 "URL hhttps://doi.org/10.32614/RJ-2016-008")
+)

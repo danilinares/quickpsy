@@ -1,0 +1,72 @@
+---
+title: "Basics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{basics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+We are going to analize the data set `qpdat`, which is included in `quickpsy`. It has a  [tidy](http://vita.had.co.nz/papers/tidy-data.html) form: each column corresponds to a variable and each row to an observation.
+
+To fit the psychometric functions (the default shape is the cumulative normal function), we use the main function of quickpsy, which has the name of the package. We introduce the data, the name of the explanatory variable, the name of the response variable and the name of the grouping variables. 
+
+```{r}
+library(quickpsy)
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"), B = 5) 
+```
+
+`quickpsy` creates a object of class quickpsy with a list of data frames with all the results. We can use `names` to see the names of the output data frames
+
+```{r}
+names(fit)
+```
+
+To obtain the thresholds, for example, we can do
+```{r}
+fit$thresholds
+```
+
+We can  use `plot` to plot  the psychometric curves
+
+```{r fig.height=2, fig.width=6}
+plot(fit)
+```
+
+or if we want to used different colors for the different conditions
+
+```{r fig.height=2, fig.width=6}
+plot(fit, color = cond)
+```
+
+The output plot is a ggplot and we can modify it accordingly. For example
+
+```{r fig.height=2, fig.width=6}
+library(ggplot2)
+
+plot(fit, color = cond) +
+  labs(y = "Proportion") +
+  theme_minimal()
+```
+
+Of course, we can also use the output data frames to create the plot ourselves
+
+```{r fig.height=2, fig.width=6}
+ ggplot() +
+  facet_wrap(~ participant) +
+  geom_line(data = fit$curvesbootstrap, 
+            aes(x = x, y = y, color = cond, 
+                group=paste(sample, cond)), lwd = .2, alpha = .4) +
+  geom_line(data = fit$curves, aes(x = x, y = y, group = cond),
+            color = "black") +
+  geom_point(data = fit$averages, aes(x = phase, y = prob, color = cond), size = 2)
+```
+
