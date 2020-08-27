@@ -34,6 +34,15 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("danilinares/quickpsy")
 ```
+## Example
+
+```{r example, fig.height=2, fig.width=6, results='hide'}
+library(quickpsy)
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"))
+
+plot(fit, color = cond)
+```
 
 ## Features
 
@@ -57,12 +66,4 @@ devtools::install_github("danilinares/quickpsy")
 
 - Easy model comparisons using likelihood ratios or Akaike information criterion. 
 
-## Example
 
-```{r example, fig.height=2, fig.width=6, results='hide'}
-library(quickpsy)
-
-fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"))
-
-plot(fit, color = cond)
-```

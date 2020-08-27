@@ -28,6 +28,18 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("danilinares/quickpsy")
 ```
 
+## Example
+
+``` r
+library(quickpsy)
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"))
+
+plot(fit, color = cond)
+```
+
+<img src="man/figures/README-example-1.png" width="100%" />
+
 ## Features
 
   - Fits and plots multiple conditions with minimal coding.
@@ -54,15 +66,3 @@ devtools::install_github("danilinares/quickpsy")
 
   - Easy model comparisons using likelihood ratios or Akaike information
     criterion.
-
-## Example
-
-``` r
-library(quickpsy)
-
-fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"))
-
-plot(fit, color = cond)
-```
-
-<img src="man/figures/README-example-1.png" width="100%" />
