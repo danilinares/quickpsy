@@ -7,6 +7,13 @@
 \usage{
 logliks(nll_fun, param, grouping_without_fun)
 }
+\arguments{
+\item{nll_fun}{The \code{nll_fun} data frame from quickpsy.}
+
+\item{param}{The \code{param} data frame from quickpsy.}
+
+\item{grouping_without_fun}{The \code{grouping_without_fun} data frame from quickpsy.}
+}
 \description{
 Calculates the loglikelihoods
 \code{logliks} calculates the loglikelihoods.

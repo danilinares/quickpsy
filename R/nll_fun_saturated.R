@@ -1,5 +1,8 @@
 #' \code{nll_fun} Creates the sturated negative log-likelihood function
 #' @keywords internal
+#' @param averages The \code{averages} data frame from quickpsy.
+#' @param psych_fun The \code{psych_fun} data frame from quickpsy.
+#' @param grouping_without_fun The \code{grouping_without_fun} data frame from quickpsy.
 nll_fun_saturated <- function(averages, psych_fun, grouping_without_fun) {
 
   averages %>%

@@ -6,6 +6,17 @@
 \usage{
 param(nll_fun, parini, control, parinivector, grouping_without_fun)
 }
+\arguments{
+\item{nll_fun}{The \code{nll_fun} data frame from quickpsy.}
+
+\item{parini}{The \code{parini} data frame from quickpsy.}
+
+\item{control}{The \code{control} data frame from quickpsy.}
+
+\item{parinivector}{The \code{parinivector} data frame from quickpsy.}
+
+\item{grouping_without_fun}{The \code{grouping_without_fun} data frame from quickpsy.}
+}
 \description{
 \code{param} Param
 }

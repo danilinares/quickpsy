@@ -106,8 +106,13 @@ estimated, p3 will be the guess rate and p4 the lapse rate.}
 
 \item{ci}{Bootstrap confidence intervals level based on percentiles (default is .95).}
 
-\item{optimization}{Method used for optimizization. The default is 'optim' which uses
-the \code{optim} function.}
+\item{control}{\code{control} argument of the \code{optim} function.}
+
+\item{parinivector}{A optional vector of initials parameters when the lower and the upper
+bounds of the parameter are specified.}
+
+\item{paircomparisons}{If \code{TRUE} bootstrap paircomparions of the parameters are performed.
+Default is \code{FALSE}}
 }
 \value{
 A list containing the following components:
@@ -147,10 +152,10 @@ where \eqn{\gamma} is the guess rate, \eqn{\lambda} is the lapse rate and
 \eqn{fun} is a sigmoidal-shape function with asymppotes at 0 and 1.
 }
 \examples{
-library(MPDiR) # contains the Vernier data; use ?Vernier for the reference
-fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = c("Direction", "WaveForm", "TempFreq"), B = 10)
+fit <- quickpsy(qpdat, phase, resp,
+grouping = c("participant", "cond"), bootstrap = "none")
 plot(fit)
+plot(fit, color = cond)
 plotpar(fit)
 plotthresholds(fit, geom = "point")
 }

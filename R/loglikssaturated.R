@@ -1,5 +1,9 @@
 #' Calculates the saturated loglikelihoods
 #' \code{logliks} calculates the saturatedloglikelihoods.
+#' @param nll_fun_saturated The \code{nll_fun_saturated} data frame from quickpsy.
+#' @param averages The \code{averages} data frame from quickpsy.
+#' @param grouping_without_fun The \code{grouping_without_fun} data frame from quickpsy.
+#' @export
 loglikssaturated <- function(nll_fun_saturated, averages, grouping_without_fun) {
   one_loglik <- function(nll_fun_saturated, .averages) {
 

@@ -1,5 +1,12 @@
 #' \code{param} Param
 #' @keywords internal
+#' @param nll_fun The \code{nll_fun} data frame from quickpsy.
+#' @param parini The \code{parini} data frame from quickpsy.
+#' @param control The \code{control} data frame from quickpsy.
+#' @param parinivector The \code{parinivector} data frame from quickpsy.
+#' @param grouping_without_fun The \code{grouping_without_fun} data frame from quickpsy.
+#' @importFrom stats optim
+
 param <- function(nll_fun, parini, control, parinivector, grouping_without_fun) {
 
   calculate_par <- function(parini, nll_fun, control, parinivector) {

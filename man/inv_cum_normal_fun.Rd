@@ -19,6 +19,7 @@ inv_cum_normal_fun(prob, p)
 Inverse cumulative normal function
 }
 \examples{
+library(ggplot2)
 yseq <- seq(0, 1, .01)
 xseq <- inv_cum_normal_fun(yseq, c(2, .5))
 curve <- data.frame(x = xseq, y = yseq)

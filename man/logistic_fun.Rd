@@ -18,6 +18,7 @@ Probability at each \code{x}.
 Logistic function of the form \eqn{ (1 + exp(-\beta * (x - \alpha)))^(-1) }
 }
 \examples{
+library(ggplot2)
 xseq <- seq(0, 4, .01)
 yseq <- logistic_fun(xseq, c(2, 4))
 curve <- data.frame(x = xseq, y = yseq)

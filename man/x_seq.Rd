@@ -6,6 +6,13 @@
 \usage{
 x_seq(limits, x, grouping)
 }
+\arguments{
+\item{limits}{The \code{limits} data frame from quickpsy.}
+
+\item{x}{The \code{x} data frame from quickpsy.}
+
+\item{grouping}{The \code{grouping} data frame from quickpsy.}
+}
 \description{
 Creates sequences of x's
 }

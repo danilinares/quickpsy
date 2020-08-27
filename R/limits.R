@@ -1,6 +1,7 @@
 #' Creates the limits
 #' \code{limits} creates the limits
 #' @keywords internal
+#' @importFrom rlang .data
 limits <- function(averages, x_str, xmin, xmax) {
 
   one_limit <- function(averages, x_str, xmin, xmax) {
@@ -9,6 +10,6 @@ limits <- function(averages, x_str, xmin, xmax) {
     data.frame(xmin, xmax)
   }
 
-  averages %>% summarise(one_limit(., x_str, xmin, xmax), .groups = "keep")
+  averages %>% summarise(one_limit(.data, x_str, xmin, xmax), .groups = "keep")
 }
 

@@ -18,6 +18,7 @@ inv_logistic_fun(q, p)
 Inverse logistic function
 }
 \examples{
+library(ggplot2)
 yseq <- seq(0, 1, .01)
 xseq <- inv_logistic_fun(yseq, c(2, 4))
 curve <- data.frame(x = xseq, y = yseq)

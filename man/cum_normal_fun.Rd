@@ -18,10 +18,11 @@ Probability at each \code{x}.
 Cumulative normal function.
 }
 \examples{
+library(ggplot2)
 xseq <- seq(0,4,.01)
 yseq <- cum_normal_fun(xseq, c(2, .5))
 curve <- data.frame(x = xseq, y = yseq)
-ggplot(curve, aes(x = x, y = y)) + geom_line()
+ggplot2::ggplot(curve, aes(x = x, y = y)) + geom_line()
 }
 \seealso{
 \code{\link{inv_cum_normal_fun}}

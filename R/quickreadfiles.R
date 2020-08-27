@@ -16,6 +16,8 @@
 #' @importFrom utils read.csv
 #' @import dplyr
 #' @export
+#' @importFrom rlang .data
+#' @importFrom utils read.table
 
 quickreadfiles <- function(path = getwd(), extension = 'txt', ...) {
 
@@ -37,15 +39,15 @@ quickreadfiles <- function(path = getwd(), extension = 'txt', ...) {
 
   namefiles <- expand.grid(arguments) %>%
     group_by(!!!syms(names(arguments))) %>%
-    unite(namefile, sep = "", remove = FALSE) %>%
-    mutate(namefile = paste0(path,'/', namefile, extensiondot)) %>%
-    mutate(exist = file.exists(namefile))
+    unite(.data$namefile, sep = "", remove = FALSE) %>%
+    mutate(namefile = paste0(path,'/', .data$namefile, extensiondot)) %>%
+    mutate(exist = file.exists(.data$namefile))
 
 
   namefiles %>%
     filter(exist) %>%
-    mutate(file = list(funread(file = namefile, header = TRUE))) %>%
-    dplyr::select(-namefile, -exist) %>%
+    mutate(file = list(funread(file = .data$namefile, header = TRUE))) %>%
+    dplyr::select(-.data$namefile, -exist) %>%
     unnest(file)
 
 }

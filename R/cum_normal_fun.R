@@ -6,9 +6,11 @@
 #' @return Probability at each \code{x}.
 #' @seealso \code{\link{inv_cum_normal_fun}}
 #' @examples
+#' library(ggplot2)
 #' xseq <- seq(0,4,.01)
 #' yseq <- cum_normal_fun(xseq, c(2, .5))
 #' curve <- data.frame(x = xseq, y = yseq)
-#' ggplot(curve, aes(x = x, y = y)) + geom_line()
+#' ggplot2::ggplot(curve, aes(x = x, y = y)) + geom_line()
 #' @export
+#' @importFrom stats pnorm
 cum_normal_fun <- function(x, p) suppressWarnings(pnorm(x, p[1], p[2]))

@@ -68,9 +68,11 @@
 #' \code{'none'} does not perform bootstrap (default is \code{'parametric'}).
 #' @param B number of bootstrap samples (default is 100 ONLY).
 #' @param ci Bootstrap confidence intervals level based on percentiles (default is .95).
-#' @param optimization Method used for optimizization. The default is 'optim' which uses
-#' the \code{optim} function.
-#'
+#' @param control \code{control} argument of the \code{optim} function.
+#' @param parinivector A optional vector of initials parameters when the lower and the upper
+#' bounds of the parameter are specified.
+#' @param paircomparisons If \code{TRUE} bootstrap paircomparions of the parameters are performed.
+#' Default is \code{FALSE}
 #' @return A list containing the following components:
 #' \itemize{
 #'   \item \code{x, k, n}
@@ -110,10 +112,10 @@
 #' introduction. London: Academic Press.
 #'
 #' @examples
-#' library(MPDiR) # contains the Vernier data; use ?Vernier for the reference
-#' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = c("Direction", "WaveForm", "TempFreq"), B = 10)
+#' fit <- quickpsy(qpdat, phase, resp,
+#' grouping = c("participant", "cond"), bootstrap = "none")
 #' plot(fit)
+#' plot(fit, color = cond)
 #' plotpar(fit)
 #' plotthresholds(fit, geom = "point")
 
@@ -122,6 +124,7 @@
 #' @import tidyr
 #' @import purrr
 #' @import ggplot2
+#' @importFrom rlang .data
 
 quickpsy <- function(d, x = x, k = k, n = NULL,
                      grouping = c(),
@@ -159,6 +162,10 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
   if (is.logical(guess) && !guess) guess <- 0
   if (is.logical(lapses) && !lapses) lapses <- 0
 
+  if (paircomparisons & length(grouping) == 0) {
+    stop("There are no groups to perform pair comparisons. paircomparisons should be FALSE")
+  }
+
 
   x_str <- quo_name(x)
 
@@ -191,7 +198,7 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
 
       qp_boot <- avbootstrap %>%
         nest_by() %>%
-        summarise(quickpsy = list(quickpsy_without_bootstrap(data, x, x_str,
+        summarise(quickpsy = list(quickpsy_without_bootstrap(.data$data, x, x_str,
                                                              quo(k), quo(n),
                                                         grouping,
                                                         xmin, xmax,

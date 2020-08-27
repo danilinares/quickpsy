@@ -6,6 +6,13 @@
 \usage{
 nll_fun_saturated(averages, psych_fun, grouping_without_fun)
 }
+\arguments{
+\item{averages}{The \code{averages} data frame from quickpsy.}
+
+\item{psych_fun}{The \code{psych_fun} data frame from quickpsy.}
+
+\item{grouping_without_fun}{The \code{grouping_without_fun} data frame from quickpsy.}
+}
 \description{
 \code{nll_fun} Creates the sturated negative log-likelihood function
 }

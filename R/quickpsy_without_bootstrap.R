@@ -88,6 +88,7 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
   }
 
   if (paircomparisons) {
+
     if (length(grouping) > 0) {
       param_dif <- param_dif(param)
       qp <- c(qp, list(par_dif = param_dif))

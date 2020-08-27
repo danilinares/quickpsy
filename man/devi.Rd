@@ -6,6 +6,13 @@
 \usage{
 devi(logliks, loglikssaturated, grouping_without_fun)
 }
+\arguments{
+\item{logliks}{The \code{logliks} data frame from quickpsy.}
+
+\item{loglikssaturated}{The \code{loglikssaturated} data frame from quickpsy.}
+
+\item{grouping_without_fun}{The \code{grouping_without_fun} data frame from quickpsy.}
+}
 \description{
 \code{devi} calculates the deviance
 }

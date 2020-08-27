@@ -1,5 +1,8 @@
 #' Calculates the loglikelihoods
 #' \code{logliks} calculates the loglikelihoods.
+#' @param nll_fun The \code{nll_fun} data frame from quickpsy.
+#' @param param The \code{param} data frame from quickpsy.
+#' @param grouping_without_fun The \code{grouping_without_fun} data frame from quickpsy.
 logliks <- function(nll_fun, param, grouping_without_fun) {
   one_loglik <- function(nll_fun, param) {
 

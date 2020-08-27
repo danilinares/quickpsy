@@ -14,15 +14,10 @@
 #' (default is \code{TRUE})
 #' @param ci If \code{FALSE} confidence intervals are not plotted
 #' (default is \code{TRUE})
-#' @seealso \code{\link{plotcurves_}}
-#' @examples
-#' library(MPDiR) # contains the Vernier data
-#' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = .(Direction, WaveForm, TempFreq), B = 5)
-#' plotcurves(fit)
-#' plotcurves(fit, xpanel = Direction)
-#' plotcurves(fit, xpanel = Direction, color = WaveForm, ci = FALSE)
-#' @export plotcurves
+#' @export
+#' @importFrom stats as.formula
+#' @importFrom rlang .data
+#' @importFrom utils packageVersion
 plotcurves <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
                        color = NULL,
                        averages = TRUE, curves = TRUE, thresholds = TRUE,
@@ -113,21 +108,21 @@ plotcurves <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
 
   # ### plotting ###################################################################
   if (ngrouping == 0) {
-    if (averages) p <- p + geom_point(data = qp$averages, aes(x = .data[[qp$x_str]], y = prob))
-    if (curves) p <- p + geom_line(data = qp$curves, aes(x = x, y = y))
+    if (averages) p <- p + geom_point(data = qp$averages, aes(x = .data[[qp$x_str]], y = .data$prob))
+    if (curves) p <- p + geom_line(data = qp$curves, aes(x = .data$x, y = .data$y))
     if (thresholds) p <- p + geom_linerange(data = qp$thresholds,
-                                            aes(x = thre, ymin = qp$guess, ymax = prob))
+                                            aes(x = .data$thre, ymin = qp$guess, ymax = .data$prob))
     if (ci) p <- p + geom_errorbarh(data = qp$thresholds, height = .03,
-                                    aes(xmin = threinf, xmax = thresup, y = prob))
+                                    aes(xmin = .data$threinf, xmax = .data$thresup, y = .data$prob))
   }
   if (ngrouping == 1 || ngrouping ==2 || ngrouping == 3) {
     if (!is.null(color)) {
       qp$averages[[color]] <- factor(qp$averages[[color]])
       qp$curves[[color]] <- factor(qp$curves[[color]])
 
-      if (averages) p <- p + geom_point(data = qp$averages, aes(x = .data[[qp$x_str]], y = prob, color = .data[[color]]))
+      if (averages) p <- p + geom_point(data = qp$averages, aes(x = .data[[qp$x_str]], y = .data$prob, color = .data[[color]]))
 
-      if (curves) p <- p + geom_line(data = qp$curves, aes(x = x, y = y, color = .data[[color]]))
+      if (curves) p <- p + geom_line(data = qp$curves, aes(x = .data$x, y = .data$y, color = .data[[color]]))
 
       if (thresholds) {
 
@@ -142,23 +137,23 @@ plotcurves <- function(qp, panel = NULL, xpanel = NULL, ypanel = NULL,
 
 
         p <- p + geom_linerange(data = qp$thresholds,
-                                aes(x = thre,
+                                aes(x = .data$thre,
                                            ymin = qp$guess, #axisYrange[1] - .2, #make sure extends below axis line
-                                           ymax = prob, color = .data[[color]]))
+                                           ymax = .data$prob, color = .data[[color]]))
         #Because threshline extended below axis limit, axis automatically scaled below it.
         #Restore it to its former values
      #   p <- p + coord_cartesian(ylim = axisYrange)
       }
       if (ci) {
         p <- p + geom_errorbarh(data = qp$thresholds, height = .03,
-                                aes(xmin = threinf, xmax = thresup, color = .data[[color]],  y = prob))
+                                aes(xmin = .data$threinf, xmax = .data$thresup, color = .data[[color]],  y = .data$prob))
       }
     }
     else {
-      if (averages) p <- p + geom_point(data = qp$averages, aes(x = .data[[qp$x_str]], y = prob))
-      if (curves) p <- p + geom_line(data = qp$curves, aes(x = x, y = y))
-      if (thresholds) p <- p + geom_linerange(data = qp$thresholds, aes(x = thre, ymin = qp$guess, ymax = prob))
-      if (ci) p <- p + geom_errorbarh(data = qp$thresholds, height = .03, aes(xmin = threinf, xmax = thresup, y = prob))
+      if (averages) p <- p + geom_point(data = qp$averages, aes(x = .data[[qp$x_str]], y = .data$prob))
+      if (curves) p <- p + geom_line(data = qp$curves, aes(x = .data$x, y = .data$y))
+      if (thresholds) p <- p + geom_linerange(data = qp$thresholds, aes(x = .data$thre, ymin = qp$guess, ymax = .data$prob))
+      if (ci) p <- p + geom_errorbarh(data = qp$thresholds, height = .03, aes(xmin = .data$threinf, xmax = .data$thresup, y = .data$prob))
     }
   }
 

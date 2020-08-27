@@ -7,6 +7,13 @@
 \usage{
 loglikssaturated(nll_fun_saturated, averages, grouping_without_fun)
 }
+\arguments{
+\item{nll_fun_saturated}{The \code{nll_fun_saturated} data frame from quickpsy.}
+
+\item{averages}{The \code{averages} data frame from quickpsy.}
+
+\item{grouping_without_fun}{The \code{grouping_without_fun} data frame from quickpsy.}
+}
 \description{
 Calculates the saturated loglikelihoods
 \code{logliks} calculates the saturatedloglikelihoods.

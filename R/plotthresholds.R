@@ -12,16 +12,11 @@
 #' If \code{'point'} displays points (default is 'bar').
 #' @param ci If \code{FALSE} confidence intervals are not plotted
 #' (default is \code{TRUE}).
-#' @seealso  \code{\link{plotthresholds_}}
 #' @examples
-#' library(MPDiR) # contains the Vernier data
-#' fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-#'                 grouping = .(Direction, WaveForm, TempFreq), B = 10)
+##' fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"), bootstrap = "none")
 #' plotthresholds(fit)
-#' plotthresholds(fit, x = WaveForm)
-#' plotthresholds(fit, xpanel = Direction)
-#' plotthresholds(fit, color = Direction, ypanel = WaveForm, geom = 'point')
 #' @export
+#' @importFrom rlang .data
 plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
                            ypanel = NULL, color = NULL, geom = "bar", ci = T,
                            sizeerrorbar = .5) {
@@ -34,38 +29,38 @@ plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
   if (!("thresholds" %in% names(qp)))
     stop('To plot the thresholds, quickpsy should be called with thresholds = TRUE', call. = FALSE)
-  
+
   if (!("threinf" %in% names(qp$thresholds))) ci <- FALSE
-  
-  p <- ggplot() 
+
+  p <- ggplot()
   if (qp$log) p <- p + ylab(paste0("log(", qp$x_str, ")"))
   else p <- p + ylab(qp$x_str)
-  
+
   grouping <- qp$grouping
   ngrouping <- length(grouping)
-  
+
   if (ngrouping == 0) { ###########################################################
     if (geom == "bar") {
-      p <- p + geom_bar(data = qp$thresholds, aes(x = 0, y = thre), fill = "grey",
+      p <- p + geom_bar(data = qp$thresholds, aes(x = 0, y = .data$thre), fill = "grey",
                         stat = "identity", position = "dodge") +
         theme(axis.title.x = element_blank(),
               axis.text.x = element_blank())
       if (ci) p <- p + geom_errorbar(data = qp$thresholds,
-                                     aes(x = 0, ymin = threinf, ymax = thresup),
+                                     aes(x = 0, ymin = .data$threinf, ymax = .data$thresup),
                                      stat = "identity", position = position_dodge(0.9), width = .5,
                                      size=sizeerrorbar)
     }
-    
+
     if (geom == "point") {
-      p <- p + geom_point(data = qp$thresholds, aes(x = 0, y = thre)) +
+      p <- p + geom_point(data = qp$thresholds, aes(x = 0, y = .data$thre)) +
         theme(axis.title.x = element_blank(),
               axis.text.x = element_blank())
       if (ci) p <- p + geom_linerange(data = qp$thresholds,
-                                      aes(x = 0, ymin = threinf, ymax = thresup),
+                                      aes(x = 0, ymin = .data$threinf, ymax = .data$thresup),
                                       stat = "identity", position = position_dodge(0.9), width = .5)
     }
   }
-  
+
   if (ngrouping == 1) { ###########################################################
     if (is.null(color) && is.null(x)) color <- grouping[[1]]
 
@@ -73,12 +68,12 @@ plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
       if (geom == "bar") {
         qp$thresholds[[color]] <- factor(qp$thresholds[[color]])
         p <- p + geom_bar(data = qp$thresholds,
-                          aes(x = .data[[color]], fill = .data[[color]], y = thre),
+                          aes(x = .data[[color]], fill = .data[[color]], y = .data$thre),
                           stat = 'identity', position = position_dodge(0.9))
         if (ci) {
           p <- p + geom_errorbar(data = qp$thresholds,
-                                 aes(x = .data[[color]], ymin = threinf,
-                                            ymax = thresup), stat = 'identity',
+                                 aes(x = .data[[color]], ymin = .data$threinf,
+                                            ymax = .data$thresup), stat = 'identity',
                                  position = position_dodge(0.9), width = .5,
                                  size=sizeerrorbar)
         }
@@ -86,31 +81,31 @@ plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
       }
       if (geom == 'point') {
         p <- p + geom_point(data = qp$thresholds,
-                            aes(x = .data[[color]], color = .data[[color]], y = thre))
+                            aes(x = .data[[color]], color = .data[[color]], y = .data$thre))
         if (ci) p <- p + geom_linerange(data = qp$thresholds,
-                                        aes(x = .data[[color]], color = .data[[color]], ymin = threinf,
-                                                   ymax = thresup), stat = 'identity', position = position_dodge(0.9))
+                                        aes(x = .data[[color]], color = .data[[color]], ymin = .data$threinf,
+                                                   ymax = .data$thresup), stat = 'identity', position = position_dodge(0.9))
       }
     }
 
     if (is.null(color) && !is.null(x)) {
       if (geom == 'bar') {
         p <- p + geom_bar(data = qp$thresholds, fill ='grey',
-                          aes(x = x, y = thre),
+                          aes(x = x, y = .data$thre),
                           stat = 'identity', position = position_dodge(0.9))
         if (ci) p <- p + geom_errorbar(data = qp$thresholds,
-                                       aes(x = x, ymin = threinf, ymax = thresup),
+                                       aes(x = x, ymin = .data$threinf, ymax = .data$thresup),
                                        stat = 'identity', position = position_dodge(0.9), width = .5,
                                        size=sizeerrorbar)
       }
 
       if (geom == 'point') {
         p <- p + geom_point(data = qp$thresholds, fill ='grey',
-                            aes(x = x, y = thre)) +
+                            aes(x = x, y = .data$thre)) +
           geom_line(data = qp$thresholds, fill ='grey',
-                    aes(x = x, y = thre))
+                    aes(x = x, y = .data$thre))
         if (ci) p <- p + geom_linerange(data = qp$thresholds,
-                                        aes(x = x, ymin = threinf, ymax = thresup),
+                                        aes(x = x, ymin = .data$threinf, ymax = .data$thresup),
                                         stat = 'identity', position = position_dodge(0.9))
       }
     }
@@ -135,24 +130,23 @@ plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
 
         qp$thresholds[[x]] <- factor(qp$thresholds[[x]])
         p <- p + geom_bar(data = qp$thresholds,
-                          aes(x = .data[[x]], fill = .data[[color]], y = thre),
+                          aes(x = .data[[x]], fill = .data[[color]], y = .data$thre),
                           stat = 'identity', position = position_dodge(0.9))
         if (ci) {
           p <- p + geom_errorbar(data = qp$thresholds, width =.5,
-                                 aes(x = .data[[x]], group = .data[[color]], ymin = threinf,
-                                            ymax = thresup), stat = 'identity',
+                                 aes(x = .data[[x]], group = .data[[color]], ymin = .data$threinf,
+                                            ymax = .data$thresup), stat = 'identity',
                                  size=sizeerrorbar,
                                  position = position_dodge(.9))
         }
       }
       if (geom == 'point') {
-        print("dentro")
         p <- p + geom_point(data = qp$thresholds,
-                            aes(x = .data[[x]], color = .data[[color]], y = thre)) 
+                            aes(x = .data[[x]], color = .data[[color]], y = .data$thre))
         if (ci) {
           p <- p + geom_linerange(data = qp$thresholds,
                                   aes(x = .data[[x]], color = .data[[color]], group = .data[[color]],
-                                             ymin = threinf, ymax = thresup))
+                                             ymin = .data$threinf, ymax = .data$thresup))
         }
       }
     }
@@ -170,25 +164,25 @@ plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
       if (geom == 'bar') {
         qp$thresholds[[x]] <- factor(qp$thresholds[[x]])
         p <- p + geom_bar(data = qp$thresholds,
-                          aes(x = .data[[x]], y = thre),
+                          aes(x = .data[[x]], y = .data$thre),
                           stat = 'identity', position = position_dodge(0.9))
         if (ci) {
           p <- p + geom_errorbar(data = qp$thresholds, width =.5,
-                                 aes(x = .data[[x]], ymin = threinf,
-                                            ymax = thresup), stat = 'identity',
+                                 aes(x = .data[[x]], ymin = .data$threinf,
+                                            ymax = .data$thresup), stat = 'identity',
                                  size=sizeerrorbar,
                                  position = position_dodge(.9))
         }
       }
       if (geom == 'point') {
         p <- p + geom_point(data = qp$thresholds,
-                            aes(x = .data[[x]], y = thre)) +
+                            aes(x = .data[[x]], y = .data$thre)) +
           geom_line(data = qp$thresholds,
-                    aes(x = x, y = thre))
+                    aes(x = x, y = .data$thre))
         if (ci) {
           p <- p + geom_linerange(data = qp$thresholds,
                                   aes(x = .data[[x]],
-                                             ymin = threinf, ymax = thresup))
+                                             ymin = .data$threinf, ymax = .data$thresup))
         }
       }
     }
@@ -232,30 +226,30 @@ plotthresholds <- function(qp, x = NULL, panel = NULL, xpanel = NULL,
     if (geom == 'bar') {
       qp$thresholds[[x]] <- factor(qp$thresholds[[x]])
       p <- p + geom_bar(data = qp$thresholds,
-                        aes(x = .data[[x]], fill = .data[[color]], y = thre),
+                        aes(x = .data[[x]], fill = .data[[color]], y = .data$thre),
                         stat = 'identity', position = 'dodge')
       if (ci) {
         p <- p + geom_errorbar(data = qp$thresholds, width =.5,
-                               aes(x = .data[[x]], group = .data[[color]], ymin = threinf,
-                                          ymax = thresup), stat = 'identity',
+                               aes(x = .data[[x]], group = .data[[color]], ymin = .data$threinf,
+                                          ymax = .data$thresup), stat = 'identity',
                                size=sizeerrorbar,
                                position = position_dodge(.9))
       }
     }
     if (geom == 'point') {
       p <- p + geom_point(data = qp$thresholds,
-                          aes(x = .data[[x]], color = .data[[color]], y = thre)) +
+                          aes(x = .data[[x]], color = .data[[color]], y = .data$thre)) +
         geom_line(data = qp$thresholds,
-                  aes(x = , color = .data[[color]], group = .data[[color]], y = thre))
+                  aes(x = , color = .data[[color]], group = .data[[color]], y = .data$thre))
       if (ci) {
         p <- p + geom_linerange(data = qp$thresholds,
                                 aes(x = .data[[x]], color = .data[[color]], group = .data[[color]],
-                                           ymin = threinf, ymax = thresup))
+                                           ymin = .data$threinf, ymax = .data$thresup))
       }
     }
 
   }
-  
-  
+
+
   p
 }

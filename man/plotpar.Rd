@@ -38,15 +38,9 @@ If \code{'point'} displays points (default is \code{'bar'}).}
 \code{plotpar} plot the values of the parameters.
 }
 \examples{
-library(MPDiR) # contains the Vernier data
-fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq), B = 10)
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"), bootstrap = "none")
+plot(fit)
+plot(fit, color = cond)
 plotpar(fit)
-plotpar(fit, x = WaveForm)
-plotpar(fit, xpanel = Direction)
-plotpar(fit, color = Direction)
-plotpar(fit, color = Direction, ypanel = WaveForm, geom = 'point')
-}
-\seealso{
-\code{\link{plotpar_}}
+plotthresholds(fit, geom = "point")
 }

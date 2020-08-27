@@ -6,6 +6,7 @@
 #' @return \code{x} at each probability.
 #' @seealso \code{\link{logistic_fun}}
 #' @examples
+#' library(ggplot2)
 #' yseq <- seq(0, 1, .01)
 #' xseq <- inv_logistic_fun(yseq, c(2, 4))
 #' curve <- data.frame(x = xseq, y = yseq)

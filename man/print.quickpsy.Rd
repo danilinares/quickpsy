@@ -6,6 +6,11 @@
 \usage{
 \method{print}{quickpsy}(x, ...)
 }
+\arguments{
+\item{x}{A quickpsy object.}
+
+\item{...}{Other arguments}
+}
 \description{
 Print quickpsy objects
 }

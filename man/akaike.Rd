@@ -7,6 +7,9 @@
 \usage{
 akaike(logliks)
 }
+\arguments{
+\item{logliks}{The \code{logliks} data frame from quickpsy.}
+}
 \description{
 Calculates the Akaike Information Criterion
 \code{akaike} calculates the loglikelihoods.

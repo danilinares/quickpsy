@@ -2,9 +2,15 @@ Package: quickpsy
 Type: Package
 Title: Fits Psychometric Functions for Multiple Groups
 Version: 0.2.0
-Author: c(
-    person("Linares", "Daniel", email = "danilinares@gmail.com", role = c("aut","cre")),
-    person("López-Moliner", "Joan", email = "j.lopezmoliner@gmail.com", role = "aut"))
+Authors@R: 
+    c(person(given = "Daniel",
+             family = "Linares",
+             role = c("aut", "cre"),
+             email = "danilinares@gmail.com"),
+     person(given = "Joan",
+             family = "López-Moliner",
+             role = c("aut"),
+             email = "j.lopezmoliner@gmail.com"))
 URL: http://dlinares.org/quickpsy.html
 Description: Quickly fits and plots psychometric functions (normal, logistic,
     Weibull or any function defined by the user) for multiple groups.
@@ -13,7 +19,12 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     dplyr,
-    ggplot2
+    ggplot2,
+    purrr,
+    rlang,
+    stats,
+    tidyr, 
+    utils
 RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)

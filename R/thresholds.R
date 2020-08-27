@@ -5,7 +5,8 @@
 #' @param prob Probability to calculate the threshold.
 #' @param log Use \code{TRUE}, if the logarithm of the independent variable
 #' has been used to fit the curves (default is \code{FALSE}).
-
+#' @importFrom rlang .data
+#' @importFrom stats approx
 thresholds <- function(param, curves, funname, psych_fun, prob, log, guess, lapses, grouping){
 
   one_threshold <- function(param, curves, funname, prob, log, guess, lapses) {
@@ -33,15 +34,11 @@ thresholds <- function(param, curves, funname, psych_fun, prob, log, guess, laps
         thre <- inv_weibull_fun(q, c(par[1], par[2]))
     }
 
-    # if (log) thre <- exp(thre)
-
     data.frame(prob, thre)
   }
 
   one_threshold2 <- function(x, y, prob, log) {
     thre <- approx(y, x, xout = prob, ties = "ordered")$y
-
-    # if (log) thre <- exp(thre)
 
     data.frame(prob, thre)
   }
@@ -64,9 +61,8 @@ thresholds <- function(param, curves, funname, psych_fun, prob, log, guess, laps
       summarise(one_threshold(param, curves, funname, prob, log, guess, lapses), .groups = "keep")
   }
   else {
-    curves %>% summarise(one_threshold2(x, y, prob, log), .groups = "keep")
+    curves %>% summarise(one_threshold2(.data$x, .data$y, prob, log), .groups = "keep")
   }
-
 
 }
 

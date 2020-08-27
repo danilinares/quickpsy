@@ -9,6 +9,13 @@ of groups}
 \usage{
 thresholdcomparisons(thresholds_dif, thresholds_difbootstrap, ci)
 }
+\arguments{
+\item{thresholds_dif}{The \code{thresholds_dif} data frame from quickpsy.}
+
+\item{thresholds_difbootstrap}{The \code{thresholds_difbootstrap} data frame from quickpsy.}
+
+\item{ci}{Bootstrap confidence intervals level based on percentiles (default is .95).}
+}
 \description{
 Pair comparisons of the thresholds using bootstrap
 \code{thresholdscomparisons} Calculates the bootstrap confidence intervals for the

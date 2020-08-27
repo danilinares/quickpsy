@@ -18,6 +18,7 @@ Probability at each \code{x}.
 Weibull function of the form \eqn{ (1 - exp(-(x/\alpha)^\beta)}
 }
 \examples{
+library(ggplot2)
 xseq <- seq(0, 4, .01)
 yseq <- weibull_fun(xseq, c(2, 4))
 curve <- data.frame(x = xseq, y = yseq)

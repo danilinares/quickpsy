@@ -11,7 +11,7 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 qpdat
 }
 \description{
-It is part of the data associated with the paper "Linares, D.,
+The data set is part of the data associated with the paper "Linares, D.,
 & Lopez-Moliner, J. (2006). Perceptual asynchrony between color and motion
 with a single direction change. Journal of Vision, 6(9), 10-10".
 }

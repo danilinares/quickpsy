@@ -1,6 +1,11 @@
 #' Calculates the deviance
 #'
 #' \code{devi} calculates the deviance
+#' @param logliks The \code{logliks} data frame from quickpsy.
+#' @param loglikssaturated The \code{loglikssaturated} data frame from quickpsy.
+#' @param grouping_without_fun The \code{grouping_without_fun} data frame from quickpsy.
+#' @export
+#' @importFrom stats pchisq
 devi <- function(logliks, loglikssaturated, grouping_without_fun) {
 
   one_devi <- function(logliks, loglikssaturated) {

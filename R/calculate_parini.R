@@ -1,5 +1,6 @@
 #' \code{calculate_parini} calculate_parini
 #' @keywords internal
+#' @importFrom stats median qnorm lm
 calculate_parini <- function(averages, funname, x, guess, lapses, grouping) {
 
   one_calculate_parini <- function(averages, funname, x, guess, lapses) {

@@ -6,9 +6,11 @@
 #' @return \code{x} at each probability.
 #' @seealso \code{\link{weibull_fun}}
 #' @examples
+#' library(ggplot2)
 #' yseq <- seq(0, 1, .01)
 #' xseq <- inv_weibull_fun(yseq, c(2, 4))
 #' curve <- data.frame(x = xseq, y = yseq)
 #' ggplot(curve, aes(x = x, y = y)) + geom_line()
 #' @export
+#' @importFrom stats qweibull
 inv_weibull_fun <- function(q, p) qweibull(q, p[2], p[1])

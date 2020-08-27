@@ -16,16 +16,23 @@ ypred(
 )
 }
 \arguments{
-\item{qp}{output from quickpsy}
+\item{averages}{The \code{"averages"} data frame from quickpsy.}
+
+\item{param}{The \code{"param"} data frame from quickpsy.}
+
+\item{psych_fun}{The \code{"psych_fun"} data frame from quickpsy.}
+
+\item{x_str}{The \code{"x_str"} data frame from quickpsy.}
+
+\item{log}{The \code{"log"} data frame from quickpsy.}
+
+\item{grouping}{The \code{"grouping"} data frame from quickpsy.}
+
+\item{grouping_without_fun}{The \code{"grouping_without_fun"} data frame from quickpsy.}
+
+\item{grouping_fun}{The \code{"grouping_fun"} data frame from quickpsy.}
 }
 \description{
 \code{ypred} calculates the predicted probabilities at the values of the
 explanatory variable.
-}
-\examples{
-library(MPDiR) # contains the Vernier data
-data(Vernier) # ?Venier for the reference
-fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq), B = 20)
-ypred(fit)
 }

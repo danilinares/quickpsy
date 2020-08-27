@@ -41,14 +41,6 @@ If \code{'point'} displays points (default is 'bar').}
 \code{plotthresholds} plot the thresholds.
 }
 \examples{
-library(MPDiR) # contains the Vernier data
-fit <- quickpsy(Vernier, Phaseshift, NumUpward, N,
-                grouping = .(Direction, WaveForm, TempFreq), B = 10)
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"), bootstrap = "none")
 plotthresholds(fit)
-plotthresholds(fit, x = WaveForm)
-plotthresholds(fit, xpanel = Direction)
-plotthresholds(fit, color = Direction, ypanel = WaveForm, geom = 'point')
-}
-\seealso{
-\code{\link{plotthresholds_}}
 }
