@@ -13,6 +13,7 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
                      parinivector,
                      paircomparisons) {
 
+
   ### Groups
 
   if (is.function(fun)) grouping_fun <- character(0) #NULL #c()
@@ -38,7 +39,7 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
 
   if (is.null(parini) & funname %in% names(get_functions()) ) {
     parini <- calculate_parini(averages, funname, x, guess, lapses, grouping)
-  }
+   }
   else if (is.null(parini) & !(funname %in% names(get_functions())) ){
     stop("parini (initial parameters) must be specified.", call. = FALSE)
   }
@@ -47,13 +48,17 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
   }
 
 
-  param <- param(nll_fun, parini, control, parinivector, grouping_without_fun)
+  param <- param(nll_fun, parini, control, parinivector, grouping_without_fun, funname, guess, lapses)
 
-  ypred <- ypred(averages, param, psych_fun, x_str, log, grouping, grouping_without_fun, grouping_fun)
+  ypred <- ypred(averages, param, psych_fun, x_str, log,
+                 grouping, grouping_without_fun, grouping_fun,
+                 funname, guess, lapses)
 
   x_seq <- x_seq(limits, x, grouping)
 
-  curves <- ypred(x_seq, param, psych_fun, x_str, log, grouping, grouping_without_fun, grouping_fun)
+  curves <- ypred(x_seq, param, psych_fun, x_str, log,
+                  grouping, grouping_without_fun, grouping_fun,
+                  funname, guess, lapses)
 
   logliks <- logliks(nll_fun, param, grouping_without_fun)
 
@@ -63,8 +68,6 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
   aic <- akaike(logliks)
 
   deviance <- devi(logliks, loglikssaturated, grouping_without_fun)
-
-
 
 
   qp <- list(averages = averages,

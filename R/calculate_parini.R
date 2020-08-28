@@ -6,7 +6,7 @@ calculate_parini <- function(averages, funname, x, guess, lapses, grouping) {
   one_calculate_parini <- function(averages, funname, x, guess, lapses) {
 
     ntrials <- averages$n %>% first()
-    x <-  averages[[quo_name(x)]]
+    x <- averages[[quo_name(x)]]
     y <- averages$prob
 
     if (is.numeric(guess) && is.numeric(lapses)) {
@@ -32,7 +32,7 @@ calculate_parini <- function(averages, funname, x, guess, lapses, grouping) {
 
     ### Transforming y values to be closer to the range (0,1)
     y01 <- (y - gue) / (1 - gue - lap)
-    datp <- tibble(x = x, y01)
+    datp <- data.frame(x = x, y01)
 
 
     ### Replacing 0s and/or 1s by 1 / (2 * n) and 1 - 1 / (2 * n)
@@ -75,6 +75,10 @@ calculate_parini <- function(averages, funname, x, guess, lapses, grouping) {
       p2 <- 1 / p2
     }
 
+    if (gue == 0) gue <- -10
+    else gue <- log(gue)
+    if (lap == 0) lap <- -10
+    else lap <- log(lap)
 
     if (is.numeric(guess) && is.numeric(lapses)) para <- c(p1, p2)
     if (is.logical(guess) && is.logical(lapses)) {

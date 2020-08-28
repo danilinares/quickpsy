@@ -12,4 +12,3 @@ thresholdsci <- function(thresholds, thresholdsbootstrap, ci) {
   thresholds %>% left_join(ci, by = group_vars(thresholds))
 
 }
-

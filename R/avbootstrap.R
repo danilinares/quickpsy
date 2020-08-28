@@ -21,9 +21,6 @@ avbootstrap <- function(averages, ypred, bootstrap, B) {
     mutate(k = rbinom(n(), size = n, prob = .data$y), prob = .data$k / n) %>%
     dplyr::select(-.data$y) %>%
     group_by(sample)
-
-
-
 }
 
 

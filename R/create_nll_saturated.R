@@ -16,9 +16,6 @@ create_nll_saturated <- function(averages) {
            averages$k * log(phi) + (averages$n - averages$k) * log(1 - phi))
 
   }
-
-
-
 }
 
 

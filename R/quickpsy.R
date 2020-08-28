@@ -150,8 +150,12 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
 
   if (missing(grouping)) grouping <- character(0)
 
-  if (is.function(fun)) funname <- deparse(substitute(fun))
-  else funname <- "no_default"
+  # if (is.function(fun)) funname <- deparse(substitute(fun))
+  # else funname <- "no_default"
+
+  funname <- deparse(substitute(fun))
+  if (length(funname) > 1) funname <- "no_default"
+
 
   if (missing(B) & bootstrap != "none")
     cat(paste("Using only", B,
@@ -173,7 +177,8 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
 
   averages <- averages(d, x, x_str, k, n, log, grouping)
 
-  qp <- list(averages = averages)
+  #qp <- list(averages = averages)
+  qp <- list()
 
   ### calling quickpsy one time
   qp <- c(qp, quickpsy_without_bootstrap(averages, x, x_str, k, n,
@@ -194,24 +199,43 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
       avbootstrap <-  avbootstrap(qp$averages,
                                   qp$ypred, bootstrap, B)
 
+
+
       qp$avbootstrap <- avbootstrap
+
+      parini <- qp$par
+      if (funname %in% names(get_functions())) {
+        if (is.logical(guess) && is.logical(lapses)) {
+          parini <- parini %>%
+            rowwise() %>%
+            mutate(par = ifelse(parn == "p3", log(par), par),
+                   par = ifelse(parn == "p4", log(par), par))
+        }
+        if ( (is.logical(guess) && is.numeric(lapses)) |
+             (is.logical(lapses) && is.numeric(guess)))  {
+          parini <- parini %>%
+            rowwise() %>%
+            mutate(par = ifelse(parn == "p3", log(par), par))
+        }
+      }
 
       qp_boot <- avbootstrap %>%
         nest_by() %>%
         summarise(quickpsy = list(quickpsy_without_bootstrap(.data$data, x, x_str,
-                                                             quo(k), quo(n),
+                                                            quo(k), quo(n),
                                                         grouping,
                                                         xmin, xmax,
                                                         log,
                                                         fun,
                                                         funname,
-                                                        qp$par,
+                                                        parini,
                                                         guess, lapses,
                                                         prob, thresholds,
                                                         control, parinivector,
                                                         paircomparisons)),
                   .groups = "keep") %>%
         rowwise()
+
 
 
 
@@ -283,8 +307,6 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
   qp$guess <- guess
   qp$lapses <- lapses
   qp$grouping <- grouping
-
-
 
  class(qp) <- "quickpsy"
  qp

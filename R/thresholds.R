@@ -50,7 +50,7 @@ thresholds <- function(param, curves, funname, psych_fun, prob, log, guess, laps
   }
 
 
-  if (funname != "no_default") {
+  if (funname %in% names(get_functions())) {
     param_n <- param %>% nest_by(.key = "param")
     curves_n <- curves %>% nest_by(.key = "curves")
 
@@ -65,9 +65,6 @@ thresholds <- function(param, curves, funname, psych_fun, prob, log, guess, laps
   }
 
 }
-
-
-
 
 
 

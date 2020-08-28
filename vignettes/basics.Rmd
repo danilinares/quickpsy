@@ -21,7 +21,7 @@ To fit the psychometric functions (the default shape is the cumulative normal fu
 ```{r}
 library(quickpsy)
 
-fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"), B = 5) 
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond")) 
 ```
 
 `quickpsy` creates a object of class quickpsy with a list of data frames with all the results. We can use `names` to see the names of the output data frames
@@ -33,6 +33,12 @@ names(fit)
 To obtain the thresholds, for example, we can do
 ```{r}
 fit$thresholds
+```
+
+and to obtain the parameters
+
+```{r}
+fit$par
 ```
 
 We can  use `plot` to plot  the psychometric curves
@@ -65,8 +71,8 @@ Of course, we can also use the output data frames to create the plot ourselves
   geom_line(data = fit$curvesbootstrap, 
             aes(x = x, y = y, color = cond, 
                 group=paste(sample, cond)), lwd = .2, alpha = .4) +
-  geom_line(data = fit$curves, aes(x = x, y = y, group = cond),
-            color = "black") +
-  geom_point(data = fit$averages, aes(x = phase, y = prob, color = cond), size = 2)
+  geom_line(data = fit$curves, aes(x = x, y = y, group = cond)) +
+  geom_point(data = fit$averages, aes(x = phase, y = prob), size = 2) +
+  geom_point(data = fit$averages, aes(x = phase, y = prob, color = cond))
 ```
 

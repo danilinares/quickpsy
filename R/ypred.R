@@ -10,9 +10,25 @@
 #' @param grouping The \code{"grouping"} data frame from quickpsy.
 #' @param grouping_without_fun The \code{"grouping_without_fun"} data frame from quickpsy.
 #' @param grouping_fun The \code{"grouping_fun"} data frame from quickpsy.
-ypred <- function(averages, param, psych_fun, x_str, log, grouping, grouping_without_fun, grouping_fun) {
+ypred <- function(averages, param, psych_fun, x_str, log,
+                  grouping, grouping_without_fun, grouping_fun,
+                  funname, guess, lapses) {
 
   one_ypred <- function(averages, param, psych_fun, x_str, log) {
+
+    if (funname %in% names(get_functions())) {
+      if (is.logical(guess) && is.logical(lapses)) {
+        param$par[3] <- log(param$par[3])
+        param$par[4] <- log(param$par[4])
+      }
+      if (is.logical(guess) && is.numeric(lapses)) {
+        param$par[3] <- log(param$par[3])
+      }
+      if (is.logical(lapses) && is.numeric(guess)) {
+        param$par[3] <- log(param$par[3])
+      }
+    }
+
     x <- averages[[x_str]]
     y <- psych_fun$fun[[1]](x, param$par)
     data.frame(x, y)
