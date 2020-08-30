@@ -1,6 +1,19 @@
 #' Creates the psychometric function
 #' \code{create_psy_fun} creates the psychometric function
 #' @export
+#' @param psy_fun The shape of the function without guesses and lapses.
+#' @param guess Value indicating the guess rate (leftward asymptote) \eqn{\gamma}
+#' (default is 0). If \code{TRUE}, the guess rate is estimated as the i + 1 parameter where
+#' i corresponds to the number of parameters of \code{fun}. If, for
+#' example, \code{fun} is a predefined shape with parameters p1 and p2,
+#' then the guess rate corresponds to parameter p3.
+#' @param lapses Value indicating the lapse rate (rightward asymptote) \eqn{\lambda}
+#' (default is 0). If \code{TRUE}, the lapse rate is estimated as the i + 1 parameter where
+#' i corresponds to the number of parameters of \code{fun} plus one if
+#' the guess rate is estimated. If, for example, \code{fun} is a
+#' predefined shape with parameters p1 and p2,
+#' then the lapse rate corresponds to parameter p3. If the guess rate is also
+#' estimated, p3 will be the guess rate and p4 the lapse rate.
 #' @importFrom utils tail head
 create_psy_fun <- function(psy_fun, guess, lapses) {
 

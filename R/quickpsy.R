@@ -30,7 +30,8 @@
 #' variable is used to fit the curves (default is \code{FALSE}).
 #' @param fun Name of the shape of the curve to fit. It could be a predefined
 #' shape (\code{cum_normal_fun}, \code{logistic_fun}, \code{weibull_fun})
-#' or the name of a function introduced by the user
+#' or the name of a function introduced by the user. It could also be a data
+#' frame of functions we shared parameters. See the vignetter \code{functions}.
 #' (default is \code{cum_normal_fun}).
 #' @param parini Initial parameters. quickpsy calculates default
 #' initial parameters for the predefined functions by linear modelling of
@@ -112,6 +113,7 @@
 #' introduction. London: Academic Press.
 #'
 #' @examples
+#' library(quickpsy)
 #' fit <- quickpsy(qpdat, phase, resp,
 #' grouping = c("participant", "cond"), bootstrap = "none")
 #' plot(fit)

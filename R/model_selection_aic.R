@@ -3,7 +3,6 @@
 #' The \code{p} indicates the relative probability of the models.
 #' @param aic1 The \code{aic1} data frame from quickpsy for the first model.
 #' @param aic2 The \code{aic2} data frame from quickpsy for the second model.
-#' @param alpha The significance level.
 #' @export
 model_selection_aic <- function(aic1, aic2){
 

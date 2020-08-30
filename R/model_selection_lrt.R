@@ -5,13 +5,13 @@
 #' @export
 model_selection_lrt <- function(loglik1, loglik2, alpha = .05){
 
-  loglik1 <- loglik1 %>% rename(loglik1 = loglik, n_par1 = n_par)
-  loglik2 <- loglik2 %>% rename(loglik2 = loglik, n_par2 = n_par)
+  loglik1 <- loglik1 %>% rename(loglik1 = .data$loglik, n_par1 = .data$n_par)
+  loglik2 <- loglik2 %>% rename(loglik2 = .data$loglik, n_par2 = .data$n_par)
 
 
   if (is.null(groups(loglik1))) {
     loglik <- loglik1 %>%
-      bind_cols(loglik2)
+      bind_cols(.data$loglik2)
   }
   else {
     loglik <- loglik1 %>%
