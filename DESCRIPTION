@@ -23,6 +23,7 @@ Imports:
     purrr,
     rlang,
     stats,
+    tibble,
     tidyr, 
     utils
 RoxygenNote: 7.1.1

@@ -31,6 +31,10 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("danilinares/quickpsy")
 ```
 
+At present, the development version of `quickpsy` is slower than older
+versions. If you need to perform bootstrap for many conditions you might
+want to use an older version.
+
 ## Example
 
 ``` r

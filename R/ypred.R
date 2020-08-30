@@ -10,6 +10,9 @@
 #' @param grouping The \code{"grouping"} data frame from quickpsy.
 #' @param grouping_without_fun The \code{"grouping_without_fun"} data frame from quickpsy.
 #' @param grouping_fun The \code{"grouping_fun"} data frame from quickpsy.
+#' @param funname The \code{funname} data frame from quickpsy.
+#' @param guess Argument \code{guess}
+#' @param lapses Argument \code{lapses}
 ypred <- function(averages, param, psych_fun, x_str, log,
                   grouping, grouping_without_fun, grouping_fun,
                   funname, guess, lapses) {

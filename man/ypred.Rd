@@ -12,7 +12,10 @@ ypred(
   log,
   grouping,
   grouping_without_fun,
-  grouping_fun
+  grouping_fun,
+  funname,
+  guess,
+  lapses
 )
 }
 \arguments{
@@ -31,6 +34,12 @@ ypred(
 \item{grouping_without_fun}{The \code{"grouping_without_fun"} data frame from quickpsy.}
 
 \item{grouping_fun}{The \code{"grouping_fun"} data frame from quickpsy.}
+
+\item{funname}{The \code{funname} data frame from quickpsy.}
+
+\item{guess}{Argument \code{guess}}
+
+\item{lapses}{Argument \code{lapses}}
 }
 \description{
 \code{ypred} calculates the predicted probabilities at the values of the

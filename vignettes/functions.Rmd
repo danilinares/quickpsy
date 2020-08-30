@@ -32,7 +32,7 @@ By default, `quickspy` fits `cum_normal_fun`, but you can change the function us
 fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"), 
                 fun = logistic_fun, bootstrap = "none") 
 
-plot(fit)
+plot(fit, color = cond)
 ```
 
 You can see that it is not necessary to include initial parameters to fit a predefined function.
@@ -71,10 +71,10 @@ plot(fit)
 
 In the `fun` argument you can also incorporate a data frame of functions specifying with function you want to fit to every condition (the data frame should be a tibble to support lists of functions). 
 
-The advantage of this approach is that allows sharing parameters across conditions, such as the slope parameter in the following example using the logistic function
+One advantage of this approach is that you can easily specify shared parameters across conditions, such as the slope parameter in the following example using the logistic function
 
 ```{r fig.height=2, fig.width=6, message=FALSE}
-library(tidyverse)
+library(dplyr)
 
 fun_df <- tibble(cond = c("cond1", "cond2"), 
                  fun = c(function(x, p) (1 + exp(-p[2] * (x - p[1])))^(-1), 
@@ -88,4 +88,22 @@ fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"),
 plot(fit, color = cond)
 ```
 
+This is another example using a shared leftward and rightward asymptote across conditions using the cumulative normal function
+
+```{r fig.height=2, fig.width=6, message=FALSE}
+library(dplyr)
+
+fun_df <- tibble(cond = c("cond1", "cond2"), 
+                 fun = c(function(x, p) p[5] + (1 - p[5] - p[6]) * pnorm(x, p[1], p[2]), 
+                         function(x, p) p[5] + (1 - p[5] - p[6]) * pnorm(x, p[3], p[4])))
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"), 
+                fun = fun_df, 
+                parini = c(-100, 50, -100, 50, 0.01, 0.01), 
+                bootstrap = "none") 
+
+plot(fit, color = cond)
+```
+
+For a given data set you can try different models and then compare them using likelihood ratio tests or the Akaike information criterion (see model_selection section).
 

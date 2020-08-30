@@ -1,0 +1,50 @@
+---
+title: "parameters_thresholds_comparisons"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{parameters_thresholds_comparisons}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Parameters comparisons using bootstrap 
+
+You need to specify that would like to perform `paircomparisons` (in older versions of `quickpsy` the comparisons are performed by default)
+
+```{r fig.height=2, fig.width=6}
+library(quickpsy)
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"),
+                paircomparisons = TRUE, 
+                B = 30) 
+
+plot(fit, color = cond)
+```
+
+All the possible pair comparisons across parameters are include in the output data frame `par_dif`. If, for example, we want to compare the parameters across conditions for each participant we need the following subset of the data frame 
+```{r message=FALSE}
+library(dplyr)
+
+fit$par_dif %>% filter(participant == participant2)
+```
+
+`dif` corresponds to the difference in parameters. `difinf`and `difsup` correspond to the limits of the bootstrap confidence intervals (default 95%). Confidence intervals that do not include the zero suggests than the parameters differ. In this case `p1` (the parameter of location) seems to differs across conditions for all participants. `p2` only seems to differ across conditions for Participant 1. 
+
+To reduce computation time, we only included 30 bootstrap samples, but you will need to include much more. 
+
+## Threholds comparisons using bootstrap 
+
+The bootstrap differences across thresholds are included in `thresholds_dif`
+
+```{r}
+fit$thresholds_dif %>% filter(participant == participant2)
+```
+
+

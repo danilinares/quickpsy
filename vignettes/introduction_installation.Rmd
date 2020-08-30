@@ -1,15 +1,16 @@
 ---
-output: github_document
+title: "introduction_installation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{introduction_installation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  comment = "#>"
 )
 ```
 
@@ -81,4 +82,3 @@ Linares, D., & López-Moliner, J. (2016). [quickpsy: An R package to fit psychom
 * [psyphy](http://cran.r-project.org/web/packages/psyphy/index.html): among other things, it provides links functions to [fit psychometric functions using an approach based on  generalized linear models](http://www.dlinares.org/psychopract.html#fitting-using-generalized-linear-models). 
 
 * [modelfree](http://personalpages.manchester.ac.uk/staff/d.h.foster/software-modelfree/latest/home): fits psychometric functions using a non-parametric approach.
-

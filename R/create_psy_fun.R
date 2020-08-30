@@ -1,6 +1,6 @@
 #' Creates the psychometric function
 #' \code{create_psy_fun} creates the psychometric function
-#' @keywords internal
+#' @export
 #' @importFrom utils tail head
 create_psy_fun <- function(psy_fun, guess, lapses) {
 

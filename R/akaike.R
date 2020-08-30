@@ -5,7 +5,7 @@
 #' @importFrom rlang .data
 akaike <- function(logliks) {
 
-  logliks %>% transmute(aic = -2 * .data$loglik + 2 * .data$n_par)
+  logliks %>% transmute(aic = -2 * .data$loglik + 2 * .data$n_par, n_par = .data$n_par)
 
 }
 

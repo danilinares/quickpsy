@@ -1,0 +1,105 @@
+---
+title: "model_selection"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{model_selection}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+To perform model selection, the dev version of quickspy is necessary. 
+
+Model selection is quite flexible in `quickpsy` as in the `fun` argument you can introduce any arbitrary set of functions with all possible combinations of shared parameters (see the last subsection of the functions section) 
+
+To perform model selection, `quickpsy` uses likelihood ratio tests and the Akaike Information Criterion (see References). 
+
+## Model 1
+
+Let's fit a model for each participant in which the slope does not change across conditions 
+
+```{r fig.height=2, fig.width=6, message=FALSE}
+library(quickpsy)
+library(dplyr)
+
+# the shared parameter is p[2]
+fun_1_df <- tibble(cond = c("cond1", "cond2"), 
+                   fun = c(function(x, p) pnorm(x, p[1], p[2]), 
+                         function(x, p) pnorm(x, p[3], p[2])))
+
+fit_1 <- quickpsy(qpdat, phase, resp, 
+                  grouping = c("participant", "cond"), 
+                  fun = fun_1_df, 
+                  parini = c(-100, 50, -100), 
+                  bootstrap = "none") 
+
+plot(fit_1, color = cond)
+```
+
+We can look at the likelihoods of the models 
+
+```{r}
+fit_1$logliks
+```
+
+or the AICs
+
+```{r}
+fit_1$aic
+```
+
+## Model 2
+
+Now let's fit a model in which for each participant the slope can change across conditions
+
+```{r fig.height=2, fig.width=6, message=FALSE}
+fun_2_df <- tibble(cond = c("cond1", "cond2"), 
+                   fun = c(function(x, p) pnorm(x, p[1], p[2]), 
+                         function(x, p) pnorm(x, p[3], p[4])))
+
+fit_2 <- quickpsy(qpdat, phase, resp, 
+                  grouping = c("participant", "cond"), 
+                  fun = fun_2_df, 
+                  parini = c(-100, 50, -100, 50), 
+                  bootstrap = "none") 
+
+plot(fit_2, color = cond)
+```
+
+## Model selection: likelihood ratio test
+
+The `quickpsy` function `model_selection_lrt` performs the likelihood ratio tests using the chi square distribution. The inputs are the likelihoods of each model. 
+
+```{r}
+model_selection_lrt(fit_1$logliks, fit_2$logliks)
+```
+
+Using the default 5% criterion of significance, the Model 2 (allowing a different slope for each condition) does not improve the fit for any participant. There is some evidence, however, that for Participant 1 the Model 2 might be better. 
+
+## Model selection: Akaike Information Criterion
+
+To perform the model selection using `quickpsy`, you need to introduce in the  `model_selection_aic` function the AICs of each model.
+
+```{r}
+model_selection_aic(fit_1$aic, fit_2$aic)
+```
+Using Akaike Information Criterion the Model 1 is preferred for Participant 2 and 3 and the Model 2 is preferred for Participant 1. The `p` indicates the relative probability of each model. 
+
+
+## References
+
+Kingdom FAA, Prins N. 2016. Psychophysics: A Practical Introduction. Elsevier Science.
+
+Knoblauch, K., & Maloney, L. T. (2012). Modeling psychophysical data in R (Vol. 32). Springer Science & Business Media.
+
+Prins, N. (2018). Applying the model-comparison approach to test specific research hypotheses in psychophysical research using the Palamedes toolbox. Frontiers in psychology, 9, 1250.
+
+
+

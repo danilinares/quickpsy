@@ -1,0 +1,130 @@
+---
+title: "initial_parameters"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{initial_parameters}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Without providing initial parameters
+
+If the function to fit (`fun` argument) is one of the predefined functions (`cum_normal_fun`, `logistic_fun` or `weibull_fun`), `quickpsy` calculates the initials parameters for you
+
+```{r fig.height=2, fig.width=6}
+library(quickpsy)
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"),
+                fun = logistic_fun, 
+                bootstrap = "none") 
+
+plot(fit)
+```
+
+## A vector initial parameters
+
+The initial parameters could be a vector 
+
+```{r fig.height=2, fig.width=6}
+library(quickpsy)
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"),
+                parini = c(-100, 70), # the default function is cum_normal_fun
+                bootstrap = "none") 
+
+plot(fit)
+```
+
+## A list of initial parameters
+
+The initial parameters could be a list in which each component constraints the lower and upper bounds of the parameter (for example, `list(c(par1min, par1max), c(par2min, par2max))`)
+
+```{r fig.height=2, fig.width=6}
+library(quickpsy)
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"),
+                parini = list(c(-300, 300), c(10, 200)),
+                bootstrap = "none") 
+
+plot(fit)
+```
+In addition of the upper and lower bound, you can also specify the initial guess of the parameters
+
+```{r fig.height=2, fig.width=6}
+library(quickpsy)
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"),
+                parini = list(c(-300, 300), c(10, 200)),
+                parinivector = c(-100, 70), 
+                bootstrap = "none") 
+
+plot(fit)
+```
+
+## A dataframe of initial parameters
+
+The initial parameters could be a dataframe specifiying the initial parameters for each condition. It should have the same structure that the component `par` of quickpsy. It is up to you how to build this dataframe. For example:
+
+```{r, message=FALSE}
+library(dplyr)
+library(tidyr) 
+
+participants <- qpdat %>% distinct(participant)
+conditions <- qpdat %>% distinct(cond)
+
+parini <- conditions %>% 
+  crossing(participants) %>% 
+  crossing(tibble(parn = c("p1", "p2"))) %>% 
+  arrange(cond) %>% 
+  bind_cols(tibble(par = c(rep(c(-100, 70), 3), 
+                           rep(c(-150, 100), 3))))
+parini
+```
+
+```{r fig.height=2, fig.width=6}
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"),
+                parini = parini, bootstrap = "none")
+
+plot(fit) 
+```
+
+The dataframe could also contain the constraints of the parameters
+
+```{r}
+parini <- conditions %>% 
+  crossing(participants) %>% 
+  crossing(tibble(parn = c("p1", "p2"))) %>% 
+  arrange(cond) %>% 
+  bind_cols(tibble(parmin = c(rep(c(-300, 10), 3), 
+                         rep(c(-500, 5), 3)),
+                   parmax = c(rep(c(300, 200), 3), 
+                         rep(c(500, 400), 3))))
+parini
+```
+## Data frame of functions (dev version of quickpsy)
+
+When the `fun` argument is a data frame of functions, you should specify all the parameters included in the functions 
+
+
+```{r fig.height=2, fig.width=6, message=FALSE}
+library(dplyr)
+
+fun_df <- tibble(cond = c("cond1", "cond2"), 
+                 fun = c(function(x, p) (1 + exp(-p[2] * (x - p[1])))^(-1), 
+                         function(x, p) (1 + exp(-p[2] * (x - p[3])))^(-1)))
+
+fit <- quickpsy(qpdat, phase, resp, grouping = c("participant", "cond"), 
+                fun = fun_df, # shared slope parameter
+                parini = c(-100, 0.02, -100), 
+                bootstrap = "none") 
+
+plot(fit, color = cond)
+```
+
