@@ -146,9 +146,7 @@ Wichmann and Hill (2001) reported that allowing $\lambda$ to vary within a given
 
 ```{r fig.height=2, fig.width=4}
 fit_lapses <- quickpsy(simdat, x, k, n, grouping = c("squeme", "lambda", "sample"), 
-                fun = weibull_fun, bootstrap = "none", guess = .5, lapses = TRUE,
-               # parini = list(c(1,30), c(1,10), c(0,.05)), 
-                xmin = 4, xmax  = 20) 
+                fun = weibull_fun, bootstrap = "none", guess = .5, lapses = TRUE, xmin = 4, xmax  = 20) 
 
 thre_lapses <- fit_lapses$thresholds %>% 
   group_by(squeme, lambda) %>%

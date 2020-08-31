@@ -69,7 +69,7 @@ plot(fit)
 
 ### Data frame of functions (dev version of quickpsy)
 
-In the `fun` argument you can also incorporate a data frame of functions specifying with function you want to fit to every condition (the data frame should be a tibble to support lists of functions). 
+In the `fun` argument you can also incorporate a data frame of functions specifying with function you want to fit to every group (the data frame should be a tibble to support lists of functions). 
 
 One advantage of this approach is that you can easily specify shared parameters across conditions, such as the slope parameter in the following example using the logistic function
 

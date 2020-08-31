@@ -71,8 +71,8 @@ plot(fit, color = cond)
 
   - Different conditions could share parameters.
 
-  - Easy model comparisons using likelihood ratios or Akaike information
-    criterion.
+  - Easy model comparisons using likelihood ratios or Akaike Information
+    Criterion.
 
 ## Citation
 

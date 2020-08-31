@@ -153,6 +153,7 @@ where \eqn{\gamma} is the guess rate, \eqn{\lambda} is the lapse rate and
 \eqn{fun} is a sigmoidal-shape function with asymppotes at 0 and 1.
 }
 \examples{
+library(quickpsy)
 fit <- quickpsy(qpdat, phase, resp,
 grouping = c("participant", "cond"), bootstrap = "none")
 plot(fit)

@@ -141,7 +141,6 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                      parinivector = NULL,
                      paircomparisons = FALSE) {
 
-
   ### Working with the arguments
 
   x <- enquo(x)
@@ -151,9 +150,7 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
   if (!missing(n)) n <- enquo(n)
 
   if (missing(grouping)) grouping <- character(0)
-
-  # if (is.function(fun)) funname <- deparse(substitute(fun))
-  # else funname <- "no_default"
+  else grouping <- as.character(enexpr(grouping))[-1] # this transform .(a,b) in c("a", "b") to be compatible with old quickpsy
 
   funname <- deparse(substitute(fun))
   if (length(funname) > 1) funname <- "no_default"
@@ -210,14 +207,14 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
         if (is.logical(guess) && is.logical(lapses)) {
           parini <- parini %>%
             rowwise() %>%
-            mutate(par = ifelse(parn == "p3", log(par), par),
-                   par = ifelse(parn == "p4", log(par), par))
+            mutate(par = ifelse(.data$parn == "p3", log(.data$par), .data$par), # .data$ avoids the note in CRAN check
+                   par = ifelse(.data$parn == "p4", log(.data$par), .data$par))
         }
         if ( (is.logical(guess) && is.numeric(lapses)) |
              (is.logical(lapses) && is.numeric(guess)))  {
           parini <- parini %>%
             rowwise() %>%
-            mutate(par = ifelse(parn == "p3", log(par), par))
+            mutate(par = ifelse(.data$parn == "p3", log(.data$par), .data$par))
         }
       }
 
