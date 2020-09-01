@@ -32,7 +32,7 @@ library(dplyr)
 # the shared parameter is p[2]
 fun_1_df <- tibble(cond = c("cond1", "cond2"), 
                    fun = c(function(x, p) pnorm(x, p[1], p[2]), 
-                         function(x, p) pnorm(x, p[3], p[2])))
+                           function(x, p) pnorm(x, p[3], p[2])))
 
 fit_1 <- quickpsy(qpdat, phase, resp, 
                   grouping = c("participant", "cond"), 
@@ -62,7 +62,7 @@ Now let's fit a model in which for each participant the slope can change across 
 ```{r fig.height=2, fig.width=6, message=FALSE}
 fun_2_df <- tibble(cond = c("cond1", "cond2"), 
                    fun = c(function(x, p) pnorm(x, p[1], p[2]), 
-                         function(x, p) pnorm(x, p[3], p[4])))
+                           function(x, p) pnorm(x, p[3], p[4])))
 
 fit_2 <- quickpsy(qpdat, phase, resp, 
                   grouping = c("participant", "cond"), 

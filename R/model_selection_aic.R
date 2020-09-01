@@ -18,7 +18,7 @@ model_selection_aic <- function(aic1, aic2){
     bind_cols(aic2)
 
   aics %>%
-    mutate(best = if_else(aic1 < aic2, "first", "second"),
-           p = exp(-(aic1 - aic2)))
+    mutate(p = exp(-(aic1 - aic2)),
+           best = if_else(aic1 < aic2, "first", "second"))
 
 }
