@@ -141,7 +141,7 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                      parinivector = NULL,
                      paircomparisons = FALSE) {
 
-  ### Working with the arguments
+  ### Working with the arguments (prueba)
 
   x <- enquo(x)
 
