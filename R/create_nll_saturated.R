@@ -1,5 +1,5 @@
 #' Creates the saturated negative log-likelihood function
-#' \code{create_nll} Creates the saturatednegative log-likelihood function
+#' \code{create_nll_saturated} Creates the saturatednegative log-likelihood function
 #' @keywords internal
 create_nll_saturated <- function(averages) {
 

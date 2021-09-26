@@ -139,9 +139,10 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                      bootstrap = "parametric", B = 100, ci = .95,
                      control = NULL,
                      parinivector = NULL,
-                     paircomparisons = FALSE) {
+                     paircomparisons = FALSE,
+                     line_res = 500) {
 
-  ### Working with the arguments (prueba)
+  ### Working with the arguments
 
   x <- enquo(x)
 
@@ -191,7 +192,8 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                              prob, thresholds,
                              control,
                              parinivector,
-                             paircomparisons))
+                             paircomparisons,
+                             line_res))
 
 
     if (bootstrap == "parametric" || bootstrap == "nonparametric") {

@@ -3,10 +3,10 @@
 #' @param x The \code{x} data frame from quickpsy.
 #' @param grouping The \code{grouping} data frame from quickpsy.
 #' @importFrom rlang .data
-x_seq <- function(limits, x, grouping) {
+x_seq <- function(limits, x, grouping, line_res) {
 
   limits %>%
-    summarise(!!quo_name(x) := seq(.data$xmin, .data$xmax, length = 500), .groups = "drop_last") %>%
+    summarise(!!quo_name(x) := seq(.data$xmin, .data$xmax, length = line_res), .groups = "drop_last") %>%
     group_by(!!!syms(grouping))
 
 }

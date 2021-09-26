@@ -11,7 +11,8 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
                      prob, thresholds,
                      control,
                      parinivector,
-                     paircomparisons) {
+                     paircomparisons,
+                     line_res) {
 
 
   ### Groups
@@ -36,6 +37,8 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
 
   nll_fun_saturated <- nll_fun_saturated(averages, psych_fun, grouping_without_fun)
 
+  nll_fun_null <- nll_fun_null(averages, psych_fun, grouping_without_fun)
+
 
   if (is.null(parini) & funname %in% names(get_functions()) ) {
     parini <- calculate_parini(averages, funname, x, guess, lapses, grouping)
@@ -54,7 +57,7 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
                  grouping, grouping_without_fun, grouping_fun,
                  funname, guess, lapses)
 
-  x_seq <- x_seq(limits, x, grouping)
+  x_seq <- x_seq(limits, x, grouping, line_res)
 
   curves <- ypred(x_seq, param, psych_fun, x_str, log,
                   grouping, grouping_without_fun, grouping_fun,
