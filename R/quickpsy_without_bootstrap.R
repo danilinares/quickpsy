@@ -37,8 +37,6 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
 
   nll_fun_saturated <- nll_fun_saturated(averages, psych_fun, grouping_without_fun)
 
-  nll_fun_null <- nll_fun_null(averages, psych_fun, grouping_without_fun)
-
 
   if (is.null(parini) & funname %in% names(get_functions()) ) {
     parini <- calculate_parini(averages, funname, x, guess, lapses, grouping)
