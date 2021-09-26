@@ -74,6 +74,7 @@
 #' bounds of the parameter are specified.
 #' @param paircomparisons If \code{TRUE} bootstrap paircomparions of the parameters are performed.
 #' Default is \code{FALSE}
+#' @param line_res Specify the number of points to draw the curves.
 #' @return A list containing the following components:
 #' \itemize{
 #'   \item \code{x, k, n}
