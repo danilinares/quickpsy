@@ -234,7 +234,8 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                                                         guess, lapses,
                                                         prob, thresholds,
                                                         control, parinivector,
-                                                        paircomparisons)),
+                                                        paircomparisons,
+                                                        line_res)),
                   .groups = "keep") %>%
         rowwise()
 
