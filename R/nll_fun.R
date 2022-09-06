@@ -5,14 +5,14 @@
 #' @param x_str The \code{x_str} data frame from quickpsy.
 #' @param grouping_without_fun The \code{grouping_without_fun} data frame from quickpsy.
 #' @param grouping_fun The \code{grouping_fun} data frame from quickpsy.
-nll_fun <- function(averages, psych_fun, x_str, grouping_without_fun, grouping_fun) {
+nll_fun <- function(averages, psych_fun, x_str, binomial_coef, grouping_without_fun, grouping_fun) {
 
   averages %>%
     group_by(!!!syms(grouping_without_fun)) %>%
     nest(averages = !group_cols()) %>%
     mutate(psych_fun = list(psych_fun)) %>%
     rowwise() %>%
-    mutate(nll_fun = list(create_nll(averages, psych_fun, x_str, grouping_fun))) %>%
+    mutate(nll_fun = list(create_nll(averages, psych_fun, x_str, binomial_coef, grouping_fun))) %>%
     select(-c(averages, psych_fun)) %>%
     group_by(!!!syms(grouping_without_fun))
 

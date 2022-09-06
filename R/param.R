@@ -11,7 +11,7 @@
 #' @importFrom stats optim
 
 param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, funname,
-                  guess, lapses) {
+                  guess, lapses, method) {
 
 
   calculate_par <- function(parini, nll_fun, control, parinivector) {
@@ -19,7 +19,15 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
 
     if ("par" %in% names(parini)) {
 
-      param <- optim(parini$par, nll_fun, control = control)$par
+      if (method == "optim") {
+        param <- optim(parini$par, nll_fun, control = control)$par
+      }
+      if (method == "nlopt") {
+        param <- nloptr(parini$par, nll_fun,
+                        opts = list("algorithm"="NLOPT_LN_SBPLX",
+                                    "xtol_rel"=1.0e-10)
+                        )$solution
+      }
     }
     else {
       if (is.null(parinivector)) p <- .5 * (parini$parmax - parini$parmin)

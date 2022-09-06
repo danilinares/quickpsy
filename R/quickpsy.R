@@ -75,6 +75,7 @@
 #' @param paircomparisons If \code{TRUE} bootstrap paircomparions of the parameters are performed.
 #' Default is \code{FALSE}
 #' @param line_res Specify the number of points to draw the curves.
+#' @param binomial_coef Specifies whether the binomical coefficient should be calculated for the likelihood. Default is \code{TRUE}
 #' @return A list containing the following components:
 #' \itemize{
 #'   \item \code{x, k, n}
@@ -95,7 +96,8 @@
 #'   \item \code{curvesbootstrap} Bootstrap psychometric curves.
 #'   \item \code{thresholds} Thresholds and its confidence intervals.
 #'   \item \code{thresholdscomparisons} Pair-wise comparisons of the thresholds.
-#'   \item \code{logliks} Log-likelihoods of the model.
+#'   \item \code{logliks} Log-likelihoods of the model. It includes the binomial
+#'   term. So it produces different values that \code{glm}.
 #'   \item \code{loglikssaturated} Log-likelihoods of the saturated model.
 #'   \item \code{deviance} Deviance of the model and the p-value calculated by
 #'    using the chi-square distribution and bootstraping.
@@ -141,7 +143,9 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                      control = NULL,
                      parinivector = NULL,
                      paircomparisons = FALSE,
-                     line_res = 500) {
+                     line_res = 500,
+                     method = "optim",
+                     binomial_coef = TRUE) {
 
   ### Working with the arguments
 
@@ -194,7 +198,9 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                              control,
                              parinivector,
                              paircomparisons,
-                             line_res))
+                             line_res,
+                             method,
+                             binomial_coef))
 
 
     if (bootstrap == "parametric" || bootstrap == "nonparametric") {

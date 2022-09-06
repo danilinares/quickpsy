@@ -12,7 +12,9 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
                      control,
                      parinivector,
                      paircomparisons,
-                     line_res) {
+                     line_res,
+                     method,
+                     binomial_coef) {
 
 
   ### Groups
@@ -33,9 +35,9 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
 
   psych_fun <- psych_fun(fun, guess, lapses, grouping_fun)
 
-  nll_fun <- nll_fun(averages, psych_fun, x_str, grouping_without_fun, grouping_fun)
+  nll_fun <- nll_fun(averages, psych_fun, x_str, binomial_coef, grouping_without_fun, grouping_fun)
 
-  nll_fun_saturated <- nll_fun_saturated(averages, psych_fun, grouping_without_fun)
+  nll_fun_saturated <- nll_fun_saturated(averages, psych_fun, binomial_coef, grouping_without_fun)
 
 
   if (is.null(parini) & funname %in% names(get_functions()) ) {
@@ -49,7 +51,7 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
   }
 
 
-  param <- param(nll_fun, parini, control, parinivector, grouping_without_fun, funname, guess, lapses)
+  param <- param(nll_fun, parini, control, parinivector, grouping_without_fun, funname, guess, lapses, method)
 
   ypred <- ypred(averages, param, psych_fun, x_str, log,
                  grouping, grouping_without_fun, grouping_fun,
