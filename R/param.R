@@ -20,24 +20,27 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
     if ("par" %in% names(parini)) {
 
       if (method == "optim") {
-        param <- optim(parini$par, nll_fun, control = control)$par
+        fit <- optim(parini$par, nll_fun, control = control,
+                       hessian = TRUE)
       }
-      if (method == "nlopt") {
-        param <- nloptr(parini$par, nll_fun,
-                        opts = list("algorithm"="NLOPT_LN_SBPLX",
-                                    "xtol_rel"=1.0e-10)
-                        )$solution
-      }
+      # if (method == "nlopt") { # we need to revover the hessian and the solution
+      #   param <- nloptr(parini$par, nll_fun,
+      #                   opts = list("algorithm"="NLOPT_LN_SBPLX",
+      #                               "xtol_rel"=1.0e-10)
+      #                   )$solution
+      # }
     }
     else {
       if (is.null(parinivector)) p <- .5 * (parini$parmax - parini$parmin)
       else p <- parinivector
 
-      param <- optim(p, nll_fun, method = "L-BFGS-B",
+      fit <- optim(p, nll_fun, method = "L-BFGS-B",
                      lower = parini$parmin,
                      upper = parini$parmax,
-                     control = control)$par
+                     control = control)
     }
+
+    param <- fit$par
 
     if (funname %in% names(get_functions())) {
       if (is.logical(guess) && is.logical(lapses)) {
@@ -51,7 +54,11 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
         param[3] <- exp(param[3])
       }
     }
-    data.frame(parn = paste0("p", seq(1, length(param))), par = param)
+
+    param <- tible(parn = paste0("p", seq(1, length(param))),
+                        par = param)
+
+    tibble(param = list(param), hessian = list(fit$hessian))
   }
 
   parini %>%

@@ -3,14 +3,24 @@
 #' @keywords internal
 #' @importFrom rlang .data
 #' @importFrom stats quantile
-parci <- function(par, parbootstrap, ci) {
-  ci <- parbootstrap %>%
-    group_by(!!!(groups(par))) %>%
-    group_by(.data$parn, .add = TRUE) %>%
-    summarise(parinf =  quantile(par, .5*(1 - ci)),
-              parsup = quantile(par, 1 - .5*(1 - ci)), .groups = "keep")
+parci <- function(par, hessian, ci) {
 
-  par %>% left_join(ci, by = c(group_vars(par), "parn"))
+  estimate_se_from_hessian <- function(hessian) {
+    fisher_info <- solve(hessian[[1]])
+    se <- sqrt(diag(fisher_info))
+
+    tibble(parn = paste0("p", seq(1, length(se))), se = se)
+  }
+
+  se_from_hessian <- hessian |>
+    summarise(estimate_se_from_hessian(hessian),
+              .groups = "keep")
+
+  par |>
+    left_join(se_from_hessian, by = c("parn", group_vars(par))) |>
+    mutate(parinf = par - qnorm(0.5 + 0.5 * ci) * se,
+           parsup = par + qnorm(0.5 + 0.5 * ci) * se) |>
+    relocate(se, .after = last_col())
 
 }
 

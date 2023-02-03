@@ -51,8 +51,11 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
     parini <- parini(averages, parini, psych_fun, grouping_without_fun)
   }
 
+  param_hessian <- param(nll_fun, parini, control, parinivector, grouping_without_fun, funname, guess, lapses, method)
 
-  param <- param(nll_fun, parini, control, parinivector, grouping_without_fun, funname, guess, lapses, method)
+  param <- param_hessian |> select(-hessian) |> unnest(param)
+
+  hessian <- param_hessian |> select(-param)
 
   ypred <- ypred(averages, param, psych_fun, x_str, log,
                  grouping, grouping_without_fun, grouping_fun,
@@ -81,6 +84,7 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
              nll_fun_saturated = nll_fun_saturated,
              parini = parini,
              par = param,
+             hessian = hessian,
              ypred = ypred,
              x_seq = x_seq,
              curves = curves,

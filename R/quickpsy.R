@@ -87,7 +87,9 @@
 #'   \item \code{ypred} Predicted probabilities at the values of the explanatory
 #'   variable.
 #'   \item \code{curves} Psychometric curves.
-#'   \item \code{par} Fitted parameters and its confidence intervals.
+#'   \item \code{par} Fitted parameters and its confidence intervals using the
+#'   asymptotic var-covar matrix computed from the Hessian. If bootstap is performed, then
+#'   the confidence intervals are bootstrap confidence intervals.
 #'   \item \code{parcomnparisons} Pair-wise comparisons of the parameters
 #'   to assess whether two parameters are significantly different
 #'   using bootstrap. Specifically, the parameter bootstrap samples for each of
@@ -137,9 +139,9 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                      log = FALSE,
                      fun = cum_normal_fun,
                      parini = NULL,
-                     guess = 0, lapses = 0,
+                     guess = 0, lapses = 0, ci = .95,
                      prob = NULL, thresholds = TRUE,
-                     bootstrap = "parametric", B = 100, ci = .95,
+                     bootstrap = "parametric", B = 100,
                      control = NULL,
                      parinivector = NULL,
                      paircomparisons = FALSE,
@@ -203,6 +205,10 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                              binomial_coef))
 
 
+
+
+
+
     if (bootstrap == "parametric" || bootstrap == "nonparametric") {
       avbootstrap <-  avbootstrap(qp$averages,
                                   qp$ypred, bootstrap, B)
@@ -252,7 +258,7 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
 
       parbootstrap <- qp_boot %>% summarise(pluck(quickpsy, "par"), .groups = "keep")
 
-      parci <- parci(qp$par, parbootstrap, ci)
+      parci <- parci_boot(qp$par, parbootstrap, ci)
 
       ypredbootstrap <- qp_boot %>% summarise(pluck(quickpsy, "ypred"), .groups = "keep")
 
@@ -293,7 +299,10 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
       }
 
 
-     }
+    }
+    else {
+      qp$par <- parci(qp$par, qp$hessian, ci)
+    }
 #
 #
 # #
