@@ -14,7 +14,7 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
                   guess, lapses, method) {
 
 
-  calculate_par <- function(parini, nll_fun, control, parinivector) {
+  calculate_par <- function(parini, nll_fun, control, parinivector, method) {
 
 
     if ("par" %in% names(parini)) {
@@ -59,6 +59,6 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
     nest(parini = !group_cols()) %>%
     left_join(nll_fun, by = grouping_without_fun) %>%
     rowwise() %>%
-    summarise(calculate_par(parini, nll_fun, control, parinivector), .groups = "keep")
+    summarise(calculate_par(parini, nll_fun, control, parinivector, method), .groups = "keep")
 
 }

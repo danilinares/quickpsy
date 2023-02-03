@@ -19,6 +19,7 @@ quickpsy_without_bootstrap <- function(averages, x, x_str, k, n,
 
   ### Groups
 
+
   if (is.function(fun)) grouping_fun <- character(0) #NULL #c()
   else if (is.data.frame(fun)) {
     grouping_fun <- fun %>% select(-fun) %>% names()
