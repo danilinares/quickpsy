@@ -55,7 +55,7 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
       }
     }
 
-    param <- tible(parn = paste0("p", seq(1, length(param))),
+    param <- tibble(parn = paste0("p", seq(1, length(param))),
                         par = param)
 
     tibble(param = list(param), hessian = list(fit$hessian))
