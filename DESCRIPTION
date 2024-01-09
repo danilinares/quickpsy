@@ -12,6 +12,7 @@ Authors@R:
              role = c("aut"),
              email = "j.lopezmoliner@gmail.com"))
 URL: http://dlinares.org/quickpsy.html
+BugReports: https://github.com/danilinares/quickpsy/issues
 Description: Quickly fits and plots psychometric functions (normal, logistic,
     Weibull or any function defined by the user) for multiple groups.
 License: MIT + file LICENSE
