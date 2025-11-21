@@ -1,6 +1,6 @@
 #' Logistic function
 #'
-#' Logistic function of the form \eqn{ (1 + exp(-\beta (x - \alpha)))^{(-1)} }
+#' Logistic function of the form \eqn{ (1 + exp(-\beta (x - \alpha)))^{-1} }
 #' @param x Vector of values of the explanatory variable.
 #' @param p Vector of parameters \eqn{p = c(\alpha, \beta)}.
 #' @return Probability at each \code{x}.
