@@ -7,7 +7,7 @@
 x_seq <- function(limits, x, grouping, line_res) {
 
   limits %>%
-    summarise(!!quo_name(x) := seq(.data$xmin, .data$xmax, length = line_res), .groups = "drop_last") %>%
+    reframe(!!quo_name(x) := seq(.data$xmin, .data$xmax, length = line_res)) %>%
     group_by(!!!syms(grouping))
 
 }

@@ -25,7 +25,7 @@ param_dif <- function(param) {
   param %>%
     ungroup() %>%
     nest_by(.data$parn)  %>%
-    summarise(create_df(.data$data), .groups = "keep")
+    reframe(create_df(.data$data))
 
 
 }

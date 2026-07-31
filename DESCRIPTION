@@ -1,7 +1,7 @@
 Package: quickpsy
 Type: Package
 Title: Fits Psychometric Functions for Multiple Groups
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     c(person(given = "Daniel",
              family = "Linares",
@@ -17,8 +17,8 @@ Description: Quickly fits and plots psychometric functions (normal, logistic,
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: 
-    dplyr,
+Imports:
+    dplyr (>= 1.1.0),
     ggplot2,
     purrr,
     rlang,

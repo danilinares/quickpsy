@@ -235,7 +235,8 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
 
       qp_boot <- avbootstrap %>%
         nest_by() %>%
-        summarise(quickpsy = list(quickpsy_without_bootstrap(.data$data, x, x_str,
+        summarise(quickpsy = list(tryCatch(
+                                     quickpsy_without_bootstrap(.data$data, x, x_str,
                                                             quo(k), quo(n),
                                                         grouping,
                                                         xmin, xmax,
@@ -249,20 +250,22 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
                                                         paircomparisons,
                                                         line_res,
                                                         method,
-                                                        binomial_coef)),
+                                                        binomial_coef),
+                                     error = function(e) NULL)),
                   .groups = "keep") %>%
-        rowwise()
+        rowwise() %>%
+        filter(!is.null(quickpsy))
 
 
 
 
-      parbootstrap <- qp_boot %>% summarise(pluck(quickpsy, "par"), .groups = "keep")
+      parbootstrap <- qp_boot %>% reframe(pluck(quickpsy, "par"))
 
       parci <- parci_boot(qp$par, parbootstrap, ci)
 
-      ypredbootstrap <- qp_boot %>% summarise(pluck(quickpsy, "ypred"), .groups = "keep")
+      ypredbootstrap <- qp_boot %>% reframe(pluck(quickpsy, "ypred"))
 
-      curvesbootstrap <- qp_boot %>% summarise(pluck(quickpsy, "curves"), .groups = "keep")
+      curvesbootstrap <- qp_boot %>% reframe(pluck(quickpsy, "curves"))
 
       qp <- c(qp, list(avbootstrap = avbootstrap,
                        parbootstrap = parbootstrap,
@@ -272,7 +275,7 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
       qp$par <- parci
 
       if (paircomparisons) {
-        par_difbootstrap <- qp_boot %>% summarise(pluck(quickpsy, "par_dif"), .groups = "keep")
+        par_difbootstrap <- qp_boot %>% reframe(pluck(quickpsy, "par_dif"))
 
         parcomparisons <- parcomparisons(qp$par_dif, par_difbootstrap, ci)
 
@@ -282,14 +285,14 @@ quickpsy <- function(d, x = x, k = k, n = NULL,
 
       if (thresholds) {
 
-        thresholdsbootstrap <- qp_boot %>% summarise(pluck(quickpsy, "thresholds"), .groups = "keep")
+        thresholdsbootstrap <- qp_boot %>% reframe(pluck(quickpsy, "thresholds"))
         thresholdsci <- thresholdsci(qp$thresholds, thresholdsbootstrap, ci)
         qp$thresholds <- thresholdsci
 
         qp$thresholdsbootstrap <- thresholdsbootstrap
 
         if (paircomparisons) {
-          thresholds_difbootstrap <- qp_boot %>% summarise(pluck(quickpsy, "thresholds_dif"), .groups = "keep")
+          thresholds_difbootstrap <- qp_boot %>% reframe(pluck(quickpsy, "thresholds_dif"))
 
           thresholdcomparisons <- thresholdcomparisons(qp$thresholds_dif, thresholds_difbootstrap, ci)
 

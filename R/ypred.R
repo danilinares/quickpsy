@@ -46,6 +46,7 @@ ypred <- function(averages, param, psych_fun, x_str, log,
     left_join(psych_fun_n, by = grouping_fun) %>%
     group_by(!!!syms(grouping)) %>%
     rowwise() %>%
-    summarise(one_ypred(averages, param, psych_fun, x_str, log), .groups = "keep")
+    reframe(one_ypred(averages, param, psych_fun, x_str, log)) %>%
+    group_by(!!!syms(grouping))
 
 }

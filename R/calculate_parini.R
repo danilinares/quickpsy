@@ -99,7 +99,7 @@ calculate_parini <- function(averages, funname, x, guess, lapses, grouping) {
 
   averages %>%
     nest_by(.key = "averages") %>%
-    summarise(one_calculate_parini(averages, funname, x, guess, lapses), .groups = "keep")
+    reframe(one_calculate_parini(averages, funname, x, guess, lapses))
 
 }
 
