@@ -37,7 +37,8 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
       fit <- optim(p, nll_fun, method = "L-BFGS-B",
                      lower = parini$parmin,
                      upper = parini$parmax,
-                     control = control)
+                     control = control,
+                     hessian = TRUE)
     }
 
     param <- fit$par
