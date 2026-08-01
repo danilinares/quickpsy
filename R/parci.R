@@ -6,7 +6,12 @@
 parci <- function(par, hessian, ci) {
 
   estimate_se_from_hessian <- function(hessian) {
-    fisher_info <- solve(hessian[[1]])
+    n_par <- nrow(hessian[[1]])
+    fisher_info <- tryCatch(solve(hessian[[1]]), error = function(e) {
+      warning("Hessian is singular for a group; returning NA standard errors.",
+              call. = FALSE)
+      matrix(NA_real_, n_par, n_par)
+    })
     se <- sqrt(diag(fisher_info))
 
     tibble(parn = paste0("p", seq(1, length(se))), se = se)
