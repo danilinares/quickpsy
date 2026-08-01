@@ -20,8 +20,7 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
     if ("par" %in% names(parini)) {
 
       if (method == "optim") {
-        fit <- optim(parini$par, nll_fun, control = control,
-                       hessian = TRUE)
+        fit <- optim(parini$par, nll_fun, control = control)
       }
       # if (method == "nlopt") { # we need to revover the hessian and the solution
       #   param <- nloptr(parini$par, nll_fun,
@@ -37,9 +36,22 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
       fit <- optim(p, nll_fun, method = "L-BFGS-B",
                      lower = parini$parmin,
                      upper = parini$parmax,
-                     control = control,
-                     hessian = TRUE)
+                     control = control)
     }
+
+    # Compute the Hessian (for asymptotic CIs) separately, so that a fit which
+    # converged but whose Hessian cannot be evaluated -- e.g. a parameter resting
+    # on a bound, where finite differences step into a non-finite region -- keeps
+    # its parameter estimates and only loses its CIs (NA), instead of aborting.
+    n_par <- length(fit$par)
+    fit$hessian <- tryCatch(
+      optimHess(fit$par, nll_fun, control = control),
+      error = function(e) {
+        warning("Could not compute the Hessian for a group (", conditionMessage(e),
+                "); its confidence intervals will be NA.", call. = FALSE)
+        matrix(NA_real_, n_par, n_par)
+      }
+    )
 
     param <- fit$par
 
