@@ -69,7 +69,16 @@
 #' \code{'none'} does not perform bootstrap (default is \code{'parametric'}).
 #' @param B number of bootstrap samples (default is 100 ONLY).
 #' @param ci Bootstrap confidence intervals level based on percentiles (default is .95).
-#' @param control \code{control} argument of the \code{optim} function.
+#' @param control When \code{method = "optim"}, the \code{control} argument of
+#' the \code{optim} function. When \code{method = "nloptr"}, the \code{opts} list
+#' passed to \code{nloptr} (e.g. \code{list(algorithm = "NLOPT_LN_COBYLA",
+#' xtol_rel = 1e-6, maxeval = 1000)}); if empty, those COBYLA defaults are used.
+#' @param method Optimiser used to fit each group. \code{"optim"} (default) uses
+#' \code{stats::optim} -- Nelder-Mead when \code{parini} is a plain vector, or
+#' L-BFGS-B when \code{parini} is a list of \code{c(lower, upper)} bounds.
+#' \code{"nloptr"} uses derivative-free, box-constrained \code{nloptr}
+#' (COBYLA by default), which is more robust for stiff nonlinear models where
+#' the finite-difference gradient of L-BFGS-B can become non-finite.
 #' @param parinivector A optional vector of initials parameters when the lower and the upper
 #' bounds of the parameter are specified.
 #' @param paircomparisons If \code{TRUE} bootstrap paircomparions of the parameters are performed.
