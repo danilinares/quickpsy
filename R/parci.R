@@ -13,8 +13,7 @@ parci <- function(par, hessian, ci) {
   }
 
   se_from_hessian <- hessian |>
-    summarise(estimate_se_from_hessian(hessian),
-              .groups = "keep")
+    reframe(estimate_se_from_hessian(hessian))
 
   par |>
     left_join(se_from_hessian, by = c("parn", group_vars(par))) |>
