@@ -35,13 +35,18 @@ calculate_parini <- function(averages, funname, x, guess, lapses, grouping) {
     datp <- data.frame(x = x, y01)
 
 
-    ### Replacing 0s and/or 1s by 1 / (2 * n) and 1 - 1 / (2 * n)
-    # where n is the number of trials
+    ### Clamping values at or beyond the asymptotes to 1 / (2 * n) and
+    # 1 - 1 / (2 * n), where n is the number of trials. Using >= / <= (rather
+    # than == ) keeps saturated points -- e.g. prob = 1 when lapses > 0, which
+    # transforms to y01 > 1 -- as informative high/low points for the linear
+    # fit instead of discarding them, which would otherwise leave too few (or
+    # non-monotonic) points and produce a degenerate initial estimate.
     datp <- datp %>%
-      mutate(y01 = ifelse(y01 == 1, 1 - 1 / (2 * ntrials), y01)) %>%
-      mutate(y01 = ifelse(y01 == 0, 1 / (2 * ntrials), y01))
+      mutate(y01 = ifelse(y01 >= 1, 1 - 1 / (2 * ntrials), y01)) %>%
+      mutate(y01 = ifelse(y01 <= 0, 1 / (2 * ntrials), y01))
 
-    ### Eliminating probabilities outside (0,1)
+    ### Eliminating probabilities outside (0,1) (e.g. NaN); after the clamping
+    ### above the remaining values are already within (0,1)
     dat <- datp %>% filter(y01 > 0, y01 <1)
 
 
