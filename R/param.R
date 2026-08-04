@@ -90,7 +90,7 @@ param <- function(nll_fun, parini, control, parinivector, grouping_without_fun, 
   parini %>%
     group_by(!!!syms(grouping_without_fun)) %>%
     nest(parini = !group_cols()) %>%
-    left_join(nll_fun, by = grouping_without_fun) %>%
+    left_join_grouped(nll_fun, by = grouping_without_fun) %>%
     rowwise() %>%
     summarise(calculate_par(parini, nll_fun, control, parinivector, method), .groups = "keep")
 

@@ -15,7 +15,7 @@ logliks <- function(nll_fun, param, grouping_without_fun) {
   param_n <- param %>% nest_by(.key = "param")
 
   nll_fun_n %>%
-    left_join(param_n, by = grouping_without_fun) %>%
+    left_join_grouped(param_n, by = grouping_without_fun) %>%
     summarise(one_loglik(nll_fun, param), .groups= "keep")
 
 }

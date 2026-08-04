@@ -42,8 +42,8 @@ ypred <- function(averages, param, psych_fun, x_str, log,
   psych_fun_n <- psych_fun %>% nest_by(.key = "psych_fun")
 
   averages_n %>%
-    left_join(param_n, by = grouping_without_fun) %>%
-    left_join(psych_fun_n, by = grouping_fun) %>%
+    left_join_grouped(param_n, by = grouping_without_fun) %>%
+    left_join_grouped(psych_fun_n, by = grouping_fun) %>%
     group_by(!!!syms(grouping)) %>%
     rowwise() %>%
     reframe(one_ypred(averages, param, psych_fun, x_str, log)) %>%

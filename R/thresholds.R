@@ -55,7 +55,7 @@ thresholds <- function(param, curves, funname, psych_fun, prob, log, guess, laps
     curves_n <- curves %>% nest_by(.key = "curves")
 
     param_n %>%
-      left_join(curves_n, by = grouping) %>%
+      left_join_grouped(curves_n, by = grouping) %>%
       group_by(!!!syms(grouping)) %>%
       rowwise() %>%
       summarise(one_threshold(param, curves, funname, prob, log, guess, lapses), .groups = "keep")

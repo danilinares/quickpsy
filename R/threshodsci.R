@@ -9,6 +9,6 @@ thresholdsci <- function(thresholds, thresholdsbootstrap, ci) {
       summarise(threinf =  quantile(.data$thre, .5*(1 - ci)),
                 thresup = quantile(.data$thre, 1 - .5*(1 - ci)), .groups = "keep")
 
-  thresholds %>% left_join(ci, by = group_vars(thresholds))
+  thresholds %>% left_join_grouped(ci, by = group_vars(thresholds))
 
 }

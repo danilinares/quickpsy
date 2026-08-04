@@ -19,7 +19,7 @@ devi <- function(logliks, loglikssaturated, grouping_without_fun) {
   loglikssaturated_n <- loglikssaturated %>% nest_by(.key = "loglikssaturated")
 
   logliks_n %>%
-    left_join(loglikssaturated_n, by = grouping_without_fun) %>%
+    left_join_grouped(loglikssaturated_n, by = grouping_without_fun) %>%
     summarise(one_devi(logliks, loglikssaturated), .groups= "keep")
 
 }
